@@ -9,7 +9,7 @@ const settings = ['Perfil', 'Cerrar Sesion'];
 const Navbar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
-  const [login , setLogin ] = React.useState(Boolean(false)) // Si esta logeado se renderiza una cosa u otra 
+  const [login , setLogin ] = React.useState(Boolean(true)) // Si esta logeado se renderiza una cosa u otra 
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
