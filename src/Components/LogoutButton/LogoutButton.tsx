@@ -6,9 +6,9 @@ export const LogoutButton = () => {
   return (
     <Button
       onClick={() => logout({ returnTo: window.location.origin })}
-      color="secondary"
+      color="inherit"
     >
-      Log Out
+      Cerrar Sesion
     </Button>
   );
 };
