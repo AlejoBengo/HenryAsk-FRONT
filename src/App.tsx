@@ -1,12 +1,16 @@
 import React from 'react';
-import './App.css';
+import { Route , Routes, useRoutes, BrowserRouter as Router } from 'react-router-dom'
+import Content from './Components/Content/Content';
 
-function App() {
+const  App = () => {
   return (
-    <div >
-     
-    </div>
-  );
+  <>
+    <Routes>
+      <Route path='/Content' element={<Content/>}/>
+    </Routes>
+    
+  </>
+  )
 }
 
 export default App;
