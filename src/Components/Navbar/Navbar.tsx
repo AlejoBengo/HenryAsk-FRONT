@@ -2,6 +2,8 @@ import React from "react";
 import {AppBar, Box, Toolbar, IconButton, Typography, Menu, Container, Avatar, Button , Tooltip, MenuItem} from '@mui/material'
 import {Img} from '../Content/ContentStyled';
 import DehazeIcon from '@mui/icons-material/Dehaze';
+import { LoginButton } from "../LoginButton/LoginButton";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const pages = ['Material complementario', 'Foro'];
 const settings = ['Perfil', 'Cerrar Sesion'];
@@ -9,7 +11,7 @@ const settings = ['Perfil', 'Cerrar Sesion'];
 const Navbar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
-  const [login , setLogin ] = React.useState(Boolean(false)) // Si esta logeado se renderiza una cosa u otra 
+  const {isAuthenticated, user} = useAuth0()
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -103,7 +105,7 @@ const Navbar = () => {
         {/* ----------------- */}
 
         {
-            login?  <Box sx={{ flexGrow: 0 }}>
+            isAuthenticated?  <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
@@ -131,7 +133,7 @@ const Navbar = () => {
                 </MenuItem>
               ))}
             </Menu>
-          </Box> : <Button sx={{color:"white"}}>Iniciar Sesion</Button>
+          </Box> : <LoginButton/>
         }
          
 
