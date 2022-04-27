@@ -17,10 +17,12 @@ import DehazeIcon from "@mui/icons-material/Dehaze";
 import { LoginButton } from "../LoginButton/LoginButton";
 import { LogoutButton } from "../LogoutButton/LogoutButton";
 import { useAuth0 } from "@auth0/auth0-react";
+import { Link } from "react-router-dom";
+import css from "./NavBar.module.css";
+
 
 const pages = ["Material complementario", "Foro"];
 const settings = ["Perfil", "Cerrar Sesion"];
-
 
 
 
@@ -114,11 +116,16 @@ const Navbar = () => {
                 display: { xs: "block", md: "none" },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-              ))}
+          
+          {pages.map((page) => (
+              <Button
+                key={page}
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: "white", display: "block" }}
+              >
+                {page}
+              </Button>
+            ))}
             </Menu>
           </Box>
 
@@ -131,15 +138,18 @@ const Navbar = () => {
               marginRight: "4em",
             }}
           >
-            {pages.map((page) => (
-              <Button
-                key={page}
+             <Button
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: "white", display: "block" }}
               >
-                {page}
+                <Link to="#" className={css.StyledLink}>Foro</Link> 
               </Button>
-            ))}
+              <Button
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: "white", display: "block" }}
+              >
+                <Link to="/Content" className={css.StyledLink}>Material</Link> 
+              </Button>
           </Box>
           {/* ----------------- */}
 

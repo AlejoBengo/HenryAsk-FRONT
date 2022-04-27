@@ -5,14 +5,19 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import {estilosCard} from "../../ContentStyled";
+interface Props{
+  text: string
+}
 
+export default function BasicCard1(props:Props) {
 
-export default function BasicCard() {
+let textRender = props.text
+
   return (
     <Card sx={estilosCard}>
       <CardContent>
         <Typography variant="h5" component="div" sx={{textAlign:"center", marginTop:"2rem", marginBottom:"0.5rem"}}>
-          Rinde el henry challengue y se parte de Henry!
+          {textRender}
         </Typography>
       </CardContent>
       <CardActions sx={{ height:"40%", justifyContent:"center"}}>
