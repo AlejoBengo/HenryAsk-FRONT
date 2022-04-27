@@ -2,8 +2,6 @@ import React from "react";
 import {
   Route,
   Routes,
-  useRoutes,
-  BrowserRouter as Router,
 } from "react-router-dom";
 import CompleteSignUp from "./Components/CompleteSignUp/CompleteSignUp";
 import Content from "./Components/Content/Content";

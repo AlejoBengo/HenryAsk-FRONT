@@ -1,0 +1,14 @@
+.StyledLink{
+    text-decoration: none;
+    transition: 0.1s;
+
+}
+.StyledLink:visited{
+    color: white;
+    
+}
+
+.StyledLink:hover{
+    border-bottom: 2px solid rgb(255,255,0);
+
+}
