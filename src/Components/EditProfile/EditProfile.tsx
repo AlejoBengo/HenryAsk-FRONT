@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useAuth0 } from "@auth0/auth0-react";
+import { useAuth0, User } from "@auth0/auth0-react";
 import { useAppSelector, useAppDispatch } from "../../app/hooks";
 import { useNavigate } from "react-router-dom";
 import Container from "@mui/material/Container";
@@ -10,13 +10,13 @@ import Grid from "@mui/material/Grid";
 import { StyledTextField } from "./StyledComponents";
 import { Navigate } from "react-router-dom";
 import { updateUser } from "../../app/Reducers/userSlice";
+import axios from "axios";
 export const EditProfile = () => {
   const DBUser = useAppSelector((state) => state.user.data);
   const { user } = useAuth0();
   const [userInfo, setUserInfo] = useState({ ...DBUser });
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-
   const handleInputChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -133,7 +133,16 @@ export const EditProfile = () => {
             justifyContent: "center",
           }}
         >
-          <Button color="primary" variant="contained" onClick={handleSave}>
+          <Button
+            color="primary"
+            variant="contained"
+            onClick={handleSave}
+            disabled={
+              userInfo.first_name === "" ||
+              userInfo.last_name === "" ||
+              userInfo.user_name === ""
+            }
+          >
             Guardar
           </Button>
         </Grid>
