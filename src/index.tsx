@@ -3,13 +3,16 @@ import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
 import { store } from "./app/store";
 import { BrowserRouter as Router } from "react-router-dom";
-
 import { Auth0Provider } from "@auth0/auth0-react";
 import App from "./App";
 import "./index.css";
+import axios from "axios";
+console.log(process.env);
+axios.defaults.baseURL =
+  process.env.REACT_APP_BACKEND || "http://localhost:3001";
+
 const container = document.getElementById("root")!;
 const root = createRoot(container);
-console.log(window.location.origin);
 
 root.render(
   <React.StrictMode>
