@@ -11,7 +11,7 @@ import { StyledTextField } from "./StyledComponents";
 import { Navigate } from "react-router-dom";
 import { updateUser } from "../../app/Reducers/userSlice";
 import axios from "axios";
-export const EditProfile = async () => {
+export const EditProfile = () => {
   const DBUser = useAppSelector((state) => state.user.data);
   const { user } = useAuth0();
   const [userInfo, setUserInfo] = useState({ ...DBUser });
