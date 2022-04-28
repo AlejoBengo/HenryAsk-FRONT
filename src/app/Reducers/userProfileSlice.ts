@@ -1,13 +1,15 @@
 import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 import { useAppSelector } from "../hooks";
-import {InitialState} from '../interface';
+import {User} from '../interface';
 import axios from "axios";
 
-
-  
-
+interface InitialState {
+  profile: User;
+  loading: string;
+}
 const initialState: InitialState = {
   profile:{
+    _id:"",
     first_name: "",
     last_name: "",
     email: "",
@@ -25,25 +27,6 @@ const initialState: InitialState = {
     give_henry_coin: 0,
     theoric: [],
     excersices: [],
-  },
-  data:{
-    first_name: "",
-    last_name: "",
-    email: "",
-    country: "",
-    city: "",
-    role: 0,
-    user_name: "",
-    profile_picture: "",
-    biography: "",
-    password: "",
-    posts: [],
-    answers: [],
-    comments: [],
-    own_henry_coin: 0,
-    give_henry_coin: 0,
-    theoric: [],
-    excersices: []
   },
   loading:""
 };
@@ -65,6 +48,7 @@ export const userProfile = createSlice({
   reducers: {
     clearProfile: (state) => {
       state.profile = {
+        _id:"",
         first_name: "",
         last_name: "",
         email: "",
@@ -88,6 +72,9 @@ export const userProfile = createSlice({
 extraReducers: (builder) => {
   builder.addCase(fetchProfile.fulfilled, (state, action) => {
     state.profile = action.payload;
+  });
+  builder.addCase(fetchProfile.rejected, (state, action) => {
+    console.log(action.payload);
   });
 },
 });
