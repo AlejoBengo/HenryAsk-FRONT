@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 import { useAppSelector } from "../hooks";
-import {User} from '../interface';
+import { User } from "../interface";
 import axios from "axios";
 
 interface InitialState {
@@ -8,8 +8,8 @@ interface InitialState {
   loading: string;
 }
 const initialState: InitialState = {
-  profile:{
-    _id:"",
+  profile: {
+    _id: "",
     first_name: "",
     last_name: "",
     email: "",
@@ -28,16 +28,13 @@ const initialState: InitialState = {
     theoric: [],
     excersices: [],
   },
-  loading:""
+  loading: "",
 };
-
 
 export const fetchProfile = createAsyncThunk(
   "user/fetchProfile",
   async (id: string) => {
-    console.log("FETCHPROFILE")
     const response = await (await axios.get(`/user/${id}`)).data;
-    console.log("luego del axios", response)
     return response;
   }
 );
@@ -48,7 +45,7 @@ export const userProfile = createSlice({
   reducers: {
     clearProfile: (state) => {
       state.profile = {
-        _id:"",
+        _id: "",
         first_name: "",
         last_name: "",
         email: "",
@@ -68,38 +65,17 @@ export const userProfile = createSlice({
         excersices: [],
       };
     },
-},
-extraReducers: (builder) => {
-  builder.addCase(fetchProfile.fulfilled, (state, action) => {
-    state.profile = action.payload;
-  });
-  builder.addCase(fetchProfile.rejected, (state, action) => {
-    console.log(action.payload);
-  });
-},
+  },
+  extraReducers: (builder) => {
+    builder.addCase(fetchProfile.fulfilled, (state, action) => {
+      state.profile = action.payload;
+    });
+    builder.addCase(fetchProfile.rejected, (state, action) => {
+      console.log(action.payload);
+    });
+  },
 });
 
 export const { clearProfile } = userProfile.actions;
 
 export default userProfile.reducer;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
