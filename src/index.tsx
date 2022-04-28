@@ -7,7 +7,6 @@ import { Auth0Provider } from "@auth0/auth0-react";
 import App from "./App";
 import "./index.css";
 import axios from "axios";
-console.log(process.env);
 axios.defaults.baseURL =
   process.env.REACT_APP_BACKEND || "http://localhost:3001";
 
