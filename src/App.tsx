@@ -6,7 +6,7 @@ import {
   BrowserRouter as Router,
   useNavigate,
 } from "react-router-dom";
-import { setUser } from "./app/Reducers/userSlice";
+import { fetchUserById } from "./app/Reducers/userSlice";
 import CompleteSignUp from "./Components/CompleteSignUp/CompleteSignUp";
 import Content from "./Components/Content/Content";
 import Navbar from "./Components/Navbar/Navbar";
@@ -17,13 +17,13 @@ const App = () => {
   const { isAuthenticated, user } = useAuth0();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const DBUser = useAppSelector((state) => state.user);
+  const DBUser = useAppSelector((state) => state.user.data);
 
   useEffect(() => {
-    if (isAuthenticated) {
-      dispatch(setUser(user?.id));
+    if (user) {
+      dispatch(fetchUserById(user?.id));
     }
-  }, []);
+  }, [user]);
 
   useEffect(() => {
     if (isAuthenticated && DBUser.user_name === "") {

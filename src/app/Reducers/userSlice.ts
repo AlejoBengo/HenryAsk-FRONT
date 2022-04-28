@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 import { useAppSelector } from "../hooks";
 import axios from "axios";
 interface User {
@@ -20,41 +20,73 @@ interface User {
   theoric: Array<string>;
   excersices: Array<string>;
 }
+interface InitialState {
+  data: User;
+  loading: string;
+}
 
-const initialState: User = {
-  first_name: "",
-  last_name: "",
-  email: "",
-  country: "",
-  city: "",
-  role: 0,
-  user_name: "",
-  profile_picture: "",
-  biography: "",
-  password: "",
-  posts: [],
-  answers: [],
-  comments: [],
-  own_henry_coin: 0,
-  give_henry_coin: 0,
-  theoric: [],
-  excersices: [],
+const initialState: InitialState = {
+  data: {
+    first_name: "",
+    last_name: "",
+    email: "",
+    country: "",
+    city: "",
+    role: 0,
+    user_name: "",
+    profile_picture: "",
+    biography: "",
+    password: "",
+    posts: [],
+    answers: [],
+    comments: [],
+    own_henry_coin: 0,
+    give_henry_coin: 0,
+    theoric: [],
+    excersices: [],
+  },
+  loading: "",
 };
+export const fetchUserById = createAsyncThunk(
+  "user/fetchUserById",
+  async (id: string) => {
+    console.log("A");
+    const response = await (await axios.get(`/user/${id}`)).data;
+    return response;
+  }
+);
+
 export const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    setUser: (state, action: PayloadAction<string>) => {
-      let id = action.payload;
-      axios
-        .get(`/users/${id}`)
-        .then((res) => res.data)
-        .then((data) => {
-          state = data;
-        })
-        .catch((e) => console.log(e));
+    clearUser: (state) => {
+      state.data = {
+        first_name: "",
+        last_name: "",
+        email: "",
+        country: "",
+        city: "",
+        role: 0,
+        user_name: "",
+        profile_picture: "",
+        biography: "",
+        password: "",
+        posts: [],
+        answers: [],
+        comments: [],
+        own_henry_coin: 0,
+        give_henry_coin: 0,
+        theoric: [],
+        excersices: [],
+      };
     },
   },
+  extraReducers: (builder) => {
+    builder.addCase(fetchUserById.fulfilled, (state, action) => {
+      state = action.payload;
+    });
+  },
 });
-export const { setUser } = userSlice.actions;
+export const { clearUser } = userSlice.actions;
 export default userSlice.reducer;
