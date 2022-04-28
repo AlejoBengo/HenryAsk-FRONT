@@ -5,7 +5,7 @@ import userProfile from "./Reducers/userProfileSlice"
 export const store = configureStore({
   reducer: {
     user: userReducer,
-    getUser:userProfile,
+    profile:userProfile,
   },
 });
 
