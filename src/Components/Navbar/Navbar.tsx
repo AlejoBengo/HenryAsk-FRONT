@@ -142,7 +142,7 @@ const Navbar = () => {
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: "white", display: "block" }}
               >
-                <Link to="#" className={css.StyledLink}>Foro</Link> 
+                <Link to="/Foro" className={css.StyledLink}>Foro</Link> 
               </Button>
               <Button
                 onClick={handleCloseNavMenu}

@@ -23,3 +23,8 @@ export interface User {
     loading: string;
     profile:User;
   }
+
+  export interface isAlumnOrInstructor {
+    user:Array,
+    height:number,
+  }
