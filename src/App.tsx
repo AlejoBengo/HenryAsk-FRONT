@@ -16,6 +16,9 @@ import { useAppSelector, useAppDispatch } from "./app/hooks";
 import Profile from "./Components/Profile/Profile";
 import { EditProfile } from "./Components/EditProfile/EditProfile";
 import PostDetails from "./Components/PostDetails/PostDetails";
+import Foro from "./Components/Foro/Foro";
+import { useLocation } from "react-router-dom";
+
 const App = () => {
   const { isAuthenticated, user } = useAuth0();
   const navigate = useNavigate();
@@ -45,6 +48,7 @@ const App = () => {
         <Route path="/Profile/:id" element={<Profile />} />
         <Route path="/Profile/:id/Edit" element={<EditProfile />} />
         <Route path="/Post/:id" element={<PostDetails />} />
+        <Route path="/Foro" element={<Foro />} />
       </Routes>
     </>
   );
