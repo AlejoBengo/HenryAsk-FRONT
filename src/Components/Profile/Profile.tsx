@@ -1,31 +1,48 @@
 import React, { useEffect } from "react";
-import {useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useAppSelector, useAppDispatch } from "../../app/hooks";
-import { fetchProfile, clearProfile } from "../../app/Reducers/userProfileSlice";
+import {
+  fetchProfile,
+  clearProfile,
+} from "../../app/Reducers/userProfileSlice";
+import EditIcon from "@mui/icons-material/Edit";
+import { useNavigate } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
+import { Button } from "@mui/material";
+export default function Profile() {
+  const roles = [
+    "Usuario",
+    "Estudiante",
+    "Teaching Assistant",
+    "Instructor",
+    "Administrator",
+  ];
+  const navigate = useNavigate();
+  const { id }: any = useParams();
+  const dispatch = useAppDispatch();
+  const userProfile = useAppSelector((state) => state.profile.profile); //state.profile?
+  const user = useAppSelector((state) => state.user.data);
+  useEffect(() => {
+    dispatch(fetchProfile(id));
+  }, []);
 
-export default function Profile(){
-    const {id}:any = useParams(); 
-    const dispatch = useAppDispatch();
-    const userProfile = useAppSelector((state) => state.profile.profile); //state.profile?
-    useEffect(() => {
-        dispatch(fetchProfile(id));
-      }, []);
-
-    function role(role:number){
-      if(role === 0) return "Usuario logeado";
-      if(role === 1) return "Estudiante";
-      if(role === 2) return "Teaching Assistant";
-      if(role === 3) return "Instructor";
-      if(role === 4) return "Administrador";
-    }
   return (
     <div>
-        <h1>NAME:{userProfile.first_name}</h1>
-        <h1>LASTNAME:{userProfile.last_name}</h1>
-        <h1>COUNTRY:{userProfile.country}</h1>
-        <h1>BIOGRAPHY:{userProfile.biography}</h1>
-        <h1>EMAIL: {userProfile.email}</h1>
-        <h1>Rol: {role(userProfile.role)}</h1>
+      <h1>Perfil</h1>
+      {id === user._id ? (
+        <Button
+          variant="contained"
+          onClick={() => navigate(`/Profile/${id}/Edit`)}
+        >
+          <EditIcon />
+        </Button>
+      ) : null}
+      <h3>NAME:{userProfile.first_name}</h3>
+      <h3>LASTNAME:{userProfile.last_name}</h3>
+      <h3>COUNTRY:{userProfile.country}</h3>
+      <h3>BIOGRAPHY:{userProfile.biography}</h3>
+      <h3>EMAIL: {userProfile.email}</h3>
+      <h3>Rol: {roles[userProfile.role]}</h3>
     </div>
   );
-};
+}

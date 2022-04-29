@@ -17,16 +17,17 @@ import DehazeIcon from "@mui/icons-material/Dehaze";
 import { LoginButton } from "../LoginButton/LoginButton";
 import { LogoutButton } from "../LogoutButton/LogoutButton";
 import { useAuth0 } from "@auth0/auth0-react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import css from "./NavBar.module.css";
-
+import { useNavigate } from "react-router-dom";
+import { useAppSelector } from "../../app/hooks";
 
 const pages = ["Material complementario", "Foro"];
 const settings = ["Perfil", "Cerrar Sesion"];
 
-
-
 const Navbar = () => {
+  const navigate = useNavigate();
+  const DBUser = useAppSelector((state) => state.user.data);
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
@@ -35,7 +36,6 @@ const Navbar = () => {
   );
   const { isAuthenticated, user } = useAuth0();
 
-
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -43,8 +43,13 @@ const Navbar = () => {
     setAnchorElUser(event.currentTarget);
   };
 
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
+  const handleCloseNavMenu = (
+    event: React.MouseEvent<HTMLLIElement | HTMLButtonElement>
+  ) => {
+    console.log("Hola", event);
+    let target = event.target;
+    // if (target.name === "Perfil") {
+    // setAnchorElNav(null);
   };
 
   const handleCloseUserMenu = () => {
@@ -116,16 +121,15 @@ const Navbar = () => {
                 display: { xs: "block", md: "none" },
               }}
             >
-          
-          {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
-              >
-                {page}
-              </Button>
-            ))}
+              {pages.map((page) => (
+                <Button
+                  key={page}
+                  onClick={handleCloseNavMenu}
+                  sx={{ my: 2, color: "white", display: "block" }}
+                >
+                  {page}
+                </Button>
+              ))}
             </Menu>
           </Box>
 
@@ -138,18 +142,22 @@ const Navbar = () => {
               marginRight: "4em",
             }}
           >
-             <Button
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
-              >
-                <Link to="/Foro" className={css.StyledLink}>Foro</Link> 
-              </Button>
-              <Button
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
-              >
-                <Link to="/Content" className={css.StyledLink}>Material</Link> 
-              </Button>
+            <Button
+              onClick={handleCloseNavMenu}
+              sx={{ my: 2, color: "white", display: "block" }}
+            >
+              <Link to="/Foro" className={css.StyledLink}>
+                Foro
+              </Link>
+            </Button>
+            <Button
+              onClick={handleCloseNavMenu}
+              sx={{ my: 2, color: "white", display: "block" }}
+            >
+              <Link to="/Content" className={css.StyledLink}>
+                Material
+              </Link>
+            </Button>
           </Box>
           {/* ----------------- */}
 
@@ -179,7 +187,15 @@ const Navbar = () => {
                 {settings.map((setting) => (
                   <MenuItem key={setting} onClick={handleCloseUserMenu}>
                     {setting !== "Cerrar Sesion" ? (
-                      <Typography textAlign="center">{setting}</Typography>
+                      <Button
+                        color="inherit"
+                        sx={{ width: "100%", height: "100%" }}
+                        onClick={() => {
+                          navigate(`/Profile/${DBUser?._id}`);
+                        }}
+                      >
+                        {setting}
+                      </Button>
                     ) : (
                       <LogoutButton></LogoutButton>
                     )}

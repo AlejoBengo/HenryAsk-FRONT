@@ -22,7 +22,6 @@ interface InitialState {
   loading: string;
 }
 
-
 const initialState: InitialState = {
   data: {
     _id: "",
@@ -48,6 +47,14 @@ export const fetchUserByEmail = createAsyncThunk(
     return response;
   }
 );
+export const remoteUpdateUser = createAsyncThunk(
+  "user/update",
+  async (user: User) => {
+    let aux = { ...user, id: user._id };
+    const response = (await axios.put("/user", aux)).data;
+    return response;
+  }
+);
 export const userSlice = createSlice({
   name: "user",
   initialState,
@@ -57,18 +64,12 @@ export const userSlice = createSlice({
     },
     updateUser: (state, action: PayloadAction<User>) => {
       state.data = action.payload;
+      axios.put(`/user/}`, state.data);
     },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchUserByEmail.fulfilled, (state, action) => {
       state.data = action.payload;
-    });
-    builder.addCase(fetchUserByEmail.rejected, (state, action) => {
-      console.log(action.payload);
-    });
-    builder.addCase(fetchUserByEmail.pending, (state, action) => {
-      state.loading = "pending";
-      console.log(state.loading);
     });
   },
 });
