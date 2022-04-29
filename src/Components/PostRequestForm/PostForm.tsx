@@ -23,7 +23,7 @@ interface Post {
   description: string;
   open: boolean;
 }
-export default const PostForm = () => {
+const PostForm = () => {
   const user = useAppSelector((state) => state.user.data);
 
   const [post, setPost] = React.useState<Post>({
@@ -80,3 +80,5 @@ export default const PostForm = () => {
     </Grid>
   );
 };
+
+export default PostForm;
