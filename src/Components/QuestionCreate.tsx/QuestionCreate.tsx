@@ -20,11 +20,9 @@ export const QuestionCreate = () => {
   if (!isAuthenticated) {
     return (
       <div>
-        {" "}
         <Typography variant="h3">
-          {" "}
           Para hacer preguntas, primero debes iniciar sesion
-        </Typography>{" "}
+        </Typography>
       </div>
     );
   }

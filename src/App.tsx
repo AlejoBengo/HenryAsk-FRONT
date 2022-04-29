@@ -13,6 +13,7 @@ import Navbar from "./Components/Navbar/Navbar";
 import { QuestionCreate } from "./Components/QuestionCreate.tsx/QuestionCreate";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useAppSelector, useAppDispatch } from "./app/hooks";
+import PostForm from "../src/Components/PostRequestForm/PostForm";
 const App = () => {
   const { isAuthenticated, user } = useAuth0();
   const navigate = useNavigate();
@@ -38,6 +39,7 @@ const App = () => {
         <Route path="/Content" element={<Content />} />
         <Route path="/CompleteSignUp" element={<CompleteSignUp />} />
         <Route path="/Ask" element={<QuestionCreate />} />
+        <Route path="/" element={<PostForm />} />
       </Routes>
     </>
   );
