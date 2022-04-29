@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import TableInstructor from "./TableInstructor/TableInstructor";
-import { Div, TituloForo } from "../Style/StyledComponents";
+import TableInstructor from "../Components/Foro/TableInstructor/TableInstructor";
+import { Div, TituloForo } from "../Components/Style/StyledComponents";
 import { Container, Typography } from "@mui/material";
 
 let AlumnOrInstructor = ["Alumno" , "Instructor"]
