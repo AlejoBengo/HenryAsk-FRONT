@@ -44,13 +44,11 @@ const App = () => {
       <Navbar />
       <Routes>
         <Route path="/Content" element={<Content />} />
-        <Route path="/CompleteSignUp" element={<CompleteSignUp />} />
-        <Route path="/Ask" element={<QuestionCreate />} />
+        <Route path="/Ask" element={<PostForm/>} />
         <Route path="/Profile/:id" element={<Profile />} />
         <Route path="/Profile/:id/Edit" element={<EditProfile />} />
         <Route path="/Post/:id" element={<PostDetails />} />
-        <Route path="/Foro" element={<Foro />} />
-        <Route path="/" element={<PostForm />} />
+        <Route path="/Forum/" element={<Foro />} />
       </Routes>
     </>
   );
