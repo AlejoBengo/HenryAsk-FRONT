@@ -14,8 +14,8 @@ import {
 } from "@mui/material";
 import { Img } from "../Content/ContentStyled";
 import DehazeIcon from "@mui/icons-material/Dehaze";
-import { LoginButton } from "../LoginButton/LoginButton";
-import { LogoutButton } from "../LogoutButton/LogoutButton";
+import { LoginButton } from "../ButtonsOutLogin/LoginButton/LoginButton";
+import { LogoutButton } from "../ButtonsOutLogin/LogoutButton/LogoutButton";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Link, Navigate } from "react-router-dom";
 import css from "./NavBar.module.css";
