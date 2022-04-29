@@ -23,7 +23,7 @@ interface Post {
   description: string;
   open: boolean;
 }
-export const PostForm = () => {
+export default const PostForm = () => {
   const user = useAppSelector((state) => state.user.data);
 
   const [post, setPost] = React.useState<Post>({
