@@ -17,6 +17,7 @@ import Profile from "./Components/Profile/Profile";
 import { EditProfile } from "./Components/EditProfile/EditProfile";
 import Foro from "./Components/Foro/Foro";
 import { useLocation } from "react-router-dom";
+import PostForm from "../src/Components/PostRequestForm/PostForm";
 
 const App = () => {
   const { isAuthenticated, user } = useAuth0();
@@ -47,6 +48,7 @@ const App = () => {
         <Route path="/Profile/:id" element={<Profile />} />
         <Route path="/Profile/:id/Edit" element={<EditProfile />} />
         <Route path="/Foro" element={<Foro />} />
+        <Route path="/" element={<PostForm />} />
       </Routes>
     </>
   );
