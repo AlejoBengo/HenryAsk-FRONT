@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useAppSelector, useAppDispatch } from "../../app/hooks";
+import { useAppSelector, useAppDispatch } from "../../../app/hooks";
 import { useNavigate } from "react-router-dom";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
@@ -11,7 +11,7 @@ import { StyledTextField } from "./StyledComponents";
 import {
   remoteUpdateUser,
   fetchUserByEmail,
-} from "../../app/Reducers/userSlice";
+} from "../../../app/Reducers/userSlice";
 export const EditProfile = () => {
   const user = useAppSelector((state) => state.user.data);
   const [userInfo, setUserInfo] = useState({ ...user });

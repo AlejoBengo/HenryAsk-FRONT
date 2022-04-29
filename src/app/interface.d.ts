@@ -9,7 +9,6 @@ export interface User {
   user_name: string;
   profile_picture: string;
   biography: string;
-
   posts: Array<string>;
   answers: Array<string>;
   comments: Array<string>;
