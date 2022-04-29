@@ -15,7 +15,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { useAppSelector, useAppDispatch } from "./app/hooks";
 import Profile from "./Components/Profile/Profile";
 import { EditProfile } from "./Components/EditProfile/EditProfile";
-
+import PostDetails from "./Components/PostDetails/PostDetails";
 const App = () => {
   const { isAuthenticated, user } = useAuth0();
   const navigate = useNavigate();
@@ -44,6 +44,7 @@ const App = () => {
         <Route path="/Ask" element={<QuestionCreate />} />
         <Route path="/Profile/:id" element={<Profile />} />
         <Route path="/Profile/:id/Edit" element={<EditProfile />} />
+        <Route path="/Post/:id" element={<PostDetails />} />
       </Routes>
     </>
   );

@@ -12,7 +12,8 @@ import { Button } from "@mui/material";
 export default function Profile() {
   const roles = [
     "Usuario",
-    "Estudiante",
+    "Estudiante de Prep",
+    "Estudiante de Henry",
     "Teaching Assistant",
     "Instructor",
     "Administrator",
