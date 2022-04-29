@@ -9,6 +9,7 @@ export interface User {
   user_name: string;
   profile_picture: string;
   biography: string;
+
   posts: Array<string>;
   answers: Array<string>;
   comments: Array<string>;
@@ -21,4 +22,9 @@ export interface InitialState {
   data: User;
   loading: string;
   profile: User;
+}
+
+export interface isAlumnOrInstructor {
+  user: Array;
+  height: number;
 }
