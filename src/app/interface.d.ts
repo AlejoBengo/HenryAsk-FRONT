@@ -59,15 +59,7 @@ export interface User {
     post:string;
   }
 
-  export interface Posts{
-    _id:string;
-    owner:User;
-    question:string;
-    type:string;
-    description:string;
-    open:boolean;
-    //answer: Array<Answer>
-  }
+  
 
   export interface propsPost{
     post:Array<Posts>
@@ -77,4 +69,19 @@ export interface User {
     height:number;
   }
 
-  // --------------------->
+  
+export interface InitialState {
+  data: User;
+  loading: string;
+  profile: User;
+}
+
+export interface isAlumnOrInstructor {
+  user: Array;
+  height: number;
+}
+
+export interface Error {
+  errorTag: string;
+  errorSubmit: string;
+}
