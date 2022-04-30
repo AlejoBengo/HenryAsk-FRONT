@@ -14,6 +14,7 @@ import { useAppSelector, useAppDispatch } from "./app/hooks";
 import Profile from "./Views/Profile";
 import { EditProfile } from "./Components/Profile/EditProfile/EditProfile";
 import Foro from "./Views/Foro";
+import PostDetails from "./Views/PostDetails";
 import CreatePost from "../src/Components/CreatePost/CreatePost";
 
 const App = () => {
@@ -42,8 +43,9 @@ const App = () => {
         <Route path="/Content" element={<Content />} />
         <Route path="/Profile/:id" element={<Profile />} />
         <Route path="/Profile/:id/Edit" element={<EditProfile />} />
-        <Route path="/Foro" element={<Foro />} />
-        <Route path="" element={<CreatePost />} />
+        <Route path="/Post/:id" element={<PostDetails />} />
+        <Route path="/Forum/" element={<Foro />} />
+        <Route path="Forum/createpost" element={<CreatePost />} />
       </Routes>
     </>
   );

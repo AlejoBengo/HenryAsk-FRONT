@@ -2,38 +2,21 @@ import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 import { useAppSelector } from "../hooks";
 import { User } from "../interface";
 import axios from "axios";
+import { userTemplate } from "../Utils/userUtilities";
 
 interface InitialState {
   profile: User;
   loading: string;
 }
 const initialState: InitialState = {
-  profile: {
-    _id: "",
-    first_name: "",
-    last_name: "",
-    email: "",
-    country: "",
-    city: "",
-    role: 0,
-    user_name: "",
-    profile_picture: "",
-    biography: "",
-    posts: [],
-    answers: [],
-    comments: [],
-    own_henry_coin: 0,
-    give_henry_coin: 0,
-    theoric: [],
-    excersices: [],
-  },
+  profile: userTemplate,
   loading: "",
 };
 
 export const fetchProfile = createAsyncThunk(
   "user/fetchProfile",
   async (id: string) => {
-    const response = await (await axios.get(`/user/${id}`)).data;
+    const response = await (await axios.get(`/user?id=${id}`)).data[0];
     return response;
   }
 );
@@ -43,25 +26,7 @@ export const userProfile = createSlice({
   initialState,
   reducers: {
     clearProfile: (state) => {
-      state.profile = {
-        _id: "",
-        first_name: "",
-        last_name: "",
-        email: "",
-        country: "",
-        city: "",
-        role: 0,
-        user_name: "",
-        profile_picture: "",
-        biography: "",
-        posts: [],
-        answers: [],
-        comments: [],
-        own_henry_coin: 0,
-        give_henry_coin: 0,
-        theoric: [],
-        excersices: [],
-      };
+      state.profile = initialState.profile;
     },
   },
   extraReducers: (builder) => {

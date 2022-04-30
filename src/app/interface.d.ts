@@ -1,5 +1,4 @@
 export interface User {
-  posts: Array<string>;
   _id: string;
   first_name: string;
   last_name: string;
@@ -10,12 +9,15 @@ export interface User {
   user_name: string;
   profile_picture: string;
   biography: string;
+  posts: Array<string>;
   answers: Array<string>;
   comments: Array<string>;
   own_henry_coin: number;
   give_henry_coin: number;
-  theoric: Array<string>;
+  theorics: Array<string>;
   excersices: Array<string>;
+  github: string;
+  linkedin: string;
 }
 export interface InitialState {
   data: User;
@@ -27,17 +29,13 @@ export interface isAlumnOrInstructor {
   user: Array;
   height: number;
 }
-
 export interface Post {
-  owner: User;
+  id: string;
   question: string;
+  description: string;
+  owner: string;
+  createdAt: string;
+  answers: Array<string>;
   type: string;
   tags: Array<string>;
-  description: string;
-  open: boolean;
-}
-
-export interface Error {
-  errorTag: string;
-  errorSubmit: string;
 }
