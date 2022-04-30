@@ -15,7 +15,7 @@ import PostForm from "../src/Components/PostRequestForm/PostForm";
 import Profile from "./Views/Profile";
 import { EditProfile } from "./Components/Profile/EditProfile/EditProfile";
 import Foro from "./Views/Foro";
-import PostDetails from "./Components/PostDetails/PostDetails";
+import PostDetails from "./Views/PostDetails";
 
 const App = () => {
   const { isAuthenticated, user } = useAuth0();

@@ -14,8 +14,10 @@ export interface User {
   comments: Array<string>;
   own_henry_coin: number;
   give_henry_coin: number;
-  theoric: Array<string>;
+  theorics: Array<string>;
   excersices: Array<string>;
+  github: string;
+  linkedin: string;
 }
 export interface InitialState {
   data: User;
@@ -26,4 +28,14 @@ export interface InitialState {
 export interface isAlumnOrInstructor {
   user: Array;
   height: number;
+}
+export interface Post {
+  id: string;
+  question: string;
+  description: string;
+  owner: string;
+  createdAt: string;
+  answers: Array<string>;
+  type: string;
+  tags: Array<string>;
 }

@@ -1,42 +1,36 @@
-import {
-  Container,
-  Divider,
-  Paper,
-  Typography,
-  Avatar,
-  Box,
-} from "@mui/material";
+import { Container, Divider, Paper, Typography, Box } from "@mui/material";
+import axios from "axios";
 import RoundedAccountIcon from "@mui/icons-material/AccountCircleRounded";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { AnswerDetails } from "../AnswerDetails/AnswerDetails";
-import { UserShort } from "../UserShort/UserShort";
+import { AnswerDetails } from "../Components/AnswerDetails/AnswerDetails";
+import { UserShort } from "../Components/UserShort/UserShort";
+import { getUserById, userTemplate } from "../app/Utils/userUtilities";
+import { postTemplate, getPostById } from "../app/Utils/postUtilities";
 export const PostDetails = () => {
   const { id } = useParams();
-  const post = {
-    id: "",
-    title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    description:
-      "Irure est ea occaecat veniam nulla officia adipisicing eiusmod culpa fugiat ipsum dolor aliqua adipisicing. Ad ex ut voluptate magna proident excepteur voluptate dolor est esse aute dolor. Do ea quis labore cupidatat cillum ullamco elit officia velit consectetur deserunt pariatur ut. ",
-    owner: "6269e33fbd446d00111d1dac",
-    createdAt: "04-04-2020",
-    updatedAt: "",
-    answers: [
-      {
-        id: "1",
-      },
-      {
-        id: "2",
-      },
-      {
-        id: "3",
-      },
-    ],
-    type: "",
-    tags: [],
-  };
+  const [post, setPost] = useState(postTemplate);
+  const [user, setUser] = useState(userTemplate);
+  const [error, setError] = useState<boolean>(false);
+  useEffect(() => {
+    getPostById(id)
+      .then((res) => {
+        console.log(res);
+        setPost(res);
+      })
+      .catch((err) => setError(true));
+  }, []);
+  useEffect(() => {
+    if (!user._id) {
+      getUserById(post.owner)
+        .then((user) => setUser(user))
+        .catch(() => setError(true));
+    }
+  }, []);
+
   const postOwner = post.owner;
   const postAnswers = post.answers;
+  if (error) return <div>Error</div>;
   return (
     <div>
       <Container sx={{ padding: "1em" }}>
@@ -57,7 +51,7 @@ export const PostDetails = () => {
             align="left"
             gutterBottom
           >
-            ¿{post.title}?
+            ¿{post.question}?
           </Typography>
           <Box
             sx={{
@@ -75,9 +69,9 @@ export const PostDetails = () => {
           </Typography>{" "}
           <Divider sx={{ marginBottom: 1 }} />
           <Typography variant="h4" align="left" gutterBottom>
-            {post.answers.length} Respuestas
+            {post.answers?.length} Respuestas
           </Typography>
-          {postAnswers.map((answer: any, index: number) => (
+          {postAnswers?.map((answer: any, index: number) => (
             <div key={answer.id}>
               <AnswerDetails id={answer.id} />
               {index !== postAnswers.length - 1 && (
