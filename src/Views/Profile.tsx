@@ -5,12 +5,22 @@ import { useParams } from "react-router-dom";
 import { useAppSelector, useAppDispatch } from "../app/hooks";
 import { useNavigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
+import { styled } from '@mui/material/styles';
+import { Container } from "@mui/material";
 /*-----------IMPORT REDUCER-----------*/
 import { fetchProfile, clearProfile } from "../app/Reducers/userProfileSlice";
 /*-----------IMPORT MUI & CSS-----------*/
 import EditIcon from "@mui/icons-material/Edit";
-import { Button } from "@mui/material";
+import { Box, Button, Typography , Stack , Paper} from "@mui/material";
 /*--------------------------------------------------------*/
+
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#c4c4c4',
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: 'center',
+  color: theme.palette.text.secondary,
+}));
 
 export default function Profile() {
   const roles = [
@@ -29,24 +39,51 @@ export default function Profile() {
   useEffect(() => {
     dispatch(fetchProfile(id));
   }, []);
-
   return (
-    <div>
-      <h1>Perfil</h1>
-      {id === user._id ? (
-        <Button
-          variant="contained"
-          onClick={() => navigate(`/Profile/${id}/Edit`)}
+    <Container maxWidth="md" sx={{ width:"100%", height:"91vh",display:"flex",justifyContent:"center", alignItems:"center"}}>
+     <Box
+     width="70%"
+     sx={{
+      height:"60vh",
+      backgroundColor:"#acacac",
+      boxShadow:"1px 1px 20px black"
+     }}
+     >
+       <Box 
+       width="100%"
+       display="flex"
+       alignItems="center"
+       flexDirection="column"
+       sx={{height:"100%" }}
+       >
+       <Typography 
+        variant="h4" 
+        textAlign="center"
+        margin="1.2rem"
         >
-          <EditIcon />
-        </Button>
-      ) : null}
-      <h3>NAME:{userProfile.first_name}</h3>
-      <h3>LASTNAME:{userProfile.last_name}</h3>
-      <h3>COUNTRY:{userProfile.country}</h3>
-      <h3>BIOGRAPHY:{userProfile.biography}</h3>
-      <h3>EMAIL: {userProfile.email}</h3>
-      <h3>Rol: {roles[userProfile.role]}</h3>
-    </div>
+          Perfil
+        </Typography>
+        {id === user._id ? (
+          <Button
+            variant="contained"
+            onClick={() => navigate(`/Profile/${id}/Edit`)} startIcon={<EditIcon/>}
+          >
+            Editar Perfil
+          </Button>
+        ) : null}
+
+          <Stack spacing={2} sx={{width:"100%", marginTop:"2rem"}}>
+            <Item sx={{fontWeight:"bold"}}>Name:{userProfile.first_name}</Item>
+            <Item sx={{fontWeight:"bold"}}>LastName:{userProfile.last_name}</Item>
+            <Item sx={{fontWeight:"bold"}}>Rol: {roles[userProfile.role]}</Item>
+            <Item sx={{fontWeight:"bold"}}>Country:{userProfile.country}</Item>
+            <Item sx={{fontWeight:"bold"}}>Email: {userProfile.email}</Item>
+            <Item sx={{fontWeight:"bold"}}>Biography:{userProfile.biography}</Item>
+          </Stack>
+       </Box>
+       
+    </Box>
+    </Container>
+    
   );
 }

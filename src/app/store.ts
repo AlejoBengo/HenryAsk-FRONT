@@ -1,11 +1,13 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
 import userReducer from "./Reducers/userSlice";
 import userProfile from "./Reducers/userProfileSlice"
+import getPosts from './Reducers/getPostsForum'
 
 export const store = configureStore({
   reducer: {
     user: userReducer,
     profile:userProfile,
+    getAllPosts:getPosts,
   },
 });
 
