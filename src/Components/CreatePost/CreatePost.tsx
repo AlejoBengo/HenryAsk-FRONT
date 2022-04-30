@@ -31,26 +31,9 @@ const PostForm = () => {
   const dispatch = useAppDispatch();
 
   const [post, setPost] = React.useState<Post>({
-    owner: {
-      _id: "",
-      first_name: "",
-      last_name: "",
-      email: "",
-      country: "",
-      city: "",
-      role: 0,
-      user_name: "",
-      profile_picture: "",
-      biography: "",
-      posts: [],
-      answers: [],
-      comments: [],
-      excersices: [],
-      own_henry_coin: 0,
-      give_henry_coin: 0,
-      theoric: [],
-    },
+    _id: "",
     question: "",
+    owner: "",
     type: "",
     tags: [],
     description: "",
