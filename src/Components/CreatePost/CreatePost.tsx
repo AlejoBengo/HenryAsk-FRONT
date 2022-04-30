@@ -1,6 +1,6 @@
 import { MenuItem, IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { Post, Error } from "../../app/interface";
+import { Posts, Error } from "../../app/interface";
 import { fetchPostToSave } from "../../app/Actions/actionsPost";
 import { postTemplate } from "../../app/Utils/postUtilities";
 import React, { useEffect } from "react";
@@ -31,7 +31,7 @@ const PostForm = () => {
   const usuario = useAppSelector((state) => state.user.data);
   const dispatch = useAppDispatch();
 
-  const [post, setPost] = React.useState<Post>(postTemplate);
+  const [post, setPost] = React.useState<Posts>(postTemplate);
 
   const [error, setError] = React.useState<Error>({
     errorTag: "",
@@ -42,6 +42,7 @@ const PostForm = () => {
     setPost({
       ...post,
       owner: usuario._id,
+      ownerData: [usuario.user_name, usuario.role.toString()],
     });
   }, [usuario]);
 
@@ -98,6 +99,7 @@ const PostForm = () => {
       post.question.length > 0 &&
       post.tags.length > 0
     ) {
+      console.log(post);
       dispatch(fetchPostToSave(post))
         .then(() => console.log("completado"))
         .catch((err) => console.log(err));

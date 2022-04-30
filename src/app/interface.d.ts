@@ -80,6 +80,18 @@ export interface isAlumnOrInstructor {
   user: Array;
   height: number;
 }
+export interface Posts {
+  _id: string;
+  question: string;
+  description: string;
+  owner: string;
+  ownerData: Array<string>;
+  createdAt: string;
+  open: boolean;
+  answers: Array<string>;
+  type: string;
+  tags: Array<string>;
+}
 
 export interface Error {
   errorTag: string;
