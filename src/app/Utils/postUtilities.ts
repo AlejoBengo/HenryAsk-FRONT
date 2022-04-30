@@ -9,7 +9,7 @@ export const postTemplate: Posts = {
   createdAt: "",
   open: true,
   answers: [],
-  type: "",
+  type: 0,
   tags: [],
 };
 

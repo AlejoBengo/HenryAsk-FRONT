@@ -43,10 +43,19 @@ const PostForm = () => {
   });
 
   useEffect(() => {
+    let tipo: number;
+    if (usuario.role === 0) {
+      tipo = 0;
+    } else if (usuario.role === 1) {
+      tipo = 1;
+    } else {
+      tipo = 2;
+    }
     setPost({
       ...post,
       owner: usuario._id,
-      ownerData: [usuario.user_name, usuario.role.toString()],
+      ownerData: [usuario._id, usuario.role.toString(), usuario.user_name],
+      type: tipo,
     });
   }, [usuario]);
 
@@ -96,7 +105,7 @@ const PostForm = () => {
     if (error.errorSubmit.length > 0) {
       setError({ ...error, errorSubmit: "" });
     }
-
+    console.log(post);
     if (
       error.errorTag.length === 0 &&
       post.description.length > 0 &&

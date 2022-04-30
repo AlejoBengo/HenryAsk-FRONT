@@ -16,8 +16,8 @@ import {
 } from "../../../app/interface";
 
 export default function TableInstructor(props: any) {
-  const renderHeadTable = props.user; //lane 56
-  const heigthTable = props.height; //lane 88
+  const renderHeadTable = props.user; //lane 24
+  const heigthTable = props.height; //lane 56
   const posts = props.post;
 
   const columns: readonly Column[] = [
@@ -94,9 +94,11 @@ export default function TableInstructor(props: any) {
                               <Avatar
                                 alt="Remy Sharp"
                                 src="/static/images/avatar/2.jpg"
+                                //src={row.owner.profile_picture}
                               />
                               <Typography variant="subtitle2">
                                 {row.ownerData[2]}
+                                {/* {row.owner.user_name} */}
                               </Typography>
                             </Box>
                           </TableCell>
@@ -111,8 +113,7 @@ export default function TableInstructor(props: any) {
                             maxWidth: "20vw",
                             minWidth: "100px",
                             maxHeight: "14.5vh",
-                          }}
-                        >
+                          }}>
                           {value}
                         </TableCell>
                       );

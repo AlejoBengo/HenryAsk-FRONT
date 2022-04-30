@@ -1,11 +1,13 @@
 /*--------------------------------------------------------*/
 /*-----------IMPORT UTILITIES-----------*/
 import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 /*-----------IMPORT COMPONENTS-----------*/
 import TableInstructor from "../Components/Foro/TableInstructor/TableInstructor";
 /*-----------IMPORT MUI & CSS-----------*/
 import { Div, TituloForo } from "../Components/Style/StyledComponents";
-import { Container, Typography } from "@mui/material";
+import { Container, Typography, Button } from "@mui/material";
 import {fetchGetAllPosts} from '../app/Reducers/getPostsForum';
 import { useAppSelector, useAppDispatch } from "../app/hooks";
 import {Posts} from '../app/interface';
@@ -15,21 +17,19 @@ export default function Foro(){
   const userLogin = useAppSelector((state) => state.user.data);
   const posts = useAppSelector((state) => state.getAllPosts.posts);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   // USER LOOGIN ---> USUARIO LOGEAEDO ---> SE MUESTRA SEGUN SU ROL 
   useEffect(()=>{
- 
+    
     if(userLogin.role === 1){ // USUARIO DEL PREP
       dispatch(fetchGetAllPosts(1))
     }
     if(userLogin.role >=2){ // USUARIO LEARNING , TA , INSTRUCTOR , ADM
       dispatch(fetchGetAllPosts(2))
     }
-    //if(userLogin.role === 0){ // USUARIO LOGEADO PERO NO ES DEL PREP 
-      // se redirija a la ruta /Forums/News
+  }, [userLogin])
 
-    //} DESCOMENTAAAAAAAAAAAAAAAAAAR 
-  }, [])
   let postInstructores: Array<Posts> = []
   let postAlumnos: Array<Posts> = []
   let postPrep:Array<Posts> = []
@@ -38,8 +38,21 @@ export default function Foro(){
 // 1 ---> USUARIO ANOTADO EN PREP 
 // 2 ---> USUARIO LEARNING 
 // 3 ---> TA 
-// 5 ---> INSTRUCTOR
-// 6 ---> ADM
+// 4 ---> INSTRUCTOR
+// 5 ---> ADM
+
+// types 
+// 0 ---> NEW
+// 1 ---> PREP
+// 2 ---> LEARNING
+
+// SI ROL 0 === TYPE 0
+// SI ROL 1 === TYPE 1 
+// SI ROL 2 === 2
+// SI ROL 3 === 2 ---> DEBERIA TENER PERMISOS PARA TYPE 0 1(ESTOS PERMISOS NO TERMINADOS)
+// SI ROL 4 === 2
+// SI ROL 5 === 2 ---> DEBERIA TENER PERMISOS PARA TYPE 0 1(ESTOS PERMISOS NO TERMINADOS) 
+
 
 // FALTA RENDERIZAR PREP 
 
@@ -84,6 +97,7 @@ if(userLogin.role === 1){
       margin="1rem 0rem 1rem 0rem">
            Posteos entre <TituloForo>Alumnos</TituloForo>
       </Typography>
+      <Link to="/Ask"><Button>Crear nueva discusion</Button></Link>
       <Container
       maxWidth={false}
       sx={{ width: "80vw" }}>
@@ -113,6 +127,7 @@ if(userLogin.role === 1){
       margin="1rem 0rem 1rem 0rem">
            Posteos entre <TituloForo>Alumnos</TituloForo>
       </Typography>
+      <Link to="/Ask"><Button>Crear nueva discusion</Button></Link>   
       <Container
       maxWidth={false}
       sx={{ width: "80vw" }}>

@@ -84,7 +84,7 @@ export interface User {
     createdAt: string;
     open: boolean;
     answers: Array<string>;
-    type: string;
+    type: number;
     tags: Array<string>;
   }
  
