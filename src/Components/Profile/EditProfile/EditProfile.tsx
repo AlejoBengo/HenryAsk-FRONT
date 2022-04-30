@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useAppSelector, useAppDispatch } from "../../../app/hooks";
 import { useNavigate } from "react-router-dom";
 import Container from "@mui/material/Container";
@@ -25,6 +25,7 @@ export const EditProfile = () => {
       [event.target.name]: event.target.value,
     });
   };
+
   const handleSave = (event: React.MouseEvent<HTMLButtonElement>) => {
     dispatch(remoteUpdateUser(userInfo))
       .then(() => dispatch(fetchUserByEmail(userInfo.email)))

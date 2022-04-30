@@ -23,8 +23,8 @@ const App = () => {
   const dispatch = useAppDispatch();
   const DBUser = useAppSelector((state) => state.user.data);
 
+  console.log(DBUser)
   useEffect(() => {
-    console.log(user);
     if (isAuthenticated) {
       dispatch(fetchUserByEmail(user?.email));
     }
@@ -43,7 +43,7 @@ const App = () => {
         <Route path="/Content" element={<Content />} />
         <Route path="/Profile/:id" element={<Profile />} />
         <Route path="/Profile/:id/Edit" element={<EditProfile />} />
-        <Route path="/Foro" element={<Foro />} />
+        <Route path="/Forum" element={<Foro />} />
         <Route path="/" element={<PostForm />} />
       </Routes>
     </>

@@ -8,10 +8,10 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import { Box, Avatar, Typography } from '@mui/material';
-import {isAlumnOrInstructor} from '../../../app/interface';
+import {isAlumnOrInstructor, propsPost, height} from '../../../app/interface';
 
 interface Column {
-  id: 'name' | 'asunto' | 'description' | 'tags' ;
+  id: 'name' | 'question' | 'description' | 'tags' ;
   label: string;
   minWidth?: number;
   align?: 'right' | 'center';
@@ -47,15 +47,17 @@ const rows = [
 ];
 
 
-export default function TableInstructor(props:isAlumnOrInstructor) {
+export default function TableInstructor(props:any) {
 
     const renderHeadTable = props.user//lane 56 
     const heigthTable = props.height//lane 88
+    const posts = props.post
+    
 
 
     const columns: readonly Column[] = [
         { id: 'name', label: renderHeadTable, minWidth: 30, align:'center' },
-        { id: 'asunto', label: 'Asunto', minWidth: 150, align:'center' },
+        { id: 'question', label: 'Asunto', minWidth: 150, align:'center' },
         {
           id: 'description',
           label: 'Descripcion',
@@ -103,11 +105,11 @@ export default function TableInstructor(props:isAlumnOrInstructor) {
           </TableHead>
 
           <TableBody sx={{width:"100%"}}>
-            {rows
+            {posts
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row) => {
+              .map((row:any) => {
                 return (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={row.asunto} sx={{maxWidth:"100%"}}>
+                  <TableRow hover role="checkbox" tabIndex={-1} key={`${row.question+Math.random()}`} sx={{maxWidth:"100%"}}>
                     {columns.map((column) => {
                       const value = row[column.id];
                       if(column.id ==="name"){
