@@ -8,44 +8,7 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import { Box, Avatar, Typography } from '@mui/material';
-import {isAlumnOrInstructor, propsPost, height} from '../../../app/interface';
-
-interface Column {
-  id: 'name' | 'question' | 'description' | 'tags' ;
-  label: string;
-  minWidth?: number;
-  align?: 'right' | 'center';
-  format?: (value: number) => string;
-}
-interface Data {
-  name: string;
-  asunto: string;
-  description: string;
-  tags: Array<string>;
-}
-
-function createData(name: string,asunto: string,description: string,tags: Array<string>): Data {
-  return { name, asunto, description, tags};
-}
-                 
-const rows = [
-  createData('India', 'Problema bucle while ', "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam cupiditate repudiandae tenetur, maxime nihil, consectetur excepturi vero eos provident molestiae eveniet iste ratione cumque itaque magnam? Ex quis nihil accusamus",["m1"," ","recursion"," ","ramas"] ),
-  createData('China', "Error ejercicio arboles m1", "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam cupiditate repudiandae tenetur, maxime nihil, consectetur excepturi vero eos provident molestiae eveniet iste ratione cumque itaque magnam? Ex quis nihil accusamus",["m1","recursion"] ),
-  createData('Italy', 'Tengo problemas con react, hooks', "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam cupiditate repudiandae tenetur, maxime nihil, consectetur excepturi vero eos provident molestiae eveniet iste ratione cumque itaque magnam? Ex quis nihil accusamus",["m1","recursion"] ),
-  createData('United States', 'Como forkear repositorio', "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam cupiditate repudiandae tenetur, maxime nihil, consectetur excepturi vero eos provident molestiae eveniet iste ratione cumque itaque magnam? Ex quis nihil accusamus",["m1","recursion"] ),
-  createData('Canada', 'Como usar las ramas de GIT', "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam cupiditate repudiandae tenetur, maxime nihil, consectetur excepturi vero eos provident molestiae eveniet iste ratione cumque itaque magnam? Ex quis nihil accusamus",["m1","recursion"] ),
-  createData('Australia', 'Necesito ayuda, no me funcionan tests', "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam cupiditate repudiandae tenetur, maxime nihil, consectetur excepturi vero eos provident molestiae eveniet iste ratione cumque itaque magnam? Ex quis nihil accusamus",["m1","recursion"] ),
-  createData('Germany', 'Cuando es el checkpoint', "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam cupiditate repudiandae tenetur, maxime nihil, consectetur excepturi vero eos provident molestiae eveniet iste ratione cumque itaque magnam? Ex quis nihil accusamus",["m1","recursion"] ),
-  createData('Ireland', 'Cuanto dura el checkpoint', "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam cupiditate repudiandae tenetur, maxime nihil, consectetur excepturi vero eos provident molestiae eveniet iste ratione cumque itaque magnam? Ex quis nihil accusamus",["m1","recursion"] ),
-  createData('Mexico', 'Breve explicacion de la cursada', "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam cupiditate repudiandae tenetur, maxime nihil, consectetur excepturi vero eos provident molestiae eveniet iste ratione cumque itaque magnam? Ex quis nihil accusamus",["m1","recursion"] ),
-  createData('Japan', 'No me funciona la ruta GET ', "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam cupiditate repudiandae tenetur, maxime nihil, consectetur excepturi vero eos provident molestiae eveniet iste ratione cumque itaque magnam? Ex quis nihil accusamus",["m1","recursion"] ),
-  createData('France', 'Como accedo a los videos de mi cohorte', "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam cupiditate repudiandae tenetur, maxime nihil, consectetur excepturi vero eos provident molestiae eveniet iste ratione cumque itaque magnam? Ex quis nihil accusamus",["m1","recursion"] ),
-  createData('United Kingdom', 'Como puedo utilizar slack', "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam cupiditate repudiandae tenetur, maxime nihil, consectetur excepturi vero eos provident molestiae eveniet iste ratione cumque itaque magnam? Ex quis nihil accusamus",["m1","recursion"] ),
-  createData('Russia', 'Que temas se ven en las TIPS', "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam cupiditate repudiandae tenetur, maxime nihil, consectetur excepturi vero eos provident molestiae eveniet iste ratione cumque itaque magnam? Ex quis nihil accusamus",["m1","recursion"] ),
-  createData('Nigeria', 'Que significa redux', "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam cupiditate repudiandae tenetur, maxime nihil, consectetur excepturi vero eos provident molestiae eveniet iste ratione cumque itaque magnam? Ex quis nihil accusamus",["m1","recursion"] ),
-  createData('Brazil', 'Ejercicio react redux', "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam cupiditate repudiandae tenetur, maxime nihil, consectetur excepturi vero eos provident molestiae eveniet iste ratione cumque itaque magnam? Ex quis nihil accusamus",["m1","recursion"] ),
-];
-
+import {isAlumnOrInstructor, propsPost, height , Column} from '../../../app/interface';
 
 export default function TableInstructor(props:any) {
 
@@ -117,7 +80,7 @@ export default function TableInstructor(props:any) {
                             <TableCell align={column.align}>
                                 <Box display="flex" alignItems="center" sx={{flexDirection:"column"}}>
                                     <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-                                    <Typography variant='subtitle2'>{row[column.id]}</Typography>
+                                    <Typography variant='subtitle2'>{row.ownerData[2]}</Typography>
                                 </Box>
                             </TableCell>
                         )
@@ -140,7 +103,7 @@ export default function TableInstructor(props:any) {
       <TablePagination
         rowsPerPageOptions={[10, 25, 100]}
         component="div"
-        count={rows.length}
+        count={posts.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onPageChange={handleChangePage}

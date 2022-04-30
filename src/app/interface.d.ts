@@ -18,6 +18,8 @@ export interface User {
     give_henry_coin: number;
     theoric: Array<string>;
     excersices: Array<string>;
+    github:string;
+    linkedin:string
   }
   export interface InitialState {
     data: User;
@@ -28,6 +30,11 @@ export interface User {
   export interface isAlumnOrInstructor {
     user:Array;
     height:number;
+  }
+  export interface Answer{
+    owner:User;
+    content:string;
+    post:string;
   }
 
 
@@ -53,12 +60,33 @@ export interface User {
     Modulo = "Modulo",
     Otros = "Otros",
   }
-  export interface Answer{
-    owner:User;
-    content:string;
-    post:string;
-  }
+  
 
+  export interface Column {
+    id: 'name' | 'question' | 'description' | 'tags' ;
+    label: string;
+    minWidth?: number;
+    align?: 'right' | 'center';
+    format?: (value: number) => string;
+  }
+  
+
+  export interface isAlumnOrInstructor {
+    user: Array;
+    height: number;
+  }
+  export interface Posts {
+    _id: string;
+    question: string;
+    description: string;
+    owner: string;
+    ownerData: Array<string>;
+    createdAt: string;
+    open: boolean;
+    answers: Array<string>;
+    type: string;
+    tags: Array<string>;
+  }
  
 
   export interface propsPost{
@@ -68,7 +96,8 @@ export interface User {
   export interface height{
     height:number;
   }
-
+// ----------------------------------> Termina interfaces posts
+// ----------------------------------> 
   
 export interface InitialState {
   data: User;
@@ -76,22 +105,21 @@ export interface InitialState {
   profile: User;
 }
 
-export interface isAlumnOrInstructor {
-  user: Array;
-  height: number;
-}
-export interface Posts {
+
+
+//Para agus modelo solucionado
+/* export interface Posts {
   _id: string;
   question: string;
   description: string;
-  owner: string;
-  ownerData: Array<string>;
-  createdAt: string;
+  owner: User;
+  //createdAt: string;
   open: boolean;
   answers: Array<string>;
-  type: string;
+  type: number;
   tags: Array<string>;
-}
+} */
+
 
 export interface Error {
   errorTag: string;

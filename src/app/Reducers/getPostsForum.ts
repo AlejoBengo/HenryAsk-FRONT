@@ -13,7 +13,7 @@ const initialState: InitialState = {
 
 export const fetchGetAllPosts = createAsyncThunk(
   'post/GetAllPosts',
-  async (type:"prep"|"learning"|"new") => {
+  async (type:0|1|2) => { // new
     const response =(await axios.get(`/post?type=${type}`)).data;
     return response;
   }

@@ -10,3 +10,4 @@ export const TituloForo = styled("span")(`
 text-shadow: 4px 4px 4px rgb(255,255,0);
 border-bottom:10px solid rgb(255,255,0);
 `)
+
