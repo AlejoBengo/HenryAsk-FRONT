@@ -11,11 +11,10 @@ import Content from "./Views/Content";
 import Navbar from "./Components/Navbar/Navbar";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useAppSelector, useAppDispatch } from "./app/hooks";
-
-import PostForm from "../src/Components/PostRequestForm/PostForm";
 import Profile from "./Views/Profile";
 import { EditProfile } from "./Components/Profile/EditProfile/EditProfile";
 import Foro from "./Views/Foro";
+import CreatePost from "../src/Components/CreatePost/CreatePost";
 
 const App = () => {
   const { isAuthenticated, user } = useAuth0();
@@ -44,7 +43,7 @@ const App = () => {
         <Route path="/Profile/:id" element={<Profile />} />
         <Route path="/Profile/:id/Edit" element={<EditProfile />} />
         <Route path="/Foro" element={<Foro />} />
-        <Route path="/" element={<PostForm />} />
+        <Route path="" element={<CreatePost />} />
       </Routes>
     </>
   );
