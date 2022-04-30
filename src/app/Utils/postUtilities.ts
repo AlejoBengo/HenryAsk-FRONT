@@ -11,7 +11,6 @@ export const postTemplate: Posts = {
   answers: [],
   type: "",
   tags: [],
-  open: true,
 };
 
 export const getPostById = async (id: string | undefined) => {
