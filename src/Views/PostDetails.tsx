@@ -22,13 +22,13 @@ export const PostDetails = () => {
   }, []);
   useEffect(() => {
     if (!user._id) {
-      getUserById(post.owner)
+      getUserById(post.owner[0])
         .then((user) => setUser(user))
         .catch(() => setError(true));
     }
   }, []);
 
-  const postOwner = post.owner;
+  const postOwner = post.owner[0];
   const postAnswers = post.answers;
   if (error) return <div>Error</div>;
   return (

@@ -29,11 +29,11 @@ export interface isAlumnOrInstructor {
   user: Array;
   height: number;
 }
-export interface Post {
+export interface Posts {
   _id: string;
   question: string;
   description: string;
-  owner: string;
+  owner: Array<string>;
   createdAt: string;
   open: boolean;
   answers: Array<string>;
