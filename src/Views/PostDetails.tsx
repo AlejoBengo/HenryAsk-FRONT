@@ -1,13 +1,17 @@
-import { Container, Divider, Typography, Box } from "@mui/material";
+/*--------------------------------------------------------*/
+/*-----------IMPORT UTILITIES-----------*/
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { AnswerDetails } from "../Components/Answer/AnswerDetails/AnswerDetails";
-import { AnswerCreate } from "../Components/Answer/AnswerCreate/AnswerCreate";
-import { UserShort } from "../Components/UserShort/UserShort";
+import axios from "axios";
 import { getUserById, userTemplate } from "../app/Utils/userUtilities";
 import { postTemplate, getPostById } from "../app/Utils/postUtilities";
-import { StyledPaper } from "../Components/Style/StyledComponents";
-import LocalOfferIcon from "@mui/icons-material/LocalOffer";
+/*-----------IMPORT COMPONENTS-----------*/
+import { AnswerDetails } from "../Components/AnswerDetails/AnswerDetails";
+import { UserShort } from "../Components/UserShort/UserShort";
+/*-----------IMPORT MUI & CSS-----------*/
+import { Container, Divider, Paper, Typography, Box } from "@mui/material";
+import RoundedAccountIcon from "@mui/icons-material/AccountCircleRounded";
+/*--------------------------------------------------------*/
 
 export const PostDetails = () => {
   const { id } = useParams();
@@ -24,13 +28,13 @@ export const PostDetails = () => {
   }, []);
   useEffect(() => {
     if (!user._id) {
-      getUserById(post.owner)
+      getUserById(post.owner[0])
         .then((user) => setUser(user))
         .catch(() => setError(true));
     }
   }, []);
 
-  const postOwner = post.owner;
+  const postOwner = post.owner[0];
   const postAnswers = post.answers;
   if (error) return <div>Error</div>;
   return (

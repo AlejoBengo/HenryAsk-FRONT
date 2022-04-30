@@ -1,11 +1,13 @@
 import axios from "axios";
-import { Post } from "../interface";
-export const postTemplate: Post = {
+import { Posts } from "../interface";
+export const postTemplate: Posts = {
   _id: "",
   question: "",
   description: "",
   owner: "",
+  ownerData: [],
   createdAt: "",
+  open: true,
   answers: [],
   type: "",
   tags: [],

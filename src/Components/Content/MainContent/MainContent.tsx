@@ -1,9 +1,14 @@
+/*--------------------------------------------------------*/
+/*-----------IMPORT UTILITIES-----------*/
 import React from "react";
+import { useAuth0 } from "@auth0/auth0-react";
+/*-----------IMPORT COMPONENTS-----------*/
+import BasicCard1 from "./BasicCard/BasicCard1";
+/*-----------IMPORT MUI & CSS-----------*/
 import { Container, Box, Typography, Button } from "@mui/material";
 import { Imagen } from "../ContentStyled";
-import { useAuth0 } from "@auth0/auth0-react";
-import BasicCard1 from "./BasicCard/BasicCard1";
 import img from "../../../Assets/imgMainNoLogeado.jpg";
+/*--------------------------------------------------------*/
 
 let textLoginOne = "Teorico";
 let textLoginTwo = "Practico";
