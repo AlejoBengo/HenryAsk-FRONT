@@ -1,12 +1,14 @@
-import { Container, Divider, Paper, Typography, Box } from "@mui/material";
-import axios from "axios";
-import RoundedAccountIcon from "@mui/icons-material/AccountCircleRounded";
+import { Container, Divider, Typography, Box } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { AnswerDetails } from "../Components/AnswerDetails/AnswerDetails";
+import { AnswerDetails } from "../Components/Answer/AnswerDetails/AnswerDetails";
+import { AnswerCreate } from "../Components/Answer/AnswerCreate/AnswerCreate";
 import { UserShort } from "../Components/UserShort/UserShort";
 import { getUserById, userTemplate } from "../app/Utils/userUtilities";
 import { postTemplate, getPostById } from "../app/Utils/postUtilities";
+import { StyledPaper } from "../Components/Style/StyledComponents";
+import LocalOfferIcon from "@mui/icons-material/LocalOffer";
+
 export const PostDetails = () => {
   const { id } = useParams();
   const [post, setPost] = useState(postTemplate);
@@ -34,15 +36,7 @@ export const PostDetails = () => {
   return (
     <div>
       <Container sx={{ padding: "1em" }}>
-        <Paper
-          elevation={2}
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            flexDirection: "column",
-            padding: "1em 1em 0.25em 1em",
-          }}
-        >
+        <StyledPaper elevation={2}>
           <Typography
             variant="h3"
             sx={{
@@ -55,13 +49,17 @@ export const PostDetails = () => {
           </Typography>
           <Box
             sx={{
+              marginBottom: "1em",
               display: "flex",
-              alignItems: "center",
-              paddingBottom: "5px",
+              flexDirection: "row",
+              justifyContent: "space-between",
             }}
           >
             <Typography variant="caption" sx={{ marginRight: "5px" }}>
               Preguntado el {post.createdAt} por <UserShort id={postOwner} />
+            </Typography>
+            <Typography variant="caption" sx={{ marginRight: "5px" }}>
+              <LocalOfferIcon /> {post.tags.join(", ")}
             </Typography>
           </Box>
           <Typography variant="body1" paragraph>
@@ -79,7 +77,8 @@ export const PostDetails = () => {
               )}
             </div>
           ))}
-        </Paper>
+        </StyledPaper>
+        <AnswerCreate />
       </Container>
     </div>
   );

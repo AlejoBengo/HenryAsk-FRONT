@@ -7,7 +7,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
-import { StyledTextField } from "./StyledComponents";
+import { StyledTextField } from "../../Style/StyledComponents";
 import {
   remoteUpdateUser,
   fetchUserByEmail,
@@ -60,7 +60,7 @@ export const EditProfile = () => {
             justifyContent: "space-around",
           }}
         >
-          <Grid item xs={11} sm={6} sx={{ paddingRight: "16px" }}>
+          <Grid item xs={11} sm={6} sx={{ paddingRight: "1em" }}>
             <StyledTextField
               variant="filled"
               label="Nombre"
@@ -71,9 +71,8 @@ export const EditProfile = () => {
               helperText={userInfo.first_name === "" ? "Campo obligatorio" : ""}
             ></StyledTextField>
           </Grid>
-          <Grid item xs={11} sm={6} sx={{ paddingRight: "16px" }}>
+          <Grid item xs={11} sm={6} sx={{ paddingRight: "1em" }}>
             <StyledTextField
-              sx={{ margin: "0px 16px 0px 16px", width: "100%" }}
               variant="filled"
               label="Apellido"
               name="last_name"
@@ -83,7 +82,7 @@ export const EditProfile = () => {
               helperText={userInfo.last_name === "" ? "Campo obligatorio" : ""}
             ></StyledTextField>
           </Grid>
-          <Grid item xs={11} sm={6} sx={{ paddingRight: "16px" }}>
+          <Grid item xs={11} sm={6} sx={{ paddingRight: "1em" }}>
             <StyledTextField
               variant="filled"
               label="Nombre de Usuario"
@@ -94,7 +93,7 @@ export const EditProfile = () => {
               helperText={userInfo.user_name === "" ? "Campo obligatorio" : ""}
             ></StyledTextField>
           </Grid>
-          <Grid item xs={11} sm={6} sx={{ paddingRight: "16px" }}>
+          <Grid item xs={11} sm={6} sx={{ paddingRight: "1em" }}>
             <StyledTextField
               variant="filled"
               label="País"
@@ -103,7 +102,7 @@ export const EditProfile = () => {
               onChange={(event) => handleInputChange(event)}
             ></StyledTextField>
           </Grid>
-          <Grid item xs={11} sm={6} sx={{ paddingRight: "16px" }}>
+          <Grid item xs={11} sm={6} sx={{ paddingRight: "1em" }}>
             <StyledTextField
               variant="filled"
               label="Ciudad"
@@ -112,7 +111,7 @@ export const EditProfile = () => {
               onChange={(event) => handleInputChange(event)}
             ></StyledTextField>
           </Grid>
-          <Grid item xs={11} sm={6} sx={{ paddingRight: "16px" }}>
+          <Grid item xs={11} sm={6} sx={{ paddingRight: "1em" }}>
             <StyledTextField
               variant="filled"
               label="Foto de Perfil"
@@ -122,7 +121,7 @@ export const EditProfile = () => {
             ></StyledTextField>
           </Grid>
 
-          <Grid item xs={11} sm={12} sx={{ paddingRight: "16px" }}>
+          <Grid item xs={11} sm={12} sx={{ paddingRight: "1em" }}>
             <StyledTextField
               variant="filled"
               multiline
@@ -138,7 +137,7 @@ export const EditProfile = () => {
             item
             xs={12}
             sx={{
-              paddingRight: "16px",
+              paddingRight: "1em",
               display: "flex",
               justifyContent: "center",
             }}

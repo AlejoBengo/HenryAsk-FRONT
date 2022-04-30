@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
-import { UserShort } from "../UserShort/UserShort";
+import { UserShort } from "../..//UserShort/UserShort";
 interface Props {
   id: string;
 }

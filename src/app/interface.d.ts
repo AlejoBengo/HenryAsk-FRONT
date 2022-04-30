@@ -38,4 +38,5 @@ export interface Post {
   answers: Array<string>;
   type: string;
   tags: Array<string>;
+  open: boolean;
 }
