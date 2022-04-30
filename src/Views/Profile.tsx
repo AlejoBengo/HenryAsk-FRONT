@@ -1,18 +1,18 @@
+/*--------------------------------------------------------*/
+/*-----------IMPORT UTILITIES-----------*/
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useAppSelector, useAppDispatch } from "../app/hooks";
-import {
-  fetchProfile,
-  clearProfile,
-} from "../app/Reducers/userProfileSlice";
-import EditIcon from "@mui/icons-material/Edit";
 import { useNavigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
-import { Box, Button, Typography , Stack , Paper} from "@mui/material";
 import { styled } from '@mui/material/styles';
 import { Container } from "@mui/material";
-
-
+/*-----------IMPORT REDUCER-----------*/
+import { fetchProfile, clearProfile } from "../app/Reducers/userProfileSlice";
+/*-----------IMPORT MUI & CSS-----------*/
+import EditIcon from "@mui/icons-material/Edit";
+import { Box, Button, Typography , Stack , Paper} from "@mui/material";
+/*--------------------------------------------------------*/
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#c4c4c4',
@@ -21,7 +21,6 @@ const Item = styled(Paper)(({ theme }) => ({
   textAlign: 'center',
   color: theme.palette.text.secondary,
 }));
-
 
 export default function Profile() {
   const roles = [

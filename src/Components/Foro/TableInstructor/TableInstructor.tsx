@@ -1,41 +1,41 @@
-import * as React from 'react';
-import Paper from '@mui/material/Paper';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TablePagination from '@mui/material/TablePagination';
-import TableRow from '@mui/material/TableRow';
-import { Box, Avatar, Typography } from '@mui/material';
-import {isAlumnOrInstructor, propsPost, height , Column} from '../../../app/interface';
+import * as React from "react";
+import Paper from "@mui/material/Paper";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TablePagination from "@mui/material/TablePagination";
+import TableRow from "@mui/material/TableRow";
+import { Box, Avatar, Typography } from "@mui/material";
+import {
+  isAlumnOrInstructor,
+  propsPost,
+  height,
+  Column,
+} from "../../../app/interface";
 
-export default function TableInstructor(props:any) {
+export default function TableInstructor(props: any) {
+  const renderHeadTable = props.user; //lane 56
+  const heigthTable = props.height; //lane 88
+  const posts = props.post;
 
-    const renderHeadTable = props.user//lane 56 
-    const heigthTable = props.height//lane 88
-    const posts = props.post
-    
-
-
-    const columns: readonly Column[] = [
-        { id: 'name', label: renderHeadTable, minWidth: 30, align:'center' },
-        { id: 'question', label: 'Asunto', minWidth: 150, align:'center' },
-        {
-          id: 'description',
-          label: 'Descripcion',
-          minWidth: 170,
-          align: 'center',
-        },
-        {
-          id: 'tags',
-          label: 'Tags',
-          minWidth: 100,
-          align: 'center',
-        },
-      ];
-
-
+  const columns: readonly Column[] = [
+    { id: "name", label: renderHeadTable, minWidth: 30, align: "center" },
+    { id: "question", label: "Asunto", minWidth: 150, align: "center" },
+    {
+      id: "description",
+      label: "Descripcion",
+      minWidth: 170,
+      align: "center",
+    },
+    {
+      id: "tags",
+      label: "Tags",
+      minWidth: 100,
+      align: "center",
+    },
+  ];
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -44,16 +44,18 @@ export default function TableInstructor(props:any) {
     setPage(newPage);
   };
 
-  const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeRowsPerPage = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
 
   return (
-    <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-      <TableContainer sx={{ maxHeight:heigthTable }}>
+    <Paper sx={{ width: "100%", overflow: "hidden" }}>
+      <TableContainer sx={{ maxHeight: heigthTable }}>
         <Table stickyHeader aria-label="sticky table">
-          <TableHead sx={{width:"100%"}}>
+          <TableHead sx={{ width: "100%" }}>
             <TableRow>
               {columns.map((column) => (
                 <TableCell
@@ -67,28 +69,50 @@ export default function TableInstructor(props:any) {
             </TableRow>
           </TableHead>
 
-          <TableBody sx={{width:"100%"}}>
+          <TableBody sx={{ width: "100%" }}>
             {posts
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row:any) => {
+              .map((row: any) => {
                 return (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={`${row.question+Math.random()}`} sx={{maxWidth:"100%"}}>
+                  <TableRow
+                    hover
+                    role="checkbox"
+                    tabIndex={-1}
+                    key={`${row.question + Math.random()}`}
+                    sx={{ maxWidth: "100%" }}
+                  >
                     {columns.map((column) => {
                       const value = row[column.id];
-                      if(column.id ==="name"){
+                      if (column.id === "name") {
                         return (
-                            <TableCell align={column.align}>
-                                <Box display="flex" alignItems="center" sx={{flexDirection:"column"}}>
-                                    <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-                                    <Typography variant='subtitle2'>{row.ownerData[2]}</Typography>
-                                </Box>
-                            </TableCell>
-                        )
+                          <TableCell align={column.align}>
+                            <Box
+                              display="flex"
+                              alignItems="center"
+                              sx={{ flexDirection: "column" }}
+                            >
+                              <Avatar
+                                alt="Remy Sharp"
+                                src="/static/images/avatar/2.jpg"
+                              />
+                              <Typography variant="subtitle2">
+                                {row.ownerData[2]}
+                              </Typography>
+                            </Box>
+                          </TableCell>
+                        );
                       }
-                      
+
                       return (
-                        <TableCell key={column.id} align={column.align} 
-                        sx={{maxWidth:"20vw",minWidth:"100px", maxHeight:"14.5vh"}}>
+                        <TableCell
+                          key={column.id}
+                          align={column.align}
+                          sx={{
+                            maxWidth: "20vw",
+                            minWidth: "100px",
+                            maxHeight: "14.5vh",
+                          }}
+                        >
                           {value}
                         </TableCell>
                       );
@@ -97,7 +121,6 @@ export default function TableInstructor(props:any) {
                 );
               })}
           </TableBody>
-
         </Table>
       </TableContainer>
       <TablePagination

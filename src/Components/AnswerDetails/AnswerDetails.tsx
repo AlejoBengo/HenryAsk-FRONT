@@ -1,6 +1,10 @@
+/*--------------------------------------------------------*/
+/*-----------IMPORT UTILITIES-----------*/
 import React from "react";
-import { Box, Typography } from "@mui/material";
 import { UserShort } from "../UserShort/UserShort";
+/*-----------IMPORT MUI & CSS-----------*/
+import { Box, Typography } from "@mui/material";
+/*--------------------------------------------------------*/
 interface Props {
   id: string;
 }

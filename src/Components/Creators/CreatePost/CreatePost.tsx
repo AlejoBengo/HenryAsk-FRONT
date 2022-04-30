@@ -1,10 +1,13 @@
+/*--------------------------------------------------------*/
+/*-----------IMPORT UTILITIES-----------*/
+import React, { useEffect } from "react";
+import { fetchPostToSave } from "../../../app/Actions/actionsPost";
+import { postTemplate } from "../../../app/Utils/postUtilities";
+import { useAppSelector, useAppDispatch } from "../../../app/hooks";
+import { Posts, Error } from "../../../app/interface";
+/*-----------IMPORT MUI & CSS-----------*/
 import { MenuItem, IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { Posts, Error } from "../../app/interface";
-import { fetchPostToSave } from "../../app/Actions/actionsPost";
-import { postTemplate } from "../../app/Utils/postUtilities";
-import React, { useEffect } from "react";
-import { useAppSelector, useAppDispatch } from "../../app/hooks";
 import {
   StyledGrid,
   StyledTextField,
@@ -14,6 +17,7 @@ import {
   StyledBox2,
   StyledButton,
 } from "./SyledComponents";
+/*--------------------------------------------------------*/
 
 const validator = (tags: Array<string>) => {
   let errors: Error = {
@@ -99,10 +103,10 @@ const PostForm = () => {
       post.question.length > 0 &&
       post.tags.length > 0
     ) {
-      console.log(post);
       dispatch(fetchPostToSave(post))
         .then(() => console.log("completado"))
         .catch((err) => console.log(err));
+      setPost(postTemplate);
     } else {
       setError({ ...error, errorSubmit: "El formulario está incompleto" });
     }

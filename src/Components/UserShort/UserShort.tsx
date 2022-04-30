@@ -1,11 +1,14 @@
+/*--------------------------------------------------------*/
+/*-----------IMPORT UTILITIES-----------*/
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import AccountCircleRoundedIcon from "@mui/icons-material/AccountCircleRounded";
 import { User } from "../../app/interface";
 import { Link } from "react-router-dom";
-import { Link as MUILink } from "@mui/material";
 import { getUserById } from "../../app/Utils/userUtilities";
-
+/*-----------IMPORT MUI & CSS-----------*/
+import AccountCircleRoundedIcon from "@mui/icons-material/AccountCircleRounded";
+import { Link as MUILink } from "@mui/material";
+/*--------------------------------------------------------*/
 interface Props {
   id: string;
 }

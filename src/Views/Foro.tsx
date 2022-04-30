@@ -1,5 +1,9 @@
+/*--------------------------------------------------------*/
+/*-----------IMPORT UTILITIES-----------*/
 import React, { useEffect } from "react";
+/*-----------IMPORT COMPONENTS-----------*/
 import TableInstructor from "../Components/Foro/TableInstructor/TableInstructor";
+/*-----------IMPORT MUI & CSS-----------*/
 import { Div, TituloForo } from "../Components/Style/StyledComponents";
 import { Container, Typography } from "@mui/material";
 import {fetchGetAllPosts} from '../app/Reducers/getPostsForum';

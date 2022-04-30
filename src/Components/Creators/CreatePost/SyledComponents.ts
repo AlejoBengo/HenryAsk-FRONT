@@ -1,18 +1,24 @@
+/*--------------------------------------------------------*/
+/*-----------IMPORT UTILITIES-----------*/
 import { Grid, TextField, Select, Alert, Box, Button } from "@mui/material";
 import { styled } from "@mui/material/styles";
+/*--------------------------------------------------------*/
 
 export const StyledGrid = styled(Grid)`
-  width: 100vw;
-  height: 50vh;
+  width: 70vw;
+  height: 60vh;
   margin-top: 10vh;
   display: flex;
+  justify-content: center;
+  background-color: rgb(209, 209, 209);
+  padding: 4vh;
   flex-direction: column;
 `;
 
 export const StyledTextField = styled(TextField)`
-  width: 40vw;
+  width: 60vw;
   height: 10vh;
-  margin-left: 1vw;
+  margin: 1vw;
 `;
 
 export const StyledSelect = styled(Select)`
