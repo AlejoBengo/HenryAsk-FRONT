@@ -35,6 +35,7 @@ export interface Post {
   description: string;
   owner: string;
   createdAt: string;
+  open: boolean;
   answers: Array<string>;
   type: string;
   tags: Array<string>;

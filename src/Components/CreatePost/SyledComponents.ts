@@ -1,5 +1,5 @@
 import { Grid, TextField, Select, Alert, Box, Button } from "@mui/material";
-import { styled } from "@mui/system";
+import { styled } from "@mui/material/styles";
 
 export const StyledGrid = styled(Grid)`
   width: 100vw;
@@ -32,7 +32,6 @@ export const StyledBox = styled(Box)`
   align-items: center;
   justify-content: space-evenly;
   margin-top: 1vh;
-  background-color: rgba(153, 153, 153, 0.74);
   width: 35vw;
 `;
 

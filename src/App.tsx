@@ -45,7 +45,7 @@ const App = () => {
         <Route path="/Profile/:id/Edit" element={<EditProfile />} />
         <Route path="/Post/:id" element={<PostDetails />} />
         <Route path="/Forum/" element={<Foro />} />
-        <Route path="Forum/createpost" element={<CreatePost />} />
+        <Route path="/" element={<CreatePost />} />
       </Routes>
     </>
   );

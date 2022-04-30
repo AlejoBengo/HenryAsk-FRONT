@@ -1,8 +1,9 @@
-import { MenuItem, IconButton, Alert } from "@mui/material";
+import { MenuItem, IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { Post, Error, User } from "../../app/interface";
+import { Post, Error } from "../../app/interface";
 import { fetchPostToSave } from "../../app/Actions/actionsPost";
-import React from "react";
+import { postTemplate } from "../../app/Utils/postUtilities";
+import React, { useEffect } from "react";
 import { useAppSelector, useAppDispatch } from "../../app/hooks";
 import {
   StyledGrid,
@@ -30,20 +31,19 @@ const PostForm = () => {
   const usuario = useAppSelector((state) => state.user.data);
   const dispatch = useAppDispatch();
 
-  const [post, setPost] = React.useState<Post>({
-    _id: "",
-    question: "",
-    owner: "",
-    type: "",
-    tags: [],
-    description: "",
-    open: true,
-  });
+  const [post, setPost] = React.useState<Post>(postTemplate);
 
   const [error, setError] = React.useState<Error>({
     errorTag: "",
     errorSubmit: "",
   });
+
+  useEffect(() => {
+    setPost({
+      ...post,
+      owner: usuario._id,
+    });
+  }, [usuario]);
 
   const tags: Array<string> = [
     "JavaScript",
@@ -88,30 +88,19 @@ const PostForm = () => {
   };
 
   const handleSubmit = (event: React.MouseEvent<HTMLButtonElement>) => {
-    // console.log(usuario);
-    // setPost({ ...post, owner: usuario }); //NO GUARDA EL OWNER
-    // console.log(post.owner);
     if (error.errorSubmit.length > 0) {
       setError({ ...error, errorSubmit: "" });
     }
+
     if (
       error.errorTag.length === 0 &&
       post.description.length > 0 &&
       post.question.length > 0 &&
-      post.tags.length > 0 &&
-      usuario._id
+      post.tags.length > 0
     ) {
       dispatch(fetchPostToSave(post))
         .then(() => console.log("completado"))
         .catch((err) => console.log(err));
-      setPost({
-        owner: post.owner,
-        question: "",
-        type: "",
-        tags: [],
-        description: "",
-        open: true,
-      });
     } else {
       setError({ ...error, errorSubmit: "El formulario está incompleto" });
     }
@@ -153,7 +142,7 @@ const PostForm = () => {
       {error.errorTag.length > 0 && (
         <StyledAlert severity="info">{error.errorTag}</StyledAlert>
       )}
-      <StyledBox>
+      <StyledBox sx={{ backgroundColor: "info.main" }}>
         {post.tags.length > 0 &&
           post.tags.map((tag) => {
             return (
