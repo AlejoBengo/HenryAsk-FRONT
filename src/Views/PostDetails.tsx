@@ -1,12 +1,18 @@
-import { Container, Divider, Paper, Typography, Box } from "@mui/material";
-import axios from "axios";
-import RoundedAccountIcon from "@mui/icons-material/AccountCircleRounded";
+/*--------------------------------------------------------*/
+/*-----------IMPORT UTILITIES-----------*/
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { AnswerDetails } from "../Components/AnswerDetails/AnswerDetails";
-import { UserShort } from "../Components/UserShort/UserShort";
+import axios from "axios";
 import { getUserById, userTemplate } from "../app/Utils/userUtilities";
 import { postTemplate, getPostById } from "../app/Utils/postUtilities";
+/*-----------IMPORT COMPONENTS-----------*/
+import { AnswerDetails } from "../Components/AnswerDetails/AnswerDetails";
+import { UserShort } from "../Components/UserShort/UserShort";
+/*-----------IMPORT MUI & CSS-----------*/
+import { Container, Divider, Paper, Typography, Box } from "@mui/material";
+import RoundedAccountIcon from "@mui/icons-material/AccountCircleRounded";
+/*--------------------------------------------------------*/
+
 export const PostDetails = () => {
   const { id } = useParams();
   const [post, setPost] = useState(postTemplate);

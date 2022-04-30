@@ -1,8 +1,12 @@
+/*--------------------------------------------------------*/
+/*-----------IMPORT UTILITIES-----------*/
 import React from "react";
+/*-----------IMPORT MUI & CSS-----------*/
 import { Grid, ToggleButtonGroup, ToggleButton } from "@mui/material";
 import FormatBoldIcon from "@mui/icons-material/FormatBold";
 import FormatItalicIcon from "@mui/icons-material/FormatItalic";
 import CodeIcon from "@mui/icons-material/Code";
+/*--------------------------------------------------------*/
 interface Props {
   value: string;
 }

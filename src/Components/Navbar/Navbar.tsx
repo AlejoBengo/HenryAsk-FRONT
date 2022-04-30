@@ -1,4 +1,14 @@
+/*--------------------------------------------------------*/
+/*-----------IMPORT UTILITIES-----------*/
 import React from "react";
+import { useAuth0 } from "@auth0/auth0-react";
+import { Link, Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useAppSelector } from "../../app/hooks";
+/*-----------IMPORT COMPONENTS-----------*/
+import { LoginButton } from "../ButtonsOutLogin/LoginButton/LoginButton";
+import { LogoutButton } from "../ButtonsOutLogin/LogoutButton/LogoutButton";
+/*-----------IMPORT MUI & CSS-----------*/
 import {
   AppBar,
   Box,
@@ -14,13 +24,7 @@ import {
 } from "@mui/material";
 import { Img } from "../Content/ContentStyled";
 import DehazeIcon from "@mui/icons-material/Dehaze";
-import { LoginButton } from "../ButtonsOutLogin/LoginButton/LoginButton";
-import { LogoutButton } from "../ButtonsOutLogin/LogoutButton/LogoutButton";
-import { useAuth0 } from "@auth0/auth0-react";
-import { Link, Navigate } from "react-router-dom";
 import css from "./NavBar.module.css";
-import { useNavigate } from "react-router-dom";
-import { useAppSelector } from "../../app/hooks";
 
 const pages = ["Material complementario", "Foro"];
 const settings = ["Perfil", "Cerrar Sesion"];

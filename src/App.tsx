@@ -1,3 +1,4 @@
+/*-----------IMPORT UTILITIES-----------*/
 import React, { useEffect } from "react";
 import {
   Route,
@@ -6,16 +7,18 @@ import {
   BrowserRouter as Router,
   useNavigate,
 } from "react-router-dom";
-import { fetchUserByEmail } from "./app/Reducers/userSlice";
-import Content from "./Views/Content";
-import Navbar from "./Components/Navbar/Navbar";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useAppSelector, useAppDispatch } from "./app/hooks";
+/*-----------IMPORT REDUCER-----------*/
+import { fetchUserByEmail } from "./app/Reducers/userSlice";
+/*-----------IMPORT COMPONENTS-----------*/
+import Content from "./Views/Content";
+import Navbar from "./Components/Navbar/Navbar";
 import Profile from "./Views/Profile";
 import { EditProfile } from "./Components/Profile/EditProfile/EditProfile";
 import Foro from "./Views/Foro";
 import PostDetails from "./Views/PostDetails";
-import CreatePost from "../src/Components/CreatePost/CreatePost";
+import CreatePost from "./Components/Creators/CreatePost/CreatePost";
 
 const App = () => {
   const { isAuthenticated, user } = useAuth0();

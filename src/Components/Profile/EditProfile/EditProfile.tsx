@@ -1,6 +1,10 @@
+/*--------------------------------------------------------*/
+/*-----------IMPORT UTILITIES-----------*/
 import React, { useState } from "react";
 import { useAppSelector, useAppDispatch } from "../../../app/hooks";
 import { useNavigate } from "react-router-dom";
+import { userTemplate } from "../../../app/Utils/userUtilities";
+/*-----------IMPORT MUI & CSS-----------*/
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
@@ -12,7 +16,7 @@ import {
   remoteUpdateUser,
   fetchUserByEmail,
 } from "../../../app/Reducers/userSlice";
-import { userTemplate } from "../../../app/Utils/userUtilities";
+/*--------------------------------------------------------*/
 
 export const EditProfile = () => {
   const user = useAppSelector((state) => state.user.data);
