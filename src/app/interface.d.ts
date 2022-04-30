@@ -33,7 +33,8 @@ export interface Posts {
   _id: string;
   question: string;
   description: string;
-  owner: Array<string>;
+  owner: string;
+  ownerData: Array<string>;
   createdAt: string;
   open: boolean;
   answers: Array<string>;

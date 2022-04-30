@@ -41,7 +41,8 @@ const PostForm = () => {
   useEffect(() => {
     setPost({
       ...post,
-      owner: [usuario._id, usuario.role.toString(), usuario.user_name],
+      owner: usuario._id,
+      ownerData: [usuario.user_name, usuario.role.toString()],
     });
   }, [usuario]);
 
