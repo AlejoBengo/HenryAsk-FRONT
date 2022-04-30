@@ -6,6 +6,7 @@ export const postTemplate: Post = {
   description: "",
   owner: "",
   createdAt: "",
+  open: true,
   answers: [],
   type: "",
   tags: [],
