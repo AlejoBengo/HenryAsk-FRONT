@@ -15,7 +15,7 @@ export const postTemplate: Posts = {
 
 export const getPostById = async (id: string | undefined) => {
   try {
-    let post = await (await axios.get(`/post?id=${id}`)).data;
+    let post = await (await axios.get(`/post/${id}`)).data;
 
     return { ...postTemplate, ...post };
   } catch (error) {

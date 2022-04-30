@@ -6,11 +6,14 @@ import axios from "axios";
 import { getUserById, userTemplate } from "../app/Utils/userUtilities";
 import { postTemplate, getPostById } from "../app/Utils/postUtilities";
 /*-----------IMPORT COMPONENTS-----------*/
-import { AnswerDetails } from "../Components/AnswerDetails/AnswerDetails";
+import { AnswerDetails } from "../Components/Answer/AnswerDetails/AnswerDetails";
 import { UserShort } from "../Components/UserShort/UserShort";
+import { AnswerCreate } from "../Components/Answer/AnswerCreate/AnswerCreate";
 /*-----------IMPORT MUI & CSS-----------*/
 import { Container, Divider, Paper, Typography, Box } from "@mui/material";
 import RoundedAccountIcon from "@mui/icons-material/AccountCircleRounded";
+import { StyledPaper } from "../Components/Style/StyledComponents";
+import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 /*--------------------------------------------------------*/
 
 export const PostDetails = () => {
@@ -40,15 +43,7 @@ export const PostDetails = () => {
   return (
     <div>
       <Container sx={{ padding: "1em" }}>
-        <Paper
-          elevation={2}
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            flexDirection: "column",
-            padding: "1em 1em 0.25em 1em",
-          }}
-        >
+        <StyledPaper elevation={2}>
           <Typography
             variant="h3"
             sx={{
@@ -61,13 +56,17 @@ export const PostDetails = () => {
           </Typography>
           <Box
             sx={{
+              marginBottom: "1em",
               display: "flex",
-              alignItems: "center",
-              paddingBottom: "5px",
+              flexDirection: "row",
+              justifyContent: "space-between",
             }}
           >
             <Typography variant="caption" sx={{ marginRight: "5px" }}>
               Preguntado el {post.createdAt} por <UserShort id={postOwner} />
+            </Typography>
+            <Typography variant="caption" sx={{ marginRight: "5px" }}>
+              <LocalOfferIcon /> {post.tags.join(", ")}
             </Typography>
           </Box>
           <Typography variant="body1" paragraph>
@@ -85,7 +84,8 @@ export const PostDetails = () => {
               )}
             </div>
           ))}
-        </Paper>
+        </StyledPaper>
+        <AnswerCreate />
       </Container>
     </div>
   );

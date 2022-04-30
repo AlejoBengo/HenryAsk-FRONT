@@ -16,7 +16,7 @@ const initialState: InitialState = {
 export const fetchProfile = createAsyncThunk(
   "user/fetchProfile",
   async (id: string) => {
-    const response = await (await axios.get(`/user?id=${id}`)).data[0];
+    const response = await (await axios.get(`/user/${id}`)).data;
     return response;
   }
 );

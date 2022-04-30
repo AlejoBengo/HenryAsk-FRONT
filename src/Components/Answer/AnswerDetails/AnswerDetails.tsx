@@ -1,7 +1,7 @@
 /*--------------------------------------------------------*/
 /*-----------IMPORT UTILITIES-----------*/
 import React from "react";
-import { UserShort } from "../UserShort/UserShort";
+import { UserShort } from "../../UserShort/UserShort";
 /*-----------IMPORT MUI & CSS-----------*/
 import { Box, Typography } from "@mui/material";
 /*--------------------------------------------------------*/

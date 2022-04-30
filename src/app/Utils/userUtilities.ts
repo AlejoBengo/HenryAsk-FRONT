@@ -25,6 +25,9 @@ export const userTemplate: User = {
 export const getUserById = async (id: string) => {
   try {
     let user = await (await axios.get(`/user/${id}`)).data;
+    if (user.user_name === "") {
+      return userTemplate;
+    }
 
     return user;
   } catch (error) {
