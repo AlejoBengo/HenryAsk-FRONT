@@ -59,7 +59,7 @@ export interface User {
     post:string;
   }
 
-  
+ 
 
   export interface propsPost{
     post:Array<Posts>
