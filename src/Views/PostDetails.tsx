@@ -6,11 +6,14 @@ import axios from "axios";
 import { getUserById, userTemplate } from "../app/Utils/userUtilities";
 import { postTemplate, getPostById } from "../app/Utils/postUtilities";
 /*-----------IMPORT COMPONENTS-----------*/
-import { AnswerDetails } from "../Components/AnswerDetails/AnswerDetails";
+import { AnswerDetails } from "../Components/Answer/AnswerDetails/AnswerDetails";
 import { UserShort } from "../Components/UserShort/UserShort";
+import { AnswerCreate } from "../Components/Answer/AnswerCreate/AnswerCreate";
 /*-----------IMPORT MUI & CSS-----------*/
 import { Container, Divider, Paper, Typography, Box } from "@mui/material";
 import RoundedAccountIcon from "@mui/icons-material/AccountCircleRounded";
+import { StyledPaper } from "../Components/Style/StyledComponents";
+import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 /*--------------------------------------------------------*/
 
 export const PostDetails = () => {
