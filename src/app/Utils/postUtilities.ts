@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Post } from "../interface";
 export const postTemplate: Post = {
-  id: "",
+  _id: "",
   question: "",
   description: "",
   owner: "",

@@ -30,7 +30,7 @@ export interface isAlumnOrInstructor {
   height: number;
 }
 export interface Post {
-  id: string;
+  _id: string;
   question: string;
   description: string;
   owner: string;
