@@ -12,9 +12,11 @@ import {
   remoteUpdateUser,
   fetchUserByEmail,
 } from "../../../app/Reducers/userSlice";
+import { userTemplate } from "../../../app/Utils/userUtilities";
+
 export const EditProfile = () => {
   const user = useAppSelector((state) => state.user.data);
-  const [userInfo, setUserInfo] = useState({ ...user });
+  const [userInfo, setUserInfo] = useState({ ...userTemplate, ...user });
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const handleInputChange = (
@@ -26,6 +28,7 @@ export const EditProfile = () => {
     });
   };
   const handleSave = (event: React.MouseEvent<HTMLButtonElement>) => {
+    console.log(userInfo);
     dispatch(remoteUpdateUser(userInfo))
       .then(() => dispatch(fetchUserByEmail(userInfo.email)))
       .then(() => {
