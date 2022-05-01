@@ -31,13 +31,13 @@ export const PostDetails = () => {
   }, []);
   useEffect(() => {
     if (!user._id) {
-      getUserById(post.owner[0])
+      getUserById(post.owner._id) //Modificado por Agus al resolverse el tema de las Refs de los modelos
         .then((user) => setUser(user))
         .catch(() => setError(true));
     }
   }, []);
 
-  const postOwner = post.owner[0];
+  const postOwner = post.owner._id; //Modificado por Agus al resolverse el tema de las Refs de los modelos
   const postAnswers = post.answers;
   if (error) return <div>Error</div>;
   return (

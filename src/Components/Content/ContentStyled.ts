@@ -10,6 +10,13 @@ export const Img = styled("img")(`
 
     `);
 
+export const ImgProfile = styled("img")(`
+  width: 50%;
+  height:auto;
+  object-fit:contain;
+
+  `);
+
 export const Imagen = styled("img")(`
   width: 100%;
   height:100%;

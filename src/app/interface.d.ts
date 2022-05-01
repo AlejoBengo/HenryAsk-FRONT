@@ -75,11 +75,12 @@ export interface User {
     user: Array;
     height: number;
   }
+
   export interface Posts {
     _id: string;
     question: string;
     description: string;
-    owner: string;
+    owner: any; //cambiado de string a any por Agus ya que se resolvió el tema de las Refs
     ownerData: Array<string>;
     createdAt: string;
     open: boolean;

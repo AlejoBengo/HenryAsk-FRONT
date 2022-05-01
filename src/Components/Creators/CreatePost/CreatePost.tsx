@@ -54,7 +54,6 @@ const PostForm = () => {
     setPost({
       ...post,
       owner: usuario._id,
-      ownerData: [usuario._id, usuario.role.toString(), usuario.user_name],
       type: tipo,
     });
   }, [usuario]);

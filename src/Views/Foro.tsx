@@ -56,26 +56,16 @@ export default function Foro(){
 
 // FALTA RENDERIZAR PREP 
 
-// SOLUCION PARA SALIR DEL APURO DE ALEJO ---> VIABLE , no deseable 
-  posts?.map(e => {
-    if(e.ownerData){
-      if(e.ownerData[1] === "4") postInstructores.push(e);
-      if(e.ownerData[1] !== "0" && e.ownerData[1] !== "4" && e.ownerData[1] !== "1") postAlumnos.push(e);
-      if(e.ownerData[1] === "1") postPrep.push(e);
-    }
-  })
-    //array ownerData [id:string , role:string, name:string , avatar ??????]
 
-// COMO DEBERIA SER , CAMBIAR SI AGUS RESUELVE EL ERROR OWNER ---> PREGUNTARLE
-  
- /*  posts?.map(e => {
+posts?.map(e => {
     if(e.owner){
       if(e.owner.role === 4) postInstructores.push(e);
       if(e.owner.role === 2 || e.owner.role === 3 || e.owner.role === 5) postAlumnos.push(e);
+      if(e.owner.role === 1) postPrep.push(e);
     }
-  }) */
+  })
   
- 
+
   
   setTimeout(()=> console.log("USER",userLogin), 4000)
   setTimeout(()=> console.log("ALUMNOS",postAlumnos), 4000)

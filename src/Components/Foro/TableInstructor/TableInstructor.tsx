@@ -85,6 +85,7 @@ export default function TableInstructor(props: any) {
                       const value = row[column.id];
                       if (column.id === "name") {
                         return (
+                          
                           <TableCell align={column.align}>
                             <Box
                               display="flex"
@@ -93,18 +94,16 @@ export default function TableInstructor(props: any) {
                             >
                               <Avatar
                                 alt="Remy Sharp"
-                                src="/static/images/avatar/2.jpg"
-                                //src={row.owner.profile_picture}
+                                src={row.owner.profile_picture}
                               />
                               <Typography variant="subtitle2">
-                                {row.ownerData[2]}
-                                {/* {row.owner.user_name} */}
+                                {row.owner.user_name}
                               </Typography>
                             </Box>
                           </TableCell>
                         );
                       }
-
+                      
                       return (
                         <TableCell
                           key={column.id}

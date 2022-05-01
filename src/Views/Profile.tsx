@@ -12,6 +12,7 @@ import { fetchProfile, clearProfile } from "../app/Reducers/userProfileSlice";
 /*-----------IMPORT MUI & CSS-----------*/
 import EditIcon from "@mui/icons-material/Edit";
 import { Box, Button, Typography , Stack , Paper} from "@mui/material";
+import { ImgProfile } from "../Components/Content/ContentStyled";
 /*--------------------------------------------------------*/
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -44,7 +45,7 @@ export default function Profile() {
      <Box
      width="70%"
      sx={{
-      height:"60vh",
+      height:"max-content",
       backgroundColor:"#acacac",
       boxShadow:"1px 1px 20px black"
      }}
@@ -63,6 +64,10 @@ export default function Profile() {
         >
           Perfil
         </Typography>
+        <ImgProfile
+          src={userProfile.profile_picture}
+          alt="profilePicture"
+        />
         {id === user._id ? (
           <Button
             variant="contained"
