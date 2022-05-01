@@ -38,11 +38,17 @@ export interface Posts {
   createdAt: string;
   open: boolean;
   answers: Array<string>;
-  type: string;
+  type: number;
   tags: Array<string>;
 }
 
 export interface Error {
   errorTag: string;
   errorSubmit: string;
+}
+
+export interface Answer {
+  owner: string;
+  content: string;
+  posts: string;
 }

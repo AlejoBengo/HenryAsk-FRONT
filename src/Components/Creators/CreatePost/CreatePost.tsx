@@ -1,8 +1,7 @@
 /*--------------------------------------------------------*/
 /*-----------IMPORT UTILITIES-----------*/
 import React, { useEffect } from "react";
-import { fetchPostToSave } from "../../../app/Actions/actionsPost";
-import { postTemplate } from "../../../app/Utils/postUtilities";
+import { postNewPost, postTemplate } from "../../../app/Utils/postUtilities";
 import { useAppSelector, useAppDispatch } from "../../../app/hooks";
 import { Posts, Error } from "../../../app/interface";
 /*-----------IMPORT MUI & CSS-----------*/
@@ -43,10 +42,19 @@ const PostForm = () => {
   });
 
   useEffect(() => {
+    let tipo: number;
+    if (usuario.role === 0) {
+      tipo = 0;
+    } else if (usuario.role === 1) {
+      tipo = 1;
+    } else {
+      tipo = 2;
+    }
     setPost({
       ...post,
       owner: usuario._id,
       ownerData: [usuario.user_name, usuario.role.toString()],
+      type: tipo,
     });
   }, [usuario]);
 
@@ -103,7 +111,7 @@ const PostForm = () => {
       post.question.length > 0 &&
       post.tags.length > 0
     ) {
-      dispatch(fetchPostToSave(post))
+      dispatch(postNewPost(post))
         .then(() => console.log("completado"))
         .catch((err) => console.log(err));
       setPost(postTemplate);
