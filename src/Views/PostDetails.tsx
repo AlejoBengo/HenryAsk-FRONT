@@ -7,6 +7,7 @@ import { getUserById, userTemplate } from "../app/Utils/userUtilities";
 import { postTemplate, getPostById } from "../app/Utils/postUtilities";
 /*-----------IMPORT COMPONENTS-----------*/
 import { AnswerDetails } from "../Components/AnswerDetails/AnswerDetails";
+import CreateAnswer from "../Components/Creators/CreateAnswer/CreateAnswer";
 import { UserShort } from "../Components/UserShort/UserShort";
 /*-----------IMPORT MUI & CSS-----------*/
 import { Container, Divider, Paper, Typography, Box } from "@mui/material";
@@ -86,6 +87,7 @@ export const PostDetails = () => {
             </div>
           ))}
         </Paper>
+        <CreateAnswer id={id} />
       </Container>
     </div>
   );
