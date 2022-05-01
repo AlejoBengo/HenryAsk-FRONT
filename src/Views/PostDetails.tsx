@@ -77,7 +77,7 @@ export const PostDetails = () => {
           </Typography>
           {postAnswers?.map((answer: any, index: number) => (
             <div key={answer.id}>
-              <AnswerDetails id={answer.id} />
+              <CreateAnswer id={answer.id} />
               {index !== postAnswers.length - 1 && (
                 <Divider sx={{ marginBottom: 1 }} />
               )}

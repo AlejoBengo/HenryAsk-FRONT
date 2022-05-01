@@ -39,7 +39,6 @@ export default function CreateAnswer(id: any) {
       setError({ errorSubmit: "" });
     }
     if (answer.content.length > 0) {
-      console.log(answer);
       dispatch(postNewAnswer(answer));
       setAnswer({ ...answer, content: "" });
     } else {
@@ -67,21 +66,4 @@ export default function CreateAnswer(id: any) {
       {error.errorSubmit && <Alert severity="error">{error.errorSubmit}</Alert>}
     </StyledPaper>
   );
-}
-
-{
-  /* <StyledPaper sx={{ marginTop: "1em", }} elevation={2} >
-      <Typography variant="h4" align="left" gutterBottom> Responder </Typography>
-      <StyledTextField
-        required
-        multiline
-        id="outlined-basic"
-        label="question"
-        variant="outlined"
-        value={answer.content}
-        onChange={(event) => handleInputChange(event)}
-      />
-      <Button onClick={handleSubmit}>Enviar</Button>
-      {error.errorSubmit && <Alert severity="error">{error.errorSubmit}</Alert>}
-    </StyledPaper> */
 }
