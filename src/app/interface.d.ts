@@ -126,3 +126,9 @@ export interface Error {
   errorTag: string;
   errorSubmit: string;
 }
+
+export interface Answer {
+  owner: string;
+  content: string;
+  posts: string;
+}
