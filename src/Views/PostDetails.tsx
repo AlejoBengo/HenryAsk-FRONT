@@ -6,7 +6,6 @@ import axios from "axios";
 import { getUserById, userTemplate } from "../app/Utils/userUtilities";
 import { postTemplate, getPostById } from "../app/Utils/postUtilities";
 /*-----------IMPORT COMPONENTS-----------*/
-import { AnswerDetails } from "../Components/Answer/AnswerDetails/AnswerDetails";
 import { UserShort } from "../Components/UserShort/UserShort";
 import CreateAnswer from "../Components/Creators/CreateAnswer/CreateAnswer";
 /*-----------IMPORT MUI & CSS-----------*/

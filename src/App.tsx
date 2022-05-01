@@ -14,7 +14,6 @@ import { fetchUserByEmail } from "./app/Reducers/userSlice";
 /*-----------IMPORT COMPONENTS-----------*/
 import Content from "./Views/Content";
 import Navbar from "./Components/Navbar/Navbar";
-import CreateAnswer from "./Components/Creators/CreateAnswer/CreateAnswer";
 import Profile from "./Views/Profile";
 import { EditProfile } from "./Components/Profile/EditProfile/EditProfile";
 import Foro from "./Views/Foro";
@@ -50,7 +49,6 @@ const App = () => {
         <Route path="/Post/:id" element={<PostDetails />} />
         <Route path="/Forum/" element={<Foro />} />
         <Route path="/Ask" element={<CreatePost />} />
-        <Route path="/Answer" element={<CreateAnswer />} />
       </Routes>
     </>
   );

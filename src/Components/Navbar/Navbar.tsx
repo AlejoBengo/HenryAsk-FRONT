@@ -150,7 +150,10 @@ const Navbar = () => {
               onClick={handleCloseNavMenu}
               sx={{ my: 2, color: "white", display: "block" }}
             >
-              <Link to={DBUser.role===0?"/Forum/News" :"/Forum"} className={css.StyledLink}>
+              <Link
+                to={DBUser.role === 0 ? "/Forum/News" : "/Forum"}
+                className={css.StyledLink}
+              >
                 Foro
               </Link>
             </Button>
@@ -169,9 +172,14 @@ const Navbar = () => {
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="Remy Sharp" src={DBUser.profile_picture
-                    ? DBUser.profile_picture 
-                    : "/static/images/avatar/2.jpg"} />
+                  <Avatar
+                    alt="Remy Sharp"
+                    src={
+                      DBUser.profile_picture
+                        ? DBUser.profile_picture
+                        : "/static/images/avatar/2.jpg"
+                    }
+                  />
                 </IconButton>
               </Tooltip>
               <Menu

@@ -17,15 +17,15 @@ interface Error {
   errorSubmit: string;
 }
 
-export default function CreateAnswer(id) {
+export default function CreateAnswer(id: any) {
   const usuario = useAppSelector((state) => state.user.data);
   const dispatch = useAppDispatch();
 
-  const [answer, setAnswer] = React.useState<Answer>(answerTemplate);
-  const [error, setError] = React.useState<Error>({ errorSubmit: "" });
+  const [answer, setAnswer] = useState<Answer>(answerTemplate);
+  const [error, setError] = useState<Error>({ errorSubmit: "" });
 
   useEffect(() => {
-    setAnswer({ ...answer, posts: id, owner: usuario._id });
+    setAnswer({ ...answer, posts: id.id, owner: usuario._id });
   }, [usuario, id]);
 
   const handleInputChange = (
@@ -39,15 +39,22 @@ export default function CreateAnswer(id) {
       setError({ errorSubmit: "" });
     }
     if (answer.content.length > 0) {
+      console.log(answer);
       dispatch(postNewAnswer(answer));
+      setAnswer({ ...answer, content: "" });
     } else {
       setError({ errorSubmit: "No has puesto nada como respuesta!" });
+      setTimeout(() => setError({ errorSubmit: "" }), 4000);
     }
   };
 
   return (
-    <Grid>
-      <TextField
+    <StyledPaper sx={{ marginTop: "1em" }} elevation={2}>
+      <Typography variant="h4" align="left" gutterBottom>
+        {" "}
+        Responder{" "}
+      </Typography>
+      <StyledTextField
         required
         multiline
         id="outlined-basic"
@@ -56,10 +63,9 @@ export default function CreateAnswer(id) {
         value={answer.content}
         onChange={(event) => handleInputChange(event)}
       />
-
-      <Button onClick={handleSubmit}>Submit</Button>
+      <Button onClick={handleSubmit}>Enviar</Button>
       {error.errorSubmit && <Alert severity="error">{error.errorSubmit}</Alert>}
-    </Grid>
+    </StyledPaper>
   );
 }
 
