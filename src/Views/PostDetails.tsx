@@ -8,7 +8,7 @@ import { postTemplate, getPostById } from "../app/Utils/postUtilities";
 /*-----------IMPORT COMPONENTS-----------*/
 import { AnswerDetails } from "../Components/Answer/AnswerDetails/AnswerDetails";
 import { UserShort } from "../Components/UserShort/UserShort";
-import { AnswerCreate } from "../Components/Answer/AnswerCreate/AnswerCreate";
+import CreateAnswer from "../Components/Creators/CreateAnswer/CreateAnswer";
 /*-----------IMPORT MUI & CSS-----------*/
 import { Container, Divider, Paper, Typography, Box } from "@mui/material";
 import RoundedAccountIcon from "@mui/icons-material/AccountCircleRounded";
@@ -85,7 +85,7 @@ export const PostDetails = () => {
             </div>
           ))}
         </StyledPaper>
-        <AnswerCreate />
+        <CreateAnswer id={id} />
       </Container>
     </div>
   );

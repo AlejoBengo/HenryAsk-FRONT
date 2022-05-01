@@ -9,15 +9,15 @@ import {
 } from "../../../app/Utils/answerUtilities";
 import { Answer } from "../../../app/interface";
 /*-----------IMPORT MUI & CSS-----------*/
-import { Grid, TextField, Button, Alert } from "@mui/material";
+import { Grid, TextField, Button, Alert, Typography } from "@mui/material";
+import { StyledPaper, StyledTextField } from "../../Style/StyledComponents";
 /*--------------------------------------------------------*/
 
 interface Error {
   errorSubmit: string;
 }
 
-export default function CreateAnswer() {
-  const { id }: any = useParams();
+export default function CreateAnswer(id) {
   const usuario = useAppSelector((state) => state.user.data);
   const dispatch = useAppDispatch();
 
@@ -61,4 +61,21 @@ export default function CreateAnswer() {
       {error.errorSubmit && <Alert severity="error">{error.errorSubmit}</Alert>}
     </Grid>
   );
+}
+
+{
+  /* <StyledPaper sx={{ marginTop: "1em", }} elevation={2} >
+      <Typography variant="h4" align="left" gutterBottom> Responder </Typography>
+      <StyledTextField
+        required
+        multiline
+        id="outlined-basic"
+        label="question"
+        variant="outlined"
+        value={answer.content}
+        onChange={(event) => handleInputChange(event)}
+      />
+      <Button onClick={handleSubmit}>Enviar</Button>
+      {error.errorSubmit && <Alert severity="error">{error.errorSubmit}</Alert>}
+    </StyledPaper> */
 }
