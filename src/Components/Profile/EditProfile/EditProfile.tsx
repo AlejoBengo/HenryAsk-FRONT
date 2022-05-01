@@ -1,6 +1,6 @@
 /*--------------------------------------------------------*/
 /*-----------IMPORT UTILITIES-----------*/
-import React, { useState} from "react";
+import React, { useState } from "react";
 import { useAppSelector, useAppDispatch } from "../../../app/hooks";
 import { useNavigate } from "react-router-dom";
 import { userTemplate } from "../../../app/Utils/userUtilities";

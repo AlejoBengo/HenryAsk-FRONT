@@ -9,8 +9,14 @@ import {
 } from "../../../app/Utils/answerUtilities";
 import { Answer } from "../../../app/interface";
 /*-----------IMPORT MUI & CSS-----------*/
-import { Grid, TextField, Button, Alert, Typography } from "@mui/material";
-import { StyledPaper, StyledTextField } from "../../Style/StyledComponents";
+import { Alert } from "@mui/material";
+import {
+  StyledPaper,
+  StyledTypography,
+  StyledTextField,
+  StyledButton,
+  StyledBox,
+} from "./StyledComponents";
 /*--------------------------------------------------------*/
 
 interface Error {
@@ -48,21 +54,20 @@ export default function CreateAnswer(id: any) {
   };
 
   return (
-    <StyledPaper sx={{ marginTop: "1em" }} elevation={2}>
-      <Typography variant="h4" align="left" gutterBottom>
-        {" "}
-        Responder{" "}
-      </Typography>
-      <StyledTextField
-        required
-        multiline
-        id="outlined-basic"
-        label="question"
-        variant="outlined"
-        value={answer.content}
-        onChange={(event) => handleInputChange(event)}
-      />
-      <Button onClick={handleSubmit}>Enviar</Button>
+    <StyledPaper>
+      <StyledTypography>Responder</StyledTypography>
+      <StyledBox>
+        <StyledTextField
+          required
+          multiline
+          id="outlined-basic"
+          label="answer"
+          variant="outlined"
+          value={answer.content}
+          onChange={(event) => handleInputChange(event)}
+        />
+        <StyledButton onClick={handleSubmit}>Enviar</StyledButton>
+      </StyledBox>
       {error.errorSubmit && <Alert severity="error">{error.errorSubmit}</Alert>}
     </StyledPaper>
   );

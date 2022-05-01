@@ -1,4 +1,6 @@
 import * as React from "react";
+import { useEffect } from "react";
+import { Link } from "react-router-dom";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -73,6 +75,9 @@ export default function TableInstructor(props: any) {
             {posts
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row: any) => {
+                {
+                  console.log(row);
+                }
                 return (
                   <TableRow
                     hover
@@ -85,7 +90,6 @@ export default function TableInstructor(props: any) {
                       const value = row[column.id];
                       if (column.id === "name") {
                         return (
-                          
                           <TableCell align={column.align}>
                             <Box
                               display="flex"
@@ -103,7 +107,7 @@ export default function TableInstructor(props: any) {
                           </TableCell>
                         );
                       }
-                      
+
                       return (
                         <TableCell
                           key={column.id}
@@ -112,7 +116,8 @@ export default function TableInstructor(props: any) {
                             maxWidth: "20vw",
                             minWidth: "100px",
                             maxHeight: "14.5vh",
-                          }}>
+                          }}
+                        >
                           {value}
                         </TableCell>
                       );
