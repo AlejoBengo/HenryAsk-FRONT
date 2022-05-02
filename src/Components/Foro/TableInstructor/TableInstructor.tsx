@@ -97,7 +97,7 @@ export default function TableInstructor(props: any) {
                               sx={{ flexDirection: "column" }}
                             >
                               <Avatar
-                                alt="Remy Sharp"
+                                alt={row.owner.user_name} //if the image can't be loaded then will show the first alt's letter (user's firstname)
                                 src={row.owner.profile_picture}
                               />
                               <Typography variant="subtitle2">

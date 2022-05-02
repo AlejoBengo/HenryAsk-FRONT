@@ -168,7 +168,7 @@ const Navbar = () => {
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                   <Avatar
-                    alt="Remy Sharp"
+                    alt={DBUser.first_name} //if the image can't be loaded then will show the first alt's letter (user's firstname)
                     src={
                       DBUser.profile_picture
                         ? DBUser.profile_picture
