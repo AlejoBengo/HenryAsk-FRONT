@@ -1,58 +1,57 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import './App.css';
+/*-----------IMPORT UTILITIES-----------*/
+import React, { useEffect } from "react";
+import {
+  Route,
+  Routes,
+  useRoutes,
+  BrowserRouter as Router,
+  useNavigate,
+} from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
+import { useAppSelector, useAppDispatch } from "./app/hooks";
+/*-----------IMPORT REDUCER-----------*/
+import { fetchUserByEmail } from "./app/Reducers/userSlice";
+/*-----------IMPORT COMPONENTS-----------*/
+import Content from "./Views/Content";
+import Navbar from "./Components/Navbar/Navbar";
+import Profile from "./Views/Profile";
+import { EditProfile } from "./Components/Profile/EditProfile/EditProfile";
+import Foro from "./Views/Foro";
+import PostDetails from "./Views/PostDetails";
+import CreatePost from "./Components/Creators/CreatePost/CreatePost";
+import TheoricList from "./Components/Theoric/TheoricList";
 
-function App() {
+const App = () => {
+  const { isAuthenticated, user } = useAuth0();
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const DBUser = useAppSelector((state) => state.user.data);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      dispatch(fetchUserByEmail(user?.email));
+    }
+  }, [user]);
+
+  useEffect(() => {
+    if (isAuthenticated && DBUser.user_name === "") {
+      navigate(`/Profile/${DBUser?._id}/Edit`);
+    }
+  }, [DBUser]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
-    </div>
+    <>
+      <Navbar />
+      <Routes>
+        <Route path="/Content" element={<Content />} />
+        <Route path="/Profile/:id" element={<Profile />} />
+        <Route path="/Profile/:id/Edit" element={<EditProfile />} />
+        <Route path="/Post/:id" element={<PostDetails />} />
+        <Route path="/Forum/" element={<Foro />} />
+        <Route path="/Ask" element={<CreatePost />} />
+        <Route path="/a" element={<TheoricList />} />
+      </Routes>
+    </>
   );
-}
-
+};
 export default App;
