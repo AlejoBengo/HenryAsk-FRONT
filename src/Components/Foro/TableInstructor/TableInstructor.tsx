@@ -101,10 +101,27 @@ export default function TableInstructor(props: any) {
                                 src={row.owner.profile_picture}
                               />
                               <Typography variant="subtitle2">
-                                {row.owner.user_name}
+                                <Link to={`/Profile/${row.owner._id}`}>{row.owner.user_name}</Link>
                               </Typography>
                             </Box>
                           </TableCell>
+                        );
+                      }
+                      if (column.id === "question") {
+                        console.log("QUESTION",row[column.id])
+                        console.log("ID",row._id)
+                        return (
+                          <TableCell
+                          key={column.id}
+                          align={column.align}
+                          sx={{
+                            maxWidth: "20vw",
+                            minWidth: "100px",
+                            maxHeight: "14.5vh",
+                          }}
+                        >
+                          <Link to={`/Post/${row._id}`}>{value}</Link>
+                        </TableCell>
                         );
                       }
 
