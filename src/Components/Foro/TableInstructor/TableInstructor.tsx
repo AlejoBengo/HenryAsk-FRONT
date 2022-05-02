@@ -108,8 +108,6 @@ export default function TableInstructor(props: any) {
                         );
                       }
                       if (column.id === "question") {
-                        console.log("QUESTION",row[column.id])
-                        console.log("ID",row._id)
                         return (
                           <TableCell
                           key={column.id}

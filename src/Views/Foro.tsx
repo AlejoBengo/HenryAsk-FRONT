@@ -34,6 +34,8 @@ export default function Foro(){
   let postAlumnos: Array<Posts> = []
   let postPrep:Array<Posts> = []
 
+
+  
 // 0 ---> USUARIO LOGEADO PERO TODAVIA NO SE ANOTO AL PREP
 // 1 ---> USUARIO ANOTADO EN PREP 
 // 2 ---> USUARIO LEARNING 
@@ -91,7 +93,7 @@ if(userLogin.role === 1){
       <Container
       maxWidth={false}
       sx={{ width: "80vw" }}>
-          <TableInstructor post={postPrep} key="alumnos" height={1040} user={AlumnOrInstructor[0]}/>
+          <TableInstructor post={postPrep.reverse()} key="alumnos" height={1040} user={AlumnOrInstructor[0]}/>
       </Container>
   </Div>
 );
@@ -109,7 +111,7 @@ if(userLogin.role === 1){
       <Container
       maxWidth={false}
       sx={{ width: "80vw" }}>
-          <TableInstructor post={postInstructores} key="instructor" height={440} user={AlumnOrInstructor[1]}/>
+          <TableInstructor post={postInstructores.reverse()} key="instructor" height={440} user={AlumnOrInstructor[1]}/>
       </Container>
       <Typography
       variant="h3"
@@ -121,7 +123,7 @@ if(userLogin.role === 1){
       <Container
       maxWidth={false}
       sx={{ width: "80vw" }}>
-          <TableInstructor post={postAlumnos} key="alumnos" height={1040} user={AlumnOrInstructor[0]}/>
+          <TableInstructor post={postAlumnos.reverse()} key="alumnos" height={1040} user={AlumnOrInstructor[0]}/>
       </Container>
   </Div>
   )
