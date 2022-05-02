@@ -23,6 +23,7 @@ export const remoteUpdateUser = createAsyncThunk(
   "user/update",
   async (user: User) => {
     let aux = { ...user, id: user._id };
+    console.log("aux", aux);
     const response = (await axios.put("/user", aux)).data;
     return response;
   }

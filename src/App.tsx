@@ -26,7 +26,6 @@ const App = () => {
   const dispatch = useAppDispatch();
   const DBUser = useAppSelector((state) => state.user.data);
 
-  console.log(DBUser)
   useEffect(() => {
     if (isAuthenticated) {
       dispatch(fetchUserByEmail(user?.email));

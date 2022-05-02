@@ -1,7 +1,11 @@
 /*--------------------------------------------------------*/
 /*-----------IMPORT UTILITIES-----------*/
 import React, { useEffect } from "react";
-import { postNewPost, postTemplate } from "../../../app/Utils/postUtilities";
+import {
+  postNewPost,
+  postOwnerTemplate,
+  postTemplate,
+} from "../../../app/Utils/postUtilities";
 import { useAppSelector, useAppDispatch } from "../../../app/hooks";
 import { Posts, Error } from "../../../app/interface";
 /*-----------IMPORT MUI & CSS-----------*/
@@ -52,8 +56,13 @@ const PostForm = () => {
     }
     setPost({
       ...post,
-      owner: usuario._id,
-      ownerData: [usuario.user_name, usuario.role.toString()],
+      owner: {
+        _id: usuario._id,
+        user_name: usuario.user_name,
+        role: usuario.role,
+        profile_picture: usuario.profile_picture,
+      },
+
       type: tipo,
     });
   }, [usuario]);

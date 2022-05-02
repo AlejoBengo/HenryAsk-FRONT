@@ -6,9 +6,10 @@ export interface User {
   country: string;
   city: string;
   type: string;
-  role: number;
+  role: 0 | 1 | 2 | 3 | 4 | 5;
   user_name: string;
   profile_picture: string;
+  banner: string;
   biography: string;
   posts: Array<string>;
   answers: Array<string>;
@@ -71,11 +72,18 @@ export interface isAlumnOrInstructor {
   height: number;
 }
 
+export interface PostOwner {
+  _id: string;
+  user_name: string;
+  profile_picture: string;
+  role: 0 | 1 | 2 | 3 | 4 | 5;
+}
+
 export interface Posts {
   _id: string;
   question: string;
   description: string;
-  owner: any; //cambiado de string a any por Agus ya que se resolvió el tema de las Refs
+  owner: PostOwner; //cambiado de string a any por Agus ya que se resolvió el tema de las Refs
   ownerData: Array<string>;
   createdAt: string;
   open: boolean;

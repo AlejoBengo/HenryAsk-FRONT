@@ -1,6 +1,6 @@
 /*--------------------------------------------------------*/
 /*-----------IMPORT UTILITIES-----------*/
-import React, { useState} from "react";
+import React, { useState } from "react";
 import { useAppSelector, useAppDispatch } from "../../../app/hooks";
 import { useNavigate } from "react-router-dom";
 import { userTemplate } from "../../../app/Utils/userUtilities";
@@ -33,7 +33,6 @@ export const EditProfile = () => {
   };
 
   const handleSave = (event: React.MouseEvent<HTMLButtonElement>) => {
-    console.log(userInfo);
     dispatch(remoteUpdateUser(userInfo))
       .then(() => dispatch(fetchUserByEmail(userInfo.email)))
       .then(() => {

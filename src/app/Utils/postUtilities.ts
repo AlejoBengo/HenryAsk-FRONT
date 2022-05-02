@@ -1,12 +1,18 @@
 import axios from "axios";
-import { Posts } from "../interface";
+import { Posts, PostOwner } from "../interface";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
+export const postOwnerTemplate: PostOwner = {
+  _id: "",
+  user_name: "",
+  profile_picture: "",
+  role: 0,
+};
 export const postTemplate: Posts = {
   _id: "",
   question: "",
   description: "",
-  owner: "",
+  owner: postOwnerTemplate,
   ownerData: [],
   createdAt: "",
   open: true,
@@ -17,7 +23,7 @@ export const postTemplate: Posts = {
 
 export const getPostById = async (id: string | undefined) => {
   try {
-    let post = await (await axios.get(`/post?id=${id}`)).data;
+    let post = await (await axios.get(`/post/${id}`)).data;
     return { ...postTemplate, ...post };
   } catch (error) {
     console.log(error);
