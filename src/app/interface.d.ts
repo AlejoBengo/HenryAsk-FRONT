@@ -37,6 +37,15 @@ export interface Answer {
   posts: string;
 }
 
+export interface Theoric {
+  owner: string;
+  title: string;
+  content: string;
+  author: string;
+  images: Array[string];
+  comments: Array[string];
+}
+
 // INTERFACES PARA GET POST './getPostsForum.ts';
 
 /*   export enum Type {
