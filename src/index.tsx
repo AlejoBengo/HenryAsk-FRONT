@@ -7,8 +7,7 @@ import { Auth0Provider } from "@auth0/auth0-react";
 import App from "./App";
 import "./index.css";
 import axios from "axios";
-axios.defaults.baseURL =
-  process.env.REACT_APP_BACKEND || "http://localhost:3001";
+axios.defaults.baseURL = process.env.REACT_APP_BACKEND;
 
 const container = document.getElementById("root")!;
 const root = createRoot(container);
