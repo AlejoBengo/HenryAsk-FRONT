@@ -33,7 +33,6 @@ export const EditProfile = () => {
   };
 
   const handleSave = (event: React.MouseEvent<HTMLButtonElement>) => {
-    console.log(userInfo);
     dispatch(remoteUpdateUser(userInfo))
       .then(() => dispatch(fetchUserByEmail(userInfo.email)))
       .then(() => {

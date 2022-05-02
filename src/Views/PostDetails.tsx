@@ -4,7 +4,11 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { getUserById, userTemplate } from "../app/Utils/userUtilities";
-import { postTemplate, getPostById } from "../app/Utils/postUtilities";
+import {
+  postTemplate,
+  getPostById,
+  postOwnerTemplate,
+} from "../app/Utils/postUtilities";
 /*-----------IMPORT COMPONENTS-----------*/
 import { UserShort } from "../Components/UserShort/UserShort";
 import CreateAnswer from "../Components/Creators/CreateAnswer/CreateAnswer";
@@ -20,6 +24,8 @@ export const PostDetails = () => {
   const [post, setPost] = useState(postTemplate);
   const [user, setUser] = useState(userTemplate);
   const [error, setError] = useState<boolean>(false);
+  const [postOwner, setPostOwner] = useState(postOwnerTemplate); //Modificado por Agus al resolverse el tema de las Refs de los modelos
+  const [postAnswers, setPostAnswers] = useState<Array<string>>([]);
   useEffect(() => {
     getPostById(id)
       .then((res) => {
@@ -35,9 +41,11 @@ export const PostDetails = () => {
         .catch(() => setError(true));
     }
   }, []);
+  useEffect(() => {
+    setPostAnswers(post.answers);
+    setPostOwner(post.owner);
+  }, [post]);
 
-  const postOwner = post.owner._id; //Modificado por Agus al resolverse el tema de las Refs de los modelos
-  const postAnswers = post.answers;
   if (error) return <div>Error</div>;
   return (
     <div>
@@ -62,7 +70,8 @@ export const PostDetails = () => {
             }}
           >
             <Typography variant="caption" sx={{ marginRight: "5px" }}>
-              Preguntado el {post.createdAt} por <UserShort id={postOwner} />
+              Preguntado el {post.createdAt} por{" "}
+              <UserShort id={postOwner._id} />
             </Typography>
             <Typography variant="caption" sx={{ marginRight: "5px" }}>
               <LocalOfferIcon /> {post.tags.join(", ")}
