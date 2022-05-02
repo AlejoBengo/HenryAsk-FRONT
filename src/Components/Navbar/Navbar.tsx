@@ -25,6 +25,7 @@ import {
 import { Img } from "../Content/ContentStyled";
 import DehazeIcon from "@mui/icons-material/Dehaze";
 import css from "./NavBar.module.css";
+import logo from "./logo.png";
 
 const pages = ["Material complementario", "Foro"];
 const settings = ["Perfil", "Cerrar Sesion"];
@@ -70,10 +71,7 @@ const Navbar = () => {
             height="5vh"
             sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
           >
-            <Img
-              src="https://assets.soyhenry.com/henry-landing/assets/Henry/logo-white.png"
-              alt="no responde img"
-            />
+            <Img src={logo} alt="no responde img" />
           </Box>
 
           <Box
@@ -101,10 +99,7 @@ const Navbar = () => {
               marginLeft="1rem"
               sx={{ mr: 2, display: { xs: "flex", md: "none" } }}
             >
-              <Img
-                src="https://assets.soyhenry.com/henry-landing/assets/Henry/logo-white.png"
-                alt="no responde img"
-              />
+              <Img src={logo} alt="no responde img" />
             </Box>
 
             <Menu

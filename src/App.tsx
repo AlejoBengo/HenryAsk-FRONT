@@ -19,6 +19,7 @@ import { EditProfile } from "./Components/Profile/EditProfile/EditProfile";
 import Foro from "./Views/Foro";
 import PostDetails from "./Views/PostDetails";
 import CreatePost from "./Components/Creators/CreatePost/CreatePost";
+import TheoricList from "./Components/Theoric/TheoricList";
 
 const App = () => {
   const { isAuthenticated, user } = useAuth0();
@@ -48,6 +49,7 @@ const App = () => {
         <Route path="/Post/:id" element={<PostDetails />} />
         <Route path="/Forum/" element={<Foro />} />
         <Route path="/Ask" element={<CreatePost />} />
+        <Route path="/a" element={<TheoricList />} />
       </Routes>
     </>
   );
