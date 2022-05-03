@@ -25,8 +25,11 @@ export default function Foro(){
     if(userLogin.role === 1){ // USUARIO DEL PREP
       dispatch(fetchGetAllPosts(1))
     }
-    if(userLogin.role >=2){ // USUARIO LEARNING , TA , INSTRUCTOR , ADM
+    else if(userLogin.role ===2){ // USUARIO LEARNING , TA , INSTRUCTOR , ADM
       dispatch(fetchGetAllPosts(2))
+    }
+    else if(userLogin.role >= 3){
+      dispatch(fetchGetAllPosts(10))
     }
   }, [userLogin])
 
@@ -69,10 +72,11 @@ posts?.map(e => {
   
 
   
-  /* setTimeout(()=> console.log("USER",userLogin), 4000)
-  setTimeout(()=> console.log("ALUMNOS",postAlumnos), 4000)
-  setTimeout(()=> console.log("INSTRUCTOR",postInstructores), 4000)
-  setTimeout(()=> console.log("POST",posts), 4000) */
+   //setTimeout(()=> console.log("USER",userLogin), 4000)
+  //setTimeout(()=> console.log("ALUMNOS",postAlumnos), 4000)
+ // setTimeout(()=> console.log("INSTRUCTOR",postInstructores), 4000)
+  setTimeout(()=> console.log("PREP",postPrep), 4000) 
+  setTimeout(()=> console.log("POST",posts), 4000) 
 
 if(userLogin.role === 1){
   return (
@@ -97,7 +101,7 @@ if(userLogin.role === 1){
       </Container>
   </Div>
 );
-} else{
+} else if(userLogin.role === 2){
   return (
 
     
@@ -127,7 +131,67 @@ if(userLogin.role === 1){
       </Container>
   </Div>
   )
-}
+} else if(userLogin.role >=3){
+
+  return (
+    <>
+    
+       <Div>
+    <Typography
+    variant="h3"
+    textAlign="center"
+    margin="1rem 0rem 1rem 0rem">
+         Posteos de los <TituloForo>Instructores</TituloForo>
+    </Typography>
+    <Container
+    maxWidth={false}
+    sx={{ width: "80vw" }}>
+        <TableInstructor post={postInstructores.reverse()} key="instructor" height={440} user={AlumnOrInstructor[1]}/>
+    </Container>
+    <Typography
+    variant="h3"
+    textAlign="center"
+    margin="1rem 0rem 1rem 0rem">
+         Posteos entre <TituloForo>Alumnos</TituloForo>
+    </Typography>
+    <Link to="/Ask"><Button>Crear nueva discusion</Button></Link>   
+    <Container
+    maxWidth={false}
+    sx={{ width: "80vw" }}>
+        <TableInstructor post={postAlumnos.reverse()} key="alumnos" height={1040} user={AlumnOrInstructor[0]}/>
+    </Container>
+  </Div>
+
+
+  
+  <Div>
+        <Typography
+        variant="h3"
+        textAlign="center"
+        margin="1rem 0rem 1rem 0rem">
+             Bienvenido/a al <TituloForo>Prep.Course</TituloForo> Forum !
+        </Typography>
+        <Typography
+        variant="h3"
+        textAlign="center"
+        margin="1rem 0rem 1rem 0rem">
+             Posteos entre <TituloForo>Alumnos</TituloForo>
+        </Typography>
+        <Link to="/Ask"><Button>Crear nueva discusion</Button></Link>
+        <Container
+        maxWidth={false}
+        sx={{ width: "80vw" }}>
+            <TableInstructor post={postPrep.reverse()} key="alumnos" height={1040} user={AlumnOrInstructor[0]}/>
+        </Container>
+    </Div>
+    </>
+  
+   
+  )
+  
+
+
+}else{ return null}
 
   
 };

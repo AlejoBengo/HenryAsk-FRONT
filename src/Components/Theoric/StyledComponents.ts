@@ -28,10 +28,10 @@ export const StyledListItemButton = styled(ListItemButton)`
 `;
 
 export const StyledListItemButton2 = styled(ListItemButton)`
-  width: 19vw;
+  width: 100%;
+  max-width:100%;
   height: 7vh;
   font-family: helvetica;
-  margin-left: 1vw;
   background-color: white;
   color: black;
 `;

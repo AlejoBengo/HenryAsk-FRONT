@@ -25,7 +25,7 @@ color:black;
 
 export const Div = styled("div")(`
     width: 100%;
-    height:1000px;
+    height:auto;
     `);
 
 export const TituloForo = styled("span")(`

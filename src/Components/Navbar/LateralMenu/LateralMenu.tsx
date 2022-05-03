@@ -87,19 +87,15 @@ import { LateralItemStyled , LinkDom} from "../../Style/StyledComponents";
           <AcordeonMenu/>
            <LinkDom  onClick={toggleDrawer(anchor, false)} to="/Forum"><LateralItemStyled text="Foro" icon={<ForumIcon/>}/></LinkDom>
            <LinkDom onClick={toggleDrawer(anchor, false)} to="/Content"><LateralItemStyled text="Material" icon={<MenuBookIcon/>}/></LinkDom>
-           {
-             userLog.role === 5 || userLog.role === 3? 
-             <LinkDom onClick={toggleDrawer(anchor, false)} to="/Forum"><LateralItemStyled text="Foro Prep Course" icon={<ForumIcon/>}/></LinkDom> : null
-           }
            <LinkDom onClick={toggleDrawer(anchor, false)} to="#"><LateralItemStyled text="Henry Coins Ranking" icon={<StarsIcon/>}/></LinkDom>
            
           </List>
           <Divider/>
 
-          {/* <Stack sx={{width:"100%"}}>
+          <Stack sx={{width:"100%"}}>
             <TheoricList />
             <TheoricList />
-          </Stack> */}
+          </Stack>
 
           
         </Box>

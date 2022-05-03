@@ -17,12 +17,19 @@ export default function AcordeonMenu() {
   const navigate = useNavigate()
   const busqueda = useAppSelector((state) => state.searchUserName.searchUserName);
   const dispatch = useAppDispatch()
+  const [userName, setUserName] = React.useState<string>("")
 
-/*   const handleClick = (event: React.MouseEvent<HTMLButtonElement>)=>{
-    //dispatch(fetchUserByUserName(e.target.value)).then(response => navigate(`/user/${response._id}`))
+
+  /*  const handleClick = ()=>{
+    dispatch(fetchUserByUserName(userName))
+    .then(response =>  (console.log(response),navigate(`/user/${response}`)) )
   } */
 
- 
+  const handleChange = ( event: React.ChangeEvent<HTMLInputElement>) => {
+    setUserName(event.target.value)
+  }
+
+
   return (
     <div>
       <Accordion
@@ -47,8 +54,11 @@ export default function AcordeonMenu() {
               fullWidth
               sx={{ padding: "10px" }}
               id="input-with-icon-textfield"
+              autoComplete="off"
+              autoSave="off"
               label="Nombre de usuario"
-              /* onClick={handleClick} */
+              onChange={handleChange}
+              value={userName}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="end">
@@ -56,9 +66,9 @@ export default function AcordeonMenu() {
                   </InputAdornment>
                 ),
                 endAdornment: (
-                    <IconButton color="primary" aria-label="add to shopping cart">
-                      <SearchIcon   sx={{ fontSize: "30px" }} />
-                    </IconButton >
+                    <Button /* onClick={handleClick} */ >
+                      Buscar
+                    </Button>
                 ),
               }}
               variant="standard"

@@ -17,7 +17,7 @@ import {
 /*--------------------------------------------------------*/
 
 export default function TheoricList() {
-  const [open, setOpen] = useState<boolean>(true);
+  const [open, setOpen] = useState<boolean>(false);
   const [allTheorics, setAllTheorics] = useState<any>([]);
 
   useEffect(() => {
@@ -29,14 +29,16 @@ export default function TheoricList() {
   };
   return (
     <List sx={{width:"100%"}}>
-      <StyledListItemButton onClick={handleOpen}>
-        TEORICO {open ? <ExpandLess /> : <ExpandMore />}
+      <StyledListItemButton onClick={handleOpen} sx={{width:"100%" , overflow:"hidden"}}>
+        
+          TEORICO {open ? <ExpandLess sx={{width:"100%"}}/> : <ExpandMore sx={{width:"100%"}} />}
+
       </StyledListItemButton>
       {allTheorics.map((teorico: any) => {
         return (
-          <Collapse in={open} timeout="auto" unmountOnExit>
+          <Collapse in={open} timeout="auto" unmountOnExit sx={{width:"100%"}}>
             <Link to={`/b/${teorico._id}`} style={{ textDecoration: "none" }}>
-              <List component="div" disablePadding>
+              <List component="div" disablePadding sx={{width:"100%"}}>
                 <StyledListItemButton2>{teorico.title}</StyledListItemButton2>
               </List>
             </Link>
