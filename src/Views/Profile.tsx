@@ -11,7 +11,17 @@ import { Container } from "@mui/material";
 import { fetchProfile, clearProfile } from "../app/Reducers/userProfileSlice";
 /*-----------IMPORT MUI & CSS-----------*/
 import EditIcon from "@mui/icons-material/Edit";
-import { Box, Button, Typography, Stack, Paper, Avatar } from "@mui/material";
+import {
+  Box,
+  Button,
+  Typography,
+  Stack,
+  Paper,
+  Avatar,
+  Card,
+  CardMedia,
+  CardContent,
+} from "@mui/material";
 
 /*--------------------------------------------------------*/
 
@@ -22,6 +32,34 @@ const Item = styled(Paper)(({ theme }) => ({
   textAlign: "center",
   color: theme.palette.text.secondary,
 }));
+const StyledAvatar = styled(Avatar)(
+  ({ theme }) => `
+  position: relative;
+  top: -10vh;
+  left: 1em;
+  width: 20vh;
+  height: 20vh;
+  border: 4px solid;
+  border-color: ${theme.palette.primary.dark};
+  margin-bottom:-10vh;
+  z-index: 2;
+  &:before{
+    z-index: -1;
+    content: "";
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: ${theme.palette.primary.light};
+}
+  @media (max-width: 600px) {
+    width:10vh;
+    height:10vh;
+    top: -5vh;
+    margin-bottom:-5vh;
+  }
+`
+);
 
 export default function Profile() {
   const roles = [
@@ -40,21 +78,60 @@ export default function Profile() {
 
   useEffect(() => {
     dispatch(fetchProfile(id));
-  }, [dispatch, id]); 
+  }, [dispatch, id]);
   //If not includes "id" in dependencies's array when u're in a profile's detail of some user
   // and go to your profile's detail, this component dont render the change.
   return (
     <Container
-      maxWidth="md"
+      // maxWidth="md"
       sx={{
-        width: "100%",
-        height: "91vh",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
+        padding: "1em",
       }}
     >
-      <Box
+      <Card sx={{ minWidth: "100%" }}>
+        <CardMedia
+          component="img"
+          image={userProfile.banner || "https://via.placeholder.com/1000"}
+          alt={userProfile.user_name + " banner"}
+          sx={{
+            width: "100%",
+            height: "20vh",
+          }}
+        />
+        <StyledAvatar
+          alt={userProfile.first_name} //if the image can't be loaded then will show the first alt's letter (user's firstname)
+          src={userProfile.profile_picture}
+        />
+        <CardContent>
+          <Typography variant="h5">
+            {`${userProfile.first_name} ${userProfile.last_name} | ${userProfile.user_name}`}
+            {id === user._id && (
+              <Button
+                variant="contained"
+                onClick={() => navigate(`/Profile/${id}/Edit`)}
+                sx={{
+                  marginLeft: "1em",
+                  fontSize: "1rem",
+                }}
+                startIcon={<EditIcon />}
+              >
+                Editar Información
+              </Button>
+            )}
+          </Typography>
+          <Typography variant="caption" gutterBottom>
+            {`${userProfile.country}${
+              userProfile.city && ` | ${userProfile.city} `
+            }`}
+            | {`${roles[userProfile.role]}`}
+          </Typography>
+          <Typography variant="body1">{userProfile.biography}</Typography>
+        </CardContent>
+      </Card>
+      {/* <Box
         width="70%"
         sx={{
           height: "max-content",
@@ -108,7 +185,7 @@ export default function Profile() {
             </Item>
           </Stack>
         </Box>
-      </Box>
+      </Box> */}
     </Container>
   );
 }
