@@ -1,11 +1,7 @@
 /*--------------------------------------------------------*/
 /*-----------IMPORT UTILITIES-----------*/
 import React, { useEffect } from "react";
-import {
-  postNewPost,
-  postOwnerTemplate,
-  postTemplate,
-} from "../../../app/Utils/postUtilities";
+import { postNewPost, postTemplate } from "../../../app/Utils/postUtilities";
 import { useAppSelector, useAppDispatch } from "../../../app/hooks";
 import { Posts, Error } from "../../../app/interface";
 /*-----------IMPORT MUI & CSS-----------*/
@@ -19,7 +15,7 @@ import {
   StyledBox,
   StyledBox2,
   StyledButton,
-} from "./SyledComponents";
+} from "./StyledComponents";
 /*--------------------------------------------------------*/
 
 const validator = (tags: Array<string>) => {

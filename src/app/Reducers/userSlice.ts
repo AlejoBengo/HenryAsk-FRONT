@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
-import { useAppSelector } from "../hooks";
 import axios from "axios";
 import { User } from "../interface";
 import { userTemplate } from "../Utils/userUtilities";
@@ -37,7 +36,7 @@ export const userSlice = createSlice({
     },
     updateUser: (state, action: PayloadAction<User>) => {
       state.data = action.payload;
-      axios.put(`/user/}`, state.data);
+      axios.put(`/user/`, state.data);
     },
   },
   extraReducers: (builder) => {
