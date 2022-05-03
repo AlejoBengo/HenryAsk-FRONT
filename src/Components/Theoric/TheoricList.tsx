@@ -28,7 +28,7 @@ export default function TheoricList() {
     setOpen(!open);
   };
   return (
-    <List>
+    <List sx={{width:"100%"}}>
       <StyledListItemButton onClick={handleOpen}>
         TEORICO {open ? <ExpandLess /> : <ExpandMore />}
       </StyledListItemButton>
@@ -44,5 +44,6 @@ export default function TheoricList() {
         );
       })}
     </List>
+    
   );
 }

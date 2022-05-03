@@ -75,9 +75,7 @@ export default function TableInstructor(props: any) {
             {posts
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row: any) => {
-                {
-                  console.log(row);
-                }
+                
                 return (
                   <TableRow
                     hover

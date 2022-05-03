@@ -1,6 +1,6 @@
 /*--------------------------------------------------------*/
 /*-----------IMPORT UTILITIES-----------*/
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 /*-----------IMPORT COMPONENTS-----------*/
@@ -69,10 +69,10 @@ posts?.map(e => {
   
 
   
-  setTimeout(()=> console.log("USER",userLogin), 4000)
+  /* setTimeout(()=> console.log("USER",userLogin), 4000)
   setTimeout(()=> console.log("ALUMNOS",postAlumnos), 4000)
   setTimeout(()=> console.log("INSTRUCTOR",postInstructores), 4000)
-  setTimeout(()=> console.log("POST",posts), 4000)
+  setTimeout(()=> console.log("POST",posts), 4000) */
 
 if(userLogin.role === 1){
   return (
