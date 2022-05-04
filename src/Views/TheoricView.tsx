@@ -12,6 +12,7 @@ import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 import {
   StyledBox,
   StyledBox2,
+  StyledBox3,
   StyledTypography,
   StyledTypography2,
   StyledTypography3,
@@ -24,8 +25,7 @@ import {
   StyledTextFieldModal3,
   StyledDivModal2,
   StyledButtonModal2,
-  StyledTextFieldModal4,
-  StyledDivModal,
+  StyledButtonModal3,
 } from "../Components/Theoric/StyledComponents";
 
 /*--------------------------------------------------------*/
@@ -88,7 +88,6 @@ export default function TheoricView() {
     return (
       <StyledGrid>
         <StyledBox>
-          <Button onClick={handleOpen}>Editar</Button>
           <Modal open={open}>
             <StyledBoxModal>
               <StyledButtonModal onClick={handleOpen}>Cerrar</StyledButtonModal>
@@ -112,26 +111,16 @@ export default function TheoricView() {
                 value={editable.author}
                 multiline
               />
-              {/* <StyledDivModal>
-                {editable.comments.length > 0 &&
-                  editable.comments.map((com: string) => {
-                    return (
-                      <StyledTextFieldModal4
-                        key={com}
-                        value={
-                          editable.comments[editable.comments.indexOf(com)]
-                        }
-                      />
-                    );
-                  })}
-              </StyledDivModal> */}
               <StyledButtonModal2 onClick={handleSaver}>
                 Save
               </StyledButtonModal2>
             </StyledBoxModal>
           </Modal>
           <StyledTypography>{theoric.title}</StyledTypography>
-          <StyledTypography2>Por: {theoric.author}</StyledTypography2>
+          <StyledBox3>
+            <StyledButtonModal3 onClick={handleOpen}>Editar</StyledButtonModal3>
+            <StyledTypography2>Por: {theoric.author}</StyledTypography2>
+          </StyledBox3>
         </StyledBox>
         <StyledPaper>{theoric.content}</StyledPaper>
 
@@ -142,8 +131,10 @@ export default function TheoricView() {
             })}
           <LocalOfferIcon />
         </StyledBox2>
-
-        <img src={theoric.images} alt="not found" />
+        {theoric.images.length > 0 &&
+          theoric.images.map((img: string) => {
+            return <img src={img} alt="" />;
+          })}
       </StyledGrid>
     );
   } else {

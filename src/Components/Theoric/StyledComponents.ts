@@ -67,8 +67,6 @@ export const StyledTypography2 = styled(Typography)`
   font-family: helvetica;
   color: #fff;
   font-size: 2vh;
-  margin-right: 0.5vw;
-  margin-top: 7vh;
 `;
 
 export const StyledTypography3 = styled(Typography)`
@@ -200,3 +198,26 @@ align-items: center;
   background-color: green;
   border-color: green;
     `);
+
+export const StyledButtonModal3 = styled("button")(`
+width: 7vw;
+height: 5vh;
+color: #090909;
+padding: 0.7em 1.7em;
+font-size: 18px;
+background: #e8e8e8;
+border: 1px solid #e8e8e8;
+transition: all 0.3s;
+display: flex;
+cursor: pointer;
+justify-content: center;
+align-items: center;
+    `);
+
+export const StyledBox3 = styled(Box)`
+  width: 15vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
