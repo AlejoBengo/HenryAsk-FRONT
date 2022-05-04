@@ -37,3 +37,13 @@ export const postNewPost = createAsyncThunk(
     await axios.post(`/post`, post);
   }
 );
+
+export const editAnswerChildInPost = async (id: string | undefined) => {
+  try {
+    let post = await (await axios.get(`/post/${id}`)).data;
+    return { ...postTemplate, ...post };
+  } catch (error) {
+    console.log(error);
+    return postTemplate;
+  }
+};
