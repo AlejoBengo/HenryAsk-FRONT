@@ -2,7 +2,11 @@
 /*-----------IMPORT UTILITIES-----------*/
 import React, { useEffect, useState } from "react";
 import { useAppSelector, useAppDispatch } from "../app/hooks";
-import { fetchOneTheoric, theoricTemplate } from "../app/Reducers/theoricSlice";
+import {
+  fetchOneTheoric,
+  theoricTemplate,
+  deleteTheoric,
+} from "../app/Reducers/theoricSlice";
 import { Theoric } from "../app/interface";
 import { editTheoric } from "../app/Reducers/theoricSlice";
 import { useParams, useNavigate } from "react-router-dom";
@@ -12,30 +16,37 @@ import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 import {
   StyledBox,
   StyledBox2,
+  StyledBox3,
   StyledTypography,
   StyledTypography2,
   StyledTypography3,
+  StyledTypography4,
   StyledPaper,
   StyledGrid,
+  StyledDiv,
   StyledBoxModal,
+  StyledBoxModal2,
   StyledButtonModal,
   StyledTextFieldModal,
   StyledTextFieldModal2,
   StyledTextFieldModal3,
   StyledDivModal2,
   StyledButtonModal2,
-  StyledTextFieldModal4,
-  StyledDivModal,
+  StyledButtonModal3,
+  StyledButtonModal4,
+  StyledButtonModal5,
 } from "../Components/Theoric/StyledComponents";
 
 /*--------------------------------------------------------*/
 
 export default function TheoricView() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const usuario = useAppSelector((state) => state.user.data);
   const [theoric, setTheoric] = useState<Theoric>(theoricTemplate);
   const [role, setRole] = useState<number>(0);
   const [open, setOpen] = useState<boolean>(false);
+  const [openDelete, setOpenDelete] = useState<boolean>(false);
   const [editable, setEditable] = useState({
     owner: "",
     title: "",
@@ -84,14 +95,35 @@ export default function TheoricView() {
     window.location.reload();
   };
 
+  const handleOpenDelete = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setOpenDelete(!openDelete);
+  };
+
+  const handleDelete = (event: React.MouseEvent<HTMLButtonElement>) => {
+    if (typeof id === "string") {
+      deleteTheoric(id);
+      navigate("/");
+    }
+  };
+
   if (role === 4 || role === 5) {
     return (
       <StyledGrid>
         <StyledBox>
-          <Button onClick={handleOpen}>Editar</Button>
+          <Modal open={openDelete}>
+            <StyledBoxModal2>
+              <StyledButtonModal5 onClick={handleOpenDelete}>
+                Close
+              </StyledButtonModal5>
+              <StyledTypography4>Are you sure?</StyledTypography4>
+              <StyledButtonModal4 onClick={handleDelete}>
+                Delete
+              </StyledButtonModal4>
+            </StyledBoxModal2>
+          </Modal>
           <Modal open={open}>
             <StyledBoxModal>
-              <StyledButtonModal onClick={handleOpen}>Cerrar</StyledButtonModal>
+              <StyledButtonModal onClick={handleOpen}>Close</StyledButtonModal>
               <StyledTextFieldModal
                 name="title"
                 onChange={handleInputChange}
@@ -112,28 +144,23 @@ export default function TheoricView() {
                 value={editable.author}
                 multiline
               />
-              {/* <StyledDivModal>
-                {editable.comments.length > 0 &&
-                  editable.comments.map((com: string) => {
-                    return (
-                      <StyledTextFieldModal4
-                        key={com}
-                        value={
-                          editable.comments[editable.comments.indexOf(com)]
-                        }
-                      />
-                    );
-                  })}
-              </StyledDivModal> */}
               <StyledButtonModal2 onClick={handleSaver}>
                 Save
               </StyledButtonModal2>
             </StyledBoxModal>
           </Modal>
           <StyledTypography>{theoric.title}</StyledTypography>
-          <StyledTypography2>Por: {theoric.author}</StyledTypography2>
+          <StyledBox3>
+            <StyledButtonModal3 onClick={handleOpen}>Edit</StyledButtonModal3>
+            <StyledButtonModal4 onClick={handleOpenDelete}>
+              Delete
+            </StyledButtonModal4>
+          </StyledBox3>
         </StyledBox>
-        <StyledPaper>{theoric.content}</StyledPaper>
+        <StyledTypography2>Por: {theoric.author}</StyledTypography2>
+        <StyledDiv>
+          <StyledPaper elevation={8}>{theoric.content}</StyledPaper>
+        </StyledDiv>
 
         <StyledBox2>
           {theoric.comments.length > 0 &&
@@ -142,8 +169,10 @@ export default function TheoricView() {
             })}
           <LocalOfferIcon />
         </StyledBox2>
-
-        <img src={theoric.images} alt="not found" />
+        {theoric.images.length > 0 &&
+          theoric.images.map((img: string) => {
+            return <img src={img} alt="" />;
+          })}
       </StyledGrid>
     );
   } else {
@@ -151,9 +180,11 @@ export default function TheoricView() {
       <StyledGrid>
         <StyledBox>
           <StyledTypography>{theoric.title}</StyledTypography>
-          <StyledTypography2>Por: {theoric.author}</StyledTypography2>
         </StyledBox>
-        <StyledPaper>{theoric.content}</StyledPaper>
+        <StyledTypography2>Por: {theoric.author}</StyledTypography2>
+        <StyledDiv>
+          <StyledPaper elevation={8}>{theoric.content}</StyledPaper>
+        </StyledDiv>
 
         <StyledBox2>
           {theoric.comments.length > 0 &&
@@ -163,7 +194,10 @@ export default function TheoricView() {
           <LocalOfferIcon />
         </StyledBox2>
 
-        <img src={theoric.images} alt="not found" />
+        {theoric.images.length > 0 &&
+          theoric.images.map((img: string) => {
+            return <img src={img} alt="" />;
+          })}
       </StyledGrid>
     );
   }

@@ -17,7 +17,10 @@ import { AnswerDetails } from "../Components/Answer/AnswerDetails/AnswerDetails"
 /*-----------IMPORT MUI & CSS-----------*/
 import { Container, Divider, Paper, Typography, Box } from "@mui/material";
 import RoundedAccountIcon from "@mui/icons-material/AccountCircleRounded";
-import { StyledPaper } from "../Components/Style/StyledComponents";
+import {
+  StyledPaper,
+  StyledButton,
+} from "../Components/Style/StyledComponents";
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 
 /*--------------------------------------------------------*/

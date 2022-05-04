@@ -7,21 +7,19 @@ import { Link } from "react-router-dom";
 /*--------------------------------------------------------*/
 
 export const LateralItemStyled = styled(LateralItem)`
-text-decoration:none;
-&:visited{
-  color:black;
-}
+  text-decoration: none;
+  &:visited {
+    color: black;
+  }
 `;
 
 export const LinkDom = styled(Link)`
-text-decoration:none;
-color:black;
-&:visited{
-  color:black;
-}
-
-`
-
+  text-decoration: none;
+  color: black;
+  &:visited {
+    color: black;
+  }
+`;
 
 export const Div = styled("div")(`
     width: 100%;
@@ -45,3 +43,8 @@ export const StyledTextField = styled(TextField)`
   text-align: center;
   padding-right: 16px;
 `;
+
+export const StyledButton = styled("div")(`
+    width: 7vw;
+    height: 5vh;
+    `);
