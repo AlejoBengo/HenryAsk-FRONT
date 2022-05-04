@@ -4,9 +4,10 @@ import React, { useEffect, useState } from "react";
 import { useAppSelector, useAppDispatch } from "../app/hooks";
 import { fetchOneTheoric, theoricTemplate } from "../app/Reducers/theoricSlice";
 import { Theoric } from "../app/interface";
-import { Link, useParams } from "react-router-dom";
+import { editTheoric } from "../app/Reducers/theoricSlice";
+import { useParams, useNavigate } from "react-router-dom";
 /*-----------IMPORT MUI & CSS-----------*/
-import { List, Stack, Grid, Paper, Box } from "@mui/material";
+import { Button, Modal, TextField } from "@mui/material";
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 import {
   StyledBox,
@@ -16,37 +17,154 @@ import {
   StyledTypography3,
   StyledPaper,
   StyledGrid,
+  StyledBoxModal,
+  StyledButtonModal,
+  StyledTextFieldModal,
+  StyledTextFieldModal2,
+  StyledTextFieldModal3,
+  StyledDivModal2,
+  StyledButtonModal2,
+  StyledTextFieldModal4,
+  StyledDivModal,
 } from "../Components/Theoric/StyledComponents";
 
 /*--------------------------------------------------------*/
 
 export default function TheoricView() {
-  const [theoric, setTheoric] = useState<Theoric>(theoricTemplate);
   const { id } = useParams();
+  const usuario = useAppSelector((state) => state.user.data);
+  const [theoric, setTheoric] = useState<Theoric>(theoricTemplate);
+  const [role, setRole] = useState<number>(0);
+  const [open, setOpen] = useState<boolean>(false);
+  const [editable, setEditable] = useState({
+    owner: "",
+    title: "",
+    content: "",
+    author: "",
+    images: [],
+    comments: [],
+    id: "",
+  });
   useEffect(() => {
     if (id && typeof id === "string") {
-      fetchOneTheoric(id).then((res) => setTheoric(res));
+      fetchOneTheoric(id).then((res) => {
+        setTheoric(res);
+        setEditable(res);
+      });
+      setRole(usuario.role);
     }
-  }, []);
+    if (typeof id === "string") {
+      setEditable({ ...editable, id: id });
+    }
+  }, [usuario, id]);
 
-  console.log(theoric);
-  return (
-    <StyledGrid>
-      <StyledBox>
-        <StyledTypography>{theoric.title}</StyledTypography>
-        <StyledTypography2>Por: {theoric.author}</StyledTypography2>
-      </StyledBox>
-      <StyledPaper>{theoric.content}</StyledPaper>
+  const handleOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
+    let aux: boolean = !open;
+    setOpen(!open);
+    if (aux === false) {
+      setEditable({ ...theoric, id: "" });
+    }
+    if (typeof id === "string") {
+      setEditable({ ...editable, id: id });
+    }
+  };
 
-      <StyledBox2>
-        {theoric.comments.length > 0 &&
-          theoric.comments.map((com: string) => {
-            return <StyledTypography3> {com} </StyledTypography3>;
-          })}
-        <LocalOfferIcon />
-      </StyledBox2>
+  const handleInputChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ): void => {
+    setEditable({ ...editable, [event.target.name]: event.target.value });
+  };
 
-      <img src={theoric.images} alt="not found" />
-    </StyledGrid>
-  );
+  const handleSaver = (event: React.MouseEvent<HTMLButtonElement>) => {
+    if (typeof id === "string") {
+      setEditable({ ...editable, id: id });
+    }
+    editTheoric(editable);
+    setOpen(!open);
+    window.location.reload();
+  };
+
+  if (role === 4 || role === 5) {
+    return (
+      <StyledGrid>
+        <StyledBox>
+          <Button onClick={handleOpen}>Editar</Button>
+          <Modal open={open}>
+            <StyledBoxModal>
+              <StyledButtonModal onClick={handleOpen}>Cerrar</StyledButtonModal>
+              <StyledTextFieldModal
+                name="title"
+                onChange={handleInputChange}
+                value={editable.title}
+                multiline
+              />
+              <StyledDivModal2>
+                <StyledTextFieldModal2
+                  name="content"
+                  onChange={handleInputChange}
+                  value={editable.content}
+                  multiline
+                />
+              </StyledDivModal2>
+              <StyledTextFieldModal3
+                name="author"
+                onChange={handleInputChange}
+                value={editable.author}
+                multiline
+              />
+              {/* <StyledDivModal>
+                {editable.comments.length > 0 &&
+                  editable.comments.map((com: string) => {
+                    return (
+                      <StyledTextFieldModal4
+                        key={com}
+                        value={
+                          editable.comments[editable.comments.indexOf(com)]
+                        }
+                      />
+                    );
+                  })}
+              </StyledDivModal> */}
+              <StyledButtonModal2 onClick={handleSaver}>
+                Save
+              </StyledButtonModal2>
+            </StyledBoxModal>
+          </Modal>
+          <StyledTypography>{theoric.title}</StyledTypography>
+          <StyledTypography2>Por: {theoric.author}</StyledTypography2>
+        </StyledBox>
+        <StyledPaper>{theoric.content}</StyledPaper>
+
+        <StyledBox2>
+          {theoric.comments.length > 0 &&
+            theoric.comments.map((com: string) => {
+              return <StyledTypography3> {com} </StyledTypography3>;
+            })}
+          <LocalOfferIcon />
+        </StyledBox2>
+
+        <img src={theoric.images} alt="not found" />
+      </StyledGrid>
+    );
+  } else {
+    return (
+      <StyledGrid>
+        <StyledBox>
+          <StyledTypography>{theoric.title}</StyledTypography>
+          <StyledTypography2>Por: {theoric.author}</StyledTypography2>
+        </StyledBox>
+        <StyledPaper>{theoric.content}</StyledPaper>
+
+        <StyledBox2>
+          {theoric.comments.length > 0 &&
+            theoric.comments.map((com: string) => {
+              return <StyledTypography3> {com} </StyledTypography3>;
+            })}
+          <LocalOfferIcon />
+        </StyledBox2>
+
+        <img src={theoric.images} alt="not found" />
+      </StyledGrid>
+    );
+  }
 }

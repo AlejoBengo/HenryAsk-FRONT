@@ -13,9 +13,15 @@ const initialState: InitialState = {
 
 export const fetchGetAllPosts = createAsyncThunk(
   'post/GetAllPosts',
-  async (type:0|1|2) => { // new
-    const response =(await axios.get(`/post?type=${type}`)).data;
+  async (type:0|1|2|10) => { // new
+    if(type===10){
+    const response =(await axios.get(`/post`)).data;
     return response;
+    }else{
+      const response =(await axios.get(`/post?type=${type}`)).data;
+    return response;
+    }
+    
   }
 );
 
