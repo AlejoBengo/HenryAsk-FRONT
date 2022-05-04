@@ -75,8 +75,8 @@ posts?.map(e => {
    //setTimeout(()=> console.log("USER",userLogin), 4000)
   //setTimeout(()=> console.log("ALUMNOS",postAlumnos), 4000)
  // setTimeout(()=> console.log("INSTRUCTOR",postInstructores), 4000)
-  setTimeout(()=> console.log("PREP",postPrep), 4000) 
-  setTimeout(()=> console.log("POST",posts), 4000) 
+  //setTimeout(()=> console.log("PREP",postPrep), 4000) 
+  //setTimeout(()=> console.log("POST",posts), 4000) 
 
 if(userLogin.role === 1){
   return (

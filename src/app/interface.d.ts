@@ -1,3 +1,4 @@
+
 export interface User {
   _id: string;
   first_name: string;
@@ -20,6 +21,7 @@ export interface User {
   excersices: Array<string>;
   github: string;
   linkedin: string;
+  avatar:"https://res.cloudinary.com/henryask/image/upload/v1651459729/avatares/unicorn_ntmtyp.png" | "https://res.cloudinary.com/henryask/image/upload/v1651459728/avatares/pig_tzhrjl.png" | "https://res.cloudinary.com/henryask/image/upload/v1651459728/avatares/pigeon_yfv9ka.png"| "";
 }
 export interface InitialState {
   data: User;

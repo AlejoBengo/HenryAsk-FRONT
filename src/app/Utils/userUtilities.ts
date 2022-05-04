@@ -22,6 +22,7 @@ export const userTemplate: User = {
   excersices: [],
   github: "",
   linkedin: "",
+  avatar:""
 };
 export const getUserById = async (id: string) => {
   try {

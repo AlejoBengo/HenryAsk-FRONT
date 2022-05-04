@@ -183,9 +183,9 @@ const Navbar = () => {
                   <Avatar
                     alt={DBUser.first_name} //if the image can't be loaded then will show the first alt's letter (user's firstname)
                     src={
-                      DBUser.profile_picture
+                      DBUser.profile_picture.length>0
                         ? DBUser.profile_picture
-                        : "/static/images/avatar/2.jpg"
+                        : DBUser.avatar ? DBUser.avatar : "/static/images/avatar/2.jpg"
                     }
                   />
                 </IconButton>

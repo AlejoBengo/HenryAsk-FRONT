@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { useAppSelector, useAppDispatch } from "../../../app/hooks";
 import { useNavigate } from "react-router-dom";
 import { userTemplate } from "../../../app/Utils/userUtilities";
+import ModalEditProfile from "./ModalEditProfile";
 /*-----------IMPORT MUI & CSS-----------*/
 import Container from "@mui/material/Container";
 import EditIcon from '@mui/icons-material/Edit';
@@ -25,6 +26,16 @@ export const EditProfile = () => {
   const [userInfo, setUserInfo] = useState({ ...userTemplate, ...user });
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  console.log(userInfo)
+
+ // ----------> Modal edit Profile
+  const [avatar , setAvatar] = React.useState("");
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+ //----------------// 
+
+
   const handleInputChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -46,14 +57,14 @@ export const EditProfile = () => {
       });
   };
   return (
-    <Container sx={{ paddingBottom: "16px", paddingTop: "20px" }}>
+    <Container sx={{ paddingBottom: "16px", paddingTop: "20px"}}>
       <Paper sx={{ paddingBottom: "16px" }}>
         <Box
           sx={{
             padding: "2rem",
           }}
         >
-          <Typography variant="h4" color="primary" gutterBottom>
+          <Typography variant="h4" color="primary" gutterBottom textAlign="center">
             Edita tu información personal
           </Typography>
         </Box>
@@ -66,28 +77,21 @@ export const EditProfile = () => {
             justifyContent: "space-around",
           }}
         >
-          <Grid item xs={12} sm={12} sx={{ paddingRight: "1em", display:"flex", margin:"0rem 0rem 3em 5em" }}>
-            <Box
-            display="flex"
-            justifyContent="center"
-            sx={{border:"1px solid black", height:"26vh"}}
-            width="20%"
-            >
+          <Grid item xs={12} sm={12} sx={{ paddingRight: "1em", display:"flex", margin:"0rem 0rem 0em 0em", justifyContent:"center" }}>
+          
             <Avatar
-            sx={{width:"100%" , height:"auto"}}
-            alt={userInfo.user_name} 
-            src={userInfo.profile_picture}/>
-            </Box>
-            <Box
-            display="flex"
-            alignItems="end"
-            sx={{border:"1px solid black", height:"26vh", marginLeft:"2em"}}
-            width="50%"
-            >
-              <Button variant="contained" startIcon={<EditIcon />}>
-                Editar Avatar
-              </Button>
-            </Box>
+            sx={{width:"14rem" , height:"13rem" , objectFit:"cover"}}
+            alt={user.user_name} 
+            src={userInfo.profile_picture.length>0? userInfo.profile_picture:  avatar ? avatar : userInfo.avatar ? userInfo.avatar : userInfo.profile_picture}/>
+           
+            
+          </Grid>
+          <Grid item xs={12} sm={12} sx={{ paddingRight: "1em", display:"flex", margin:"0rem 0rem 2em 0em", justifyContent:"center" }}>
+          
+          <Button variant="contained" startIcon={<EditIcon />} onClick={handleOpen}>
+            Elegir Avatar
+          </Button>
+           <ModalEditProfile open={open} setOpen={setOpen} handleOpen={handleOpen} handleClose={handleClose} userInfo={userInfo} setUserInfo={setUserInfo} avatar={avatar} setAvatar={setAvatar} />
           </Grid>
 
           <Grid item xs={11} sm={4} sx={{ paddingRight: "1em" }}>

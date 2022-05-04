@@ -71,11 +71,11 @@ import { LateralItemStyled , LinkDom} from "../../Style/StyledComponents";
           sx={{ height:"25vh"}}
           >
           <Box
-          width="30%"
-          sx={{height:"15vh", margin:"2em 0em -1em 0em"}}
+          width="37%"
+          sx={{height:"20vh", margin:"2em 0em -1em 0em"}}
           flexDirection="column"
           >
-          <Avatar alt={userLog.user_name} src={userLog.profile_picture} sx={{width:"100%", height:"auto"}}/>
+          <Avatar alt={userLog.user_name} src={userLog.profile_picture.length>0 ? userLog.profile_picture : userLog.avatar ? userLog.avatar : userLog.profile_picture } sx={{width:"100%", height:"auto"}}/>
           <Typography variant="subtitle1">{userLog.user_name}</Typography>
           <LinkDom onClick={toggleDrawer(anchor, false)} to={`/Profile/${userLog._id}`}>Ir al Perfil</LinkDom>
           </Box>

@@ -1,7 +1,7 @@
 /*--------------------------------------------------------*/
 /*-----------IMPORT UTILITIES-----------*/
 import { styled } from "@mui/system";
-import { Paper, TextField } from "@mui/material";
+import { Paper, TextField, Box } from "@mui/material";
 import LateralItem from "../Navbar/LateralMenu/LateralItem";
 import { Link } from "react-router-dom";
 /*--------------------------------------------------------*/
@@ -45,3 +45,30 @@ export const StyledTextField = styled(TextField)`
   text-align: center;
   padding-right: 16px;
 `;
+
+
+
+// --------------> STYLED EDIT PROFILE
+
+export const BoxStyledEditProfile = styled(Box)`
+position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: auto;
+    height:auto;
+    background-color: black;
+    border: 2px solid black;
+    box-shadow: 1px 1px 20px black;
+    padding: 4px;
+    color:white
+`;
+
+export const Img = styled("img")`
+  width:100%;
+  height:auto;
+  object-fit:cover;
+`;
+
+
+//-----------------------//
