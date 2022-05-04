@@ -2,30 +2,41 @@
 /*-----------IMPORT UTILITIES-----------*/
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { User } from "../../app/interface";
+import { Owner, User } from "../../app/interface";
 import { Link } from "react-router-dom";
 import { getUserById, userTemplate } from "../../app/Utils/userUtilities";
 /*-----------IMPORT MUI & CSS-----------*/
 import AccountCircleRoundedIcon from "@mui/icons-material/AccountCircleRounded";
-import { Link as MUILink } from "@mui/material";
+import { Avatar, Link as MUILink, Typography } from "@mui/material";
 /*--------------------------------------------------------*/
 interface Props {
-  id: string;
+  user: Owner;
 }
-export const UserShort = ({ id }: Props) => {
-  const [user, setUser] = useState(userTemplate);
-  useEffect(() => {
-    if (!user.first_name) {
-      getUserById(id).then((user) => {
-        setUser(user);
-      });
-    }
-  }, [user]);
-
+export const UserShort = ({ user }: Props) => {
   return (
-    <span>
-      <MUILink href={`/Profile/${id}`}>{user?.user_name}</MUILink>
-      <AccountCircleRoundedIcon />
-    </span>
+    <Typography display={"flex"} variant="caption" alignItems="center">
+      <Avatar
+        sx={{
+          width: "40px",
+          height: "40px",
+          display: "inline",
+          mx: 1,
+          zIndex: 2,
+          border: "1px solid",
+          borderColor: "primary.dark",
+          ["&:before"]: {
+            zIndex: -1,
+            content: "''",
+            display: "block",
+            backgroundColor: "primary.light",
+            width: "40px",
+            height: "40px",
+            position: "absolute",
+          },
+        }}
+        src={user?.profile_picture}
+      />
+      <MUILink href={`/Profile/${user._id}`}>{user?.user_name}</MUILink>
+    </Typography>
   );
 };

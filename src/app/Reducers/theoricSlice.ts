@@ -49,6 +49,14 @@ export const editTheoric = async (obj: any) => {
   }
 };
 
+export const deleteTheoric = async (id: string) => {
+  try {
+    await axios.delete(`/theoric/?id=${id}`);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 export const theoricSlice = createSlice({
   name: "theoric",
   initialState,

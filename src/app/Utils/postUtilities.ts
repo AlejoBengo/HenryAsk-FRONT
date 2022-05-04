@@ -1,18 +1,13 @@
 import axios from "axios";
-import { Posts, PostOwner } from "../interface";
+import { Posts, Owner } from "../interface";
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { ownerTemplate } from "./userUtilities";
 
-export const postOwnerTemplate: PostOwner = {
-  _id: "",
-  user_name: "",
-  profile_picture: "",
-  role: 0,
-};
 export const postTemplate: Posts = {
   _id: "",
   question: "",
   description: "",
-  owner: postOwnerTemplate,
+  owner: ownerTemplate,
   ownerData: [],
   createdAt: "",
   open: true,
@@ -45,5 +40,14 @@ export const editAnswerChildInPost = async (id: string | undefined) => {
   } catch (error) {
     console.log(error);
     return postTemplate;
+  }
+};
+export const closePost = async (id: string | undefined) => {
+  try {
+    return await (
+      await axios.put("/post", { id, open: false })
+    ).data;
+  } catch (error) {
+    return error;
   }
 };

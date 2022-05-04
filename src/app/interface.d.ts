@@ -34,9 +34,12 @@ export interface isAlumnOrInstructor {
   height: number;
 }
 export interface Answer {
-  owner: any;
+  _id: string;
+  owner: Owner;
   content: string;
-  posts: string;
+  post: string;
+  comments: Array<Comment>;
+  createdAt: string;
 }
 
 export interface Theoric {
@@ -47,7 +50,12 @@ export interface Theoric {
   images: Array[string];
   comments: Array[string];
 }
-
+export interface Comment {
+  _id: string;
+  owner: Owner;
+  answer: string;
+  content: string;
+}
 // INTERFACES PARA GET POST './getPostsForum.ts';
 
 /*   export enum Type {
@@ -83,7 +91,7 @@ export interface isAlumnOrInstructor {
   height: number;
 }
 
-export interface PostOwner {
+export interface Owner {
   _id: string;
   user_name: string;
   profile_picture: string;
@@ -94,7 +102,7 @@ export interface Posts {
   _id: string;
   question: string;
   description: string;
-  owner: PostOwner; //cambiado de string a any por Agus ya que se resolvió el tema de las Refs
+  owner: Owner; //cambiado de string a any por Agus ya que se resolvió el tema de las Refs
   ownerData: Array<string>;
   createdAt: string;
   open: boolean;
