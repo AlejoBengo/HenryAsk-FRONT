@@ -1,6 +1,6 @@
 /*--------------------------------------------------------*/
 /*-----------IMPORT UTILITIES-----------*/
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Link, Navigate } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
@@ -8,6 +8,7 @@ import { useAppSelector } from "../../app/hooks";
 /*-----------IMPORT COMPONENTS-----------*/
 import { LoginButton } from "../ButtonsOutLogin/LoginButton/LoginButton";
 import { LogoutButton } from "../ButtonsOutLogin/LogoutButton/LogoutButton";
+import LateralMenu from "./LateralMenu/LateralMenu";
 /*-----------IMPORT MUI & CSS-----------*/
 import {
   AppBar,
@@ -33,6 +34,14 @@ const settings = ["Perfil", "Cerrar Sesion"];
 const Navbar = () => {
   const navigate = useNavigate();
   const DBUser = useAppSelector((state) => state.user.data);
+  const [pivote, setPivote] = useState(false); // para TA y ADM moverse en livertad por forum learning y forum prep
+
+  useEffect(() => {
+    if (DBUser.role === 3 || DBUser.role === 5) {
+      setPivote(true);
+    }
+  }, []);
+
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
@@ -62,15 +71,18 @@ const Navbar = () => {
   };
 
   return (
-    <AppBar position="sticky" sx={{ backgroundColor: "#000" }}>
+    <AppBar position="sticky" sx={{ height: "8vh", backgroundColor: "#000" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Box
+            display="flex"
+            alignItems="center"
             component="div"
             width="15%"
             height="5vh"
             sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
           >
+            <LateralMenu user={DBUser} />
             <Link to="/">
               <Img src={logo} alt="no responde img" />
             </Link>

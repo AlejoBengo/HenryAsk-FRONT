@@ -1,18 +1,13 @@
 import axios from "axios";
-import { Posts, PostOwner } from "../interface";
+import { Posts, Owner } from "../interface";
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { ownerTemplate } from "./userUtilities";
 
-export const postOwnerTemplate: PostOwner = {
-  _id: "",
-  user_name: "",
-  profile_picture: "",
-  role: 0,
-};
 export const postTemplate: Posts = {
   _id: "",
   question: "",
   description: "",
-  owner: postOwnerTemplate,
+  owner: ownerTemplate,
   ownerData: [],
   createdAt: "",
   open: true,

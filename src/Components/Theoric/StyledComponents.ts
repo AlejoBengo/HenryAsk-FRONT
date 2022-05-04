@@ -13,29 +13,28 @@ import { styled } from "@mui/material/styles";
 /*--------------------------------------------------------*/
 
 export const StyledStack = styled(Stack)`
-  width: 22vw;
+  width: 19vw;
   margin-left: 1vw;
   background-color: red;
 `;
 
 export const StyledListItemButton = styled(ListItemButton)`
-  width: 20vw;
+  width: 19vw;
   height: 7vh;
-  margin-left: 1vw;
-  background-color: black;
-  color: white;
+  background-color: white;
+  color: black;
   display: flex;
   justify-content: space-between;
   font-family: helvetica;
 `;
 
 export const StyledListItemButton2 = styled(ListItemButton)`
-  width: 20vw;
+  width: 100%;
+  max-width:100%;
   height: 7vh;
   font-family: helvetica;
-  margin-left: 1vw;
-  background-color: rgb(18, 18, 18);
-  color: white;
+  background-color: white;
+  color: black;
 `;
 
 //-----------------------------------------------------------------------

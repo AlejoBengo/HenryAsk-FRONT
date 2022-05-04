@@ -2,10 +2,11 @@
 /*-----------IMPORT UTILITIES-----------*/
 import React, { useState } from "react";
 import { useAppSelector, useAppDispatch } from "../../../app/hooks";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { userTemplate } from "../../../app/Utils/userUtilities";
 /*-----------IMPORT MUI & CSS-----------*/
 import Container from "@mui/material/Container";
+import EditIcon from '@mui/icons-material/Edit';
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -16,11 +17,13 @@ import {
   remoteUpdateUser,
   fetchUserByEmail,
 } from "../../../app/Reducers/userSlice";
+import { Avatar } from "@mui/material";
 /*--------------------------------------------------------*/
 
 export const EditProfile = () => {
   const user = useAppSelector((state) => state.user.data);
   const [userInfo, setUserInfo] = useState({ ...userTemplate, ...user });
+  const { id } = useParams();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const handleInputChange = (
@@ -43,6 +46,7 @@ export const EditProfile = () => {
         alert("Algo salió mal, intente de nuevo");
       });
   };
+  if (user._id != id) navigate(`/Profile/${id}`);
   return (
     <Container sx={{ paddingBottom: "16px", paddingTop: "20px" }}>
       <Paper sx={{ paddingBottom: "16px" }}>
@@ -64,6 +68,30 @@ export const EditProfile = () => {
             justifyContent: "space-around",
           }}
         >
+          <Grid item xs={12} sm={12} sx={{ paddingRight: "1em", display:"flex", margin:"0rem 0rem 3em 5em" }}>
+            <Box
+            display="flex"
+            justifyContent="center"
+            sx={{border:"1px solid black", height:"26vh"}}
+            width="20%"
+            >
+            <Avatar
+            sx={{width:"100%" , height:"auto"}}
+            alt={userInfo.user_name} 
+            src={userInfo.profile_picture}/>
+            </Box>
+            <Box
+            display="flex"
+            alignItems="end"
+            sx={{border:"1px solid black", height:"26vh", marginLeft:"2em"}}
+            width="50%"
+            >
+              <Button variant="contained" startIcon={<EditIcon />}>
+                Editar Avatar
+              </Button>
+            </Box>
+          </Grid>
+
           <Grid item xs={11} sm={4} sx={{ paddingRight: "1em" }}>
             <StyledTextField
               variant="filled"

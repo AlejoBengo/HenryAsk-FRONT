@@ -2,11 +2,30 @@
 /*-----------IMPORT UTILITIES-----------*/
 import { styled } from "@mui/system";
 import { Paper, TextField } from "@mui/material";
+import LateralItem from "../Navbar/LateralMenu/LateralItem";
+import { Link } from "react-router-dom";
 /*--------------------------------------------------------*/
+
+export const LateralItemStyled = styled(LateralItem)`
+text-decoration:none;
+&:visited{
+  color:black;
+}
+`;
+
+export const LinkDom = styled(Link)`
+text-decoration:none;
+color:black;
+&:visited{
+  color:black;
+}
+
+`
+
 
 export const Div = styled("div")(`
     width: 100%;
-    height:1000px;
+    height:auto;
     `);
 
 export const TituloForo = styled("span")(`

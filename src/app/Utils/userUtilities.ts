@@ -1,5 +1,11 @@
 import axios from "axios";
-import { User } from "../interface";
+import { User, Owner } from "../interface";
+export const ownerTemplate: Owner = {
+  _id: "",
+  user_name: "",
+  profile_picture: "",
+  role: 0,
+};
 export const userTemplate: User = {
   _id: "",
   user_name: "",
