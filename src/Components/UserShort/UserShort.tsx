@@ -17,18 +17,20 @@ export const UserShort = ({ user }: Props) => {
     <Typography display={"flex"} variant="caption" alignItems="center">
       <Avatar
         sx={{
-          width: "30px",
-          height: "30px",
+          width: "40px",
+          height: "40px",
           display: "inline",
           mx: 1,
           zIndex: 2,
+          border: "1px solid",
+          borderColor: "primary.dark",
           ["&:before"]: {
             zIndex: -1,
             content: "''",
             display: "block",
             backgroundColor: "primary.light",
-            width: "30px",
-            height: "30px",
+            width: "40px",
+            height: "40px",
             position: "absolute",
           },
         }}

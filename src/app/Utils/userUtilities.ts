@@ -31,6 +31,7 @@ export const userTemplate: User = {
 };
 export const getUserById = async (id: string) => {
   try {
+    if (id === "") return userTemplate;
     let user = await (await axios.get(`/user/${id}`)).data;
     if (user.user_name === "") {
       return userTemplate;
