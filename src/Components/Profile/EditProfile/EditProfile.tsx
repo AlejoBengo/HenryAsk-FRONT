@@ -64,7 +64,7 @@ export const EditProfile = () => {
             justifyContent: "space-around",
           }}
         >
-          <Grid item xs={11} sm={6} sx={{ paddingRight: "1em" }}>
+          <Grid item xs={11} sm={4} sx={{ paddingRight: "1em" }}>
             <StyledTextField
               variant="filled"
               label="Nombre"
@@ -75,7 +75,7 @@ export const EditProfile = () => {
               helperText={userInfo.first_name === "" ? "Campo obligatorio" : ""}
             ></StyledTextField>
           </Grid>
-          <Grid item xs={11} sm={6} sx={{ paddingRight: "1em" }}>
+          <Grid item xs={11} sm={4} sx={{ paddingRight: "1em" }}>
             <StyledTextField
               variant="filled"
               label="Apellido"
@@ -86,7 +86,7 @@ export const EditProfile = () => {
               helperText={userInfo.last_name === "" ? "Campo obligatorio" : ""}
             ></StyledTextField>
           </Grid>
-          <Grid item xs={11} sm={6} sx={{ paddingRight: "1em" }}>
+          <Grid item xs={11} sm={4} sx={{ paddingRight: "1em" }}>
             <StyledTextField
               variant="filled"
               label="Nombre de Usuario"
@@ -121,6 +121,15 @@ export const EditProfile = () => {
               label="Foto de Perfil"
               name="profile_picture"
               value={userInfo.profile_picture}
+              onChange={(event) => handleInputChange(event)}
+            ></StyledTextField>
+          </Grid>
+          <Grid item xs={11} sm={6} sx={{ paddingRight: "1em" }}>
+            <StyledTextField
+              variant="filled"
+              label="Foto de Portada"
+              name="banner"
+              value={userInfo.banner}
               onChange={(event) => handleInputChange(event)}
             ></StyledTextField>
           </Grid>
