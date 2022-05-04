@@ -71,7 +71,9 @@ const Navbar = () => {
             height="5vh"
             sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
           >
-            <Img src={logo} alt="no responde img" />
+            <Link to="/">
+              <Img src={logo} alt="no responde img" />
+            </Link>
           </Box>
 
           <Box
