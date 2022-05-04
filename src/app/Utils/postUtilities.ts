@@ -42,3 +42,19 @@ export const editAnswerChildInPost = async (id: string | undefined) => {
     return postTemplate;
   }
 };
+
+export const editPost = async (obj: any) => {
+  try {
+    await axios.put(`/post/`, obj);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const deletePost = async (id: string) => {
+  try {
+    await axios.delete(`/post/?id=${id}`);
+  } catch (error) {
+    console.log(error);
+  }
+};

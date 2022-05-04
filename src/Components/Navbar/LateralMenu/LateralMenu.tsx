@@ -22,12 +22,12 @@ import {
   List,
   ListItem,
 } from "@mui/material";
+// import { StarsIcon } from "@mui/icons-material";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import { yellow } from "@mui/material/colors";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import ForumIcon from "@mui/icons-material/Forum";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
-// import StarIcon from "@mui/icons-material";
 import {
   StyledStack,
   StyledListItemButton,
@@ -106,7 +106,12 @@ export default function LateralMenu(props: any) {
           <LateralItemStyled text="Material" icon={<MenuBookIcon />} />
         </LinkDom>
         <LinkDom onClick={toggleDrawer(anchor, false)} to="#">
-          <LateralItemStyled text="Henry Coins Ranking" icon={<ForumIcon />} />
+          <LinkDom onClick={toggleDrawer(anchor, false)} to="#">
+            <LateralItemStyled
+              text="Henry Coins Ranking"
+              // icon={<StarsIcon />}
+            />
+          </LinkDom>
         </LinkDom>
       </List>
       <Divider />
