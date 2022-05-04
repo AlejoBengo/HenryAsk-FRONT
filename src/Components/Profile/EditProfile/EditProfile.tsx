@@ -2,7 +2,7 @@
 /*-----------IMPORT UTILITIES-----------*/
 import React, { useState } from "react";
 import { useAppSelector, useAppDispatch } from "../../../app/hooks";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { userTemplate } from "../../../app/Utils/userUtilities";
 /*-----------IMPORT MUI & CSS-----------*/
 import Container from "@mui/material/Container";
@@ -21,6 +21,7 @@ import {
 export const EditProfile = () => {
   const user = useAppSelector((state) => state.user.data);
   const [userInfo, setUserInfo] = useState({ ...userTemplate, ...user });
+  const { id } = useParams();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const handleInputChange = (
@@ -43,6 +44,7 @@ export const EditProfile = () => {
         alert("Algo salió mal, intente de nuevo");
       });
   };
+  if (user._id != id) navigate(`/Profile/${id}`);
   return (
     <Container sx={{ paddingBottom: "16px", paddingTop: "20px" }}>
       <Paper sx={{ paddingBottom: "16px" }}>
