@@ -72,7 +72,7 @@ const Navbar = () => {
   };
 
   return (
-    <AppBar position="sticky" sx={{ backgroundColor: "#000" }}>
+    <AppBar position="sticky" sx={{ height: "8vh", backgroundColor: "#000" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Box
