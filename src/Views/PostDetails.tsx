@@ -117,6 +117,8 @@ export const PostDetails = () => {
               <AnswerDetails
                 id={answer._id}
                 setSelectedAnswer={setSelectedAnswer}
+                postOwner={postOwner}
+                postOpen={post.open}
               />
               {index !== postAnswers.length - 1 && (
                 <Divider sx={{ marginBottom: 1 }} />
@@ -124,7 +126,7 @@ export const PostDetails = () => {
             </div>
           ))}
         </StyledPaper>
-        <CreateAnswer id={id} />
+        {post.open ? <CreateAnswer id={id} /> : null}
       </Container>
       <Comments id={selectedAnswer} toggleOpen={toggleOpen} open={open} />
     </div>

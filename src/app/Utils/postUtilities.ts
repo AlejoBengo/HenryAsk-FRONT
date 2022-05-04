@@ -42,3 +42,12 @@ export const editAnswerChildInPost = async (id: string | undefined) => {
     return postTemplate;
   }
 };
+export const closePost = async (id: string | undefined) => {
+  try {
+    return await (
+      await axios.put("/post", { id, open: false })
+    ).data;
+  } catch (error) {
+    return error;
+  }
+};
