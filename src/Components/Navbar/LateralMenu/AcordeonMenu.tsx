@@ -13,17 +13,20 @@ import { useAppSelector , useAppDispatch} from "../../../app/hooks";
 import { fetchUserByUserName } from "../../../app/Utils/userNameUtilities";
 import { useNavigate } from "react-router-dom";
 
-export default function AcordeonMenu() {
+export default function AcordeonMenu(props:any) {
+  const {state , setState} = props;
   const navigate = useNavigate()
   const busqueda = useAppSelector((state) => state.searchUserName.searchUserName);
   const dispatch = useAppDispatch()
   const [userName, setUserName] = React.useState<string>("")
 
 
-  /*  const handleClick = ()=>{
+   const handleClick = ()=>{
     dispatch(fetchUserByUserName(userName))
-    .then(response =>  (console.log(response),navigate(`/user/${response}`)) )
-  } */
+    .then(response =>  response.payload._id )
+    .then(data => navigate(`/Profile/${data}`))
+    setState({left:false})
+  }
 
   const handleChange = ( event: React.ChangeEvent<HTMLInputElement>) => {
     setUserName(event.target.value)
@@ -66,7 +69,7 @@ export default function AcordeonMenu() {
                   </InputAdornment>
                 ),
                 endAdornment: (
-                    <Button /* onClick={handleClick} */ >
+                    <Button onClick={handleClick} >
                       Buscar
                     </Button>
                 ),

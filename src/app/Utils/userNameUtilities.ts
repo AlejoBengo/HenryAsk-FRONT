@@ -7,7 +7,7 @@ import { userTemplate } from "./userUtilities";
 export const fetchUserByUserName = createAsyncThunk(
     "user/fetchUserByUserName",
     async (user: string | undefined) => {
-      const response:User = (await axios(`/user?user_name=${user}`)).data;
+      const response = (await axios(`/user?user_name=${user}`)).data;
       return { ...userTemplate , ... response };
     }
   );

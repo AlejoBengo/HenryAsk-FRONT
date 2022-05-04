@@ -84,7 +84,7 @@ import { LateralItemStyled , LinkDom} from "../../Style/StyledComponents";
           <Divider/>
 
           <List>
-          <AcordeonMenu/>
+          <AcordeonMenu state={state} setState={setState}/>
            <LinkDom  onClick={toggleDrawer(anchor, false)} to="/Forum"><LateralItemStyled text="Foro" icon={<ForumIcon/>}/></LinkDom>
            <LinkDom onClick={toggleDrawer(anchor, false)} to="/Content"><LateralItemStyled text="Material" icon={<MenuBookIcon/>}/></LinkDom>
            <LinkDom onClick={toggleDrawer(anchor, false)} to="#"><LateralItemStyled text="Henry Coins Ranking" icon={<StarsIcon/>}/></LinkDom>
