@@ -19,7 +19,7 @@ import { EditProfile } from "./Components/Profile/EditProfile/EditProfile";
 import Foro from "./Views/Foro";
 import PostDetails from "./Views/PostDetails";
 import CreatePost from "./Components/Creators/CreatePost/CreatePost";
-import LateralMenu from "./Views/LateralMenu";
+import LateralMenu from "./Components/Navbar/LateralMenu/LateralMenu";
 import TheoricView from "./Views/TheoricView";
 
 const App = () => {
