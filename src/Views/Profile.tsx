@@ -104,7 +104,7 @@ export default function Profile() {
         />
         <StyledAvatar
           alt={userProfile.first_name} //if the image can't be loaded then will show the first alt's letter (user's firstname)
-          src={userProfile.profile_picture.length>0? userProfile.profile_picture : userProfile.avatar}
+          src={userProfile.profile_picture.length>0? userProfile.profile_picture : userProfile.avatar ? userProfile.avatar : userProfile.profile_picture}
         />
         <CardContent>
           <Typography variant="h5">

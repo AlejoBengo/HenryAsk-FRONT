@@ -74,11 +74,11 @@ export default function LateralMenu(props: any) {
           display="flex"
           justifyContent="center"
           textAlign="center"
-          sx={{ height:"25vh"}}
+          sx={{ height:"30vh"}}
           >
           <Box
           width="37%"
-          sx={{height:"20vh", margin:"2em 0em -1em 0em"}}
+          sx={{height:"100%", margin:"2em 0em -1em 0em"}}
           flexDirection="column"
           >
           <Avatar alt={userLog.user_name} src={userLog.profile_picture.length>0 ? userLog.profile_picture : userLog.avatar ? userLog.avatar : userLog.profile_picture } sx={{width:"100%", height:"auto"}}/>

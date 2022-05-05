@@ -56,6 +56,7 @@ const PostForm = () => {
         _id: usuario._id,
         user_name: usuario.user_name,
         role: usuario.role,
+        avatar:usuario.avatar,
         profile_picture: usuario.profile_picture,
       },
 

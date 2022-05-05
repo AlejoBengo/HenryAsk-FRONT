@@ -95,6 +95,7 @@ export interface Owner {
   _id: string;
   user_name: string;
   profile_picture: string;
+  avatar:string;
   role: 0 | 1 | 2 | 3 | 4 | 5;
 }
 

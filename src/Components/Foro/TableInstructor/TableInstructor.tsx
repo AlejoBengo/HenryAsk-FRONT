@@ -96,7 +96,7 @@ export default function TableInstructor(props: any) {
                             >
                               <Avatar
                                 alt={row.owner.user_name} //if the image can't be loaded then will show the first alt's letter (user's firstname)
-                                src={row.owner.profile_picture.length>0? row.owner.profile_picture : row.owner.avatar ? row.owner.avatar : row.owner.profile_picture }
+                                src={row.owner.profile_picture.length>0? row.owner.profile_picture : row.owner.avatar.length>0? row.owner.avatar : row.owner.profile_picture }
                               />
                               <Typography variant="subtitle2">
                                 <Link to={`/Profile/${row.owner._id}`}>{row.owner.user_name}</Link>

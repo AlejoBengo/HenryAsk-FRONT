@@ -79,12 +79,12 @@ const Navbar = () => {
             alignItems="center"
             component="div"
             width="15%"
-            height="5vh"
+            height="8vh"
             sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
           >
             <LateralMenu user={DBUser} />
             <Link to="/">
-              <Img src={logo} alt="no responde img" />
+              <Img src={logo} alt="no responde img" sx={{marginTop:".3em"}} />
             </Link>
           </Box>
 
@@ -95,26 +95,19 @@ const Navbar = () => {
               alignItems: "center",
             }}
           >
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
-              <DehazeIcon />
-            </IconButton>
-
-            <Box
-              component="div"
-              width="20%"
-              height="5vh"
-              marginLeft="1rem"
-              sx={{ mr: 2, display: { xs: "flex", md: "none" } }}
-            >
-              <Img src={logo} alt="no responde img" />
-            </Box>
+           <Box
+            display="flex"
+            alignItems="center"
+            component="div"
+            width="50%"
+            height="8vh"
+            sx={{ mr: 2, display: { xs: "flex", md: "none" } }}
+          >
+            <LateralMenu user={DBUser} />
+            <Link to="/">
+              <Img src={logo} alt="no responde img" sx={{marginTop:".2em"}} />
+            </Link>
+          </Box>
 
             <Menu
               id="menu-appbar"
