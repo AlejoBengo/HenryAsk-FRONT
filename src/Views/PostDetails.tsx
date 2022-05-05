@@ -26,6 +26,7 @@ import {
   Typography,
   MenuItem,
   Box,
+  Button,
   Modal,
   IconButton,
 } from "@mui/material";
@@ -171,194 +172,132 @@ export const PostDetails = () => {
   }, [selectedAnswer]);
 
   if (error) return <div>Error</div>;
-  if (post.owner._id === usuario._id) {
-    return (
-      <div>
-        <Container sx={{ padding: "1em" }}>
-          <StyledDivButtons>
-            <StyledButton onClick={handleOpenEdit}>Edit</StyledButton>
-            <StyledButton2 onClick={handleOpenDelete}>Delete</StyledButton2>
-          </StyledDivButtons>
+  return (
+    <div>
+      <Container sx={{ padding: "1em" }}>
+        <StyledDivButtons>
+          <StyledButton onClick={handleOpenEdit}>Edit</StyledButton>
+          <Button variant="contained" onClick={handleOpenDelete}>
+            Delete
+          </Button>
+        </StyledDivButtons>
 
-          <Modal open={openDelete}>
-            <StyledBoxModal2>
-              <StyledButtonModal5 onClick={handleOpenDelete}>
-                Close
-              </StyledButtonModal5>
+        <Modal open={openDelete}>
+          <StyledBoxModal2>
+            <StyledButtonModal5 onClick={handleOpenDelete}>
+              Close
+            </StyledButtonModal5>
 
-              <StyledTypography4>Are you sure?</StyledTypography4>
+            <StyledTypography4>Are you sure?</StyledTypography4>
 
-              <StyledButtonModal6 onClick={handleDeletePost}>
-                Delete
-              </StyledButtonModal6>
-            </StyledBoxModal2>
-          </Modal>
+            <StyledButtonModal6 onClick={handleDeletePost}>
+              Delete
+            </StyledButtonModal6>
+          </StyledBoxModal2>
+        </Modal>
 
-          <Modal open={openEdit}>
-            <StyledBoxModal>
-              <StyledButtonModal onClick={handleOpenEdit}>
-                Close
-              </StyledButtonModal>
-              <StyledTextField2
-                multiline
-                onChange={handleEditInputChange}
-                name="question"
-                value={editable.question}
-              />
-              <StyledTextField2
-                multiline
-                onChange={handleEditInputChange}
-                name="description"
-                value={editable.description}
-              />
-              <StyledSelect onChange={(event) => handleEditTags(event)}>
-                {tags.map((tag) => {
+        <Modal open={openEdit}>
+          <StyledBoxModal>
+            <StyledButtonModal onClick={handleOpenEdit}>
+              Close
+            </StyledButtonModal>
+            <StyledTextField2
+              multiline
+              onChange={handleEditInputChange}
+              name="question"
+              value={editable.question}
+            />
+            <StyledTextField2
+              multiline
+              onChange={handleEditInputChange}
+              name="description"
+              value={editable.description}
+            />
+            <StyledSelect onChange={(event) => handleEditTags(event)}>
+              {tags.map((tag) => {
+                return (
+                  <MenuItem value={tag} key={tag}>
+                    {tag}
+                  </MenuItem>
+                );
+              })}
+            </StyledSelect>
+            <StyledBoxChoosed sx={{ backgroundColor: "info.main" }}>
+              {newTags.length > 0 &&
+                newTags.map((tag: string) => {
                   return (
-                    <MenuItem value={tag} key={tag}>
-                      {tag}
-                    </MenuItem>
+                    <Box style={{ display: "flex" }} key={tag}>
+                      <h4>{tag}</h4>
+                      <IconButton
+                        onClick={() => handleDelete(tag)}
+                        aria-label="delete"
+                      >
+                        <DeleteIcon />
+                      </IconButton>
+                    </Box>
                   );
                 })}
-              </StyledSelect>
-              <StyledBoxChoosed sx={{ backgroundColor: "info.main" }}>
-                {newTags.length > 0 &&
-                  newTags.map((tag: string) => {
-                    return (
-                      <Box style={{ display: "flex" }} key={tag}>
-                        <h4>{tag}</h4>
-                        <IconButton
-                          onClick={() => handleDelete(tag)}
-                          aria-label="delete"
-                        >
-                          <DeleteIcon />
-                        </IconButton>
-                      </Box>
-                    );
-                  })}
-              </StyledBoxChoosed>
-              <StyledButtonModal4 onClick={handleSaver}>
-                Save
-              </StyledButtonModal4>
-            </StyledBoxModal>
-          </Modal>
-          <StyledPaper elevation={2}>
+            </StyledBoxChoosed>
+            <StyledButtonModal4 onClick={handleSaver}>Save</StyledButtonModal4>
+          </StyledBoxModal>
+        </Modal>
+        <StyledPaper elevation={2}>
+          <Typography
+            variant="h3"
+            sx={{
+              textDecoration: "underline 2px solid ",
+            }}
+            align="left"
+            gutterBottom
+          >
+            {post.question}
+          </Typography>
+          <Box
+            sx={{
+              marginBottom: "1em",
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
+            }}
+          >
             <Typography
-              variant="h3"
-              sx={{
-                textDecoration: "underline 2px solid ",
-              }}
-              align="left"
-              gutterBottom
+              variant="caption"
+              sx={{ marginRight: "5px" }}
+              display="flex"
+              alignItems={"center"}
             >
-              {post.question}
+              Preguntado el {post.createdAt} por <UserShort user={postOwner} />
             </Typography>
-            <Box
-              sx={{
-                marginBottom: "1em",
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "space-between",
-              }}
-            >
-              <Typography
-                variant="caption"
-                sx={{ marginRight: "5px" }}
-                display="flex"
-                alignItems={"center"}
-              >
-                Preguntado el {post.createdAt} por{" "}
-                <UserShort user={postOwner} />
-              </Typography>
+            <Typography variant="caption" sx={{ marginRight: "5px" }}>
+              <LocalOfferIcon /> {post.tags.join(", ")}
+            </Typography>
+          </Box>
+          <Typography variant="body1" paragraph>
+            {post.description}
+          </Typography>
+          <Divider sx={{ marginBottom: 1 }} />
+          <Typography variant="h4" align="left" gutterBottom>
+            {post.answers?.length} Respuestas
+          </Typography>
 
-              <Typography variant="caption" sx={{ marginRight: "5px" }}>
-                <LocalOfferIcon /> {post.tags.join(", ")}
-              </Typography>
-            </Box>
-            <Typography variant="body1" paragraph>
-              {post.description}
-            </Typography>{" "}
-            <Divider sx={{ marginBottom: 1 }} />
-            <Typography variant="h4" align="left" gutterBottom>
-              {post.answers?.length} Respuestas
-            </Typography>
-            {postAnswers?.map((answer: any, index: number) => (
-              <div key={answer.id}>
-                <AnswerDetails
-                  id={answer._id}
-                  setSelectedAnswer={setSelectedAnswer}
-                />
-                {index !== postAnswers.length - 1 && (
-                  <Divider sx={{ marginBottom: 1 }} />
-                )}
-              </div>
-            ))}
-          </StyledPaper>
-          <CreateAnswer id={id} />
-        </Container>
-        <Comments id={selectedAnswer} toggleOpen={toggleOpen} open={open} />
-      </div>
-    );
-  } else {
-    return (
-      <div>
-        <Container sx={{ padding: "1em" }}>
-          <StyledPaper elevation={2}>
-            <Typography
-              variant="h3"
-              sx={{
-                textDecoration: "underline 2px solid ",
-              }}
-              align="left"
-              gutterBottom
-            >
-              {post.question}
-            </Typography>
-            <Box
-              sx={{
-                marginBottom: "1em",
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "space-between",
-              }}
-            >
-              <Typography
-                variant="caption"
-                sx={{ marginRight: "5px" }}
-                display="flex"
-                alignItems={"center"}
-              >
-                Preguntado el {post.createdAt} por{" "}
-                <UserShort user={postOwner} />
-              </Typography>
-
-              <Typography variant="caption" sx={{ marginRight: "5px" }}>
-                <LocalOfferIcon /> {post.tags.join(", ")}
-              </Typography>
-            </Box>
-            <Typography variant="body1" paragraph>
-              {post.description}
-            </Typography>{" "}
-            <Divider sx={{ marginBottom: 1 }} />
-            <Typography variant="h4" align="left" gutterBottom>
-              {post.answers?.length} Respuestas
-            </Typography>
-            {postAnswers?.map((answer: any, index: number) => (
-              <div key={answer.id}>
-                <AnswerDetails
-                  id={answer._id}
-                  setSelectedAnswer={setSelectedAnswer}
-                />
-                {index !== postAnswers.length - 1 && (
-                  <Divider sx={{ marginBottom: 1 }} />
-                )}
-              </div>
-            ))}
-          </StyledPaper>
-          <CreateAnswer id={id} />
-        </Container>
-        <Comments id={selectedAnswer} toggleOpen={toggleOpen} open={open} />
-      </div>
-    );
-  }
+          {postAnswers?.map((answer: any, index: number) => (
+            <div key={answer.id}>
+              <AnswerDetails
+                id={answer._id}
+                setSelectedAnswer={setSelectedAnswer}
+                postOwner={postOwner}
+                postOpen={post.open}
+              />
+              {index !== postAnswers.length - 1 && (
+                <Divider sx={{ marginBottom: 1 }} />
+              )}
+            </div>
+          ))}
+        </StyledPaper>
+        {post.open ? <CreateAnswer id={id} /> : null}
+      </Container>
+      <Comments id={selectedAnswer} toggleOpen={toggleOpen} open={open} />
+    </div>
+  );
 };
 export default PostDetails;

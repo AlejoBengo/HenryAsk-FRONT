@@ -58,3 +58,12 @@ export const deletePost = async (id: string) => {
     console.log(error);
   }
 };
+export const closePost = async (id: string | undefined) => {
+  try {
+    return await (
+      await axios.put("/post", { id, open: false })
+    ).data;
+  } catch (error) {
+    return error;
+  }
+};
