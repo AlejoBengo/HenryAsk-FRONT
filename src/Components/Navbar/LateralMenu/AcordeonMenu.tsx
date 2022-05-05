@@ -1,4 +1,5 @@
-import * as React from "react";
+import React , {useState, useEffect} from "react";
+import DialogFailed from "../../Dialog/DialogWarning";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
@@ -17,15 +18,31 @@ export default function AcordeonMenu(props:any) {
   const {state , setState} = props;
   const navigate = useNavigate()
   const busqueda = useAppSelector((state) => state.searchUserName.searchUserName);
+  const all = useAppSelector((state)=> state.allUser.allUsers);
   const dispatch = useAppDispatch()
-  const [userName, setUserName] = React.useState<string>("")
+  const [userName, setUserName] = useState<string>("")
 
+  
+  //DIALOG FAILED 
+  const [open, setOpen] = React.useState(false);
+  const handleClose = () => {
+    setOpen(false);
+  };
+//------------------------//
 
    const handleClick = ()=>{
-    dispatch(fetchUserByUserName(userName))
-    .then(response =>  response.payload._id )
-    .then(data => navigate(`/Profile/${data}`))
-    setState({left:false})
+    let aux = false
+    all.filter((e)=>{
+      return e.user_name === userName? aux=true : null
+    })
+    if(aux){
+      dispatch(fetchUserByUserName(userName))
+      .then(response =>  response.payload._id )
+      .then(data => navigate(`/Profile/${data}`))
+      setState({left:false}) 
+    }else{
+      setOpen(true);
+    }
   }
 
   const handleChange = ( event: React.ChangeEvent<HTMLInputElement>) => {
@@ -35,6 +52,7 @@ export default function AcordeonMenu(props:any) {
 
   return (
     <div>
+      <DialogFailed open={open} handleClose={handleClose}/>
       <Accordion
         sx={{ width: "100%", margin: "0em 0em 1em 0em", boxShadow: "none" }}
       >

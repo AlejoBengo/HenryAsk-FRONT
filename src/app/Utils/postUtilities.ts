@@ -29,7 +29,8 @@ export const getPostById = async (id: string | undefined) => {
 export const postNewPost = createAsyncThunk(
   "post/fetchPostToSave",
   async (post: Posts) => {
-    await axios.post(`/post`, post);
+    let info = await axios.post(`/post`, post);
+    return info.data;
   }
 );
 

@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import { remoteUpdateUser } from "../../../app/Reducers/userSlice";
 import { User } from "../../../app/interface";
 import AcordeonMenu from "./AcordeonMenu";
+import { fetchAllUsers } from "../../../app/Utils/allUsers";
 /*-----------IMPORT MUI & CSS-----------*/
 import {
   Stack,
@@ -37,12 +38,14 @@ import { LateralItemStyled, LinkDom } from "../../Style/StyledComponents";
 
 /*--------------------------------------------------------*/
 
-/*  <Stack>
-      <TheoricList />
-    </Stack> */
 
 export default function LateralMenu(props: any) {
   const userLog = useAppSelector((state) => state.user.data);
+  const all = useAppSelector((state) => state.allUser.allUsers);
+  const dispatch = useAppDispatch()
+  useEffect(()=>{
+    dispatch(fetchAllUsers())
+  },[])
 
   const [state, setState] = React.useState({
     left: false,

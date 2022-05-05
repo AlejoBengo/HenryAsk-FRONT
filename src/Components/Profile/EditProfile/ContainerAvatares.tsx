@@ -5,11 +5,11 @@ import { Img } from '../../Style/StyledComponents';
 
 export default function ContainerAvatares(props:any) {
 
-  const {userInfo , setUserInfo , setAvatar , handleClose} = props
+  let {userInfo , setUserInfo , setAvatar , handleClose} = props
 
   const handleClick = (img:any)=>{
-    setUserInfo({...userInfo , profile_picture:""})
-    setUserInfo({...userInfo, avatar:img});
+    setUserInfo(userInfo = {...userInfo , profile_picture:""})
+    setUserInfo(userInfo = {...userInfo, avatar:img});
     
     setAvatar(img)
   }
