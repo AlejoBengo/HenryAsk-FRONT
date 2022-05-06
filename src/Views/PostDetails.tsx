@@ -122,11 +122,12 @@ export const PostDetails = () => {
     setNewTags(nuevo);
   };
 
-  const handleSaver = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleSaver = async (event: React.MouseEvent<HTMLButtonElement>) => {
     setEditable({ ...editable, tags: newTags });
-    editPost(editable);
+    console.log("SOY LA EDICION", editable);
+    await editPost(editable);
     setOpenEdit(!openEdit);
-    window.location.reload();
+    // window.location.reload();
   };
 
   const handleOpenDelete = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -148,6 +149,9 @@ export const PostDetails = () => {
         setEditable(res);
       })
       .catch((err) => setError(true));
+    if (typeof id === "string") {
+      setEditable({ ...editable, id: id });
+    }
   }, []);
 
   useEffect(() => {
@@ -175,12 +179,14 @@ export const PostDetails = () => {
   return (
     <div>
       <Container sx={{ padding: "1em" }}>
-        <StyledDivButtons>
-          <StyledButton onClick={handleOpenEdit}>Edit</StyledButton>
-          <Button variant="contained" onClick={handleOpenDelete}>
-            Delete
-          </Button>
-        </StyledDivButtons>
+        {post.owner._id === usuario._id && (
+          <StyledDivButtons>
+            <StyledButton onClick={handleOpenEdit}>Edit</StyledButton>
+            <Button variant="contained" onClick={handleOpenDelete}>
+              Delete
+            </Button>
+          </StyledDivButtons>
+        )}
 
         <Modal open={openDelete}>
           <StyledBoxModal2>
