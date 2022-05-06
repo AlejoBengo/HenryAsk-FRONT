@@ -32,7 +32,7 @@ import {
 } from "@mui/material";
 import RoundedAccountIcon from "@mui/icons-material/AccountCircleRounded";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { StyledTypography4 } from "../Components/Theoric/StyledComponents";
+import { StyledTypography } from "../Components/Theoric/StyledComponents";
 import {
   StyledPaper,
   StyledButton,
@@ -219,7 +219,7 @@ export const PostDetails = () => {
               Cerrar
             </StyledButtonModal5>
 
-            <StyledTypography4>Are you sure?</StyledTypography4>
+            <StyledTypography>Are you sure?</StyledTypography>
 
             <StyledButtonModal6 onClick={handleDeletePost}>
               Borrar

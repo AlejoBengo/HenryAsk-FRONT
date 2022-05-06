@@ -21,22 +21,14 @@ import {
   StyledTypography,
   StyledTypography2,
   StyledTypography3,
-  StyledTypography4,
   StyledPaper,
   StyledGrid,
   StyledDiv,
   StyledBoxModal,
   StyledBoxModal2,
-  StyledButtonModal,
-  StyledTextFieldModal,
-  StyledTextFieldModal2,
-  StyledTextFieldModal3,
   StyledDivModal2,
-  StyledButtonModal2,
-  StyledButtonModal3,
-  StyledButtonModal4,
-  StyledButtonModal5,
 } from "../Components/Theoric/StyledComponents";
+import { TextFieldsTwoTone } from "@mui/icons-material";
 
 /*--------------------------------------------------------*/
 
@@ -112,49 +104,74 @@ export default function TheoricView() {
       <StyledBox>
         <Modal open={openDelete}>
           <StyledBoxModal2>
-            <StyledButtonModal5 onClick={handleOpenDelete}>
-              Close
-            </StyledButtonModal5>
-            <StyledTypography4>Are you sure?</StyledTypography4>
-            <StyledButtonModal4 onClick={handleDelete}>
-              Delete
-            </StyledButtonModal4>
+            <Button
+              variant="contained"
+              style={{ marginLeft: "43.2vw", marginTop: "-4vh" }}
+              onClick={handleOpenDelete}
+            >
+              Cerrar
+            </Button>
+            <StyledTypography>¿Estás segur@?</StyledTypography>
+            <Button variant="contained" color="error" onClick={handleDelete}>
+              Borrar
+            </Button>
           </StyledBoxModal2>
         </Modal>
         <Modal open={open}>
           <StyledBoxModal>
-            <StyledButtonModal onClick={handleOpen}>Close</StyledButtonModal>
-            <StyledTextFieldModal
+            <Button
+              style={{ marginLeft: "74vw", marginTop: "-0.2vh" }}
+              variant="contained"
+              onClick={handleOpen}
+            >
+              Close
+            </Button>
+            <TextField
+              style={{ width: "45vw", marginLeft: "1vh" }}
               name="title"
               onChange={handleInputChange}
               value={editable.title}
               multiline
             />
             <StyledDivModal2>
-              <StyledTextFieldModal2
+              <TextField
+                style={{ width: "77vw" }}
                 name="content"
                 onChange={handleInputChange}
                 value={editable.content}
                 multiline
               />
             </StyledDivModal2>
-            <StyledTextFieldModal3
+            <TextField
+              style={{ marginLeft: "1vh", width: "25vw" }}
               name="author"
               onChange={handleInputChange}
               value={editable.author}
               multiline
             />
-            <StyledButtonModal2 onClick={handleSaver}>Save</StyledButtonModal2>
+            <Button
+              style={{ marginLeft: "74.85vw", marginBottom: "-0.2vh" }}
+              variant="contained"
+              onClick={handleSaver}
+            >
+              Save
+            </Button>
           </StyledBoxModal>
         </Modal>
         <StyledTypography>{theoric.title}</StyledTypography>
 
         {role > 3 && (
           <StyledBox3>
-            <StyledButtonModal3 onClick={handleOpen}>Edit</StyledButtonModal3>
-            <StyledButtonModal4 onClick={handleOpenDelete}>
-              Delete
-            </StyledButtonModal4>
+            <Button variant="contained" onClick={handleOpen}>
+              Editar
+            </Button>
+            <Button
+              color="error"
+              variant="contained"
+              onClick={handleOpenDelete}
+            >
+              Borrar
+            </Button>
           </StyledBox3>
         )}
       </StyledBox>
@@ -170,6 +187,7 @@ export default function TheoricView() {
           })}
         <LocalOfferIcon />
       </StyledBox2>
+
       {theoric.images.length > 0 &&
         theoric.images.map((img: string) => {
           return <img src={img} alt="" />;
