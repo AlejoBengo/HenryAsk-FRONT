@@ -235,3 +235,38 @@ export const StyledBoxModal2 = styled(Box)(`
   align-items: center;
   justify-content: space-around;
 `);
+
+//--------------style Code Editor
+
+export const GridContainter = styled("div")(`
+display: grid;
+grid-template-columns: 60% 40%;
+grid-gap: 20px;
+padding-left: 2%;
+`)
+
+export const CodeArea = styled("div")(`
+background-color: white;
+border-radius: 1em;
+padding-bottom: 5%;
+`)
+
+export const CodeAreaHeader = styled("div")(`
+display: grid;
+grid-template-columns: 50% 30%;
+text-align: center;
+`)
+
+export const CodeButton = styled("button")(`
+background-color: #4CAF50; /* Green */
+border: none;
+color: white;
+padding: 15px 32px;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+font-size: 16px;
+margin-top: 1%;
+margin-bottom: 1%;
+`)
+
