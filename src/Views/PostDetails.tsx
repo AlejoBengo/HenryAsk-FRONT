@@ -137,7 +137,7 @@ export const PostDetails = () => {
   const handleDeletePost = (event: React.MouseEvent<HTMLButtonElement>) => {
     if (typeof id === "string") {
       deletePost(id);
-      handleClickOpen()
+      handleClickOpen();
       setOpenDelete(!openDelete);
     }
   };
@@ -172,29 +172,31 @@ export const PostDetails = () => {
     }
   }, [selectedAnswer]);
 
-
-  //dialog delete complete 
+  //dialog delete complete
   const [openDialog, setOpenDialog] = React.useState(false);
   const handleClickOpen = () => {
     setOpenDialog(true);
-    console.log("ENTRO PAPA")
+    console.log("ENTRO PAPA");
   };
 
   const handleClose = () => {
     setOpen(false);
     navigate("/Forum");
-  }; 
+  };
 
-  
   // ------------------//
-
-
 
   if (error) return <div>Error</div>;
   return (
-    <div>
+    <Box>
       <Container sx={{ padding: "1em" }}>
-      <DialogSuccess openDialog={openDialog} handleClose={handleClose} title1="Discusion eliminada con exito!" subtitle1="Su posteo fue eliminado con exito" buttonText="Volver al foro"/>
+        <DialogSuccess
+          openDialog={openDialog}
+          handleClose={handleClose}
+          title1="Discusion eliminada con exito!"
+          subtitle1="Su posteo fue eliminado con exito"
+          buttonText="Volver al foro"
+        />
         <StyledDivButtons>
           <StyledButton onClick={handleOpenEdit}>Edit</StyledButton>
           <Button variant="contained" onClick={handleOpenDelete}>
@@ -266,6 +268,7 @@ export const PostDetails = () => {
             variant="h3"
             sx={{
               textDecoration: "underline 2px solid ",
+              textDecorationColor: "primary.main",
             }}
             align="left"
             gutterBottom
@@ -317,7 +320,7 @@ export const PostDetails = () => {
         {post.open ? <CreateAnswer id={id} /> : null}
       </Container>
       <Comments id={selectedAnswer} toggleOpen={toggleOpen} open={open} />
-    </div>
+    </Box>
   );
 };
 export default PostDetails;

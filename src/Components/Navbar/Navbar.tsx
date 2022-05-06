@@ -9,6 +9,7 @@ import { useAppSelector } from "../../app/hooks";
 import { LoginButton } from "../ButtonsOutLogin/LoginButton/LoginButton";
 import { LogoutButton } from "../ButtonsOutLogin/LogoutButton/LogoutButton";
 import LateralMenu from "./LateralMenu/LateralMenu";
+import DarkModeButton from "../ThemeModeButton/ThemeModeButton";
 /*-----------IMPORT MUI & CSS-----------*/
 import {
   AppBar,
@@ -71,9 +72,12 @@ const Navbar = () => {
   };
 
   return (
-    <AppBar position="sticky" sx={{ maxHeight: "5rem", minHeight: "5rem", backgroundColor: "#000" }}>
+    <AppBar
+      position="sticky"
+      sx={{ maxHeight: "5rem", minHeight: "5rem", backgroundColor: "#000" }}
+    >
       <Container maxWidth={false}>
-        <Toolbar sx={{height:"5rem"}} disableGutters>
+        <Toolbar sx={{ height: "5rem" }} disableGutters>
           <Box
             display="flex"
             alignItems="center"
@@ -84,9 +88,14 @@ const Navbar = () => {
           >
             <LateralMenu user={DBUser} />
             <Link to="/">
-              <Img src={logo} alt="no responde img" sx={{marginTop:".3em"}} />
+              <Img
+                src={logo}
+                alt="no responde img"
+                sx={{ marginTop: ".3em" }}
+              />
             </Link>
           </Box>
+          <DarkModeButton />
 
           <Box
             sx={{
@@ -95,19 +104,23 @@ const Navbar = () => {
               alignItems: "center",
             }}
           >
-           <Box
-            display="flex"
-            alignItems="center"
-            component="div"
-            width="50%"
-            height="8vh"
-            sx={{ mr: 2, display: { xs: "flex", md: "none" } }}
-          >
-            <LateralMenu user={DBUser} />
-            <Link to="/">
-              <Img src={logo} alt="no responde img" sx={{marginTop:".2em"}} />
-            </Link>
-          </Box>
+            <Box
+              display="flex"
+              alignItems="center"
+              component="div"
+              width="50%"
+              height="8vh"
+              sx={{ mr: 2, display: { xs: "flex", md: "none" } }}
+            >
+              <LateralMenu user={DBUser} />
+              <Link to="/">
+                <Img
+                  src={logo}
+                  alt="no responde img"
+                  sx={{ marginTop: ".2em" }}
+                />
+              </Link>
+            </Box>
 
             <Menu
               id="menu-appbar"
@@ -149,10 +162,12 @@ const Navbar = () => {
             }}
           >
             <Button
-             onClick={handleCloseNavMenu}
-             sx={{ my: 2, color: "white", display: "block" }}>
-               <Link to="/Ask" className={css.StyledLink}>
-                 Crear nueva discusión</Link>
+              onClick={handleCloseNavMenu}
+              sx={{ my: 2, color: "white", display: "block" }}
+            >
+              <Link to="/Ask" className={css.StyledLink}>
+                Crear nueva discusión
+              </Link>
             </Button>
             <Button
               onClick={handleCloseNavMenu}
@@ -183,9 +198,11 @@ const Navbar = () => {
                   <Avatar
                     alt={DBUser.first_name} //if the image can't be loaded then will show the first alt's letter (user's firstname)
                     src={
-                      DBUser.profile_picture.length>0
+                      DBUser.profile_picture.length > 0
                         ? DBUser.profile_picture
-                        : DBUser.avatar ? DBUser.avatar : "/static/images/avatar/2.jpg"
+                        : DBUser.avatar
+                        ? DBUser.avatar
+                        : "/static/images/avatar/2.jpg"
                     }
                   />
                 </IconButton>
