@@ -4,6 +4,7 @@ import {
   Typography,
   Divider,
   Button,
+  Link,
   Box,
   Avatar,
   Skeleton,
@@ -12,7 +13,6 @@ import {
   answerTemplate,
   fetchAnswerById,
 } from "../../app/Utils/answerUtilities";
-import { Link } from "react-router-dom";
 import { Owner, Answer, Comment } from "../../app/interface";
 import { ownerTemplate } from "../../app/Utils/userUtilities";
 import { getCommentsByAnswerID } from "../../app/Utils/commentUtilities";
@@ -90,22 +90,45 @@ export const Comments = ({ id, toggleOpen, open }: Props) => {
           }}
         >
           <Link
-            to={`/Profile/${answer.owner._id}`}
+            href={`/Profile/${answer.owner._id}`}
             style={{ marginRight: "1em" }}
           >
-            {!loading.answer ? (
-              <Avatar src={answer.owner.profile_picture.length>0? answer.owner.profile_picture : answer.owner.avatar.length>0? answer.owner.avatar : answer.owner.profile_picture} />
-            ) : (
-              <Skeleton
-                variant="circular"
-                sx={{
-                  bgcolor: "info.light",
-                  width: "40px",
-                  height: "40px",
-                }}
-                animation="pulse"
-              />
-            )}
+            <Box
+              display="flex"
+              flexDirection="column"
+              justifyContent="center"
+              alignItems="center"
+              sx={{
+                width: 100,
+              }}
+            >
+              {!loading.answer ? (
+                <Avatar
+                  src={
+                    answer.owner.profile_picture.length > 0
+                      ? answer.owner.profile_picture
+                      : answer.owner.avatar.length > 0
+                      ? answer.owner.avatar
+                      : answer.owner.profile_picture
+                  }
+                />
+              ) : (
+                <Skeleton
+                  variant="circular"
+                  sx={{
+                    bgcolor: "info.light",
+                    width: "40px",
+                    height: "40px",
+                  }}
+                  animation="pulse"
+                />
+              )}
+              {!loading.answer && (
+                <Typography variant="caption">
+                  {answer.owner.user_name}
+                </Typography>
+              )}
+            </Box>
           </Link>
           {!loading.answer ? (
             <Typography variant="body1">{answer.content}</Typography>
@@ -141,11 +164,33 @@ export const Comments = ({ id, toggleOpen, open }: Props) => {
                   }}
                 >
                   <Link
-                    to={`/Profile/${comment.owner._id}`}
+                    href={`/Profile/${comment.owner._id}`}
                     style={{ marginRight: "1em" }}
                   >
-                    <Avatar src={comment.owner.profile_picture.length>0? comment.owner.profile_picture : comment.owner.avatar.length>0? comment.owner.avatar : comment.owner.profile_picture  } />
+                    <Box
+                      display="flex"
+                      flexDirection="column"
+                      justifyContent="center"
+                      alignItems="center"
+                      sx={{
+                        width: 100,
+                      }}
+                    >
+                      <Avatar
+                        src={
+                          comment.owner.profile_picture.length > 0
+                            ? comment.owner.profile_picture
+                            : comment.owner.avatar.length > 0
+                            ? comment.owner.avatar
+                            : comment.owner.profile_picture
+                        }
+                      />
+                      <Typography variant="caption">
+                        {comment.owner.user_name}
+                      </Typography>
+                    </Box>
                   </Link>
+
                   <Typography variant="body1">{comment.content}</Typography>
                 </Box>{" "}
                 {index < comments.length - 1 && <Divider />}
