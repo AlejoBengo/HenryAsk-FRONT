@@ -165,14 +165,24 @@ export default function Profile() {
           >
             {userProfile.github !== "" && (
               <Link href={userProfile.github} rel="noopener" target="_blank">
-                <Avatar sx={{ bgcolor: "info.main" }}>
+                <Avatar
+                  sx={{
+                    bgcolor: "info.main",
+                    color: "info.contrastText",
+                  }}
+                >
                   <GitHubIcon />
                 </Avatar>
               </Link>
             )}
             {userProfile.linkedin !== "" && (
               <Link href={userProfile.linkedin} rel="noopener" target="_blank">
-                <Avatar sx={{ bgcolor: "info.main" }}>
+                <Avatar
+                  sx={{
+                    bgcolor: "info.main",
+                    color: "info.contrastText",
+                  }}
+                >
                   <LinkedInIcon />
                 </Avatar>
               </Link>
