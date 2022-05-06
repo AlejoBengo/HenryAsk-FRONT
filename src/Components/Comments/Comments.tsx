@@ -32,7 +32,8 @@ export const Comments = ({ id, toggleOpen, open }: Props) => {
     answer: true,
     comments: true,
   });
-
+console.log("ANSWE", comments)
+ 
   useEffect(() => {
     fetchAnswerById(id)
       .then((res) => {
@@ -62,6 +63,7 @@ export const Comments = ({ id, toggleOpen, open }: Props) => {
     "loading comments:",
     loading.comments
   );
+
   return (
     <Drawer
       open={open}
@@ -98,7 +100,7 @@ export const Comments = ({ id, toggleOpen, open }: Props) => {
             style={{ marginRight: "1em" }}
           >
             {!loading.answer ? (
-              <Avatar src={answer.owner.profile_picture} />
+              <Avatar src={answer.owner.profile_picture.length>0? answer.owner.profile_picture : answer.owner.avatar.length>0? answer.owner.avatar : answer.owner.profile_picture} />
             ) : (
               <Skeleton
                 variant="circular"
@@ -148,7 +150,7 @@ export const Comments = ({ id, toggleOpen, open }: Props) => {
                     to={`/Profile/${comment.owner._id}`}
                     style={{ marginRight: "1em" }}
                   >
-                    <Avatar src={comment.owner.profile_picture} />
+                    <Avatar src={comment.owner.profile_picture.length>0? comment.owner.profile_picture : comment.owner.avatar.length>0? comment.owner.avatar : comment.owner.profile_picture  } />
                   </Link>
                   <Typography variant="body1">{comment.content}</Typography>
                 </Box>{" "}

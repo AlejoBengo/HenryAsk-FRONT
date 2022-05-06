@@ -34,7 +34,7 @@ export const UserShort = ({ user }: Props) => {
             position: "absolute",
           },
         }}
-        src={user?.profile_picture}
+        src={user?.profile_picture.length>0? user.profile_picture : user.avatar.length>0? user.avatar : user.profile_picture}
       />
       <MUILink href={`/Profile/${user._id}`}>{user?.user_name}</MUILink>
     </Typography>

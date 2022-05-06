@@ -4,6 +4,7 @@ export const ownerTemplate: Owner = {
   _id: "",
   user_name: "",
   profile_picture: "",
+  avatar:"",
   role: 0,
 };
 export const userTemplate: User = {
@@ -28,6 +29,7 @@ export const userTemplate: User = {
   excersices: [],
   github: "",
   linkedin: "",
+  avatar:""
 };
 export const getUserById = async (id: string) => {
   try {

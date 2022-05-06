@@ -29,7 +29,8 @@ export const getPostById = async (id: string | undefined) => {
 export const postNewPost = createAsyncThunk(
   "post/fetchPostToSave",
   async (post: Posts) => {
-    await axios.post(`/post`, post);
+    let info = await axios.post(`/post`, post);
+    return info.data;
   }
 );
 
@@ -40,6 +41,22 @@ export const editAnswerChildInPost = async (id: string | undefined) => {
   } catch (error) {
     console.log(error);
     return postTemplate;
+  }
+};
+
+export const editPost = async (obj: any) => {
+  try {
+    await axios.put(`/post/`, obj);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const deletePost = async (id: string) => {
+  try {
+    await axios.delete(`/post/?id=${id}`);
+  } catch (error) {
+    console.log(error);
   }
 };
 export const closePost = async (id: string | undefined) => {

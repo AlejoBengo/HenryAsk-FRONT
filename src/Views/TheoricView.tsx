@@ -107,99 +107,73 @@ export default function TheoricView() {
     }
   };
 
-  if (role === 4 || role === 5) {
-    return (
-      <StyledGrid>
-        <StyledBox>
-          <Modal open={openDelete}>
-            <StyledBoxModal2>
-              <StyledButtonModal5 onClick={handleOpenDelete}>
-                Close
-              </StyledButtonModal5>
-              <StyledTypography4>Are you sure?</StyledTypography4>
-              <StyledButtonModal4 onClick={handleDelete}>
-                Delete
-              </StyledButtonModal4>
-            </StyledBoxModal2>
-          </Modal>
-          <Modal open={open}>
-            <StyledBoxModal>
-              <StyledButtonModal onClick={handleOpen}>Close</StyledButtonModal>
-              <StyledTextFieldModal
-                name="title"
+  return (
+    <StyledGrid>
+      <StyledBox>
+        <Modal open={openDelete}>
+          <StyledBoxModal2>
+            <StyledButtonModal5 onClick={handleOpenDelete}>
+              Close
+            </StyledButtonModal5>
+            <StyledTypography4>Are you sure?</StyledTypography4>
+            <StyledButtonModal4 onClick={handleDelete}>
+              Delete
+            </StyledButtonModal4>
+          </StyledBoxModal2>
+        </Modal>
+        <Modal open={open}>
+          <StyledBoxModal>
+            <StyledButtonModal onClick={handleOpen}>Close</StyledButtonModal>
+            <StyledTextFieldModal
+              name="title"
+              onChange={handleInputChange}
+              value={editable.title}
+              multiline
+            />
+            <StyledDivModal2>
+              <StyledTextFieldModal2
+                name="content"
                 onChange={handleInputChange}
-                value={editable.title}
+                value={editable.content}
                 multiline
               />
-              <StyledDivModal2>
-                <StyledTextFieldModal2
-                  name="content"
-                  onChange={handleInputChange}
-                  value={editable.content}
-                  multiline
-                />
-              </StyledDivModal2>
-              <StyledTextFieldModal3
-                name="author"
-                onChange={handleInputChange}
-                value={editable.author}
-                multiline
-              />
-              <StyledButtonModal2 onClick={handleSaver}>
-                Save
-              </StyledButtonModal2>
-            </StyledBoxModal>
-          </Modal>
-          <StyledTypography>{theoric.title}</StyledTypography>
+            </StyledDivModal2>
+            <StyledTextFieldModal3
+              name="author"
+              onChange={handleInputChange}
+              value={editable.author}
+              multiline
+            />
+            <StyledButtonModal2 onClick={handleSaver}>Save</StyledButtonModal2>
+          </StyledBoxModal>
+        </Modal>
+        <StyledTypography>{theoric.title}</StyledTypography>
+
+        {role > 3 && (
           <StyledBox3>
             <StyledButtonModal3 onClick={handleOpen}>Edit</StyledButtonModal3>
             <StyledButtonModal4 onClick={handleOpenDelete}>
               Delete
             </StyledButtonModal4>
           </StyledBox3>
-        </StyledBox>
-        <StyledTypography2>Por: {theoric.author}</StyledTypography2>
-        <StyledDiv>
-          <StyledPaper elevation={8}>{theoric.content}</StyledPaper>
-        </StyledDiv>
+        )}
+      </StyledBox>
+      <StyledTypography2>Por: {theoric.author}</StyledTypography2>
+      <StyledDiv>
+        <StyledPaper elevation={8}>{theoric.content}</StyledPaper>
+      </StyledDiv>
 
-        <StyledBox2>
-          {theoric.comments.length > 0 &&
-            theoric.comments.map((com: string) => {
-              return <StyledTypography3> {com} </StyledTypography3>;
-            })}
-          <LocalOfferIcon />
-        </StyledBox2>
-        {theoric.images.length > 0 &&
-          theoric.images.map((img: string) => {
-            return <img src={img} alt="" />;
+      <StyledBox2>
+        {theoric.comments.length > 0 &&
+          theoric.comments.map((com: string) => {
+            return <StyledTypography3> {com} </StyledTypography3>;
           })}
-      </StyledGrid>
-    );
-  } else {
-    return (
-      <StyledGrid>
-        <StyledBox>
-          <StyledTypography>{theoric.title}</StyledTypography>
-        </StyledBox>
-        <StyledTypography2>Por: {theoric.author}</StyledTypography2>
-        <StyledDiv>
-          <StyledPaper elevation={8}>{theoric.content}</StyledPaper>
-        </StyledDiv>
-
-        <StyledBox2>
-          {theoric.comments.length > 0 &&
-            theoric.comments.map((com: string) => {
-              return <StyledTypography3> {com} </StyledTypography3>;
-            })}
-          <LocalOfferIcon />
-        </StyledBox2>
-
-        {theoric.images.length > 0 &&
-          theoric.images.map((img: string) => {
-            return <img src={img} alt="" />;
-          })}
-      </StyledGrid>
-    );
-  }
+        <LocalOfferIcon />
+      </StyledBox2>
+      {theoric.images.length > 0 &&
+        theoric.images.map((img: string) => {
+          return <img src={img} alt="" />;
+        })}
+    </StyledGrid>
+  );
 }
