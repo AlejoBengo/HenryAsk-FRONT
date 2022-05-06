@@ -39,40 +39,32 @@ export const StyledPaper = styled(Paper)`
   margin-top: 0.5vh;
 `;
 export const StyledTextField = styled(TextField)`
-  margin: 1em;
   width: 100%;
   text-align: center;
-  padding-right: 16px;
 `;
-
-
 
 // --------------> STYLED EDIT PROFILE
 
 export const BoxStyledEditProfile = styled(Box)`
-position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: auto;
-    height:auto;
-    background-color: black;
-    border: 2px solid black;
-    box-shadow: 1px 1px 20px black;
-    padding: 4px;
-    color:white
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: auto;
+  height: auto;
+  background-color: black;
+  border: 2px solid black;
+  box-shadow: 1px 1px 20px black;
+  padding: 4px;
+  color: white;
 `;
 
 export const Img = styled("img")`
-  width:100%;
-  height:auto;
-  object-fit:cover;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
 `;
 //-----------------------//
-
-
-
-
 
 export const StyledButton = styled("button")(`
     width: 7vw;

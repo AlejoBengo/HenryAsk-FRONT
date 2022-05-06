@@ -2,6 +2,7 @@ import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
 import userReducer from "./Reducers/userSlice";
 import userProfile from "./Reducers/userProfileSlice"
 import getPosts from './Reducers/getPostsForum'
+import allUsers from './Reducers/allUserSlice'
 import busquedaUserName from './Reducers/getUserByUserName';
 
 export const store = configureStore({
@@ -10,6 +11,7 @@ export const store = configureStore({
     profile:userProfile,
     getAllPosts:getPosts,
     searchUserName:busquedaUserName,
+    allUser:allUsers,
   },
 });
 

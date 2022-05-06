@@ -3,11 +3,13 @@
 import React, { useEffect, useState } from "react";
 import { useAppSelector, useAppDispatch } from "../../../app/hooks";
 import TheoricList from "../../Theoric/TheoricList";
+import NoteAddIcon from '@mui/icons-material/NoteAdd';
 import LateralItem from "./LateralItem";
 import { Link } from "react-router-dom";
 import { remoteUpdateUser } from "../../../app/Reducers/userSlice";
 import { User } from "../../../app/interface";
 import AcordeonMenu from "./AcordeonMenu";
+import { fetchAllUsers } from "../../../app/Utils/allUsers";
 /*-----------IMPORT MUI & CSS-----------*/
 import {
   Stack,
@@ -37,12 +39,14 @@ import { LateralItemStyled, LinkDom } from "../../Style/StyledComponents";
 
 /*--------------------------------------------------------*/
 
-/*  <Stack>
-      <TheoricList />
-    </Stack> */
 
 export default function LateralMenu(props: any) {
   const userLog = useAppSelector((state) => state.user.data);
+  const all = useAppSelector((state) => state.allUser.allUsers);
+  const dispatch = useAppDispatch()
+  useEffect(()=>{
+    dispatch(fetchAllUsers())
+  },[])
 
   const [state, setState] = React.useState({
     left: false,
@@ -108,6 +112,9 @@ export default function LateralMenu(props: any) {
               // icon={<StarsIcon />}
             />
           </LinkDom>
+        </LinkDom>
+        <LinkDom onClick={toggleDrawer(anchor, false)} to="/Ask">
+          <LateralItemStyled text="Crear nueva Discusión" icon={<NoteAddIcon />} />
         </LinkDom>
       </List>
       <Divider />

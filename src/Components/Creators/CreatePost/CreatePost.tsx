@@ -16,6 +16,7 @@ import {
   StyledBox2,
   StyledButton,
 } from "./StyledComponents";
+import { useNavigate } from "react-router-dom";
 /*--------------------------------------------------------*/
 
 const validator = (tags: Array<string>) => {
@@ -33,6 +34,7 @@ const validator = (tags: Array<string>) => {
 const PostForm = () => {
   const usuario = useAppSelector((state) => state.user.data);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const [post, setPost] = React.useState<Posts>(postTemplate);
 
@@ -110,15 +112,15 @@ const PostForm = () => {
     if (error.errorSubmit.length > 0) {
       setError({ ...error, errorSubmit: "" });
     }
-    console.log(post);
     if (
       error.errorTag.length === 0 &&
       post.description.length > 0 &&
       post.question.length > 0 &&
       post.tags.length > 0
     ) {
+     
       dispatch(postNewPost(post))
-        .then(() => console.log("completado"))
+        .then((response) =>   navigate(`/post/${response.payload._id}`))
         .catch((err) => console.log(err));
       setPost(postTemplate);
     } else {
@@ -179,7 +181,7 @@ const PostForm = () => {
           })}
       </StyledBox>
 
-      <StyledButton onClick={handleSubmit}>Submit</StyledButton>
+      <StyledButton onClick={handleSubmit}>Crear Discusion</StyledButton>
       {error.errorSubmit.length > 0 && (
         <StyledAlert severity="error">{error.errorSubmit}</StyledAlert>
       )}

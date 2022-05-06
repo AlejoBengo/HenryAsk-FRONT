@@ -9,7 +9,7 @@ import { BoxStyledEditProfile } from '../../Style/StyledComponents';
 
 export default function ModalEditProfile(props:any) {
 
-  const { handleClose , open , userInfo , setUserInfo , avatar , setAvatar} = props
+  let { handleClose , open , userInfo , setUserInfo , avatar , setAvatar} = props
   return (
     <div>
       <Modal

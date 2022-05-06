@@ -1,9 +1,10 @@
 import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 import { Theoric } from "../interface";
 import axios from "axios";
+import { ownerTemplate } from "../Utils/userUtilities";
 
 export const theoricTemplate: Theoric = {
-  owner: "",
+  owner: ownerTemplate,
   title: "",
   content: "",
   author: "",

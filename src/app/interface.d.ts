@@ -43,13 +43,14 @@ export interface Answer {
 }
 
 export interface Theoric {
-  owner: string;
+  owner: Owner;
   title: string;
   content: string;
   author: string;
   images: Array[string];
   comments: Array[string];
 }
+
 export interface Comment {
   _id: string;
   owner: Owner;
@@ -79,8 +80,9 @@ export enum Tags {
 }
 
 export interface Column {
-  id: "name" | "question" | "description" | "tags";
+  id: "name" | "question" | "description" | "tags" | "open";
   label: string;
+  maxWidth?:number | string;
   minWidth?: number;
   align?: "right" | "center";
   format?: (value: number) => string;

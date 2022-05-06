@@ -49,6 +49,7 @@ import {
   StyledButtonModal6,
 } from "../Components/Style/StyledComponents";
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
+import DialogSuccess from "../Components/Dialog/DialogSuccess";
 
 /*--------------------------------------------------------*/
 
@@ -136,8 +137,8 @@ export const PostDetails = () => {
   const handleDeletePost = (event: React.MouseEvent<HTMLButtonElement>) => {
     if (typeof id === "string") {
       deletePost(id);
+      handleClickOpen()
       setOpenDelete(!openDelete);
-      navigate("/");
     }
   };
 
@@ -171,10 +172,29 @@ export const PostDetails = () => {
     }
   }, [selectedAnswer]);
 
+
+  //dialog delete complete 
+  const [openDialog, setOpenDialog] = React.useState(false);
+  const handleClickOpen = () => {
+    setOpenDialog(true);
+    console.log("ENTRO PAPA")
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+    navigate("/Forum");
+  }; 
+
+  
+  // ------------------//
+
+
+
   if (error) return <div>Error</div>;
   return (
     <div>
       <Container sx={{ padding: "1em" }}>
+      <DialogSuccess openDialog={openDialog} handleClose={handleClose} title1="Discusion eliminada con exito!" subtitle1="Su posteo fue eliminado con exito" buttonText="Volver al foro"/>
         <StyledDivButtons>
           <StyledButton onClick={handleOpenEdit}>Edit</StyledButton>
           <Button variant="contained" onClick={handleOpenDelete}>

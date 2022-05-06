@@ -28,17 +28,31 @@ export default function TheoricList() {
     setOpen(!open);
   };
   return (
-    <List sx={{width:"100%"}}>
-      <StyledListItemButton onClick={handleOpen} sx={{width:"100%" , overflow:"hidden"}}>
-        
-          TEORICO {open ? <ExpandLess sx={{width:"100%"}}/> : <ExpandMore sx={{width:"100%"}} />}
-
+    <List sx={{ width: "100%" }}>
+      <StyledListItemButton
+        onClick={handleOpen}
+        sx={{ width: "100%", overflow: "hidden" }}
+      >
+        TEORICO{" "}
+        {open ? (
+          <ExpandLess sx={{ width: "100%" }} />
+        ) : (
+          <ExpandMore sx={{ width: "100%" }} />
+        )}
       </StyledListItemButton>
       {allTheorics.map((teorico: any) => {
         return (
-          <Collapse in={open} timeout="auto" unmountOnExit sx={{width:"100%"}}>
-            <Link to={`/b/${teorico._id}`} style={{ textDecoration: "none" }}>
-              <List component="div" disablePadding sx={{width:"100%"}}>
+          <Collapse
+            in={open}
+            timeout="auto"
+            unmountOnExit
+            sx={{ width: "100%" }}
+          >
+            <Link
+              to={`/Theoric/${teorico._id}`}
+              style={{ textDecoration: "none" }}
+            >
+              <List component="div" disablePadding sx={{ width: "100%" }}>
                 <StyledListItemButton2>{teorico.title}</StyledListItemButton2>
               </List>
             </Link>
@@ -46,6 +60,5 @@ export default function TheoricList() {
         );
       })}
     </List>
-    
   );
 }
