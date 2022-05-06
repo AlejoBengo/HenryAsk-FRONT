@@ -1,6 +1,6 @@
 /*--------------------------------------------------------*/
 /*-----------IMPORT UTILITIES-----------*/
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Link, Navigate } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
@@ -8,6 +8,7 @@ import { useAppSelector } from "../../app/hooks";
 /*-----------IMPORT COMPONENTS-----------*/
 import { LoginButton } from "../ButtonsOutLogin/LoginButton/LoginButton";
 import { LogoutButton } from "../ButtonsOutLogin/LogoutButton/LogoutButton";
+import LateralMenu from "./LateralMenu/LateralMenu";
 /*-----------IMPORT MUI & CSS-----------*/
 import {
   AppBar,
@@ -33,6 +34,14 @@ const settings = ["Perfil", "Cerrar Sesion"];
 const Navbar = () => {
   const navigate = useNavigate();
   const DBUser = useAppSelector((state) => state.user.data);
+  const [pivote, setPivote] = useState(false); // para TA y ADM moverse en livertad por forum learning y forum prep
+
+  useEffect(() => {
+    if (DBUser.role === 3 || DBUser.role === 5) {
+      setPivote(true);
+    }
+  }, []);
+
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
@@ -62,16 +71,21 @@ const Navbar = () => {
   };
 
   return (
-    <AppBar position="sticky" sx={{ backgroundColor: "#000" }}>
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
+    <AppBar position="sticky" sx={{ maxHeight: "5rem", minHeight: "5rem", backgroundColor: "#000" }}>
+      <Container maxWidth={false}>
+        <Toolbar sx={{height:"5rem"}} disableGutters>
           <Box
+            display="flex"
+            alignItems="center"
             component="div"
             width="15%"
-            height="5vh"
+            height="8vh"
             sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
           >
-            <Img src={logo} alt="no responde img" />
+            <LateralMenu user={DBUser} />
+            <Link to="/">
+              <Img src={logo} alt="no responde img" sx={{marginTop:".3em"}} />
+            </Link>
           </Box>
 
           <Box
@@ -81,26 +95,19 @@ const Navbar = () => {
               alignItems: "center",
             }}
           >
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
-              <DehazeIcon />
-            </IconButton>
-
-            <Box
-              component="div"
-              width="20%"
-              height="5vh"
-              marginLeft="1rem"
-              sx={{ mr: 2, display: { xs: "flex", md: "none" } }}
-            >
-              <Img src={logo} alt="no responde img" />
-            </Box>
+           <Box
+            display="flex"
+            alignItems="center"
+            component="div"
+            width="50%"
+            height="8vh"
+            sx={{ mr: 2, display: { xs: "flex", md: "none" } }}
+          >
+            <LateralMenu user={DBUser} />
+            <Link to="/">
+              <Img src={logo} alt="no responde img" sx={{marginTop:".2em"}} />
+            </Link>
+          </Box>
 
             <Menu
               id="menu-appbar"
@@ -142,6 +149,12 @@ const Navbar = () => {
             }}
           >
             <Button
+             onClick={handleCloseNavMenu}
+             sx={{ my: 2, color: "white", display: "block" }}>
+               <Link to="/Ask" className={css.StyledLink}>
+                 Crear nueva discusión</Link>
+            </Button>
+            <Button
               onClick={handleCloseNavMenu}
               sx={{ my: 2, color: "white", display: "block" }}
             >
@@ -170,9 +183,9 @@ const Navbar = () => {
                   <Avatar
                     alt={DBUser.first_name} //if the image can't be loaded then will show the first alt's letter (user's firstname)
                     src={
-                      DBUser.profile_picture
+                      DBUser.profile_picture.length>0
                         ? DBUser.profile_picture
-                        : "/static/images/avatar/2.jpg"
+                        : DBUser.avatar ? DBUser.avatar : "/static/images/avatar/2.jpg"
                     }
                   />
                 </IconButton>

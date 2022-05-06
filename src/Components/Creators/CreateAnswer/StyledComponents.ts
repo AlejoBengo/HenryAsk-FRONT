@@ -19,6 +19,7 @@ export const StyledTypography = styled(Typography)`
 export const StyledBox = styled(Box)`
   display: flex;
   justify-content: space-evenly;
+  align-items: center;
 `;
 
 export const StyledButton = styled(Button)`
@@ -26,7 +27,6 @@ export const StyledButton = styled(Button)`
   height: 6vh;
   // background-color: yellow;
   // color: black;
-  margin-top: 3.5vh;
 `;
 
 export const StyledTextField = styled(TextField)`
@@ -40,6 +40,6 @@ export const StyledPaper = styled(Paper)`
   display: flex;
   justify-content: center;
   flex-direction: column;
-  padding: 1em 1em 1em 1em;
+  padding: 1em;
   margin-top: 1em;
 `;

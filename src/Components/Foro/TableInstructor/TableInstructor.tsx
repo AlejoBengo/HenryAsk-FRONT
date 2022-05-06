@@ -1,6 +1,7 @@
 import * as React from "react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { LinkDom } from "../../Style/StyledComponents";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -23,18 +24,24 @@ export default function TableInstructor(props: any) {
   const posts = props.post;
 
   const columns: readonly Column[] = [
-    { id: "name", label: renderHeadTable, minWidth: 30, align: "center" },
-    { id: "question", label: "Asunto", minWidth: 150, align: "center" },
+    {
+      id: "open",
+      label: "Tags",
+      minWidth: 90,
+      align: "center",
+    },
+    { id: "name", label: renderHeadTable, maxWidth: "4em", align: "center" },
+    { id: "question", label: "Asunto", minWidth: 220, maxWidth:220 , align: "center" },
     {
       id: "description",
       label: "Descripcion",
-      minWidth: 170,
+      minWidth: 320,
       align: "center",
     },
     {
       id: "tags",
       label: "Tags",
-      minWidth: 100,
+      minWidth: 90,
       align: "center",
     },
   ];
@@ -59,57 +66,144 @@ export default function TableInstructor(props: any) {
         <Table stickyHeader aria-label="sticky table">
           <TableHead sx={{ width: "100%" }}>
             <TableRow>
-              {columns.map((column) => (
-                <TableCell
-                  key={column.id}
-                  align={column.align}
-                  sx={{ width: column.minWidth }}
-                >
-                  {column.label}
-                </TableCell>
-              ))}
+            
+              {columns.map((column) => {
+
+                  if(column.id==="open"){
+                    return(
+                      <TableCell
+                      key="hola"
+                      sx={{ width: "5px" , padding:"0px", margin:"0px"}}
+                      >
+                      </TableCell>
+
+                    )
+                  }
+
+                if(column.id==="name"){
+                  return(
+                    <TableCell
+                    key={column.id}
+                    align={column.align}
+                    sx={{ width: column.maxWidth }}
+                    >
+                    {column.label}
+                    </TableCell>
+  
+                  )
+                }
+                
+                if(column.id==="question"){
+
+                  return(
+                    <TableCell
+                    key={column.id}
+                    align={column.align}
+                    sx={{ width: column.minWidth , maxWidth:column.maxWidth}}
+                    >
+                    {column.label}
+                    </TableCell>
+  
+                  )
+                }
+                if(column.id==="description"){
+
+                  return(
+                    <TableCell
+                    key={column.id}
+                    align={column.align}
+                    sx={{ width: column.minWidth , maxWidth:column.maxWidth}}
+                    >
+                    {column.label}
+                    </TableCell>
+  
+                  )
+                }
+                if(column.id==="tags"){
+                  return(
+                    <TableCell
+                    key={column.id}
+                    align={column.align}
+                    sx={{ width: column.minWidth , maxWidth:column.maxWidth}}
+                    >
+                    {column.label}
+                    </TableCell>
+                  )
+                }
+              }
+               
+              )}
             </TableRow>
           </TableHead>
-
+{/* Desde aca empieza el body de la table */}
           <TableBody sx={{ width: "100%" }}>
             {posts
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row: any) => {
-                {
-                  console.log(row);
-                }
+                
                 return (
                   <TableRow
                     hover
                     role="checkbox"
                     tabIndex={-1}
                     key={`${row.question + Math.random()}`}
-                    sx={{ maxWidth: "100%" }}
+                    sx={{ maxWidth: "100%", height:"5em", maxHeigth:"5em" }}
                   >
+                    
                     {columns.map((column) => {
                       const value = row[column.id];
+                      
+                      if(column.id==="open"){
+                        return(
+                          <TableCell
+                          key="hola"
+                          sx={{ width: "5px" , padding:"0px", margin:"0px", backgroundColor:row.open?"rgb(2, 136, 209)":"rgb(56, 142, 60)",}}
+                          >
+                          </TableCell>
+    
+                        )
+                      }
+                      
+
                       if (column.id === "name") {
                         return (
                           <TableCell align={column.align}>
                             <Box
                               display="flex"
                               alignItems="center"
-                              sx={{ flexDirection: "column" }}
+                              sx={{ flexDirection: "column", maxWidth:"200px"}}
                             >
                               <Avatar
                                 alt={row.owner.user_name} //if the image can't be loaded then will show the first alt's letter (user's firstname)
-                                src={row.owner.profile_picture}
+                                src={row.owner.profile_picture.length>0? row.owner.profile_picture : row.owner.avatar.length>0? row.owner.avatar : row.owner.profile_picture }
                               />
                               <Typography variant="subtitle2">
-                                <Link to={`/Profile/${row.owner._id}`}>{row.owner.user_name}</Link>
+                                <LinkDom to={`/Profile/${row.owner._id}`}>{row.owner.user_name}</LinkDom>
                               </Typography>
                             </Box>
                           </TableCell>
                         );
                       }
                       if (column.id === "question") {
-                        console.log("QUESTION",row[column.id])
-                        console.log("ID",row._id)
+                        return (
+                          <TableCell
+                          key={column.id}
+                          align={column.align}
+                          sx={{
+                            maxWidth: "20vw",
+                            minWidth: "100px",
+                            maxHeight: "14.5vh",
+                            fontWeight:"bold"
+                          }}
+                        >
+                          <LinkDom to={`/Post/${row._id}`}>{value}</LinkDom>
+                        </TableCell>
+                        );
+                      }
+                      if (column.id === "description") {
+                        let aux = value.split(" ");
+                        let aux2 = aux.slice(0,28);
+                        let aux3 = aux2.join(" ")
                         return (
                           <TableCell
                           key={column.id}
@@ -120,28 +214,36 @@ export default function TableInstructor(props: any) {
                             maxHeight: "14.5vh",
                           }}
                         >
-                          <Link to={`/Post/${row._id}`}>{value}</Link>
+                          {aux.length>=28? `${aux3}...`: value}
                         </TableCell>
                         );
                       }
-
-                      return (
-                        <TableCell
-                          key={column.id}
-                          align={column.align}
-                          sx={{
-                            maxWidth: "20vw",
-                            minWidth: "100px",
-                            maxHeight: "14.5vh",
-                          }}
-                        >
-                          {value}
-                        </TableCell>
-                      );
+                      if(column.id ==="tags"){
+                        return (
+                          <TableCell
+                            key={column.id}
+                            align={column.align}
+                            sx={{
+                              maxWidth: "7vw",
+                              minWidth: "8em",
+                              maxHeight: "14.5vh",
+                            }}
+                          >
+                            <Box
+                            display="flex"
+                            sx={{flexDirection:"column" , color:"#dba200" , fontWeight:"bold"}}
+                            >
+                            {value.map((e:any)=> (<span># {e}</span>))}
+                            </Box>
+                          </TableCell>
+                        );
+                      }
+                      
                     })}
                   </TableRow>
                 );
               })}
+              {/* ACA TERMINA EL BODY DE LA TABLE */}
           </TableBody>
         </Table>
       </TableContainer>

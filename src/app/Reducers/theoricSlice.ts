@@ -1,9 +1,10 @@
 import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 import { Theoric } from "../interface";
 import axios from "axios";
+import { ownerTemplate } from "../Utils/userUtilities";
 
 export const theoricTemplate: Theoric = {
-  owner: "",
+  owner: ownerTemplate,
   title: "",
   content: "",
   author: "",
@@ -14,11 +15,13 @@ export const theoricTemplate: Theoric = {
 interface InitialState {
   allTheorics: Array<Theoric>;
   oneTheoric: Theoric;
+  willEdit: any;
 }
 
 const initialState: InitialState = {
   allTheorics: [],
   oneTheoric: theoricTemplate,
+  willEdit: {},
 };
 
 export const fetchAllTheorics = async () => {
@@ -39,6 +42,22 @@ export const fetchOneTheoric = async (id: string) => {
   }
 };
 
+export const editTheoric = async (obj: any) => {
+  try {
+    await axios.put(`/theoric`, obj);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const deleteTheoric = async (id: string) => {
+  try {
+    await axios.delete(`/theoric/?id=${id}`);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 export const theoricSlice = createSlice({
   name: "theoric",
   initialState,
@@ -46,12 +65,9 @@ export const theoricSlice = createSlice({
     bringAllTheorics: (state) => {
       state.allTheorics = initialState.allTheorics;
     },
-    bringTheoricById: (state) => {
-      state.oneTheoric = initialState.oneTheoric;
-    },
   },
 });
 
-export const { bringAllTheorics, bringTheoricById } = theoricSlice.actions;
+export const { bringAllTheorics } = theoricSlice.actions;
 
 export default theoricSlice.reducer;

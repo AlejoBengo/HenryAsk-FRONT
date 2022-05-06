@@ -19,8 +19,10 @@ import { EditProfile } from "./Components/Profile/EditProfile/EditProfile";
 import Foro from "./Views/Foro";
 import PostDetails from "./Views/PostDetails";
 import CreatePost from "./Components/Creators/CreatePost/CreatePost";
-import LateralMenu from "./Views/LateralMenu";
+import { CreateTheoric } from "./Components/Creators/CreateTheoric/CreateTheoric";
+import LateralMenu from "./Components/Navbar/LateralMenu/LateralMenu";
 import TheoricView from "./Views/TheoricView";
+import Home from "./Views/Home";
 
 const App = () => {
   const { isAuthenticated, user } = useAuth0();
@@ -44,14 +46,16 @@ const App = () => {
     <>
       <Navbar />
       <Routes>
+        <Route path="/" element={<Home />} />
         <Route path="/a" element={<LateralMenu />} />
-        <Route path="/b/:id" element={<TheoricView />} />
+        <Route path="/Theoric/:id" element={<TheoricView />} />
         <Route path="/Content" element={<Content />} />
         <Route path="/Profile/:id" element={<Profile />} />
         <Route path="/Profile/:id/Edit" element={<EditProfile />} />
         <Route path="/Post/:id" element={<PostDetails />} />
         <Route path="/Forum/" element={<Foro />} />
         <Route path="/Ask" element={<CreatePost />} />
+        <Route path="/Theoric/Create" element={<CreateTheoric />} />
       </Routes>
     </>
   );

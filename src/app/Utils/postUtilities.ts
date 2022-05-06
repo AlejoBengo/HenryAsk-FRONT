@@ -1,18 +1,13 @@
 import axios from "axios";
-import { Posts, PostOwner } from "../interface";
+import { Posts, Owner } from "../interface";
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { ownerTemplate } from "./userUtilities";
 
-export const postOwnerTemplate: PostOwner = {
-  _id: "",
-  user_name: "",
-  profile_picture: "",
-  role: 0,
-};
 export const postTemplate: Posts = {
   _id: "",
   question: "",
   description: "",
-  owner: postOwnerTemplate,
+  owner: ownerTemplate,
   ownerData: [],
   createdAt: "",
   open: true,
@@ -34,6 +29,42 @@ export const getPostById = async (id: string | undefined) => {
 export const postNewPost = createAsyncThunk(
   "post/fetchPostToSave",
   async (post: Posts) => {
-    await axios.post(`/post`, post);
+    let info = await axios.post(`/post`, post);
+    return info.data;
   }
 );
+
+export const editAnswerChildInPost = async (id: string | undefined) => {
+  try {
+    let post = await (await axios.get(`/post/${id}`)).data;
+    return { ...postTemplate, ...post };
+  } catch (error) {
+    console.log(error);
+    return postTemplate;
+  }
+};
+
+export const editPost = async (obj: any) => {
+  try {
+    await axios.put(`/post/`, obj);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const deletePost = async (id: string) => {
+  try {
+    await axios.delete(`/post/?id=${id}`);
+  } catch (error) {
+    console.log(error);
+  }
+};
+export const closePost = async (id: string | undefined) => {
+  try {
+    return await (
+      await axios.put("/post", { id, open: false })
+    ).data;
+  } catch (error) {
+    return error;
+  }
+};

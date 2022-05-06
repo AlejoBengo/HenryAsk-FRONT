@@ -1,3 +1,4 @@
+
 export interface User {
   _id: string;
   first_name: string;
@@ -20,6 +21,7 @@ export interface User {
   excersices: Array<string>;
   github: string;
   linkedin: string;
+  avatar:"https://res.cloudinary.com/henryask/image/upload/v1651459729/avatares/unicorn_ntmtyp.png" | "https://res.cloudinary.com/henryask/image/upload/v1651459728/avatares/pig_tzhrjl.png" | "https://res.cloudinary.com/henryask/image/upload/v1651459728/avatares/pigeon_yfv9ka.png"| "";
 }
 export interface InitialState {
   data: User;
@@ -32,13 +34,16 @@ export interface isAlumnOrInstructor {
   height: number;
 }
 export interface Answer {
-  owner: any;
+  _id: string;
+  owner: Owner;
   content: string;
-  posts: string;
+  post: string;
+  comments: Array<Comment>;
+  createdAt: string;
 }
 
 export interface Theoric {
-  owner: string;
+  owner: Owner;
   title: string;
   content: string;
   author: string;
@@ -46,6 +51,12 @@ export interface Theoric {
   comments: Array[string];
 }
 
+export interface Comment {
+  _id: string;
+  owner: Owner;
+  answer: string;
+  content: string;
+}
 // INTERFACES PARA GET POST './getPostsForum.ts';
 
 /*   export enum Type {
@@ -69,8 +80,9 @@ export enum Tags {
 }
 
 export interface Column {
-  id: "name" | "question" | "description" | "tags";
+  id: "name" | "question" | "description" | "tags" | "open";
   label: string;
+  maxWidth?:number | string;
   minWidth?: number;
   align?: "right" | "center";
   format?: (value: number) => string;
@@ -81,10 +93,11 @@ export interface isAlumnOrInstructor {
   height: number;
 }
 
-export interface PostOwner {
+export interface Owner {
   _id: string;
   user_name: string;
   profile_picture: string;
+  avatar:string;
   role: 0 | 1 | 2 | 3 | 4 | 5;
 }
 
@@ -92,7 +105,7 @@ export interface Posts {
   _id: string;
   question: string;
   description: string;
-  owner: PostOwner; //cambiado de string a any por Agus ya que se resolvió el tema de las Refs
+  owner: Owner; //cambiado de string a any por Agus ya que se resolvió el tema de las Refs
   ownerData: Array<string>;
   createdAt: string;
   open: boolean;
