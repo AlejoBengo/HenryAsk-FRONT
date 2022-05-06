@@ -10,6 +10,7 @@ import {
 import { Theoric } from "../app/interface";
 import { editTheoric } from "../app/Reducers/theoricSlice";
 import { useParams, useNavigate } from "react-router-dom";
+import { ownerTemplate } from "../app/Utils/userUtilities";
 /*-----------IMPORT MUI & CSS-----------*/
 import { Button, Modal, TextField } from "@mui/material";
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
@@ -48,7 +49,7 @@ export default function TheoricView() {
   const [open, setOpen] = useState<boolean>(false);
   const [openDelete, setOpenDelete] = useState<boolean>(false);
   const [editable, setEditable] = useState({
-    owner: "",
+    owner: ownerTemplate,
     title: "",
     content: "",
     author: "",

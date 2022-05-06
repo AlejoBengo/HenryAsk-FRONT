@@ -43,13 +43,14 @@ export interface Answer {
 }
 
 export interface Theoric {
-  owner: string;
+  owner: Owner;
   title: string;
   content: string;
   author: string;
   images: Array[string];
   comments: Array[string];
 }
+
 export interface Comment {
   _id: string;
   owner: Owner;
