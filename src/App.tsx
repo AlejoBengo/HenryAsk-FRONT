@@ -23,6 +23,7 @@ import { CreateTheoric } from "./Components/Creators/CreateTheoric/CreateTheoric
 import LateralMenu from "./Components/Navbar/LateralMenu/LateralMenu";
 import TheoricView from "./Views/TheoricView";
 import Home from "./Views/Home";
+import PanelAdm from "./Views/PanelAdm";
 
 const App = () => {
   const { isAuthenticated, user } = useAuth0();
@@ -56,6 +57,7 @@ const App = () => {
         <Route path="/Forum/" element={<Foro />} />
         <Route path="/Ask" element={<CreatePost />} />
         <Route path="/Theoric/Create" element={<CreateTheoric />} />
+        <Route path="/PanelAdm" element={<PanelAdm/>}/>
       </Routes>
     </>
   );
