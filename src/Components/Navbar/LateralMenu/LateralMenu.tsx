@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { useAppSelector, useAppDispatch } from "../../../app/hooks";
 import TheoricList from "../../Theoric/TheoricList";
+import NoteAddIcon from '@mui/icons-material/NoteAdd';
 import LateralItem from "./LateralItem";
 import { Link } from "react-router-dom";
 import { remoteUpdateUser } from "../../../app/Reducers/userSlice";
@@ -111,6 +112,9 @@ export default function LateralMenu(props: any) {
               // icon={<StarsIcon />}
             />
           </LinkDom>
+        </LinkDom>
+        <LinkDom onClick={toggleDrawer(anchor, false)} to="/Ask">
+          <LateralItemStyled text="Crear nueva Discusión" icon={<NoteAddIcon />} />
         </LinkDom>
       </List>
       <Divider />

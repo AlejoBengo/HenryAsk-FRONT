@@ -80,8 +80,9 @@ export enum Tags {
 }
 
 export interface Column {
-  id: "name" | "question" | "description" | "tags";
+  id: "name" | "question" | "description" | "tags" | "open";
   label: string;
+  maxWidth?:number | string;
   minWidth?: number;
   align?: "right" | "center";
   format?: (value: number) => string;
