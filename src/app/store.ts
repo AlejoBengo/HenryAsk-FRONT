@@ -3,6 +3,7 @@ import userReducer from "./Reducers/userSlice";
 import userProfile from "./Reducers/userProfileSlice"
 import getPosts from './Reducers/getPostsForum'
 import busquedaUserName from './Reducers/getUserByUserName';
+import exercisesReducer from './Reducers/exercisesSlice';
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     profile:userProfile,
     getAllPosts:getPosts,
     searchUserName:busquedaUserName,
+    exercises: exercisesReducer,
   },
 });
 

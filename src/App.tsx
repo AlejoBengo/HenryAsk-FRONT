@@ -21,6 +21,8 @@ import PostDetails from "./Views/PostDetails";
 import CreatePost from "./Components/Creators/CreatePost/CreatePost";
 import LateralMenu from "./Components/Navbar/LateralMenu/LateralMenu";
 import TheoricView from "./Views/TheoricView";
+import { ExerciseList } from "./Views/ExerciseList";
+import { ExerciseDetail } from "./Views/ExerciseDetail";
 
 const App = () => {
   const { isAuthenticated, user } = useAuth0();
@@ -47,6 +49,8 @@ const App = () => {
         <Route path="/a" element={<LateralMenu />} />
         <Route path="/b/:id" element={<TheoricView />} />
         <Route path="/Content" element={<Content />} />
+        <Route path="/Content/Exercise" element={<ExerciseList />} />
+        <Route path="/Content/Exercise/:id" element={<ExerciseDetail />} />
         <Route path="/Profile/:id" element={<Profile />} />
         <Route path="/Profile/:id/Edit" element={<EditProfile />} />
         <Route path="/Post/:id" element={<PostDetails />} />

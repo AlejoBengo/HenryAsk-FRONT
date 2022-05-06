@@ -8,6 +8,7 @@ import BasicCard1 from "./BasicCard/BasicCard1";
 import { Container, Box, Typography, Button } from "@mui/material";
 import { Imagen } from "../ContentStyled";
 import img from "../../../Assets/imgMainNoLogeado.jpg";
+import { Link } from "react-router-dom";
 /*--------------------------------------------------------*/
 
 let textLoginOne = "Teorico";
@@ -50,7 +51,7 @@ const MainContent = () => {
                 alignItems: "center",
               }}
             >
-              <BasicCard1 text={textLoginTwo} />
+              <Link to={`/Content/Exercise`}><BasicCard1 text={textLoginTwo}/></Link>
             </Box>
           </Box>
         </Container>
