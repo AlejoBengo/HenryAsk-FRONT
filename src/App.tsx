@@ -19,10 +19,13 @@ import { EditProfile } from "./Components/Profile/EditProfile/EditProfile";
 import Foro from "./Views/Foro";
 import PostDetails from "./Views/PostDetails";
 import CreatePost from "./Components/Creators/CreatePost/CreatePost";
+import { CreateTheoric } from "./Components/Creators/CreateTheoric/CreateTheoric";
 import LateralMenu from "./Components/Navbar/LateralMenu/LateralMenu";
 import TheoricView from "./Views/TheoricView";
 import { ExerciseList } from "./Views/ExerciseList";
 import { ExerciseDetail } from "./Views/ExerciseDetail";
+import Home from "./Views/Home";
+import PanelAdm from "./Views/PanelAdm";
 
 const App = () => {
   const { isAuthenticated, user } = useAuth0();
@@ -46,8 +49,9 @@ const App = () => {
     <>
       <Navbar />
       <Routes>
+        <Route path="/" element={<Home />} />
         <Route path="/a" element={<LateralMenu />} />
-        <Route path="/b/:id" element={<TheoricView />} />
+        <Route path="/Theoric/:id" element={<TheoricView />} />
         <Route path="/Content" element={<Content />} />
         <Route path="/Content/Exercise" element={<ExerciseList />} />
         <Route path="/Content/Exercise/:id" element={<ExerciseDetail />} />
@@ -56,6 +60,8 @@ const App = () => {
         <Route path="/Post/:id" element={<PostDetails />} />
         <Route path="/Forum/" element={<Foro />} />
         <Route path="/Ask" element={<CreatePost />} />
+        <Route path="/Theoric/Create" element={<CreateTheoric />} />
+        <Route path="/PanelAdm" element={<PanelAdm/>}/>
       </Routes>
     </>
   );

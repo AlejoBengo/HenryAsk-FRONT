@@ -7,21 +7,27 @@ import { useNavigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import { styled } from "@mui/material/styles";
 import { Container } from "@mui/material";
+import BuyMeACoffe from "../Components/Profile/EditProfile/BuyMeACoffe";
 /*-----------IMPORT REDUCER-----------*/
 import { fetchProfile, clearProfile } from "../app/Reducers/userProfileSlice";
 /*-----------IMPORT MUI & CSS-----------*/
+import CoffeeIcon from '@mui/icons-material/Coffee';
 import EditIcon from "@mui/icons-material/Edit";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
+
 import {
   Box,
   Button,
   Typography,
-  Stack,
+  Link,
   Paper,
   Avatar,
   Card,
   CardMedia,
   CardContent,
 } from "@mui/material";
+import { profile } from "console";
 
 /*--------------------------------------------------------*/
 
@@ -76,6 +82,10 @@ export default function Profile() {
   const userProfile = useAppSelector((state) => state.profile.profile); //state.profile?
   const user = useAppSelector((state) => state.user.data);
 
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   useEffect(() => {
     dispatch(fetchProfile(id));
   }, [dispatch, id]);
@@ -91,7 +101,7 @@ export default function Profile() {
         padding: "1em",
       }}
     >
-      <Card sx={{ minWidth: "100%" }}>
+      <Card sx={{ minWidth: "100%"}}>
         <CardMedia
           component="img"
           image={userProfile.banner || "https://via.placeholder.com/1000"}
@@ -101,10 +111,24 @@ export default function Profile() {
             height: "20vh",
           }}
         />
-        <StyledAvatar
-          alt={userProfile.first_name} //if the image can't be loaded then will show the first alt's letter (user's firstname)
-          src={userProfile.profile_picture}
-        />
+        <Box 
+        width="100%"
+        display="flex"
+        justifyContent="space-between"
+        >
+          <StyledAvatar
+            alt={userProfile.first_name} //if the image can't be loaded then will show the first alt's letter (user's firstname)
+            src={userProfile.profile_picture.length>0? userProfile.profile_picture : userProfile.avatar ? userProfile.avatar : userProfile.profile_picture}
+          />
+          <BuyMeACoffe handleClose={handleClose} open={open}/>
+          {
+            user._id !== userProfile._id && userProfile.role < 4 && user.role<4? <Button onClick={handleOpen} variant="contained" color="primary" sx={{height:"20%"}} startIcon={<CoffeeIcon />}>
+            Regalame un cafecito😋
+          </Button> : null
+          }
+          
+        </Box>
+        
         <CardContent>
           <Typography variant="h5">
             {`${userProfile.first_name} ${userProfile.last_name} | ${userProfile.user_name}`}
@@ -128,64 +152,34 @@ export default function Profile() {
             }`}
             | {`${roles[userProfile.role]}`}
           </Typography>
-          <Typography variant="body1">{userProfile.biography}</Typography>
+          <Typography variant="body1" my={3}>
+            {userProfile.biography}
+          </Typography>
+          <Box
+            display="flex"
+            justifyContent="space-around"
+            alignItems="center"
+            justifySelf="flex-start"
+            sx={{ width: "100px" }}
+            mt={1}
+          >
+            {userProfile.github !== "" && (
+              <Link href={userProfile.github} rel="noopener" target="_blank">
+                <Avatar sx={{ bgcolor: "info.main" }}>
+                  <GitHubIcon />
+                </Avatar>
+              </Link>
+            )}
+            {userProfile.linkedin !== "" && (
+              <Link href={userProfile.linkedin} rel="noopener" target="_blank">
+                <Avatar sx={{ bgcolor: "info.main" }}>
+                  <LinkedInIcon />
+                </Avatar>
+              </Link>
+            )}
+          </Box>
         </CardContent>
       </Card>
-      {/* <Box
-        width="70%"
-        sx={{
-          height: "max-content",
-          backgroundColor: "#acacac",
-          boxShadow: "1px 1px 20px black",
-        }}
-      >
-        <Box
-          width="100%"
-          display="flex"
-          alignItems="center"
-          flexDirection="column"
-          sx={{ height: "100%" }}
-        >
-          <Typography variant="h4" textAlign="center" margin="1.2rem">
-            Perfil
-          </Typography>
-          <Avatar
-            alt={userProfile.first_name} //if the image can't be loaded then will show the first alt's letter (user's firstname)
-            variant="rounded"
-            style={{ width: "50%", height: "auto" }}
-            src={userProfile.profile_picture}
-          />
-          {id === user._id ? (
-            <Button
-              variant="contained"
-              onClick={() => navigate(`/Profile/${id}/Edit`)}
-              startIcon={<EditIcon />}
-              sx={{marginTop:"1rem"}}
-            >
-              Editar Perfil
-            </Button>
-          ) : null}
-
-          <Stack spacing={ 2 } sx={{ width: "100%", marginBlock: "1rem" }}>
-            <Item sx={{ fontWeight: "bold" }}>
-              Name: {userProfile.first_name}
-            </Item>
-            <Item sx={{ fontWeight: "bold" }}>
-              LastName: {userProfile.last_name}
-            </Item>
-            <Item sx={{ fontWeight: "bold" }}>
-              Rol: {roles[userProfile.role]}
-            </Item>
-            <Item sx={{ fontWeight: "bold" }}>
-              Country: {userProfile.country}
-            </Item>
-            <Item sx={{ fontWeight: "bold" }}>Email: {userProfile.email}</Item>
-            <Item sx={{ fontWeight: "bold" }}>
-              Biography: {userProfile.biography}
-            </Item>
-          </Stack>
-        </Box>
-      </Box> */}
     </Container>
   );
 }

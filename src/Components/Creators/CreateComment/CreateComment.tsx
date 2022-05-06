@@ -48,6 +48,7 @@ export const CreateComment = ({ answerId }: Props) => {
         _id: user._id,
         user_name: user.user_name,
         profile_picture: user.profile_picture,
+        avatar:user.avatar,
         role: user.role,
       },
       answer: answerId,

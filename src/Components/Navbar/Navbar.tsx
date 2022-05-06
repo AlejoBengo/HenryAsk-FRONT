@@ -71,20 +71,20 @@ const Navbar = () => {
   };
 
   return (
-    <AppBar position="sticky" sx={{ height: "8vh", backgroundColor: "#000" }}>
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
+    <AppBar position="sticky" sx={{ maxHeight: "5rem", minHeight: "5rem", backgroundColor: "#000" }}>
+      <Container maxWidth={false}>
+        <Toolbar sx={{height:"5rem"}} disableGutters>
           <Box
             display="flex"
             alignItems="center"
             component="div"
             width="15%"
-            height="5vh"
+            height="8vh"
             sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
           >
             <LateralMenu user={DBUser} />
             <Link to="/">
-              <Img src={logo} alt="no responde img" />
+              <Img src={logo} alt="no responde img" sx={{marginTop:".3em"}} />
             </Link>
           </Box>
 
@@ -95,26 +95,19 @@ const Navbar = () => {
               alignItems: "center",
             }}
           >
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
-              <DehazeIcon />
-            </IconButton>
-
-            <Box
-              component="div"
-              width="20%"
-              height="5vh"
-              marginLeft="1rem"
-              sx={{ mr: 2, display: { xs: "flex", md: "none" } }}
-            >
-              <Img src={logo} alt="no responde img" />
-            </Box>
+           <Box
+            display="flex"
+            alignItems="center"
+            component="div"
+            width="50%"
+            height="8vh"
+            sx={{ mr: 2, display: { xs: "flex", md: "none" } }}
+          >
+            <LateralMenu user={DBUser} />
+            <Link to="/">
+              <Img src={logo} alt="no responde img" sx={{marginTop:".2em"}} />
+            </Link>
+          </Box>
 
             <Menu
               id="menu-appbar"
@@ -156,6 +149,12 @@ const Navbar = () => {
             }}
           >
             <Button
+             onClick={handleCloseNavMenu}
+             sx={{ my: 2, color: "white", display: "block" }}>
+               <Link to="/Ask" className={css.StyledLink}>
+                 Crear nueva discusión</Link>
+            </Button>
+            <Button
               onClick={handleCloseNavMenu}
               sx={{ my: 2, color: "white", display: "block" }}
             >
@@ -184,9 +183,9 @@ const Navbar = () => {
                   <Avatar
                     alt={DBUser.first_name} //if the image can't be loaded then will show the first alt's letter (user's firstname)
                     src={
-                      DBUser.profile_picture
+                      DBUser.profile_picture.length>0
                         ? DBUser.profile_picture
-                        : "/static/images/avatar/2.jpg"
+                        : DBUser.avatar ? DBUser.avatar : "/static/images/avatar/2.jpg"
                     }
                   />
                 </IconButton>

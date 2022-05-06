@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import TableInstructor from "../Components/Foro/TableInstructor/TableInstructor";
 /*-----------IMPORT MUI & CSS-----------*/
 import { Div, TituloForo } from "../Components/Style/StyledComponents";
-import { Container, Typography, Button } from "@mui/material";
+import { Container, Typography, Button , Grid , Alert} from "@mui/material";
 import {fetchGetAllPosts} from '../app/Reducers/getPostsForum';
 import { useAppSelector, useAppDispatch } from "../app/hooks";
 import {Posts} from '../app/interface';
@@ -75,25 +75,30 @@ posts?.map(e => {
    //setTimeout(()=> console.log("USER",userLogin), 4000)
   //setTimeout(()=> console.log("ALUMNOS",postAlumnos), 4000)
  // setTimeout(()=> console.log("INSTRUCTOR",postInstructores), 4000)
-  setTimeout(()=> console.log("PREP",postPrep), 4000) 
-  setTimeout(()=> console.log("POST",posts), 4000) 
+  //setTimeout(()=> console.log("PREP",postPrep), 4000) 
+  //setTimeout(()=> console.log("POST",posts), 4000) 
 
 if(userLogin.role === 1){
   return (
     <Div>
-      <Typography
-      variant="h3"
-      textAlign="center"
-      margin="1rem 0rem 1rem 0rem">
-           Bienvenido/a al <TituloForo>Prep.Course</TituloForo> Forum !
-      </Typography>
-      <Typography
-      variant="h3"
-      textAlign="center"
-      margin="1rem 0rem 1rem 0rem">
-           Posteos entre <TituloForo>Alumnos</TituloForo>
-      </Typography>
-      <Link to="/Ask"><Button>Crear nueva discusion</Button></Link>
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <Typography
+            variant="h3"
+            textAlign="center"
+            margin="1rem 0rem 1rem 0rem">
+                Bienvenido/a al <TituloForo>Prep.Course</TituloForo> Forum !
+            </Typography>
+          </Grid>
+          <Grid item xs={12}>
+            <Typography
+            variant="h3"
+            textAlign="center"
+            margin="1rem 0rem 1rem 0rem">
+                Posteos entre <TituloForo>Alumnos</TituloForo>
+            </Typography>
+          </Grid>
+        </Grid>
       <Container
       maxWidth={false}
       sx={{ width: "80vw" }}>
@@ -106,24 +111,31 @@ if(userLogin.role === 1){
 
     
     <Div>
-      <Typography
-      variant="h3"
-      textAlign="center"
-      margin="1rem 0rem 1rem 0rem">
-           Posteos de los <TituloForo>Instructores</TituloForo>
-      </Typography>
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <Typography
+          variant="h3"
+          textAlign="center"
+          margin="1rem 0rem 1rem 0rem">
+              Posteos de los <TituloForo>Instructores</TituloForo>
+          </Typography>
+        </Grid>
+      </Grid>
       <Container
       maxWidth={false}
       sx={{ width: "80vw" }}>
-          <TableInstructor post={postInstructores.reverse()} key="instructor" height={440} user={AlumnOrInstructor[1]}/>
+          <TableInstructor post={postInstructores.reverse()} key="instructor" height={1040} user={AlumnOrInstructor[1]}/>
       </Container>
-      <Typography
-      variant="h3"
-      textAlign="center"
-      margin="1rem 0rem 1rem 0rem">
-           Posteos entre <TituloForo>Alumnos</TituloForo>
-      </Typography>
-      <Link to="/Ask"><Button>Crear nueva discusion</Button></Link>   
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <Typography
+          variant="h3"
+          textAlign="center"
+          margin="1rem 0rem 1rem 0rem">
+              Posteos entre <TituloForo>Alumnos</TituloForo>
+          </Typography>
+        </Grid>
+      </Grid>  
       <Container
       maxWidth={false}
       sx={{ width: "80vw" }}>
@@ -137,24 +149,51 @@ if(userLogin.role === 1){
     <>
     
        <Div>
-    <Typography
-    variant="h3"
-    textAlign="center"
-    margin="1rem 0rem 1rem 0rem">
-         Posteos de los <TituloForo>Instructores</TituloForo>
-    </Typography>
+         <Container
+         maxWidth={false}
+         sx={{ width: "80vw" }}>
+           <Grid container spacing={5}>
+           <Grid item xs={12}>
+           <Typography
+            variant="h3"
+            textAlign="center"
+            margin="1rem 0rem 1rem 0rem">
+                Posteos de los <TituloForo>Instructores</TituloForo>
+            </Typography>
+           </Grid>
+           <Grid item xs={6}>
+           <Alert variant="filled" severity="success">
+              Esta discusion fue resuelta!
+            </Alert>
+           </Grid>
+           {/* <Grid item xs={7}></Grid> */}
+           
+           <Grid item xs={6}>
+           <Alert variant="filled" severity="info">
+              El propietario de esa discusion aun busca una respuesta!
+            </Alert>
+           </Grid>
+         </Grid>
+         </Container>
     <Container
     maxWidth={false}
     sx={{ width: "80vw" }}>
-        <TableInstructor post={postInstructores.reverse()} key="instructor" height={440} user={AlumnOrInstructor[1]}/>
+        <TableInstructor post={postInstructores.reverse()} key="instructor" height={1040} user={AlumnOrInstructor[1]}/>
     </Container>
-    <Typography
-    variant="h3"
-    textAlign="center"
-    margin="1rem 0rem 1rem 0rem">
-         Posteos entre <TituloForo>Alumnos</TituloForo>
-    </Typography>
-    <Link to="/Ask"><Button>Crear nueva discusion</Button></Link>   
+    <Container>
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <Typography
+          variant="h3"
+          textAlign="center"
+          margin="1rem 0rem 1rem 0rem">
+              Posteos entre <TituloForo>Alumnos</TituloForo>
+          </Typography>
+        </Grid>
+      </Grid>
+     
+    </Container>
+    
     <Container
     maxWidth={false}
     sx={{ width: "80vw" }}>
@@ -165,19 +204,24 @@ if(userLogin.role === 1){
 
   
   <Div>
-        <Typography
-        variant="h3"
-        textAlign="center"
-        margin="1rem 0rem 1rem 0rem">
-             Bienvenido/a al <TituloForo>Prep.Course</TituloForo> Forum !
-        </Typography>
-        <Typography
-        variant="h3"
-        textAlign="center"
-        margin="1rem 0rem 1rem 0rem">
-             Posteos entre <TituloForo>Alumnos</TituloForo>
-        </Typography>
-        <Link to="/Ask"><Button>Crear nueva discusion</Button></Link>
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <Typography
+            variant="h3"
+            textAlign="center"
+            margin="1rem 0rem 1rem 0rem">
+                Bienvenido/a al <TituloForo>Prep.Course</TituloForo> Forum !
+            </Typography>
+          </Grid>
+          <Grid item xs={12}>
+            <Typography
+            variant="h3"
+            textAlign="center"
+            margin="1rem 0rem 1rem 0rem">
+                Posteos entre <TituloForo>Alumnos</TituloForo>
+            </Typography>
+          </Grid>
+        </Grid>
         <Container
         maxWidth={false}
         sx={{ width: "80vw" }}>
