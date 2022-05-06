@@ -188,7 +188,7 @@ export const PostDetails = () => {
   
   // ------------------//
 
-
+console.log("POSTEO",post);
 
   if (error) return <div>Error</div>;
   return (
