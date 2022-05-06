@@ -7,9 +7,11 @@ import { useNavigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import { styled } from "@mui/material/styles";
 import { Container } from "@mui/material";
+import BuyMeACoffe from "../Components/Profile/EditProfile/BuyMeACoffe";
 /*-----------IMPORT REDUCER-----------*/
 import { fetchProfile, clearProfile } from "../app/Reducers/userProfileSlice";
 /*-----------IMPORT MUI & CSS-----------*/
+import CoffeeIcon from '@mui/icons-material/Coffee';
 import EditIcon from "@mui/icons-material/Edit";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
@@ -25,6 +27,7 @@ import {
   CardMedia,
   CardContent,
 } from "@mui/material";
+import { profile } from "console";
 
 /*--------------------------------------------------------*/
 
@@ -79,6 +82,10 @@ export default function Profile() {
   const userProfile = useAppSelector((state) => state.profile.profile); //state.profile?
   const user = useAppSelector((state) => state.user.data);
 
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   useEffect(() => {
     dispatch(fetchProfile(id));
   }, [dispatch, id]);
@@ -94,7 +101,7 @@ export default function Profile() {
         padding: "1em",
       }}
     >
-      <Card sx={{ minWidth: "100%" }}>
+      <Card sx={{ minWidth: "100%"}}>
         <CardMedia
           component="img"
           image={userProfile.banner || "https://via.placeholder.com/1000"}
@@ -104,16 +111,24 @@ export default function Profile() {
             height: "20vh",
           }}
         />
-        <StyledAvatar
-          alt={userProfile.first_name} //if the image can't be loaded then will show the first alt's letter (user's firstname)
-          src={
-            userProfile.profile_picture.length > 0
-              ? userProfile.profile_picture
-              : userProfile.avatar
-              ? userProfile.avatar
-              : userProfile.profile_picture
+        <Box 
+        width="100%"
+        display="flex"
+        justifyContent="space-between"
+        >
+          <StyledAvatar
+            alt={userProfile.first_name} //if the image can't be loaded then will show the first alt's letter (user's firstname)
+            src={userProfile.profile_picture.length>0? userProfile.profile_picture : userProfile.avatar ? userProfile.avatar : userProfile.profile_picture}
+          />
+          <BuyMeACoffe handleClose={handleClose} open={open}/>
+          {
+            user._id !== userProfile._id && userProfile.role < 4 && user.role<4? <Button onClick={handleOpen} variant="contained" color="primary" sx={{height:"20%"}} startIcon={<CoffeeIcon />}>
+            Regalame un cafecito😋
+          </Button> : null
           }
-        />
+          
+        </Box>
+        
         <CardContent>
           <Typography variant="h5">
             {`${userProfile.first_name} ${userProfile.last_name} | ${userProfile.user_name}`}

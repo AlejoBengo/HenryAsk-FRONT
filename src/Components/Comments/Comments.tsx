@@ -32,8 +32,7 @@ export const Comments = ({ id, toggleOpen, open }: Props) => {
     answer: true,
     comments: true,
   });
-  console.log("ANSWE", comments);
-
+ 
   useEffect(() => {
     fetchAnswerById(id)
       .then((res) => {
@@ -57,12 +56,7 @@ export const Comments = ({ id, toggleOpen, open }: Props) => {
       setComments([]);
     };
   }, [id]);
-  console.log(
-    "loading answer:",
-    loading.answer,
-    "loading comments:",
-    loading.comments
-  );
+
 
   return (
     <Drawer

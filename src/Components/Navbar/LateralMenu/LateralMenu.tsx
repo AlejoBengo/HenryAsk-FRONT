@@ -30,6 +30,7 @@ import { yellow } from "@mui/material/colors";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import ForumIcon from "@mui/icons-material/Forum";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
+import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import {
   StyledStack,
   StyledListItemButton,
@@ -95,7 +96,7 @@ export default function LateralMenu(props: any) {
           </LinkDom>
         </Box>
       </Box>
-      <Divider />
+
 
       <List>
         <AcordeonMenu state={state} setState={setState} />
@@ -116,6 +117,11 @@ export default function LateralMenu(props: any) {
         <LinkDom onClick={toggleDrawer(anchor, false)} to="/Ask">
           <LateralItemStyled text="Crear nueva Discusión" icon={<NoteAddIcon />} />
         </LinkDom>
+        {
+          userLog.role ===5? <LinkDom onClick={toggleDrawer(anchor, false)} to="/PanelAdm">
+          <LateralItemStyled text="Panel de administrador" icon={<AdminPanelSettingsIcon />} />
+        </LinkDom> : null
+        }
       </List>
       <Divider />
 
