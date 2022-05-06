@@ -149,6 +149,12 @@ const Navbar = () => {
             }}
           >
             <Button
+             onClick={handleCloseNavMenu}
+             sx={{ my: 2, color: "white", display: "block" }}>
+               <Link to="/Ask" className={css.StyledLink}>
+                 Crear nueva discusión</Link>
+            </Button>
+            <Button
               onClick={handleCloseNavMenu}
               sx={{ my: 2, color: "white", display: "block" }}
             >
