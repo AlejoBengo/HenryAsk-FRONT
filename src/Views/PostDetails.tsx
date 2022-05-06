@@ -49,6 +49,7 @@ import {
   StyledButtonModal6,
 } from "../Components/Style/StyledComponents";
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
+import DialogSuccess from "../Components/Dialog/DialogSuccess";
 
 /*--------------------------------------------------------*/
 
@@ -137,8 +138,8 @@ export const PostDetails = () => {
   const handleDeletePost = (event: React.MouseEvent<HTMLButtonElement>) => {
     if (typeof id === "string") {
       deletePost(id);
+      handleClickOpen();
       setOpenDelete(!openDelete);
-      navigate("/");
     }
   };
 
@@ -175,29 +176,53 @@ export const PostDetails = () => {
     }
   }, [selectedAnswer]);
 
+  //dialog delete complete
+  const [openDialog, setOpenDialog] = React.useState(false);
+  const handleClickOpen = () => {
+    setOpenDialog(true);
+    console.log("ENTRO PAPA");
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+    navigate("/Forum");
+  };
+
+  // ------------------//
+
   if (error) return <div>Error</div>;
   return (
     <div>
       <Container sx={{ padding: "1em" }}>
-        {post.owner._id === usuario._id && (
-          <StyledDivButtons>
-            <StyledButton onClick={handleOpenEdit}>Edit</StyledButton>
+        <DialogSuccess
+          openDialog={openDialog}
+          handleClose={handleClose}
+          title1="Discusion eliminada con exito!"
+          subtitle1="Su posteo fue eliminado con exito"
+          buttonText="Volver al foro"
+        />
+
+        <StyledDivButtons>
+          {usuario._id === post.owner._id && (
+            <StyledButton onClick={handleOpenEdit}>Editar</StyledButton>
+          )}
+          {(usuario.role > 3 || usuario._id === post.owner._id) && (
             <Button variant="contained" onClick={handleOpenDelete}>
-              Delete
+              Borrar
             </Button>
-          </StyledDivButtons>
-        )}
+          )}
+        </StyledDivButtons>
 
         <Modal open={openDelete}>
           <StyledBoxModal2>
             <StyledButtonModal5 onClick={handleOpenDelete}>
-              Close
+              Cerrar
             </StyledButtonModal5>
 
             <StyledTypography4>Are you sure?</StyledTypography4>
 
             <StyledButtonModal6 onClick={handleDeletePost}>
-              Delete
+              Borrar
             </StyledButtonModal6>
           </StyledBoxModal2>
         </Modal>
@@ -205,7 +230,7 @@ export const PostDetails = () => {
         <Modal open={openEdit}>
           <StyledBoxModal>
             <StyledButtonModal onClick={handleOpenEdit}>
-              Close
+              Cerrar
             </StyledButtonModal>
             <StyledTextField2
               multiline
@@ -244,7 +269,9 @@ export const PostDetails = () => {
                   );
                 })}
             </StyledBoxChoosed>
-            <StyledButtonModal4 onClick={handleSaver}>Save</StyledButtonModal4>
+            <StyledButtonModal4 onClick={handleSaver}>
+              Guardar
+            </StyledButtonModal4>
           </StyledBoxModal>
         </Modal>
         <StyledPaper elevation={2}>

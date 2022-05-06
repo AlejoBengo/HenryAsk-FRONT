@@ -5,6 +5,7 @@ import { useAppSelector, useAppDispatch } from "../../../app/hooks";
 import { useNavigate, useParams } from "react-router-dom";
 import { userTemplate } from "../../../app/Utils/userUtilities";
 import ModalEditProfile from "./ModalEditProfile";
+import DialogSuccess from "../../Dialog/DialogSuccess";
 /*-----------IMPORT MUI & CSS-----------*/
 import Container from "@mui/material/Container";
 import EditIcon from '@mui/icons-material/Edit';
@@ -23,7 +24,7 @@ import { Avatar } from "@mui/material";
 
 export const EditProfile = () => {
   const user = useAppSelector((state) => state.user.data);
-  const [userInfo, setUserInfo] = useState({ ...userTemplate, ...user });
+  let [userInfo, setUserInfo] = useState({ ...userTemplate, ...user });
   const { id } = useParams();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -36,6 +37,18 @@ export const EditProfile = () => {
   const handleClose = () => setOpen(false);
  //----------------// 
 
+// ------------> DIALOG SUCCES EDIT PROFILE
+ const [openDialog, setOpenDialog] = React.useState(false);
+ const handleClickOpenDialog = () => {
+   setOpenDialog(true);
+ };
+
+ const handleCloseDialog = () => {
+   setOpen(false);
+   navigate(`/Profile/${user._id}`)
+ }; 
+// ---------------------------------
+
 
   const handleInputChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -47,11 +60,9 @@ export const EditProfile = () => {
   };
 
   const handleSave = (event: React.MouseEvent<HTMLButtonElement>) => {
+    handleClickOpenDialog()
     dispatch(remoteUpdateUser(userInfo))
       .then(() => dispatch(fetchUserByEmail(userInfo.email)))
-      .then(() => {
-        navigate(`/Profile/${user._id}`);
-      })
       .catch((err) => {
         console.log(err);
         alert("Algo salió mal, intente de nuevo");
@@ -60,6 +71,7 @@ export const EditProfile = () => {
   if (user._id != id) navigate(`/Profile/${id}`);
   return (
     <Container sx={{ paddingBottom: "16px", paddingTop: "20px"}}>
+      <DialogSuccess openDialog={openDialog} handleClose={handleCloseDialog} title1="Cambios guardados correctamente" subtitle1="Se redirigirá a su perfil para visualizar los cambios " buttonText="Volver a mi perfil"/>
       <Paper sx={{ paddingBottom: "16px" }}>
         <Box
           sx={{
