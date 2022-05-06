@@ -1,17 +1,32 @@
 import React, { useState, useEffect } from "react";
 import { useAppSelector } from "../../../app/hooks";
-import { Container, Grid, Typography, Button, Box } from "@mui/material";
+import {
+  Container,
+  Grid,
+  Typography,
+  Button,
+  Box,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+} from "@mui/material";
 import {
   theoricTemplate,
   postTheoric,
 } from "../../../app/Utils/theoricUtilites";
 import { StyledPaper, StyledTextField } from "../../Style/StyledComponents";
 import { Theoric } from "../../../app/interface";
+import { useNavigate } from "react-router-dom";
 export const CreateTheoric = () => {
   const user = useAppSelector((state) => state.user.data);
   const [theoric, setTheoric] = useState<Theoric>(theoricTemplate);
   const [newImage, setNewImage] = useState<string>("");
   const [newComment, setNewComment] = useState<string>("");
+  const [open, setOpen] = useState(false);
+  const [dialogText, setDialogText] = useState("Enviando...");
+  const [newTheoricId, setNewTheoricId] = useState("");
+  const navigate = useNavigate();
   // if (user.role < 4) {
   //   return <div>No estás autorizado para crear contenido teórico</div>;
   // }
@@ -54,8 +69,21 @@ export const CreateTheoric = () => {
   };
   const handleSave = async () => {
     try {
-      postTheoric(theoric).then((res) => console.log(res));
-    } catch (error) {}
+      setOpen(true);
+      postTheoric(theoric).then((res) => {
+        if (res._id) {
+          setNewTheoricId(res._id);
+          setTheoric(theoricTemplate);
+          setNewImage("");
+          setNewComment("");
+          setDialogText("Contenido teorico creado exitosamente");
+        } else {
+          setNewComment("");
+        }
+      });
+    } catch (error) {
+      setDialogText("Algo salio mal. Por favor intentalo de nuevo");
+    }
   };
   useEffect(() => {
     theoric.owner = {
@@ -63,6 +91,7 @@ export const CreateTheoric = () => {
       profile_picture: user.profile_picture,
       role: user.role,
       user_name: user.user_name,
+      avatar: user.avatar,
     };
   }, [user]);
 
@@ -221,6 +250,22 @@ export const CreateTheoric = () => {
           </Grid>
         </Grid>
       </StyledPaper>
+      <Dialog open={open} onClose={() => setOpen(false)}>
+        <DialogTitle>{dialogText}</DialogTitle>
+        <DialogContent>
+          {dialogText !== "Enviando..." ? (
+            <Button
+              onClick={() => {
+                setOpen(false);
+                dialogText === "Contenido teorico creado exitosamente" &&
+                  navigate(`/Theoric/${newTheoricId}`);
+              }}
+            >
+              Aceptar
+            </Button>
+          ) : null}
+        </DialogContent>
+      </Dialog>
     </Container>
   );
 };

@@ -17,6 +17,7 @@ export const postTheoric = async (theoric: Theoric) => {
       await axios.post("/theoric", aux)
     ).data;
   } catch (error) {
+    return "Algo salió mal, intente de nuevo";
     console.log(error);
   }
 };
