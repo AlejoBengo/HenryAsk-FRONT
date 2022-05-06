@@ -22,6 +22,7 @@ import CreatePost from "./Components/Creators/CreatePost/CreatePost";
 import { CreateTheoric } from "./Components/Creators/CreateTheoric/CreateTheoric";
 import LateralMenu from "./Components/Navbar/LateralMenu/LateralMenu";
 import TheoricView from "./Views/TheoricView";
+import Home from "./Views/Home";
 
 const App = () => {
   const { isAuthenticated, user } = useAuth0();
@@ -45,6 +46,7 @@ const App = () => {
     <>
       <Navbar />
       <Routes>
+        <Route path="/" element={<Home />} />
         <Route path="/a" element={<LateralMenu />} />
         <Route path="/Theoric/:id" element={<TheoricView />} />
         <Route path="/Content" element={<Content />} />
