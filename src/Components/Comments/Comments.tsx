@@ -1,23 +1,29 @@
-import React, { useEffect } from "react";
-import {
-  Drawer,
-  Typography,
-  Divider,
-  Button,
-  Box,
-  Avatar,
-  Skeleton,
-} from "@mui/material";
+import React, { useEffect, useState } from "react";
+import { useAppSelector } from "../../app/hooks";
+import { CreateComment } from "../Creators/CreateComment/CreateComment";
+import { Link } from "react-router-dom";
 import {
   answerTemplate,
   fetchAnswerById,
 } from "../../app/Utils/answerUtilities";
-import { Link } from "react-router-dom";
-import { Owner, Answer, Comment } from "../../app/interface";
-import { ownerTemplate } from "../../app/Utils/userUtilities";
-import { getCommentsByAnswerID } from "../../app/Utils/commentUtilities";
-import { AnswerDetails } from "../Answer/AnswerDetails/AnswerDetails";
-import { CreateComment } from "../Creators/CreateComment/CreateComment";
+import { Answer, Comment } from "../../app/interface";
+import {
+  getCommentsByAnswerID,
+  deleteComment,
+} from "../../app/Utils/commentUtilities";
+import {
+  Drawer,
+  Typography,
+  Divider,
+  TextField,
+  Button,
+  Box,
+  Modal,
+  Avatar,
+  Skeleton,
+} from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { BoxButtons, BoxModalDelete, AreYouSure } from "./StyledComponents";
 
 interface Props {
   id: string;
@@ -26,14 +32,16 @@ interface Props {
 }
 
 export const Comments = ({ id, toggleOpen, open }: Props) => {
+  const usuario = useAppSelector((state: any) => state.user.data);
   const [answer, setAnswer] = React.useState<Answer>(answerTemplate);
   const [comments, setComments] = React.useState<Array<Comment>>([]);
   const [loading, setLoading] = React.useState({
     answer: true,
     comments: true,
   });
-console.log("ANSWE", comments)
- 
+  const [openEdit, setOpenEdit] = useState<boolean>(false);
+  const [openDelete, setOpenDelete] = useState<boolean>(false);
+
   useEffect(() => {
     fetchAnswerById(id)
       .then((res) => {
@@ -57,12 +65,19 @@ console.log("ANSWE", comments)
       setComments([]);
     };
   }, [id]);
-  console.log(
-    "loading answer:",
-    loading.answer,
-    "loading comments:",
-    loading.comments
-  );
+
+  const handleOpenDelete = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setOpenDelete(!openDelete);
+  };
+
+  const handleOpenEdit = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setOpenEdit(!openEdit);
+  };
+
+  const handleDelete = (event: string) => {
+    deleteComment(event);
+    window.location.reload();
+  };
 
   return (
     <Drawer
@@ -100,7 +115,15 @@ console.log("ANSWE", comments)
             style={{ marginRight: "1em" }}
           >
             {!loading.answer ? (
-              <Avatar src={answer.owner.profile_picture.length>0? answer.owner.profile_picture : answer.owner.avatar.length>0? answer.owner.avatar : answer.owner.profile_picture} />
+              <Avatar
+                src={
+                  answer.owner.profile_picture.length > 0
+                    ? answer.owner.profile_picture
+                    : answer.owner.avatar.length > 0
+                    ? answer.owner.avatar
+                    : answer.owner.profile_picture
+                }
+              />
             ) : (
               <Skeleton
                 variant="circular"
@@ -150,10 +173,50 @@ console.log("ANSWE", comments)
                     to={`/Profile/${comment.owner._id}`}
                     style={{ marginRight: "1em" }}
                   >
-                    <Avatar src={comment.owner.profile_picture.length>0? comment.owner.profile_picture : comment.owner.avatar.length>0? comment.owner.avatar : comment.owner.profile_picture  } />
+                    <Avatar
+                      src={
+                        comment.owner.profile_picture.length > 0
+                          ? comment.owner.profile_picture
+                          : comment.owner.avatar.length > 0
+                          ? comment.owner.avatar
+                          : comment.owner.profile_picture
+                      }
+                    />
                   </Link>
                   <Typography variant="body1">{comment.content}</Typography>
-                </Box>{" "}
+                </Box>
+                {(usuario._id === comment.owner._id || usuario.role > 3) && (
+                  <BoxButtons>
+                    <Button
+                      onClick={handleOpenDelete}
+                      variant="contained"
+                      size="small"
+                      color="error"
+                    >
+                      <DeleteIcon />
+                    </Button>
+                  </BoxButtons>
+                )}
+
+                <Modal open={openDelete}>
+                  <BoxModalDelete>
+                    <Button
+                      style={{ marginLeft: "53.2vw", marginTop: "-4.7vh" }}
+                      variant="contained"
+                      onClick={handleOpenDelete}
+                    >
+                      Cerrar
+                    </Button>
+                    <AreYouSure>¿Estás segur@?</AreYouSure>
+                    <Button
+                      onClick={() => handleDelete(comment._id)}
+                      variant="contained"
+                      color="error"
+                    >
+                      Borrar
+                    </Button>
+                  </BoxModalDelete>
+                </Modal>
                 {index < comments.length - 1 && <Divider />}
               </Box>
             );

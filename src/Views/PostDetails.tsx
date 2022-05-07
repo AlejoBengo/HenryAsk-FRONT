@@ -27,26 +27,20 @@ import {
   MenuItem,
   Box,
   Button,
+  TextField,
   Modal,
   IconButton,
 } from "@mui/material";
-import RoundedAccountIcon from "@mui/icons-material/AccountCircleRounded";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { StyledTypography } from "../Components/Theoric/StyledComponents";
 import {
   StyledPaper,
-  StyledButton,
-  StyledButton2,
   StyledBoxModal,
-  StyledTextField2,
   StyledDivButtons,
   StyledBoxChoosed,
   StyledSelect,
+  StyledDiv,
   StyledBoxModal2,
-  StyledButtonModal,
-  StyledButtonModal4,
-  StyledButtonModal5,
-  StyledButtonModal6,
 } from "../Components/Style/StyledComponents";
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 import DialogSuccess from "../Components/Dialog/DialogSuccess";
@@ -204,10 +198,16 @@ export const PostDetails = () => {
 
         <StyledDivButtons>
           {usuario._id === post.owner._id && (
-            <StyledButton onClick={handleOpenEdit}>Editar</StyledButton>
+            <Button variant="contained" onClick={handleOpenEdit}>
+              Editar
+            </Button>
           )}
           {(usuario.role > 3 || usuario._id === post.owner._id) && (
-            <Button variant="contained" onClick={handleOpenDelete}>
+            <Button
+              variant="contained"
+              color="error"
+              onClick={handleOpenDelete}
+            >
               Borrar
             </Button>
           )}
@@ -215,35 +215,49 @@ export const PostDetails = () => {
 
         <Modal open={openDelete}>
           <StyledBoxModal2>
-            <StyledButtonModal5 onClick={handleOpenDelete}>
+            <Button
+              style={{ marginLeft: "43.2vw", marginTop: "-2.4vh" }}
+              variant="contained"
+              onClick={handleOpenDelete}
+            >
               Cerrar
-            </StyledButtonModal5>
-
+            </Button>
             <StyledTypography>Are you sure?</StyledTypography>
-
-            <StyledButtonModal6 onClick={handleDeletePost}>
+            <Button
+              variant="contained"
+              color="error"
+              onClick={handleDeletePost}
+            >
               Borrar
-            </StyledButtonModal6>
+            </Button>
           </StyledBoxModal2>
         </Modal>
 
         <Modal open={openEdit}>
           <StyledBoxModal>
-            <StyledButtonModal onClick={handleOpenEdit}>
+            <Button
+              style={{ marginLeft: "68.1vw" }}
+              variant="contained"
+              onClick={handleOpenEdit}
+            >
               Cerrar
-            </StyledButtonModal>
-            <StyledTextField2
+            </Button>
+            <TextField
               multiline
+              style={{ marginLeft: "1vh", width: "50vw" }}
               onChange={handleEditInputChange}
               name="question"
               value={editable.question}
             />
-            <StyledTextField2
-              multiline
-              onChange={handleEditInputChange}
-              name="description"
-              value={editable.description}
-            />
+            <StyledDiv>
+              <TextField
+                multiline
+                style={{ width: "72vw" }}
+                onChange={handleEditInputChange}
+                name="description"
+                value={editable.description}
+              />
+            </StyledDiv>
             <StyledSelect onChange={(event) => handleEditTags(event)}>
               {tags.map((tag) => {
                 return (
@@ -253,11 +267,20 @@ export const PostDetails = () => {
                 );
               })}
             </StyledSelect>
-            <StyledBoxChoosed sx={{ backgroundColor: "info.main" }}>
+            <StyledBoxChoosed>
               {newTags.length > 0 &&
                 newTags.map((tag: string) => {
                   return (
-                    <Box style={{ display: "flex" }} key={tag}>
+                    <Box
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        width: "10vw",
+                        fontFamily: "Helvetica",
+                      }}
+                      key={tag}
+                    >
                       <h4>{tag}</h4>
                       <IconButton
                         onClick={() => handleDelete(tag)}
@@ -269,9 +292,13 @@ export const PostDetails = () => {
                   );
                 })}
             </StyledBoxChoosed>
-            <StyledButtonModal4 onClick={handleSaver}>
+            <Button
+              style={{ marginLeft: "67.3vw" }}
+              variant="contained"
+              onClick={handleSaver}
+            >
               Guardar
-            </StyledButtonModal4>
+            </Button>
           </StyledBoxModal>
         </Modal>
         <StyledPaper elevation={2}>
