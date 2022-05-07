@@ -186,7 +186,7 @@ export const PostDetails = () => {
 
   if (error) return <div>Error</div>;
   return (
-    <div>
+    <Box>
       <Container sx={{ padding: "1em" }}>
         <DialogSuccess
           openDialog={openDialog}
@@ -195,7 +195,6 @@ export const PostDetails = () => {
           subtitle1="Su posteo fue eliminado con exito"
           buttonText="Volver al foro"
         />
-
         <StyledDivButtons>
           {usuario._id === post.owner._id && (
             <Button variant="contained" onClick={handleOpenEdit}>
@@ -306,6 +305,7 @@ export const PostDetails = () => {
             variant="h3"
             sx={{
               textDecoration: "underline 2px solid ",
+              textDecorationColor: "primary.main",
             }}
             align="left"
             gutterBottom
@@ -357,7 +357,7 @@ export const PostDetails = () => {
         {post.open ? <CreateAnswer id={id} /> : null}
       </Container>
       <Comments id={selectedAnswer} toggleOpen={toggleOpen} open={open} />
-    </div>
+    </Box>
   );
 };
 export default PostDetails;

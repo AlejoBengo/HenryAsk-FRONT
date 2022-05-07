@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useAppSelector } from "../../app/hooks";
 import { CreateComment } from "../Creators/CreateComment/CreateComment";
-import { Link } from "react-router-dom";
 import {
   answerTemplate,
   fetchAnswerById,
@@ -18,6 +17,7 @@ import {
   TextField,
   Button,
   Box,
+  Link,
   Modal,
   Avatar,
   Skeleton,
@@ -111,7 +111,7 @@ export const Comments = ({ id, toggleOpen, open }: Props) => {
           }}
         >
           <Link
-            to={`/Profile/${answer.owner._id}`}
+            href={`/Profile/${answer.owner._id}`}
             style={{ marginRight: "1em" }}
           >
             {!loading.answer ? (
@@ -170,7 +170,7 @@ export const Comments = ({ id, toggleOpen, open }: Props) => {
                   }}
                 >
                   <Link
-                    to={`/Profile/${comment.owner._id}`}
+                    href={`/Profile/${comment.owner._id}`}
                     style={{ marginRight: "1em" }}
                   >
                     <Avatar
@@ -183,6 +183,7 @@ export const Comments = ({ id, toggleOpen, open }: Props) => {
                       }
                     />
                   </Link>
+
                   <Typography variant="body1">{comment.content}</Typography>
                 </Box>
                 {(usuario._id === comment.owner._id || usuario.role > 3) && (
