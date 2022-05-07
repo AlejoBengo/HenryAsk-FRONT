@@ -23,7 +23,7 @@ const {handleClose, openDialog, title1 , subtitle1 , buttonText} = props
   const handleClose = () => {
     setOpen(false);
   }; */
-
+  //const [openDialog, setOpenDialog] = React.useState(false);
   return (
     <div>
       <Dialog
