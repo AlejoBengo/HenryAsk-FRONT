@@ -1,23 +1,22 @@
 /*--------------------------------------------------------*/
 /*-----------IMPORT UTILITIES-----------*/
-import {
-  Paper,
-  Stack,
-  ListItemButton,
-  Box,
-  Grid,
-  Typography,
-  TextField,
-} from "@mui/material";
+import { Paper, Box, Grid, Typography, TextField } from "@mui/material";
 import { styled } from "@mui/material/styles";
 /*--------------------------------------------------------*/
+export const StyledDiv = styled("div")`
+  padding: 1vh;
+  overflow-y: auto;
+  height: 80vh;
+  width: 98vw;
 
-export const StyledBox = styled(Box)`
-  width: 100vw;
-  height: 10vh;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  &::-webkit-scrollbar {
+    width: 15px;
+    background-color: #fff;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: rgb(39, 37, 37);
+    border-radius: 10px;
+  }
 `;
 
 export const StyledBox2 = styled(Box)`
@@ -26,6 +25,7 @@ export const StyledBox2 = styled(Box)`
   position: absolute;
   bottom: 1vh;
   right: 1vh;
+  background-color: red;
 `;
 
 export const StyledTypography = styled(Typography)`
@@ -58,7 +58,7 @@ export const StyledPaper = styled(Paper)`
   font-family: helvetica;
   color: black;
   font-size: 3vh;
-  width: 96vw;
+  width: 95vw;
   padding: 1vw;
   over-flow: hidden;
 `;
@@ -118,21 +118,6 @@ export const StyledBox3 = styled(Box)`
   justify-content: space-evenly;
   align-items: center;
 `;
-
-export const StyledDiv = styled("div")(`
-  height: 69vh;
-  overflow-y: auto;
-  padding: 1vw;
-
-  &::-webkit-scrollbar {
-    width: 15px;
-    background-color: #fff;
-  }
-  &::-webkit-scrollbar-thumb {
-    background-color: rgb(39, 37, 37);
-    border-radius: 10px;
-  }
-`);
 
 export const StyledBoxModal2 = styled(Box)(`
   background-color: #fff;

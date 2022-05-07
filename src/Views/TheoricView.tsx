@@ -12,23 +12,20 @@ import { editTheoric } from "../app/Reducers/theoricSlice";
 import { useParams, useNavigate } from "react-router-dom";
 import { ownerTemplate } from "../app/Utils/userUtilities";
 /*-----------IMPORT MUI & CSS-----------*/
-import { Button, Modal, TextField } from "@mui/material";
+import { Button, Modal, TextField, Box } from "@mui/material";
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 import {
-  StyledBox,
-  StyledBox2,
+  StyledDiv,
   StyledBox3,
   StyledTypography,
   StyledTypography2,
   StyledTypography3,
   StyledPaper,
   StyledGrid,
-  StyledDiv,
   StyledBoxModal,
   StyledBoxModal2,
   StyledDivModal2,
 } from "../Components/Theoric/StyledComponents";
-import { TextFieldsTwoTone } from "@mui/icons-material";
 
 /*--------------------------------------------------------*/
 
@@ -68,8 +65,16 @@ export default function TheoricView() {
     if (aux === false) {
       setEditable({ ...theoric, id: "" });
     }
-    if (typeof id === "string") {
-      setEditable({ ...editable, id: id });
+    if (open === false && typeof id === "string") {
+      setEditable({
+        owner: ownerTemplate,
+        title: theoric.title,
+        content: theoric.content,
+        author: theoric.author,
+        images: theoric.images,
+        comments: theoric.comments,
+        id: id,
+      });
     }
   };
 
@@ -101,7 +106,29 @@ export default function TheoricView() {
 
   return (
     <StyledGrid>
-      <StyledBox>
+      <Box
+        style={{
+          width: "100%",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        <StyledTypography>{theoric.title}</StyledTypography>
+        {role > 3 && (
+          <StyledBox3>
+            <Button variant="contained" onClick={handleOpen}>
+              Editar
+            </Button>
+            <Button
+              color="error"
+              variant="contained"
+              onClick={handleOpenDelete}
+            >
+              Borrar
+            </Button>
+          </StyledBox3>
+        )}
         <Modal open={openDelete}>
           <StyledBoxModal2>
             <Button
@@ -158,35 +185,25 @@ export default function TheoricView() {
             </Button>
           </StyledBoxModal>
         </Modal>
-        <StyledTypography>{theoric.title}</StyledTypography>
-
-        {role > 3 && (
-          <StyledBox3>
-            <Button variant="contained" onClick={handleOpen}>
-              Editar
-            </Button>
-            <Button
-              color="error"
-              variant="contained"
-              onClick={handleOpenDelete}
-            >
-              Borrar
-            </Button>
-          </StyledBox3>
-        )}
-      </StyledBox>
+      </Box>
       <StyledTypography2>Por: {theoric.author}</StyledTypography2>
       <StyledDiv>
         <StyledPaper elevation={8}>{theoric.content}</StyledPaper>
       </StyledDiv>
 
-      <StyledBox2>
+      <Box
+        style={{
+          display: "flex",
+          marginTop: "2.5vh",
+          justifyContent: "flex-end",
+        }}
+      >
         {theoric.comments.length > 0 &&
           theoric.comments.map((com: string) => {
             return <StyledTypography3> {com} </StyledTypography3>;
           })}
         <LocalOfferIcon />
-      </StyledBox2>
+      </Box>
 
       {theoric.images.length > 0 &&
         theoric.images.map((img: string) => {
