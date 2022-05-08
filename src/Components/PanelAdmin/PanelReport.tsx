@@ -1,21 +1,31 @@
 import React from 'react';
 /*-----------IMPORT MUI & CSS-----------*/
-import {Table, TableBody, TableCell, TableContainer, TableHead, Paper, TableRow , TablePagination} from '@mui/material'
+import {Table, TableBody, TableCell, TableContainer, TableHead, Paper, TableRow , TablePagination } from '@mui/material';
+import Typography from '@mui/material/Typography';
+import {LinkDom} from '../Style/StyledComponents';
+import { Box } from '@mui/system';
+import Avatar from '@mui/material/Avatar';
 
 interface Column {
-  id: 'name' | 'post' | 'description' ;
+  id: 'name' | 'post' | 'description' | 'deleted' ;
   label: string;
   minWidth?: number;
   align?: 'center' | 'left';
 }
 
 const columns: readonly Column[] = [
-  { id: 'name', label: 'Nombre de Usuario', minWidth: 170, align:'left' },
+  { id: 'name', label: 'Usuario', minWidth: 120, align:'center' },
   { id: 'post', label: 'Post reportado', minWidth: 100, align:'center' },
   {
     id: 'description',
     label: 'Descripcion del report',
     minWidth: 170,
+    align: 'center',
+  },
+  {
+    id: 'deleted',
+    label: 'Eliminar',
+    minWidth: 120,
     align: 'center',
   },
 ];
@@ -24,33 +34,34 @@ interface Data {
   name: string;
   post: string;
   description: string;
+  deleted:string;
 }
 
 function createData(
   name: string,
   post: string,
   description: string,
-
+  deleted:string
 ): Data {
-  return { name, post, description };
+  return { name, post, description, deleted};
 }
 
 const rows = [
-  createData('India', "true", "1324171354"),
-  createData('China', "true", "1403500365"),
-  createData('Italy', "true", "60483973"),
-  createData('United States', "true", "327167434"),
-  createData('Canada', "true", "37602103"),
-  createData('Australia', "true", "25475400"),
-  createData('Germany', "true", "83019200"),
-  createData('Ireland', "true", "4857000"),
-  createData('Mexico', "true", "126577691"),
-  createData('Japan', "true", "126317000"),
-  createData('France', "true", "67022000"),
-  createData('United Kingdom', "true", "67545757"),
-  createData('Russia', "true", "146793744"),
-  createData('Nigeria', "true", "200962417"),
-  createData('Brazil', "true", "210147125"),
+  createData('India', "true", "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Amet magni mollitia repellat quibusdam ab voluptatum eius blanditiis veritatis delectus aut. Dolores veritatis asperiores mollitia fuga perferendis distinctio pariatur voluptatem explicabo.", "Eliminar"),
+  createData('China', "true", "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Amet magni mollitia repellat quibusdam ab voluptatum eius blanditiis veritatis delectus aut. Dolores veritatis asperiores mollitia fuga perferendis distinctio pariatur voluptatem explicabo.", "Eliminar"),
+  createData('Italy', "true", "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Amet magni mollitia repellat quibusdam ab voluptatum eius blanditiis veritatis delectus aut. Dolores veritatis asperiores mollitia fuga perferendis distinctio pariatur voluptatem explicabo.", "Eliminar"),
+  createData('United', "true", "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Amet magni mollitia repellat quibusdam ab voluptatum eius blanditiis veritatis delectus aut. Dolores veritatis asperiores mollitia fuga perferendis distinctio pariatur voluptatem explicabo.", "Eliminar"),
+  createData('Canada', "true", "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Amet magni mollitia repellat quibusdam ab voluptatum eius blanditiis veritatis delectus aut. Dolores veritatis asperiores mollitia fuga perferendis distinctio pariatur voluptatem explicabo.", "Eliminar"),
+  createData('Australia', "true", "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Amet magni mollitia repellat quibusdam ab voluptatum eius blanditiis veritatis delectus aut. Dolores veritatis asperiores mollitia fuga perferendis distinctio pariatur voluptatem explicabo.", "Eliminar"),
+  createData('Germany', "true", "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Amet magni mollitia repellat quibusdam ab voluptatum eius blanditiis veritatis delectus aut. Dolores veritatis asperiores mollitia fuga perferendis distinctio pariatur voluptatem explicabo.", "Eliminar"),
+  createData('Ireland', "true", "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Amet magni mollitia repellat quibusdam ab voluptatum eius blanditiis veritatis delectus aut. Dolores veritatis asperiores mollitia fuga perferendis distinctio pariatur voluptatem explicabo.", "Eliminar"),
+  createData('Mexico', "true", "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Amet magni mollitia repellat quibusdam ab voluptatum eius blanditiis veritatis delectus aut. Dolores veritatis asperiores mollitia fuga perferendis distinctio pariatur voluptatem explicabo.", "Eliminar"),
+  createData('Japan', "true", "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Amet magni mollitia repellat quibusdam ab voluptatum eius blanditiis veritatis delectus aut. Dolores veritatis asperiores mollitia fuga perferendis distinctio pariatur voluptatem explicabo.", "Eliminar"),
+  createData('France', "true", "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Amet magni mollitia repellat quibusdam ab voluptatum eius blanditiis veritatis delectus aut. Dolores veritatis asperiores mollitia fuga perferendis distinctio pariatur voluptatem explicabo.", "Eliminar"),
+  createData('United', "true", "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Amet magni mollitia repellat quibusdam ab voluptatum eius blanditiis veritatis delectus aut. Dolores veritatis asperiores mollitia fuga perferendis distinctio pariatur voluptatem explicabo.", "Eliminar"),
+  createData('Russia', "true", "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Amet magni mollitia repellat quibusdam ab voluptatum eius blanditiis veritatis delectus aut. Dolores veritatis asperiores mollitia fuga perferendis distinctio pariatur voluptatem explicabo.", "Eliminar"),
+  createData('Nigeria', "true", "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Amet magni mollitia repellat quibusdam ab voluptatum eius blanditiis veritatis delectus aut. Dolores veritatis asperiores mollitia fuga perferendis distinctio pariatur voluptatem explicabo.", "Eliminar"),
+  createData('Brazil', "true", "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Amet magni mollitia repellat quibusdam ab voluptatum eius blanditiis veritatis delectus aut. Dolores veritatis asperiores mollitia fuga perferendis distinctio pariatur voluptatem explicabo.", "Eliminar"),
 ];
 
 export default function PanelReport() {
@@ -68,7 +79,7 @@ export default function PanelReport() {
 
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-      <TableContainer sx={{ maxHeight: 1540}}>
+      <TableContainer sx={{ maxHeight: 1540 , minHeight:1540}}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
@@ -76,7 +87,7 @@ export default function PanelReport() {
                 <TableCell
                   key={column.id}
                   align={column.align}
-                  style={{ minWidth: column.minWidth }}
+                  style={{ minWidth: column.minWidth , fontWeight:"bold",}}
                 >
                   {column.label}
                 </TableCell>
@@ -91,6 +102,26 @@ export default function PanelReport() {
                   <TableRow hover role="checkbox" tabIndex={-1} key={row.name}>
                     {columns.map((column) => {
                       const value = row[column.id];
+
+                      if(column.id === "name"){
+                        return (
+                          <TableCell align={column.align}>
+                            <Box
+                              display="flex"
+                              alignItems="center"
+                              sx={{ flexDirection: "column"}}
+                            >
+                              <Avatar
+                                alt={row.name}
+                                src="https://thumbs.dreamstime.com/b/hombre-de-avatar-en-gris-hombres-abstractos-del-la-muestra-perfil-masculino-icono-s%C3%ADmbolo-blanco-fondo-c%C3%ADrculo-ilustraci%C3%B3n-144168114.jpg"
+                              />
+                              <Typography variant="subtitle2" sx={{color:"secondary.main",}}>
+                                <LinkDom to={`#`} color="secondary.main" >{row.name}</LinkDom>
+                              </Typography>
+                            </Box>
+                          </TableCell>
+                        )
+                      }
                       return (
                         <TableCell key={column.id} align={column.align}>
                           {value}

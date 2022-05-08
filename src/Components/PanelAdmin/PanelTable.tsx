@@ -28,45 +28,12 @@ const columns:Array<Column> = [
   },
 ];
 
-/* interface Data {
-  name: string;
-  puedePostear: string;
-  role: number;
-}
-
-function createData(
-  name: string,
-  puedePostear: string,
-  role: number,
-
-): Data {
-  return { name, puedePostear, role };
-}
-
-const rows = [
-  createData('India', "true", 1324171354),
-  createData('China', "true", 1403500365),
-  createData('Italy', "true", 60483973),
-  createData('United States', "true", 327167434),
-  createData('Canada', "true", 37602103),
-  createData('Australia', "true", 25475400),
-  createData('Germany', "true", 83019200),
-  createData('Ireland', "true", 4857000),
-  createData('Mexico', "true", 126577691),
-  createData('Japan', "true", 126317000),
-  createData('France', "true", 67022000),
-  createData('United Kingdom', "true", 67545757),
-  createData('Russia', "true", 146793744),
-  createData('Nigeria', "true", 200962417),
-  createData('Brazil', "true", 210147125),
-]; */
-
 export default function PanelTable(props:any) {
   const dispatch = useAppDispatch()
   const users = useAppSelector((state)=> state.allUser.allUsers)
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(25);
-
+  const userByUserName = useAppSelector((state) => state.searchUserName.searchUserName);
   const [openDialog, setOpenDialog] = React.useState(false); // dialog
 
   useEffect(()=>{
@@ -92,7 +59,7 @@ export default function PanelTable(props:any) {
 //---------------
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-      <TableContainer sx={{ maxHeight: 1540 }}>
+      <TableContainer sx={{ maxHeight: 1540 , minHeight:1540}}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
@@ -100,7 +67,7 @@ export default function PanelTable(props:any) {
                 <TableCell
                   key={column.id}
                   align={column.align}
-                  style={{ minWidth: column.minWidth }}
+                  style={{ minWidth: column.minWidth , fontWeight:"bold"}}
                 >
                   {column.label}
                 </TableCell>
@@ -108,9 +75,32 @@ export default function PanelTable(props:any) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {users
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row) => {
+            { userByUserName.user_name? 
+            
+            [userByUserName].map((row) => {
+              return (
+                <TableRow hover role="checkbox" tabIndex={-1} key={row.first_name}>
+                  {columns.map((column) => {
+                    const value = row[column.id];
+                    let usuario = row
+                    if(column.id === "role"){
+                        return (
+                        <TableCell key={column.id} align={column.align}>
+                              <SelectRole valor={value} usuario={usuario} handleClickOpen={handleClickOpen}/>
+                        </TableCell>
+                        )
+                    }
+                    return (
+                      <TableCell key={column.id} align={column.align}>
+                        {value}
+                      </TableCell>
+                    );
+                  })}
+                </TableRow>
+              );
+            })
+            
+            :users.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
                 return (
                   <TableRow hover role="checkbox" tabIndex={-1} key={row.first_name}>
                     {columns.map((column) => {
@@ -139,7 +129,7 @@ export default function PanelTable(props:any) {
       <TablePagination
         rowsPerPageOptions={[10, 25, 100]}
         component="div"
-        count={users.length}
+        count={userByUserName.user_name? [userByUserName].length :users.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onPageChange={handleChangePage}
