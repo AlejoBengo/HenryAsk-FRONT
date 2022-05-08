@@ -46,7 +46,7 @@ export const editAnswerChildInPost = async (id: string | undefined) => {
 
 export const editPost = async (obj: any) => {
   try {
-    await axios.put(`/post/`, obj);
+    axios.put(`/post`, obj);
   } catch (error) {
     console.log(error);
   }

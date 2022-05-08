@@ -1,23 +1,28 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { useAppSelector } from "../../app/hooks";
+import { CreateComment } from "../Creators/CreateComment/CreateComment";
+import {
+  answerTemplate,
+  fetchAnswerById,
+} from "../../app/Utils/answerUtilities";
+import { Answer, Comment } from "../../app/interface";
+import {
+  getCommentsByAnswerID,
+  deleteComment,
+} from "../../app/Utils/commentUtilities";
 import {
   Drawer,
   Typography,
   Divider,
   Button,
-  Link,
   Box,
+  Link,
+  Modal,
   Avatar,
   Skeleton,
 } from "@mui/material";
-import {
-  answerTemplate,
-  fetchAnswerById,
-} from "../../app/Utils/answerUtilities";
-import { Owner, Answer, Comment } from "../../app/interface";
-import { ownerTemplate } from "../../app/Utils/userUtilities";
-import { getCommentsByAnswerID } from "../../app/Utils/commentUtilities";
-import { AnswerDetails } from "../Answer/AnswerDetails/AnswerDetails";
-import { CreateComment } from "../Creators/CreateComment/CreateComment";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { BoxButtons, BoxModalDelete, AreYouSure } from "./StyledComponents";
 
 interface Props {
   id: string;
@@ -26,13 +31,16 @@ interface Props {
 }
 
 export const Comments = ({ id, toggleOpen, open }: Props) => {
+  const usuario = useAppSelector((state: any) => state.user.data);
   const [answer, setAnswer] = React.useState<Answer>(answerTemplate);
   const [comments, setComments] = React.useState<Array<Comment>>([]);
   const [loading, setLoading] = React.useState({
     answer: true,
     comments: true,
   });
- 
+  const [openEdit, setOpenEdit] = useState<boolean>(false);
+  const [openDelete, setOpenDelete] = useState<boolean>(false);
+
   useEffect(() => {
     fetchAnswerById(id)
       .then((res) => {
@@ -57,6 +65,18 @@ export const Comments = ({ id, toggleOpen, open }: Props) => {
     };
   }, [id]);
 
+  const handleOpenDelete = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setOpenDelete(!openDelete);
+  };
+
+  const handleOpenEdit = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setOpenEdit(!openEdit);
+  };
+
+  const handleDelete = (event: string) => {
+    deleteComment(event);
+    window.location.reload();
+  };
 
   return (
     <Drawer
@@ -93,42 +113,27 @@ export const Comments = ({ id, toggleOpen, open }: Props) => {
             href={`/Profile/${answer.owner._id}`}
             style={{ marginRight: "1em" }}
           >
-            <Box
-              display="flex"
-              flexDirection="column"
-              justifyContent="center"
-              alignItems="center"
-              sx={{
-                width: 100,
-              }}
-            >
-              {!loading.answer ? (
-                <Avatar
-                  src={
-                    answer.owner.profile_picture.length > 0
-                      ? answer.owner.profile_picture
-                      : answer.owner.avatar.length > 0
-                      ? answer.owner.avatar
-                      : answer.owner.profile_picture
-                  }
-                />
-              ) : (
-                <Skeleton
-                  variant="circular"
-                  sx={{
-                    bgcolor: "info.light",
-                    width: "40px",
-                    height: "40px",
-                  }}
-                  animation="pulse"
-                />
-              )}
-              {!loading.answer && (
-                <Typography variant="caption">
-                  {answer.owner.user_name}
-                </Typography>
-              )}
-            </Box>
+            {!loading.answer ? (
+              <Avatar
+                src={
+                  answer.owner.profile_picture.length > 0
+                    ? answer.owner.profile_picture
+                    : answer.owner.avatar.length > 0
+                    ? answer.owner.avatar
+                    : answer.owner.profile_picture
+                }
+              />
+            ) : (
+              <Skeleton
+                variant="circular"
+                sx={{
+                  bgcolor: "info.light",
+                  width: "40px",
+                  height: "40px",
+                }}
+                animation="pulse"
+              />
+            )}
           </Link>
           {!loading.answer ? (
             <Typography variant="body1">{answer.content}</Typography>
@@ -167,32 +172,51 @@ export const Comments = ({ id, toggleOpen, open }: Props) => {
                     href={`/Profile/${comment.owner._id}`}
                     style={{ marginRight: "1em" }}
                   >
-                    <Box
-                      display="flex"
-                      flexDirection="column"
-                      justifyContent="center"
-                      alignItems="center"
-                      sx={{
-                        width: 100,
-                      }}
-                    >
-                      <Avatar
-                        src={
-                          comment.owner.profile_picture.length > 0
-                            ? comment.owner.profile_picture
-                            : comment.owner.avatar.length > 0
-                            ? comment.owner.avatar
-                            : comment.owner.profile_picture
-                        }
-                      />
-                      <Typography variant="caption">
-                        {comment.owner.user_name}
-                      </Typography>
-                    </Box>
+                    <Avatar
+                      src={
+                        comment.owner.profile_picture.length > 0
+                          ? comment.owner.profile_picture
+                          : comment.owner.avatar.length > 0
+                          ? comment.owner.avatar
+                          : comment.owner.profile_picture
+                      }
+                    />
                   </Link>
 
                   <Typography variant="body1">{comment.content}</Typography>
-                </Box>{" "}
+                </Box>
+                {(usuario._id === comment.owner._id || usuario.role > 3) && (
+                  <BoxButtons>
+                    <Button
+                      onClick={handleOpenDelete}
+                      variant="contained"
+                      size="small"
+                      color="error"
+                    >
+                      <DeleteIcon />
+                    </Button>
+                  </BoxButtons>
+                )}
+
+                <Modal open={openDelete}>
+                  <BoxModalDelete>
+                    <Button
+                      style={{ marginLeft: "53.2vw", marginTop: "-4.7vh" }}
+                      variant="contained"
+                      onClick={handleOpenDelete}
+                    >
+                      Cerrar
+                    </Button>
+                    <AreYouSure>¿Estás segur@?</AreYouSure>
+                    <Button
+                      onClick={() => handleDelete(comment._id)}
+                      variant="contained"
+                      color="error"
+                    >
+                      Borrar
+                    </Button>
+                  </BoxModalDelete>
+                </Modal>
                 {index < comments.length - 1 && <Divider />}
               </Box>
             );
