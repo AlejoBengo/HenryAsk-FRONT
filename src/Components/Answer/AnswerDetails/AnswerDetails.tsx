@@ -38,7 +38,6 @@ import {
 } from "./StyledComponents";
 import CheckIcon from "@mui/icons-material/Check";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { Navigate } from "react-router-dom";
 
 /*--------------------------------------------------------*/
 interface Props {
