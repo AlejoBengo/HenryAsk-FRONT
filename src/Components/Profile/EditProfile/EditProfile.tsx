@@ -28,7 +28,6 @@ export const EditProfile = () => {
   const { id } = useParams();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  console.log(userInfo);
 
   // ----------> Modal edit Profile
   const [avatar, setAvatar] = React.useState("");
