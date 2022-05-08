@@ -1,61 +1,50 @@
 /*--------------------------------------------------------*/
 /*-----------IMPORT UTILITIES-----------*/
-import React from "react";
+import { useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
+import { useAppDispatch, useAppSelector } from "../../../app/hooks";
+import { getAllExercises } from "../../../app/Reducers/exercisesSlice";
+import { fetchAllTheorics } from "../../../app/Reducers/theoricSlice";
+import { theoricTemplate } from "../../../app/Utils/theoricUtilites"
 /*-----------IMPORT COMPONENTS-----------*/
 import BasicCard1 from "./BasicCard/BasicCard1";
+import TableExercise from "./TableExercise/TableExercise";
+import TableTheoric from "./TableTheoric/TableTheoric";
 /*-----------IMPORT MUI & CSS-----------*/
 import { Container, Box, Typography, Button } from "@mui/material";
 import { Imagen } from "../ContentStyled";
 import img from "../../../Assets/imgMainNoLogeado.jpg";
-import { Link } from "react-router-dom";
+import { exerciseTemplate } from "../../../app/Utils/ExerciseUtilities";
+import { ExerciseInterface } from "../../../app/Interfaces/interfaceExercise";
+import { Theoric } from "../../../app/interface"
 /*--------------------------------------------------------*/
 
-let textLoginOne = "Teorico";
-let textLoginTwo = "Practico";
 let textNoLogin = "Rinde el henry challengue y se parte de Henry!";
 
 const MainContent = () => {
   const { isAuthenticated } = useAuth0();
+  const {user:{ data }, exercises:{exercises},theorics:{allTheorics} } = useAppSelector((state) => state);
+  const dispatch = useAppDispatch();
+  let [exercisesLocal,setExercisesLocal] = useState<Array<ExerciseInterface>>([exerciseTemplate]);
+  let [theoricsLocal,setTheoricsLocal] = useState<Array<Theoric>>([theoricTemplate]);
+
+
+  useEffect(() => {
+    dispatch(getAllExercises())
+    setExercisesLocal(exercisesLocal = exercises)
+    dispatch(fetchAllTheorics())
+    setTheoricsLocal(theoricsLocal = allTheorics)
+  }
+  ,[ data, dispatch, setExercisesLocal, setTheoricsLocal ]); // load the info when the user refresh the page
+
   return (
     <div>
-      {isAuthenticated ? (
-        <Container maxWidth={false} sx={{ width: "95vw" }}>
-          <Box
-            width="100%"
-            display="flex"
-            flexDirection="row"
-            justifyContent="center"
-            marginTop="2.5rem"
-            height="10vh"
-          >
-            <Typography variant="h3"> Que tipo de material buscas</Typography>
-          </Box>
-
-          <Box width="100%" height="50vh" display="flex" flexDirection="row">
-            <Box
-              sx={{
-                width: "100%",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <BasicCard1 text={textLoginOne} />
-            </Box>
-            <Box
-              sx={{
-                width: "100%",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <Link to={`/Content/Exercise`}><BasicCard1 text={textLoginTwo}/></Link>
-            </Box>
-          </Box>
-        </Container>
-      ) : (
+      {isAuthenticated ? 
+        <Container>
+          <TableExercise exercisesToRender={exercisesLocal} key={`TableExercise`}/>
+          <TableTheoric theoricsToRender={theoricsLocal} key={`TableTheoric`}/>
+        </Container> 
+      : (
         <Container maxWidth={false} sx={{ width: "95vw" }}>
           <Box
             sx={{

@@ -22,8 +22,7 @@ import CreatePost from "./Components/Creators/CreatePost/CreatePost";
 import { CreateTheoric } from "./Components/Creators/CreateTheoric/CreateTheoric";
 import LateralMenu from "./Components/Navbar/LateralMenu/LateralMenu";
 import TheoricView from "./Views/TheoricView";
-import { ExerciseList } from "./Views/ExerciseList";
-import { ExerciseDetail } from "./Views/ExerciseDetail";
+import ExerciseDetails from "./Views/ExerciseDetails";
 import Home from "./Views/Home";
 import PanelAdm from "./Views/PanelAdm";
 
@@ -51,10 +50,9 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/a" element={<LateralMenu />} />
-        <Route path="/Theoric/:id" element={<TheoricView />} />
         <Route path="/Content" element={<Content />} />
-        <Route path="/Content/Exercise" element={<ExerciseList />} />
-        <Route path="/Content/Exercise/:id" element={<ExerciseDetail />} />
+        <Route path="/Theoric/:id" element={<TheoricView />} />
+        <Route path="/Exercise/:id" element={<ExerciseDetails />} />
         <Route path="/Profile/:id" element={<Profile />} />
         <Route path="/Profile/:id/Edit" element={<EditProfile />} />
         <Route path="/Post/:id" element={<PostDetails />} />

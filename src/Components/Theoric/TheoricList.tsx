@@ -2,14 +2,12 @@
 /*-----------IMPORT UTILITIES-----------*/
 import React, { useEffect, useState } from "react";
 import { useAppSelector, useAppDispatch } from "../../app/hooks";
-import Theoric from "../../app/interface";
 import { fetchAllTheorics } from "../../app/Reducers/theoricSlice";
 import { Link } from "react-router-dom";
 /*-----------IMPORT MUI & CSS-----------*/
-import { List, Stack, ListItemButton, Collapse, Box } from "@mui/material";
+import { List, Collapse } from "@mui/material";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import {
-  StyledStack,
   StyledListItemButton,
   StyledListItemButton2,
 } from "./StyledComponents";
@@ -18,10 +16,13 @@ import {
 
 export default function TheoricList() {
   const [open, setOpen] = useState<boolean>(false);
-  const [allTheorics, setAllTheorics] = useState<any>([]);
+  let [allTheoricsLocal, setAllTheoricsLocal] = useState<any>([]);
+  const {allTheorics} = useAppSelector((state) => state.theorics)
+  const dipatch = useAppDispatch();
 
   useEffect(() => {
-    fetchAllTheorics().then((res) => setAllTheorics(res));
+    dipatch( fetchAllTheorics() )
+    setAllTheoricsLocal( allTheoricsLocal = allTheorics )
   }, []);
 
   const handleOpen = (event: React.MouseEvent<HTMLDivElement>) => {
@@ -40,7 +41,7 @@ export default function TheoricList() {
           <ExpandMore sx={{ width: "100%" }} />
         )}
       </StyledListItemButton>
-      {allTheorics.map((teorico: any) => {
+      {allTheoricsLocal?.map((teorico: any) => {
         return (
           <Collapse
             in={open}

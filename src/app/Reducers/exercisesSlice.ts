@@ -1,12 +1,11 @@
-import { createSlice, createAsyncThunk, PayloadAction, Action, AnyAction, ActionReducerMapBuilder } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, PayloadAction, ActionReducerMapBuilder } from "@reduxjs/toolkit";
 import axios from "axios";
-import { workerData } from "worker_threads";
 import { initialStateInterface, ErrorType, ExerciseInterface } from "../Interfaces/interfaceExercise";
 import { exerciseTemplate } from "../Utils/ExerciseUtilities";
 
 
 const initialState: initialStateInterface = {
-  exercises: [exerciseTemplate],
+  exercises: [],
   exercisesFounded: [exerciseTemplate],
   exercise: exerciseTemplate,
   loading: false,
@@ -36,8 +35,8 @@ export const getExercisesByWord = createAsyncThunk(
   },
 );
 
-export const getExercisesById = createAsyncThunk(
-  "exercises/getExercisesById",
+export const getExerciseById = createAsyncThunk(
+  "exercises/getExerciseById",
   async (id: string) => {
     try {
       const response = (await axios(`/exercise/${id}`)).data;
@@ -62,15 +61,15 @@ const exercisesReducer = createSlice({
         state.exercises = action.payload
       });
     builder
-      .addCase(getExercisesByWord.fulfilled, (state, action: PayloadAction<Array<ExerciseInterface>>):void => {
+      .addCase(getExercisesByWord.fulfilled, (state, action: PayloadAction<Array<ExerciseInterface>>) : void => {
         state.exercisesFounded = action.payload;
       });
     builder
-      .addCase(getExercisesById.fulfilled, (state, action: PayloadAction<ExerciseInterface>):void => {
+      .addCase(getExerciseById.fulfilled, (state, action: PayloadAction<ExerciseInterface>):void => {
           state.exercise = action.payload;
         },)
   }
 });
 
-export default exercisesReducer.reducer;
 export const { clearExercises } = exercisesReducer.actions;
+export default exercisesReducer.reducer;

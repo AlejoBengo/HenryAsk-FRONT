@@ -6,12 +6,13 @@
 
 /*-----------IMPORT MUI & CSS-----------*/
 
-
-export const ExerciseDetail  = () =>{
+const ExerciseDetails = () =>{
 
   return(
     <div>
       Hola
     </div>
   )
-}
+};
+
+export default ExerciseDetails;

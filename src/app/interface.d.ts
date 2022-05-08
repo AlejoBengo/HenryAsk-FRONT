@@ -43,6 +43,7 @@ export interface Answer {
 }
 
 export interface Theoric {
+  _id: string;
   owner: Owner;
   title: string;
   content: string;
@@ -129,21 +130,29 @@ export interface InitialState {
   loading: string;
   profile: User;
 }
-
-//Para agus modelo solucionado
-/* export interface Posts {
-  _id: string;
-  question: string;
-  description: string;
-  owner: User;
-  //createdAt: string;
-  open: boolean;
-  answers: Array<string>;
-  type: number;
-  tags: Array<string>;
-} */
-
 export interface Error {
   errorTag: string;
   errorSubmit: string;
+}
+/**
+ * @TableExercise
+*/
+export interface ColumnTableExercise {
+  id: "owner" | "title" | "description" | "code" | "test" | "tags";
+  label: "Creador" | "Título" | "Descripción" | "Código" | "Test" | "Tags";
+  maxWidth?:number | string;
+  minWidth?: number;
+  align?: "center";
+  format?: ( value: string & Array<string> ) => string;
+}
+/**
+ * @TableTheoric
+*/
+export interface ColumnTableTheoric {
+  id: "owner" | "title" | "content" | "author" | "images" | "comments";
+  label: "Creador" | "Título" | "Contenido" | "Autor" | "Imágenes" | "Comentarios";
+  maxWidth?:number | string;
+  minWidth?: number;
+  align?: "center";
+  format?: ( value: string & Array<string> ) => string;
 }
