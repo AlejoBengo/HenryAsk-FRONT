@@ -6,6 +6,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { userTemplate } from "../../../app/Utils/userUtilities";
 import ModalEditProfile from "./ModalEditProfile";
 import DialogSuccess from "../../Dialog/DialogSuccess";
+import Dialog from "../../Dialog/Dialog";
 /*-----------IMPORT MUI & CSS-----------*/
 import Container from "@mui/material/Container";
 import EditIcon from "@mui/icons-material/Edit";
@@ -36,17 +37,12 @@ export const EditProfile = () => {
   const handleClose = () => setOpen(false);
   //----------------//
 
-  // ------------> DIALOG SUCCES EDIT PROFILE
-  const [openDialog, setOpenDialog] = React.useState(false);
-  const handleClickOpenDialog = () => {
-    setOpenDialog(true);
-  };
 
-  const handleCloseDialog = () => {
-    setOpen(false);
-    navigate(`/Profile/${user._id}`);
-  };
-  // ---------------------------------
+  //  EJEMPLO DIALOGO ACA SIGUE EN LA LINEA 57 
+  const [openDialog, setOpenDialog] = useState(false);  
+  const [modalState, setModalState] = useState("Enviando...");
+
+  // ------------------------//
 
   const handleInputChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -58,23 +54,28 @@ export const EditProfile = () => {
   };
 
   const handleSave = (event: React.MouseEvent<HTMLButtonElement>) => {
-    handleClickOpenDialog();
+    setModalState('Enviando'); // seteamos primero 'Enviando' EXACTAMENTE escrito asi , en caso de que la funcion asincronica tome unos segundos y muestre mensaje de que carga
+    setOpenDialog(true) // Abrimos el modal
     dispatch(remoteUpdateUser(userInfo))
-      .then(() => dispatch(fetchUserByEmail(userInfo.email)))
+      .then(() => (dispatch(fetchUserByEmail(userInfo.email)), setModalState("Cambios guardados correctamente"))) // encierro en parentesis las dos acciones y las separo en coma ,
+      // si ya entro aca es porque salio satisfactoriamente la peticion , "Cambios guardados correctamente" COINCIDE con linea 74 y DEBE coincidir
       .catch((err) => {
         console.log(err);
-        alert("Algo salió mal, intente de nuevo");
+        setModalState("Error al hacer los cambios"); // en caso de entrar al catch mando mensaje de error que COINCIDE  con la prop de error en linea 75 , de esta forma tenemos renderizaods
+        //manejos de errores tambien en el front
       });
   };
   if (user._id != id) navigate(`/Profile/${id}`);
   return (
     <Container sx={{ paddingBottom: "16px", paddingTop: "20px" }}>
-      <DialogSuccess
+      <Dialog
         openDialog={openDialog}
-        handleClose={handleCloseDialog}
-        title1="Cambios guardados correctamente"
-        subtitle1="Se redirigirá a su perfil para visualizar los cambios "
+        setOpenDialog={setOpenDialog}
+        textSuccess="Cambios guardados correctamente"
+        error="Error al hacer los cambios"
         buttonText="Volver a mi perfil"
+        modalState={modalState}
+        setModalState={setModalState}
       />
       <Paper sx={{ paddingBottom: "16px" }}>
         <Box
