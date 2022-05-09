@@ -15,9 +15,9 @@ export const LateralItemStyled = styled(LateralItem)`
 
 export const LinkDom = styled(Link)`
   text-decoration: none;
-  color: black;
+  color: unset;
   &:visited {
-    color: black;
+    color: unset;
   }
 `;
 

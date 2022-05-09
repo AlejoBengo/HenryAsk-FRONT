@@ -2,31 +2,27 @@
 /*-----------IMPORT UTILITIES-----------*/
 import React, { useEffect, useState } from "react";
 import { useAppSelector, useAppDispatch } from "../../app/hooks";
-import { fetchAllTheorics } from "../../app/Reducers/theoricSlice";
+import { getAllExercises } from "../../app/Reducers/exercisesSlice";
 /*-----------IMPORT MUI & CSS-----------*/
 import { List, ListItemButton, Collapse, Link } from "@mui/material";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
-import { StyledSpan } from "./StyledComponents";
+import { StyledSpan } from "../Theoric/StyledComponents";
 /*--------------------------------------------------------*/
 
-export default function TheoricList() {
+const ExerciseList = () => {
   const [open, setOpen] = useState<boolean>(false);
-  let [allTheoricsLocal, setAllTheoricsLocal] = useState<any>([]);
-  const {allTheorics} = useAppSelector((state) => state.theorics)
-  const dipatch = useAppDispatch();
+  let [allExercisesLocal, setAllExercisesLocal] = useState<any>([]);
+  const { exercises } = useAppSelector((state) => state.exercises)
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    // dipatch( fetchAllTheorics() )
-    fetchAllTheorics().then((res) => {
-      setAllTheoricsLocal( res )
-
-    })
+    dispatch( getAllExercises() )
+    exercises.length && setAllExercisesLocal(allExercisesLocal = exercises )
   }, []);
 
   const handleOpen = (event: React.MouseEvent<HTMLDivElement>) => {
     setOpen(!open);
   };
-
   return (
     <List sx={{ width: "100%" }}>
       <ListItemButton
@@ -34,28 +30,28 @@ export default function TheoricList() {
         sx={{ width: "100%", overflow: "hidden" }}
         style={{ fontFamily: "Helvetica", display: "flex" }}
       >
-        <StyledSpan>MATERIAL TEÓRICO</StyledSpan>
+        <StyledSpan>MATERIAL PRÁCTICO</StyledSpan>
         {open ? (
           <ExpandLess sx={{ width: "35%" }} />
-        ) : (
+          ) : (
           <ExpandMore sx={{ width: "35%" }} />
         )}
       </ListItemButton>
-      {allTheoricsLocal.map((teorico: any) => {
+      {allExercisesLocal.map((exercise: any) => {
         return (
           <Collapse
             in={open}
-            key={teorico._id}
+            key={exercise._id}
             timeout="auto"
             unmountOnExit
             sx={{ width: "100%" }}
           >
-            <Link href={`/Theoric/${teorico._id}`} underline="none">
+            <Link href={`/Exercise/${exercise._id}`} underline="none">
               <List component="div" disablePadding sx={{ width: "100%" }}>
                 <ListItemButton
                   style={{ fontFamily: "Helvetica", display: "flex" }}
                 >
-                  {teorico.title}
+                  {exercise.title}
                 </ListItemButton>
               </List>
             </Link>
@@ -65,3 +61,4 @@ export default function TheoricList() {
     </List>
   );
 }
+export default ExerciseList;

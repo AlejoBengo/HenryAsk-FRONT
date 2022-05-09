@@ -25,6 +25,7 @@ import CreatePost from "./Components/Creators/CreatePost/CreatePost";
 import { CreateTheoric } from "./Components/Creators/CreateTheoric/CreateTheoric";
 import LateralMenu from "./Components/Navbar/LateralMenu/LateralMenu";
 import TheoricView from "./Views/TheoricView";
+import ExerciseDetails from "./Views/ExerciseDetails";
 import Home from "./Views/Home";
 import AboutUs from "./Views/AboutUs";
 import About from "./Views/About";
@@ -86,6 +87,7 @@ const App = () => {
           <Route path="/Ask" element={<CreatePost />} />
           <Route path="/Theoric/Create" element={<CreateTheoric />} />{" "}
           <Route path="/PanelAdm" element={<PanelAdm />} />
+          <Route path="/Exercise/:id" element={<ExerciseDetails />} />
         </Routes>
       </Box>
     </ThemeProvider>

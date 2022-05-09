@@ -1,19 +1,12 @@
 /*--------------------------------------------------------*/
 /*-----------IMPORT UTILITIES-----------*/
 import React, { useEffect, useState } from "react";
-import { useAppSelector } from "../app/hooks";
-import {
-  fetchOneTheoric,
-  deleteTheoric,
-} from "../app/Reducers/theoricSlice";
-import { Theoric } from "../app/interface";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { editTheoric } from "../app/Reducers/theoricSlice";
 import { useParams, useNavigate } from "react-router-dom";
 import { ownerTemplate } from "../app/Utils/userUtilities";
-import TheoricDraft from "../Components/Draft/TheoricDraft";
-import { useAuth0 } from "@auth0/auth0-react";
-import RedirectToLogin from "../Components/RedirectToLogin/RedirectToLogin";
-import { theoricTemplate } from "../app/Utils/theoricUtilites";
+import { ExerciseInterface } from "../app/Interfaces/interfaceExercise";
+import { exerciseTemplate } from "../app/Utils/ExerciseUtilities";
 /*-----------IMPORT MUI & CSS-----------*/
 import { Button, Modal, TextField, Box } from "@mui/material";
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
@@ -29,47 +22,50 @@ import {
   StyledBoxModal2,
   StyledDivModal2,
 } from "../Components/Theoric/StyledComponents";
+import { deleteExercise, editExercise, getExerciseById } from "../app/Reducers/exercisesSlice";
+/*-----------IMPORT REDUCER-----------*/
+
+/*-----------IMPORT COMPONENTS-----------*/
 
 /*--------------------------------------------------------*/
 
-export default function TheoricView() {
+const ExerciseDetails = () =>{
   const { id } = useParams();
   const navigate = useNavigate();
-  const usuario = useAppSelector((state) => state.user.data);
-  const [theoric, setTheoric] = useState<Theoric>(theoricTemplate);
+  const {user:{data}, exercises:{exercise}} = useAppSelector((state) => state);
   const [role, setRole] = useState<number>(0);
   const [open, setOpen] = useState<boolean>(false);
-  const [save, setSave] = useState<boolean>(false);
   const [openDelete, setOpenDelete] = useState<boolean>(false);
-  const { isAuthenticated } = useAuth0();
-  const [editable, setEditable] = useState(theoricTemplate);
+  const [editable, setEditable] = useState<ExerciseInterface>(exerciseTemplate);
+const dispatch = useAppDispatch();
+
   useEffect(() => {
     if (id && typeof id === "string") {
-      fetchOneTheoric(id).then((res) => {
-        setTheoric(res);
-        setEditable(res);
-      });
-      setRole(usuario.role);
+      dispatch(getExerciseById(id));
+      setEditable((editable) => editable = exercise);
+      setRole(( role ) => role = data.role);
     }
     if (typeof id === "string") {
       setEditable({ ...editable, _id: id });
     }
-  }, [usuario, id]);
+  }, [data, id]); 
 
   const handleOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
     let aux: boolean = !open;
     setOpen(!open);
     if (aux === false) {
-      setEditable({ ...theoric, _id: "" });
+      setEditable({ ...exercise, _id: "" });
     }
     if (open === false && typeof id === "string") {
       setEditable({
         owner: ownerTemplate,
-        title: theoric.title,
-        content: theoric.content,
-        author: theoric.author,
-        images: theoric.images,
-        comments: theoric.comments,
+        title: exercise.title,
+        description: exercise.description,
+        code: exercise.code,
+        test: exercise.test,
+        createdAt: exercise.createdAt,
+        updatedAt: exercise.updatedAt,
+        tags: exercise.tags,
         _id: id,
       });
     }
@@ -85,9 +81,8 @@ export default function TheoricView() {
     if (typeof id === "string") {
       setEditable({ ...editable, _id: id });
     }
-    editTheoric(editable);
+    editExercise(editable);
     setOpen(!open);
-    setSave(!save);
     window.location.reload();
   };
 
@@ -97,17 +92,13 @@ export default function TheoricView() {
 
   const handleDelete = (event: React.MouseEvent<HTMLButtonElement>) => {
     if (typeof id === "string") {
-      deleteTheoric(id);
-      navigate("/");
+      deleteExercise(id);
+      navigate("/Content");
     }
   };
 
-  if (!isAuthenticated) {
-    return <RedirectToLogin open={true} />;
-  }
-
   return (
-    <StyledGrid>
+    <StyledGrid sx={{minHeight:"unset"}}>
       <Box
         style={{
           width: "100%",
@@ -116,7 +107,7 @@ export default function TheoricView() {
           alignItems: "center",
         }}
       >
-        <StyledTypography>{theoric.title}</StyledTypography>
+        <StyledTypography>{exercise.title}</StyledTypography>
         {role > 3 && (
           <StyledBox3>
             <Button variant="contained" onClick={handleOpen}>
@@ -162,21 +153,20 @@ export default function TheoricView() {
               value={editable.title}
               multiline
             />
-            {/* <TheoricDraft id={id} /> */}
             <StyledDivModal2>
               <TextField
                 style={{ width: "77vw" }}
-                name="content"
+                name="description"
                 onChange={handleInputChange}
-                value={editable.content}
+                value={editable.description}
                 multiline
               />
             </StyledDivModal2>
             <TextField
-              style={{ marginLeft: "1vh", width: "25vw" }}
-              name="author"
+              style={{ marginLeft: "1vh", width: "25vw" }} // tags, test
+              name="code"
               onChange={handleInputChange}
-              value={editable.author}
+              value={editable.code}
               multiline
             />
             <Button
@@ -189,11 +179,14 @@ export default function TheoricView() {
           </StyledBoxModal>
         </Modal>
       </Box>
-      <StyledTypography2>Por: {theoric.author}</StyledTypography2>
-      <StyledDiv>
-        <StyledPaper elevation={8}>{theoric.content}</StyledPaper>
+      <StyledTypography2>Creado por: <Typography>{exercise.owner.user_name} </Typography>el <Typography>{exercise.createdAt.length > 0 && exercise.createdAt}</Typography></StyledTypography2>
+      <StyledDiv sx={{height:"100%"}}>
+        <StyledPaper elevation={8} sx={{marginBlock:"3rem"}}>Descripción: {exercise.description}</StyledPaper>
+        <StyledPaper elevation={8} sx={{marginBlock:"3rem"}}>Código: {exercise.code.length > 0 &&
+          exercise.code}</StyledPaper>
+        <StyledPaper elevation={8} sx={{marginBlock:"3rem"}}>Test: {exercise.test.length > 0 &&
+          exercise.test}</StyledPaper>
       </StyledDiv>
-
       <Box
         style={{
           display: "flex",
@@ -201,17 +194,14 @@ export default function TheoricView() {
           justifyContent: "flex-end",
         }}
       >
-        {theoric.comments.length > 0 &&
-          theoric.comments.map((com: string) => {
-            return <StyledTypography3> {com} </StyledTypography3>;
+        {exercise.tags.length > 0 &&
+          exercise.tags.map((tag: string) => {
+            return <StyledTypography3> {tag} </StyledTypography3>;
           })}
         <LocalOfferIcon />
       </Box>
-
-      {theoric.images.length > 0 &&
-        theoric.images.map((img: string) => {
-          return <img src={img} alt="" />;
-        })}
     </StyledGrid>
   );
-}
+};
+
+export default ExerciseDetails;
