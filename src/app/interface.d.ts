@@ -12,9 +12,9 @@ export interface User {
   profile_picture: string;
   banner: string;
   biography: string;
-  posts: Array<string>;
-  answers: Array<string>;
-  comments: Array<string>;
+  posts: Array<string> & any;
+  answers: Array<string> & any;
+  comments: Array<string> & any;
   own_henry_coin: number;
   give_henry_coin: number;
   theoric: Array<string>;
