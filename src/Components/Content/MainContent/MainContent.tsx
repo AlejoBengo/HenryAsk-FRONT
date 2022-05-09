@@ -32,8 +32,11 @@ const MainContent = () => {
   useEffect(() => {
     dispatch(getAllExercises())
     setExercisesLocal(exercisesLocal = exercises)
-    dispatch(fetchAllTheorics())
-    setTheoricsLocal(theoricsLocal = allTheorics)
+    // dispatch(fetchAllTheorics())
+    fetchAllTheorics().then((res) => {
+
+      setTheoricsLocal( res )
+    })
   }
   ,[ data, dispatch, setExercisesLocal, setTheoricsLocal ]); // load the info when the user refresh the page
 

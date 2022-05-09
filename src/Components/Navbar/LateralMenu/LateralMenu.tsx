@@ -3,6 +3,7 @@
 import React, { useEffect } from "react";
 import { useAppSelector, useAppDispatch } from "../../../app/hooks";
 import TheoricList from "../../Theoric/TheoricList";
+import ExerciseList from "../../Excercise/ExerciseList";
 import NoteAddIcon from "@mui/icons-material/NoteAdd";
 import AcordeonMenu from "./AcordeonMenu";
 import { fetchAllUsers } from "../../../app/Utils/allUsers";
@@ -128,7 +129,7 @@ export default function LateralMenu(props: any) {
 
       <Stack sx={{ width: "100%" }}>
         <TheoricList />
-        <TheoricList />
+        <ExerciseList />
       </Stack>
     </Box>
   );

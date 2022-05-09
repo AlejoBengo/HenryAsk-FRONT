@@ -4,13 +4,13 @@ import React, { useEffect, useState } from "react";
 import { useAppSelector } from "../app/hooks";
 import {
   fetchOneTheoric,
-  theoricTemplate,
   deleteTheoric,
 } from "../app/Reducers/theoricSlice";
 import { Theoric } from "../app/interface";
 import { editTheoric } from "../app/Reducers/theoricSlice";
 import { useParams, useNavigate } from "react-router-dom";
 import { ownerTemplate } from "../app/Utils/userUtilities";
+import { theoricTemplate } from "../app/Utils/theoricUtilites";
 /*-----------IMPORT MUI & CSS-----------*/
 import { Button, Modal, TextField, Box } from "@mui/material";
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
@@ -37,15 +37,7 @@ export default function TheoricView() {
   const [role, setRole] = useState<number>(0);
   const [open, setOpen] = useState<boolean>(false);
   const [openDelete, setOpenDelete] = useState<boolean>(false);
-  const [editable, setEditable] = useState({
-    owner: ownerTemplate,
-    title: "",
-    content: "",
-    author: "",
-    images: [],
-    comments: [],
-    id: "",
-  });
+  const [editable, setEditable] = useState(theoricTemplate);
   useEffect(() => {
     if (id && typeof id === "string") {
       fetchOneTheoric(id).then((res) => {
@@ -55,7 +47,7 @@ export default function TheoricView() {
       setRole(usuario.role);
     }
     if (typeof id === "string") {
-      setEditable({ ...editable, id: id });
+      setEditable({ ...editable, _id: id });
     }
   }, [usuario, id]);
 
@@ -63,7 +55,7 @@ export default function TheoricView() {
     let aux: boolean = !open;
     setOpen(!open);
     if (aux === false) {
-      setEditable({ ...theoric, id: "" });
+      setEditable({ ...theoric, _id: "" });
     }
     if (open === false && typeof id === "string") {
       setEditable({
@@ -73,7 +65,7 @@ export default function TheoricView() {
         author: theoric.author,
         images: theoric.images,
         comments: theoric.comments,
-        id: id,
+        _id: id,
       });
     }
   };
@@ -86,7 +78,7 @@ export default function TheoricView() {
 
   const handleSaver = (event: React.MouseEvent<HTMLButtonElement>) => {
     if (typeof id === "string") {
-      setEditable({ ...editable, id: id });
+      setEditable({ ...editable, _id: id });
     }
     editTheoric(editable);
     setOpen(!open);

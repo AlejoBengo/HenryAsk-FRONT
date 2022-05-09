@@ -18,7 +18,7 @@ const initialState: InitialState = {
   willEdit: {},
 };
 
-export const fetchAllTheorics = createAsyncThunk(
+export const fetchAllTheoricsReducer = createAsyncThunk(
   "theorics/fetchAllTheorics",
   async () => {
     try {
@@ -29,8 +29,24 @@ export const fetchAllTheorics = createAsyncThunk(
     }
   }
 ) 
+export const fetchAllTheorics = async () => {
+  try {
+    const response = await (await axios(`/theoric`)).data;
+    return response;
+  } catch (err) {
+    console.log(err);
+  }
+};
 
-export const fetchOneTheoric = createAsyncThunk(
+export const fetchOneTheoric = async (id: string) => {
+  try {
+    const response = await (await axios(`/theoric/${id}`)).data;
+    return response;
+  } catch (err) {
+    console.log(err);
+  }
+};
+export const fetchOneTheoricReducer = createAsyncThunk(
   "theorics/fetchOneTheoric",
   async (id: string) => {
     try {
@@ -68,11 +84,11 @@ export const theoricsReducer = createSlice({
   },
   extraReducers: (builder) => {
     builder
-    .addCase(fetchAllTheorics.fulfilled, (state,action:PayloadAction<Array<Theoric>>):void => {
+    .addCase(fetchAllTheoricsReducer.fulfilled, (state,action:PayloadAction<Array<Theoric>>):void => {
       state.allTheorics = action.payload;
     });
     builder 
-      .addCase(fetchOneTheoric.fulfilled,(state, action: PayloadAction<Theoric>) : void => {
+      .addCase(fetchOneTheoricReducer.fulfilled,(state, action: PayloadAction<Theoric>) : void => {
         state.oneTheoric = action.payload;
     })
 }
