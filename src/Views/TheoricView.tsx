@@ -1,7 +1,7 @@
 /*--------------------------------------------------------*/
 /*-----------IMPORT UTILITIES-----------*/
 import React, { useEffect, useState } from "react";
-import { useAppSelector, useAppDispatch } from "../app/hooks";
+import { useAppSelector } from "../app/hooks";
 import {
   fetchOneTheoric,
   theoricTemplate,
@@ -11,31 +11,22 @@ import { Theoric } from "../app/interface";
 import { editTheoric } from "../app/Reducers/theoricSlice";
 import { useParams, useNavigate } from "react-router-dom";
 import { ownerTemplate } from "../app/Utils/userUtilities";
+import { useAuth0 } from "@auth0/auth0-react";
+import RedirectToLogin from "../Components/RedirectToLogin/RedirectToLogin";
 /*-----------IMPORT MUI & CSS-----------*/
-import { Button, Modal, TextField } from "@mui/material";
+import { Button, Modal, TextField, Box } from "@mui/material";
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 import {
-  StyledBox,
-  StyledBox2,
+  StyledDiv,
   StyledBox3,
   StyledTypography,
   StyledTypography2,
   StyledTypography3,
-  StyledTypography4,
   StyledPaper,
   StyledGrid,
-  StyledDiv,
   StyledBoxModal,
   StyledBoxModal2,
-  StyledButtonModal,
-  StyledTextFieldModal,
-  StyledTextFieldModal2,
-  StyledTextFieldModal3,
   StyledDivModal2,
-  StyledButtonModal2,
-  StyledButtonModal3,
-  StyledButtonModal4,
-  StyledButtonModal5,
 } from "../Components/Theoric/StyledComponents";
 
 /*--------------------------------------------------------*/
@@ -57,6 +48,8 @@ export default function TheoricView() {
     comments: [],
     id: "",
   });
+  const { isAuthenticated } = useAuth0();
+
   useEffect(() => {
     if (id && typeof id === "string") {
       fetchOneTheoric(id).then((res) => {
@@ -76,8 +69,16 @@ export default function TheoricView() {
     if (aux === false) {
       setEditable({ ...theoric, id: "" });
     }
-    if (typeof id === "string") {
-      setEditable({ ...editable, id: id });
+    if (open === false && typeof id === "string") {
+      setEditable({
+        owner: ownerTemplate,
+        title: theoric.title,
+        content: theoric.content,
+        author: theoric.author,
+        images: theoric.images,
+        comments: theoric.comments,
+        id: id,
+      });
     }
   };
 
@@ -106,70 +107,111 @@ export default function TheoricView() {
       navigate("/");
     }
   };
+  if (!isAuthenticated) {
+    return <RedirectToLogin open={true} />;
+  }
 
   return (
     <StyledGrid>
-      <StyledBox>
+      <Box
+        style={{
+          width: "100%",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        <StyledTypography>{theoric.title}</StyledTypography>
+        {role > 3 && (
+          <StyledBox3>
+            <Button variant="contained" onClick={handleOpen}>
+              Editar
+            </Button>
+            <Button
+              color="error"
+              variant="contained"
+              onClick={handleOpenDelete}
+            >
+              Borrar
+            </Button>
+          </StyledBox3>
+        )}
         <Modal open={openDelete}>
           <StyledBoxModal2>
-            <StyledButtonModal5 onClick={handleOpenDelete}>
-              Close
-            </StyledButtonModal5>
-            <StyledTypography4>Are you sure?</StyledTypography4>
-            <StyledButtonModal4 onClick={handleDelete}>
-              Delete
-            </StyledButtonModal4>
+            <Button
+              variant="contained"
+              style={{ marginLeft: "43.2vw", marginTop: "-4vh" }}
+              onClick={handleOpenDelete}
+            >
+              Cerrar
+            </Button>
+            <StyledTypography>¿Estás segur@?</StyledTypography>
+            <Button variant="contained" color="error" onClick={handleDelete}>
+              Borrar
+            </Button>
           </StyledBoxModal2>
         </Modal>
         <Modal open={open}>
           <StyledBoxModal>
-            <StyledButtonModal onClick={handleOpen}>Close</StyledButtonModal>
-            <StyledTextFieldModal
+            <Button
+              style={{ marginLeft: "74vw", marginTop: "-0.2vh" }}
+              variant="contained"
+              onClick={handleOpen}
+            >
+              Close
+            </Button>
+            <TextField
+              style={{ width: "45vw", marginLeft: "1vh" }}
               name="title"
               onChange={handleInputChange}
               value={editable.title}
               multiline
             />
             <StyledDivModal2>
-              <StyledTextFieldModal2
+              <TextField
+                style={{ width: "77vw" }}
                 name="content"
                 onChange={handleInputChange}
                 value={editable.content}
                 multiline
               />
             </StyledDivModal2>
-            <StyledTextFieldModal3
+            <TextField
+              style={{ marginLeft: "1vh", width: "25vw" }}
               name="author"
               onChange={handleInputChange}
               value={editable.author}
               multiline
             />
-            <StyledButtonModal2 onClick={handleSaver}>Save</StyledButtonModal2>
+            <Button
+              style={{ marginLeft: "74.85vw", marginBottom: "-0.2vh" }}
+              variant="contained"
+              onClick={handleSaver}
+            >
+              Save
+            </Button>
           </StyledBoxModal>
         </Modal>
-        <StyledTypography>{theoric.title}</StyledTypography>
-
-        {role > 3 && (
-          <StyledBox3>
-            <StyledButtonModal3 onClick={handleOpen}>Edit</StyledButtonModal3>
-            <StyledButtonModal4 onClick={handleOpenDelete}>
-              Delete
-            </StyledButtonModal4>
-          </StyledBox3>
-        )}
-      </StyledBox>
+      </Box>
       <StyledTypography2>Por: {theoric.author}</StyledTypography2>
       <StyledDiv>
         <StyledPaper elevation={8}>{theoric.content}</StyledPaper>
       </StyledDiv>
 
-      <StyledBox2>
+      <Box
+        style={{
+          display: "flex",
+          marginTop: "2.5vh",
+          justifyContent: "flex-end",
+        }}
+      >
         {theoric.comments.length > 0 &&
           theoric.comments.map((com: string) => {
             return <StyledTypography3> {com} </StyledTypography3>;
           })}
         <LocalOfferIcon />
-      </StyledBox2>
+      </Box>
+
       {theoric.images.length > 0 &&
         theoric.images.map((img: string) => {
           return <img src={img} alt="" />;

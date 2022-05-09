@@ -1,6 +1,7 @@
 .StyledLink{
     text-decoration: none;
     transition: 0.1s;
+    color: white;
 
 }
 .StyledLink:visited{

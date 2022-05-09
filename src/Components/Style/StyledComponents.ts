@@ -26,8 +26,10 @@ export const Div = styled("div")(`
     height:auto;
     `);
 
+    
+//text-shadow: 4px 4px 4px rgb(255,255,0);
 export const TituloForo = styled("span")(`
-text-shadow: 4px 4px 4px rgb(255,255,0);
+
 border-bottom:10px solid rgb(255,255,0);
 `);
 
@@ -102,24 +104,19 @@ export const StyledBoxModal = styled(Box)`
   height: 55vh;
   margin-left: 12.5vw;
   margin-top: 15vh;
-  background-color: #302d2d;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-start;
 `;
 
 export const StyledBoxChoosed = styled(Box)`
-  width: 35vw;
+  width: 30vw;
   height: 10vh;
-  margin-left: 0.5vw;
   margin-top: 1vh;
   display: flex;
   justify-content: space-evenly;
-`;
-
-export const StyledTextField2 = styled(TextField)`
-  width: 65vw;
-  border-radius: 0.5vh;
-  background-color: #fff;
-  color: black;
-  margin: 0.5vw;
 `;
 
 export const StyledSelect = styled(Select)`
@@ -130,94 +127,32 @@ export const StyledSelect = styled(Select)`
   margin-left: 0.5vw;
 `;
 
-export const StyledButtonModal = styled("button")(`
-    width: 7vw;
-    height: 5vh;
-    padding: 0.8em 1.7em;
-transition: all 0.3s;
-    display: flex;
-    justify-content: center;
-    font-size: 2.5vh;
-    align-items: center;
-    border: #fff;
-    background-color: #ff;
-    color: #black;
-    font-family: helvetica;
-    cursor: pointer;
-    margin-left: 68vw;
-
-    &:hover {
-      border: #f35555;
-      background-color: #f35555;
-    }
-    `);
-
-export const StyledButtonModal4 = styled("button")(`
-width: 7vw;
-height: 5vh;
-margin-left: 68vw;
-margin-top: 6vh;
-color: #090909;
-padding: 0.7em 1.7em;
-font-size: 18px;
-background: #e7e3e3;
-border: 1px solid #e7e3e3;
-transition: all 0.3s;
-display: flex;
-cursor: pointer;
-justify-content: center;
-align-items: center;
-
-&:hover {
-  background: #5ace43;
-border: 1px solid #5ace43;
-}
-    `);
-
 export const StyledDivButtons = styled("div")(`
+    width: 15vw;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
+    margin-left: 70vw;
     `);
 
-export const StyledButtonModal5 = styled("button")(`
-width: 7vw;
-height: 5vh;
-margin-top: -2.7vh;
-margin-left: 43.1vw;  
-color: #090909;
-font-size: 18px;
-background:  #e8e8e8;
-border: 1px solid  #e8e8e8;
-cursor: pointer;
-padding: 0.7em 1.7em;
-display: flex;
-justify-content: center;
-align-items: center;
-    `);
+export const StyledDiv = styled("div")(`
+    width: 75vw;
+    height: 25vh;
+    padding: 1vh;
+    overflow-y: auto;
 
-export const StyledButtonModal6 = styled("button")(`
-width: 7vw;
-height: 5vh;
-color: #090909;
-padding: 0.7em 1.7em;
-font-size: 18px;
-background: #e7e3e3;
-border: 1px solid #e7e3e3;
-transition: all 0.3s;
-display: flex;
-cursor: pointer;
-justify-content: center;
-align-items: center;
-
-&:hover {
-  background: #5ace43;
-border: 1px solid #5ace43;
-}
+    &::-webkit-scrollbar {
+      width: 15px;
+      background-color: #fff;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: rgb(39, 37, 37);
+      border-radius: 10px;
+    }
     `);
 
 export const StyledBoxModal2 = styled(Box)(`
-  background-color: rgb(18, 18, 18);
+  background-color: #fff;
   margin-top: 20vh;
   margin-left: 25vw;
   height: 30vh;

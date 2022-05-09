@@ -1,5 +1,5 @@
 /*-----------IMPORT UTILITIES-----------*/
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Route,
   Routes,
@@ -9,6 +9,9 @@ import {
 } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useAppSelector, useAppDispatch } from "./app/hooks";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { createOptions } from "./Assets/theme/options";
+import { Box } from "@mui/material";
 /*-----------IMPORT REDUCER-----------*/
 import { fetchUserByEmail } from "./app/Reducers/userSlice";
 /*-----------IMPORT COMPONENTS-----------*/
@@ -23,18 +26,15 @@ import { CreateTheoric } from "./Components/Creators/CreateTheoric/CreateTheoric
 import LateralMenu from "./Components/Navbar/LateralMenu/LateralMenu";
 import TheoricView from "./Views/TheoricView";
 import Home from "./Views/Home";
-import AboutUs from "./Views/AboutUs";
-import About from "./Views/About";
-import Careers from "./Views/Careers";
-import Contact from "./Views/Contact";
-import QA from "./Views/Q&A";
-import Privacy from "./Views/PrivacyPolicies";
+import PanelAdm from "./Views/PanelAdm";
 
 const App = () => {
   const { isAuthenticated, user } = useAuth0();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const DBUser = useAppSelector((state) => state.user.data);
+  const mode = useAppSelector((state) => state.mode.mode);
+  const [theme, setTheme] = useState(createTheme(createOptions(mode)));
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -48,28 +48,35 @@ const App = () => {
     }
   }, [DBUser]);
 
+  useEffect(() => {
+    setTheme(createTheme(createOptions(mode)));
+  }, [mode]);
+
   return (
-    <>
+    <ThemeProvider theme={theme}>
       <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/privacy" element={<Privacy />} />
-        <Route path="/qya" element={<QA />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/careeers" element={<Careers />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/aboutus" element={<AboutUs />} />
-        <Route path="/a" element={<LateralMenu />} />
-        <Route path="/Theoric/:id" element={<TheoricView />} />
-        <Route path="/Content" element={<Content />} />
-        <Route path="/Profile/:id" element={<Profile />} />
-        <Route path="/Profile/:id/Edit" element={<EditProfile />} />
-        <Route path="/Post/:id" element={<PostDetails />} />
-        <Route path="/Forum/" element={<Foro />} />
-        <Route path="/Ask" element={<CreatePost />} />
-        <Route path="/Theoric/Create" element={<CreateTheoric />} />
-      </Routes>
-    </>
+      <Box
+        bgcolor={theme.palette.background.default}
+        sx={{
+          minHeight: "100vh",
+          p: 1,
+        }}
+      >
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/a" element={<LateralMenu />} />
+          <Route path="/Theoric/:id" element={<TheoricView />} />
+          <Route path="/Content" element={<Content />} />
+          <Route path="/Profile/:id" element={<Profile />} />
+          <Route path="/Profile/:id/Edit" element={<EditProfile />} />
+          <Route path="/Post/:id" element={<PostDetails />} />
+          <Route path="/Forum/" element={<Foro />} />
+          <Route path="/Ask" element={<CreatePost />} />
+          <Route path="/Theoric/Create" element={<CreateTheoric />} />{" "}
+          <Route path="/PanelAdm" element={<PanelAdm />} />
+        </Routes>
+      </Box>
+    </ThemeProvider>
   );
 };
 export default App;

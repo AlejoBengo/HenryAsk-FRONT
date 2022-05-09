@@ -1,17 +1,19 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
 import userReducer from "./Reducers/userSlice";
-import userProfile from "./Reducers/userProfileSlice"
-import getPosts from './Reducers/getPostsForum'
-import allUsers from './Reducers/allUserSlice'
-import busquedaUserName from './Reducers/getUserByUserName';
+import userProfile from "./Reducers/userProfileSlice";
+import getPosts from "./Reducers/getPostsForum";
+import allUsers from "./Reducers/allUserSlice";
+import busquedaUserName from "./Reducers/getUserByUserName";
+import mode from "./Reducers/modeReducer";
 
 export const store = configureStore({
   reducer: {
     user: userReducer,
-    profile:userProfile,
-    getAllPosts:getPosts,
-    searchUserName:busquedaUserName,
-    allUser:allUsers,
+    profile: userProfile,
+    getAllPosts: getPosts,
+    searchUserName: busquedaUserName,
+    allUser: allUsers,
+    mode,
   },
 });
 
