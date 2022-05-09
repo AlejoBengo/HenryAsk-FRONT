@@ -2,9 +2,13 @@ import * as React from 'react';
 import { Container, Box, Typography, Link, CardActionArea, Grid } from "@mui/material";
 import Collapse from '@mui/material/Collapse';
 import Footer from "../Components/Home/Footer/Footer";
+import { useTheme } from '@mui/material';
 
 
 export default function Careers(){
+
+    const theme = useTheme();
+
     return(
         <Box sx={{width: '100%', padding: '0'}}>            
             <Box
@@ -13,10 +17,10 @@ export default function Careers(){
                     flexDirection: 'column',
                     justifyContent: "center",
                     alignItems: "center",               
-                    backgroundColor: "rgb(255, 255, 1)"
+                    
                 }}>
                     <Container component="main" sx={{ mt: 8, mb: 2 }} maxWidth="sm">
-                        <Typography variant="h3" component="h2" gutterBottom display='flex' justifyContent='center'>
+                        <Typography color={theme.palette.getContrastText(theme.palette.background.default)} variant="h3" component="h2" gutterBottom display='flex' justifyContent='center'>
                             Políticas de privacidad.
                         </Typography>
 

@@ -8,10 +8,14 @@ import Alejo from "../Components/AboutUs/Img/alejo.jpg";
 import Dai from "../Components/AboutUs/Img/Dai.jpg";
 import Marko from "../Components/AboutUs/Img/Marko.jpg";
 import Saul from "../Components/AboutUs/Img/Saul.jpg";
+import { useTheme } from '@mui/material';
 
 
 
 export default function AboutUs(){
+
+    const theme = useTheme();
+
     return(
         <Box sx={{width: '100%', padding: '0'}}>            
             <Box
@@ -19,24 +23,23 @@ export default function AboutUs(){
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: "center",
-                    alignItems: "center",               
-                    backgroundColor: "rgb(255, 255, 1)"
+                    alignItems: "center",                    
                 }}>                
-                <Container sx={{ mt: 8, mb: 2, fontWeight: "bold", justifyContent: "center", alignItems: "center" }} maxWidth="sm">
-                    <Typography variant="h2" component="h1" gutterBottom display='flex' justifyContent='center'>
+                <Container sx={{ mt: 8, mb: 2, display: 'flex',flexDirection: 'column', fontWeight: "bold", justifyContent: "center", alignItems: "center" }}>
+                    <Typography color={theme.palette.getContrastText(theme.palette.background.default)} variant="h2" component="h1" gutterBottom display='flex' justifyContent='center'>
                         Sobre Nosotros
                     </Typography>
-                    <Box sx={{ height: "100%", width: "100%", backgroundColor: "black", color: "rgb(255, 255, 1)", fontWeight: "bold", padding: "1em", borderRadius: "1em"}}>
+                    <Box sx={{ height: "100%", width: "80%", backgroundColor: "black", color: "rgb(255, 255, 1)", fontWeight: "bold", padding: "1em", borderRadius: "1em"}}>
                     <Typography variant="body2" color="rgb(255, 255, 1)">
                     Nuestra propuesta es una aplicación web diseñada para que la comunidad pueda solventar sus dudas, practicar y ayudar a sus compañeros con el fin de fortalecer la solidaridad y participación de los alumnos.
                     </Typography>
                     </Box>
-                    <Typography variant="h3" component="h2" gutterBottom display='flex' justifyContent='center'>
+                    <Typography color={theme.palette.getContrastText(theme.palette.background.default)} variant="h3" component="h2" gutterBottom display='flex' justifyContent='center'>
                         Integrantes
                     </Typography>
 
                     {/* --------------------------------------- */}
-                    <Box sx={{ height: "100%", width: "100%", backgroundColor: "black", color: "rgb(255, 255, 1)", fontWeight: "bold", padding: "1em", borderRadius: "1em"}}>
+                    <Box sx={{ height: "100%", width: "80%", backgroundColor: "black", color: "rgb(255, 255, 1)", fontWeight: "bold", padding: "1em", borderRadius: "1em"}}>
                     <Typography variant="h4" component="h3" gutterBottom display='flex' justifyContent='center'>
                         Back End
                     </Typography>
@@ -56,8 +59,11 @@ export default function AboutUs(){
                                 image={Q4Tr0}
                                 alt=""
                                 sx={{
+                                    borderRadius: "100px",
                                     width: "200px",
-                                    height: "20vh",
+                                    height: "200px",
+                                    border: "2px solid",
+                                    borderColor:"primary.mein",
                                   }}
                             />
                         </Grid>
@@ -91,8 +97,11 @@ export default function AboutUs(){
                                 image={Dai}
                                 alt=""
                                 sx={{
+                                    borderRadius: "100px",
                                     width: "200px",
-                                    height: "20vh",
+                                    height: "200px",
+                                    border: "2px solid",
+                                    borderColor:"primary.mein",
                                   }}
                             />
                         </Grid>
@@ -130,8 +139,11 @@ export default function AboutUs(){
                                 image={Saul}
                                 alt=""
                                 sx={{
+                                    borderRadius: "100px",
                                     width: "200px",
-                                    height: "20vh",
+                                    height: "200px",
+                                    border: "2px solid",
+                                    borderColor:"primary.mein",
                                   }}
                             />
                         </Grid>
@@ -165,8 +177,11 @@ export default function AboutUs(){
                                 image={Marko}
                                 alt=""
                                 sx={{
+                                    borderRadius: "100px",
                                     width: "200px",
-                                    height: "20vh",
+                                    height: "200px",
+                                    border: "2px solid",
+                                    borderColor:"primary.mein",
                                   }}
                             />
                         </Grid>
@@ -205,8 +220,11 @@ export default function AboutUs(){
                                 image={elKefa}
                                 alt=""
                                 sx={{
+                                    borderRadius: "100px",
                                     width: "200px",
-                                    height: "30vh",
+                                    height: "200px",
+                                    border: "2px solid",
+                                    borderColor:"primary.mein",
                                   }}
                             />
                         </Grid>
@@ -240,8 +258,11 @@ export default function AboutUs(){
                                 image={Alejo}
                                 alt=""
                                 sx={{
+                                    borderRadius: "100px",
                                     width: "200px",
-                                    height: "30vh",
+                                    height: "200px",
+                                    border: "2px solid",
+                                    borderColor:"primary.mein",
                                   }}
                             />
                         </Grid>
@@ -252,7 +273,7 @@ export default function AboutUs(){
                             <Typography variant="body2" color="text.secondary" component="div"
                             sx={{ textAlign: "center", marginTop: "1rem", marginBottom: "0.5rem", color: "rgb(255, 255, 1)"}}
                             >
-                            UN TIPO MUY CHEVERE!
+                            Me apasionan profundamente las técnicas de aprendizaje, las habilidades y las nuevas tecnologías. Entonces, me convertí en full stack developer, periodista y, actualmente, estoy estudiando Economics Sciense. También me estoy introduciendo en la criptografía y la ciberseguridad.
                             </Typography>                                               
                         </Grid>
                         </Grid>

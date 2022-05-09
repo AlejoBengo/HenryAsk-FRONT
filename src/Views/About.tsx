@@ -1,8 +1,12 @@
 import * as React from 'react';
 import { Container, Box, Typography, Link, CardActionArea, Grid } from "@mui/material";
 import Footer from "../Components/Home/Footer/Footer";
+import { useTheme } from '@mui/material';
 
 export default function About(){
+
+    const theme = useTheme();
+
     return(
         <Box sx={{width: '100%', padding: '0'}}>            
             <Box
@@ -10,21 +14,20 @@ export default function About(){
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: "center",
-                    alignItems: "center",               
-                    backgroundColor: "rgb(255, 255, 1)"
+                    alignItems: "center"
                 }}>                
                 <Container component="main" sx={{ mt: 8, mb: 2 }} maxWidth="sm">
-                    <Typography variant="h2" component="h1" gutterBottom display='flex' justifyContent='center'>
+                    <Typography color={theme.palette.getContrastText(theme.palette.background.default)} variant="h2" component="h1" gutterBottom display='flex' justifyContent='center'>
                         HENRY ASK
                     </Typography>
 
                     <Box sx={{ boxShadow: "15px", height: "100%", width: "100%", backgroundColor: "black", color: "rgb(255, 255, 1)", fontWeight: "bold", padding: "1em", borderRadius: "1em"}}>
-                    <Typography variant="body2" color="rgb(255, 255, 1)">
+                    <Typography  variant="body2" color="rgb(255, 255, 1)">
                     Nuestra propuesta es una aplicación web diseñada para que la comunidad pueda solventar sus dudas, practicar y ayudar a sus compañeros con el fin de fortalecer la solidaridad y participación de los alumnos.
                     </Typography>
                     </Box>
 
-                    <Typography variant="h5" component="h4" gutterBottom display='flex' justifyContent='center'>
+                    <Typography color={theme.palette.getContrastText(theme.palette.background.default)} variant="h5" component="h4" gutterBottom display='flex' justifyContent='center'>
                     El contenido de la página se dividirá de la siguiente forma:
                     </Typography>
 

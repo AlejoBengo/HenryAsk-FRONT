@@ -5,9 +5,13 @@ import Button from "@mui/material/Button"
 import CardActions from "@mui/material/CardActions";
 import Footer from "../Components/Home/Footer/Footer";
 import Rocket from "../Components/AboutUs/Img/rocket.gif";
+import { useTheme } from '@mui/material';
 
 
 export default function Careers(){
+
+    const theme = useTheme();
+
     return(
         <Box sx={{width: '100%', padding: '0'}}>            
             <Box
@@ -16,14 +20,14 @@ export default function Careers(){
                     flexDirection: 'column',
                     justifyContent: "center",
                     alignItems: "center",               
-                    backgroundColor: "rgb(255, 255, 1)"
+                    
                 }}>                
                 <Container component="main" sx={{ mt: 8, mb: 2 }} maxWidth="sm">
-                    <Typography variant="h2" component="h1" gutterBottom display='flex' justifyContent='center'>
+                    <Typography color={theme.palette.getContrastText(theme.palette.background.default)} variant="h2" component="h1" gutterBottom display='flex' justifyContent='center'>
                         Carreras
                     </Typography>
 
-                    <Typography variant="h4" component="h3" gutterBottom display='flex' justifyContent='center'>
+                    <Typography color={theme.palette.getContrastText(theme.palette.background.default)} variant="h4" component="h3" gutterBottom display='flex' justifyContent='center'>
                         Invertimos en tu educación
                     </Typography>
                 </Container>
