@@ -1,41 +1,3 @@
-// import Typography from '@mui/material/Typography';
-// import Container from '@mui/material/Container';
-// import Grid from '@mui/material/Grid';
-// import Box from '@mui/material/Box';
-// import { CssBaseline } from '@mui/material';
-
-// export default function Grids(){
-//     return(
-//         <Container sx={{ paddingBottom: "16px", paddingTop: "20px"}}>
-//             <Grid container sx={{ mt: 8, mb: 2 }}>
-//                 <Grid item xs={4} sm={4} sx={{ paddingRight: "1em", display:"flex", margin:"0rem 0rem 2em 0em", justifyContent:"space-around" }}>
-//                     {/* <CssBaseline /> */}
-//                     <Box component="main" sx={{ mt: 8, mb: 2 }} maxWidth="sm">
-//                         <Typography variant="h3" component="h2" gutterBottom>
-//                             Teoría
-//                         </Typography>
-//                     </Box>
-//                 </Grid>
-//                 <Grid item xs={4} sm={4}>
-//                     <Box component="main" sx={{ mt: 8, mb: 2 }} maxWidth="sm">
-//                         <Typography variant="h3" component="h2" gutterBottom>
-//                             Ejercicios
-//                         </Typography>
-//                     </Box>
-//                 </Grid>
-//                 <Grid item xs={4} sm={4}>
-//                     <Box component="main" sx={{ mt: 8, mb: 2 }} maxWidth="sm">
-//                         <Typography variant="h3" component="h2" gutterBottom>
-//                             Posteos
-//                         </Typography>
-//                     </Box>
-//                 </Grid>
-//             </Grid>
-//         </Container>
-//     )
-// };
-
-import * as React from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -45,10 +7,11 @@ import posteos from './posteos.jpeg';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 
+
 export default function Grids() {
-  return (
-      <Container>
-          <Grid container spacing={5}>
+    return (
+        <Container>
+                <Grid container spacing={5}>
                 <Grid item xs={12} sm={4}>
                     <Card sx={{ maxWidth: 345 }}>
                         <CardActionArea>
@@ -131,5 +94,5 @@ export default function Grids() {
                 </Grid>
           </Grid>
       </Container>
-  );
-}
+    );
+};

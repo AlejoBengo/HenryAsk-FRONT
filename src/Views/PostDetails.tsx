@@ -2,7 +2,7 @@
 /*-----------IMPORT UTILITIES-----------*/
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { useAppSelector, useAppDispatch } from "../app/hooks";
+import { useAppSelector } from "../app/hooks";
 import {
   getUserById,
   ownerTemplate,
@@ -14,11 +14,13 @@ import {
   getPostById,
   editPost,
 } from "../app/Utils/postUtilities";
+import { useAuth0 } from "@auth0/auth0-react";
 /*-----------IMPORT COMPONENTS-----------*/
 import { UserShort } from "../Components/UserShort/UserShort";
 import CreateAnswer from "../Components/Creators/CreateAnswer/CreateAnswer";
 import { Comments } from "../Components/Comments/Comments";
 import { AnswerDetails } from "../Components/Answer/AnswerDetails/AnswerDetails";
+import RedirectToLogin from "../Components/RedirectToLogin/RedirectToLogin";
 /*-----------IMPORT MUI & CSS-----------*/
 import {
   Container,
@@ -27,26 +29,20 @@ import {
   MenuItem,
   Box,
   Button,
+  TextField,
   Modal,
   IconButton,
 } from "@mui/material";
-import RoundedAccountIcon from "@mui/icons-material/AccountCircleRounded";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { StyledTypography4 } from "../Components/Theoric/StyledComponents";
+import { StyledTypography } from "../Components/Theoric/StyledComponents";
 import {
   StyledPaper,
-  StyledButton,
-  StyledButton2,
   StyledBoxModal,
-  StyledTextField2,
   StyledDivButtons,
   StyledBoxChoosed,
   StyledSelect,
+  StyledDiv,
   StyledBoxModal2,
-  StyledButtonModal,
-  StyledButtonModal4,
-  StyledButtonModal5,
-  StyledButtonModal6,
 } from "../Components/Style/StyledComponents";
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 import DialogSuccess from "../Components/Dialog/DialogSuccess";
@@ -75,7 +71,7 @@ export const PostDetails = () => {
   const [post, setPost] = useState(postTemplate);
   const [user, setUser] = useState(userTemplate);
   const [error, setError] = useState<boolean>(false);
-  const [postOwner, setPostOwner] = useState(ownerTemplate); //Modificado por Agus al resolverse el tema de las Refs de los modelos
+  const [postOwner, setPostOwner] = useState(ownerTemplate);
   const [postAnswers, setPostAnswers] = useState<Array<string>>([]);
   const [selectedAnswer, setSelectedAnswer] = useState<string>("");
   const [open, setOpen] = useState<boolean>(false);
@@ -88,12 +84,13 @@ export const PostDetails = () => {
     tags: "",
   });
   const [newTags, setNewTags] = useState<any>([]);
+  const [openDialog, setOpenDialog] = React.useState(false);
+  const { isAuthenticated } = useAuth0();
 
   const toggleOpen = () => {
     if (!open) setSelectedAnswer("");
     setOpen(!open);
   };
-
   const handleOpenEdit = (event: React.MouseEvent<HTMLButtonElement>) => {
     setOpenEdit(!openEdit);
     setEditable({
@@ -105,41 +102,43 @@ export const PostDetails = () => {
       setEditable({ ...editable, id: id });
     }
   };
-
   const handleEditInputChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     setEditable({ ...editable, [event.target.name]: event.target.value });
   };
-
   const handleEditTags = (event: any) => {
     if (!newTags.includes(event.target.value) && newTags.length < 3) {
       setNewTags([...newTags, event.target.value]);
     }
   };
-
   const handleDelete = (event: any) => {
     const nuevo: Array<string> = newTags.filter((tag: string) => tag !== event);
     setNewTags(nuevo);
   };
-
-  const handleSaver = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleSaver = async (event: React.MouseEvent<HTMLButtonElement>) => {
     setEditable({ ...editable, tags: newTags });
-    editPost(editable);
+    console.log("SOY LA EDICION", editable);
+    await editPost(editable);
     setOpenEdit(!openEdit);
-    window.location.reload();
+    // window.location.reload();
   };
-
   const handleOpenDelete = (event: React.MouseEvent<HTMLButtonElement>) => {
     setOpenDelete(!openDelete);
   };
-
   const handleDeletePost = (event: React.MouseEvent<HTMLButtonElement>) => {
     if (typeof id === "string") {
       deletePost(id);
-      handleClickOpen()
+      handleClickOpen();
       setOpenDelete(!openDelete);
     }
+  };
+  const handleClickOpen = () => {
+    setOpenDialog(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+    navigate("/Forum");
   };
 
   useEffect(() => {
@@ -149,6 +148,9 @@ export const PostDetails = () => {
         setEditable(res);
       })
       .catch((err) => setError(true));
+    if (typeof id === "string") {
+      setEditable({ ...editable, id: id });
+    }
   }, []);
 
   useEffect(() => {
@@ -172,67 +174,83 @@ export const PostDetails = () => {
     }
   }, [selectedAnswer]);
 
-
-  //dialog delete complete 
-  const [openDialog, setOpenDialog] = React.useState(false);
-  const handleClickOpen = () => {
-    setOpenDialog(true);
-    console.log("ENTRO PAPA")
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-    navigate("/Forum");
-  }; 
-
-  
   // ------------------//
 
-
-
   if (error) return <div>Error</div>;
+  if (!isAuthenticated) {
+    return <RedirectToLogin open={true} />;
+  }
   return (
-    <div>
+    <Box>
       <Container sx={{ padding: "1em" }}>
-      <DialogSuccess openDialog={openDialog} handleClose={handleClose} title1="Discusion eliminada con exito!" subtitle1="Su posteo fue eliminado con exito" buttonText="Volver al foro"/>
-        <StyledDivButtons>
-          <StyledButton onClick={handleOpenEdit}>Edit</StyledButton>
-          <Button variant="contained" onClick={handleOpenDelete}>
-            Delete
-          </Button>
-        </StyledDivButtons>
+        <DialogSuccess
+          openDialog={openDialog}
+          handleClose={handleClose}
+          title1="Discusion eliminada con exito!"
+          subtitle1="Su posteo fue eliminado con exito"
+          buttonText="Volver al foro"
+        />
 
+        <StyledDivButtons>
+          {usuario._id === post.owner._id && (
+            <Button variant="contained" onClick={handleOpenEdit}>
+              Editar
+            </Button>
+          )}
+          {(usuario.role > 3 || usuario._id === post.owner._id) && (
+            <Button
+              variant="contained"
+              color="error"
+              onClick={handleOpenDelete}
+            >
+              Borrar
+            </Button>
+          )}
+        </StyledDivButtons>
         <Modal open={openDelete}>
           <StyledBoxModal2>
-            <StyledButtonModal5 onClick={handleOpenDelete}>
-              Close
-            </StyledButtonModal5>
-
-            <StyledTypography4>Are you sure?</StyledTypography4>
-
-            <StyledButtonModal6 onClick={handleDeletePost}>
-              Delete
-            </StyledButtonModal6>
+            <Button
+              style={{ marginLeft: "43.2vw", marginTop: "-2.4vh" }}
+              variant="contained"
+              onClick={handleOpenDelete}
+            >
+              Cerrar
+            </Button>
+            <StyledTypography>Are you sure?</StyledTypography>
+            <Button
+              variant="contained"
+              color="error"
+              onClick={handleDeletePost}
+            >
+              Borrar
+            </Button>
           </StyledBoxModal2>
         </Modal>
-
         <Modal open={openEdit}>
           <StyledBoxModal>
-            <StyledButtonModal onClick={handleOpenEdit}>
-              Close
-            </StyledButtonModal>
-            <StyledTextField2
+            <Button
+              style={{ marginLeft: "68.1vw" }}
+              variant="contained"
+              onClick={handleOpenEdit}
+            >
+              Cerrar
+            </Button>
+            <TextField
               multiline
+              style={{ marginLeft: "1vh", width: "50vw" }}
               onChange={handleEditInputChange}
               name="question"
               value={editable.question}
             />
-            <StyledTextField2
-              multiline
-              onChange={handleEditInputChange}
-              name="description"
-              value={editable.description}
-            />
+            <StyledDiv>
+              <TextField
+                multiline
+                style={{ width: "72vw" }}
+                onChange={handleEditInputChange}
+                name="description"
+                value={editable.description}
+              />
+            </StyledDiv>
             <StyledSelect onChange={(event) => handleEditTags(event)}>
               {tags.map((tag) => {
                 return (
@@ -242,11 +260,20 @@ export const PostDetails = () => {
                 );
               })}
             </StyledSelect>
-            <StyledBoxChoosed sx={{ backgroundColor: "info.main" }}>
+            <StyledBoxChoosed>
               {newTags.length > 0 &&
                 newTags.map((tag: string) => {
                   return (
-                    <Box style={{ display: "flex" }} key={tag}>
+                    <Box
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        width: "10vw",
+                        fontFamily: "Helvetica",
+                      }}
+                      key={tag}
+                    >
                       <h4>{tag}</h4>
                       <IconButton
                         onClick={() => handleDelete(tag)}
@@ -258,14 +285,22 @@ export const PostDetails = () => {
                   );
                 })}
             </StyledBoxChoosed>
-            <StyledButtonModal4 onClick={handleSaver}>Save</StyledButtonModal4>
+            <Button
+              style={{ marginLeft: "67.3vw" }}
+              variant="contained"
+              onClick={handleSaver}
+            >
+              Guardar
+            </Button>
           </StyledBoxModal>
         </Modal>
+
         <StyledPaper elevation={2}>
           <Typography
             variant="h3"
             sx={{
               textDecoration: "underline 2px solid ",
+              textDecorationColor: "primary.main",
             }}
             align="left"
             gutterBottom
@@ -314,10 +349,11 @@ export const PostDetails = () => {
             </div>
           ))}
         </StyledPaper>
+
         {post.open ? <CreateAnswer id={id} /> : null}
       </Container>
       <Comments id={selectedAnswer} toggleOpen={toggleOpen} open={open} />
-    </div>
+    </Box>
   );
 };
 export default PostDetails;

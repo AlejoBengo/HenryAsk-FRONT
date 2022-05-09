@@ -32,3 +32,11 @@ export const createComment = async (comment: Comment) => {
     console.log(error);
   }
 };
+
+export const deleteComment = async (id: string) => {
+  try {
+    await axios.delete(`/comment/?id=${id}`);
+  } catch (error) {
+    console.log(error);
+  }
+};

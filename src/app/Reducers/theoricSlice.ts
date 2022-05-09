@@ -1,29 +1,34 @@
 import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 import { Theoric } from "../interface";
 import axios from "axios";
-import { ownerTemplate } from "../Utils/userUtilities";
-
-export const theoricTemplate: Theoric = {
-  owner: ownerTemplate,
-  title: "",
-  content: "",
-  author: "",
-  images: [],
-  comments: [],
-};
+import { theoricTemplate } from "../Utils/theoricUtilites";
+import { ErrorType } from "../Interfaces/interfaceExercise";
 
 interface InitialState {
   allTheorics: Array<Theoric>;
   oneTheoric: Theoric;
+  loading: boolean;
   willEdit: any;
 }
 
 const initialState: InitialState = {
   allTheorics: [],
   oneTheoric: theoricTemplate,
+  loading: false,
   willEdit: {},
 };
 
+export const fetchAllTheoricsReducer = createAsyncThunk(
+  "theorics/fetchAllTheorics",
+  async () => {
+    try {
+      const response = await (await axios(`/theoric`)).data;
+      return response ? response : new Error(`No se ha encontrado ningún ejercicio: ${response}`);
+    } catch (error: ErrorType) {
+      console.log(`Error en exercisesSlice:${error.message}`)
+    }
+  }
+) 
 export const fetchAllTheorics = async () => {
   try {
     const response = await (await axios(`/theoric`)).data;
@@ -33,6 +38,18 @@ export const fetchAllTheorics = async () => {
   }
 };
 
+export const fetchAllTheoricss = createAsyncThunk(
+  "user/fetchAllTheorics",
+  async () => {
+    try {
+      const response = await (await axios(`/theoric`)).data;
+      return response;
+    } catch (err) {
+      console.log(err);
+    }
+  }
+);
+
 export const fetchOneTheoric = async (id: string) => {
   try {
     const response = await (await axios(`/theoric/${id}`)).data;
@@ -41,6 +58,29 @@ export const fetchOneTheoric = async (id: string) => {
     console.log(err);
   }
 };
+export const fetchOneTheoricReducer = createAsyncThunk(
+  "theorics/fetchOneTheoric",
+  async (id: string) => {
+    try {
+      const response = (await axios(`/theoric/${id}`)).data;
+      return response ? response : new Error(`No se ha encontrado ningún ejercicio: ${response}`);
+    } catch (error: ErrorType) {
+      console.log(`Error en theoricsSlice:${error.message}`)
+    }
+  }
+);
+
+export const fetchOneTheorics = createAsyncThunk(
+  "user/fetchOneTheorics",
+  async (id: string) => {
+    try {
+      const response = await (await axios(`/theoric/${id}`)).data;
+      return response;
+    } catch (err) {
+      console.log(err);
+    }
+  }
+);
 
 export const editTheoric = async (obj: any) => {
   try {
@@ -58,16 +98,25 @@ export const deleteTheoric = async (id: string) => {
   }
 };
 
-export const theoricSlice = createSlice({
-  name: "theoric",
+export const theoricsReducer = createSlice({
+  name: "theorics",
   initialState,
   reducers: {
-    bringAllTheorics: (state) => {
-      state.allTheorics = initialState.allTheorics;
+    clearTheorics: (state) => {
+      state = initialState;
     },
   },
+  extraReducers: (builder) => {
+    builder
+    .addCase(fetchAllTheoricsReducer.fulfilled, (state,action:PayloadAction<Array<Theoric>>):void => {
+      state.allTheorics = action.payload;
+    });
+    builder 
+      .addCase(fetchOneTheoricReducer.fulfilled,(state, action: PayloadAction<Theoric>) : void => {
+        state.oneTheoric = action.payload;
+    })
+}
 });
 
-export const { bringAllTheorics } = theoricSlice.actions;
-
-export default theoricSlice.reducer;
+export const { clearTheorics } = theoricsReducer.actions;
+export default theoricsReducer.reducer;

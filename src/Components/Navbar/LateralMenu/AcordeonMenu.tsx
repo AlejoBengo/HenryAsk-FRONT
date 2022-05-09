@@ -30,7 +30,7 @@ export default function AcordeonMenu(props:any) {
   };
 //------------------------//
 
-   const handleClick = ()=>{
+    const handleClick = ()=>{
     let aux = false
     all.filter((e)=>{
       return e.user_name === userName? aux=true : null
@@ -54,7 +54,7 @@ export default function AcordeonMenu(props:any) {
     <div>
       <DialogFailed open={open} handleClose={handleClose}/>
       <Accordion
-        sx={{ width: "100%", margin: "0em 0em 1em 0em", boxShadow: "none" }}
+        sx={{ width: "100%", margin: "0em 0em 1em 0em", boxShadow: "none"}}
       >
         <AccordionSummary aria-controls="panel1a-content" id="panel1a-header">
           <Button
@@ -70,6 +70,7 @@ export default function AcordeonMenu(props:any) {
         <AccordionDetails>
           <Box
           display="flex"
+          sx={{border:"none"}}
           >
             <TextField
               fullWidth
