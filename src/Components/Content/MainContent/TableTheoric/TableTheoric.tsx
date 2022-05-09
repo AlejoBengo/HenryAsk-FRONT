@@ -9,6 +9,9 @@ import { ColumnTableTheoric, Theoric } from '../../../../app/interface';
 /*-----------IMPORT MUI & CSS-----------*/
 import { Paper, Table, TableBody, TableCell, TableContainer, TablePagination, TableHead, TableRow, Container, Typography, Box, Avatar } from '@mui/material';
 import { LinkDom, TituloForo } from '../../../Style/StyledComponents';
+import { StyledTypography } from "../TableExercise/TableExercise";
+import CloseIcon from '@mui/icons-material/Close';
+import CheckIcon from '@mui/icons-material/Check';
 /*-------------------------------------*/
 
 const TableTheoric = (props:any) => {
@@ -30,10 +33,13 @@ const TableTheoric = (props:any) => {
       id: 'owner', 
       label: 'Creador', 
       minWidth: 170 ,
+      align: 'center',
     },
     { 
       id: 'title', 
-      label: 'Título', minWidth: 100 
+      label: 'Título',
+      minWidth: 100,
+      align: 'center', 
     },
     {
       id: 'content',
@@ -55,25 +61,29 @@ const TableTheoric = (props:any) => {
       label: 'Imágenes',
       minWidth: 170,
       align: 'center',
-      format: (value: Array<string>) => value.length? "✔" : "❌",
+      format: (value)=> value.length
+        ? <CheckIcon data-testid="CheckIcon" fontSize="large" color="success"></CheckIcon>
+        : <CloseIcon data-testid="CloseIcon" fontSize="large" color="error"></CloseIcon> 
     },
     {
       id: 'comments',
       label: 'Comentarios',
       minWidth: 170,
       align: 'center',
-      format: (value: Array<string>) => value.length? "✔" : "❌",
+      format: (value)=> value.length
+        ? <CheckIcon data-testid="CheckIcon" fontSize="large" color="success"></CheckIcon>
+        : <CloseIcon data-testid="CloseIcon" fontSize="large" color="error"></CloseIcon> 
     },
   ];
 
   return (
     <Container>
-      <Typography
+      <StyledTypography
       variant="h3"
       textAlign="center"
       margin="4rem 0rem 2rem 0rem">
           🧠 Aumenta tus conocimientos con <TituloForo>Posteos Teóricos</TituloForo>
-      </Typography>
+      </StyledTypography>
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
     <TableContainer sx={{ maxHeight: 440 }}>
       <Table stickyHeader aria-label="sticky table">
@@ -111,7 +121,10 @@ const TableTheoric = (props:any) => {
                               alt={row.owner.user_name} //if the image can't be loaded then will show the first alt's letter (user's firstname)
                               src={row.owner.profile_picture ? row.owner.profile_picture : row.owner.avatar }
                             />
-                            <Typography variant="subtitle2">
+                            <Typography 
+                              variant="subtitle2"
+                              fontWeight="bold"
+                            >
                               <LinkDom to={`/Profile/${row.owner?._id}`}>{row.owner?.user_name}</LinkDom>
                             </Typography>
                           </Box>
@@ -119,9 +132,22 @@ const TableTheoric = (props:any) => {
                       );
                     } else if (column.id === "title"){
                       return(
-                        <LinkDom to={`/Theoric/${row._id}`}>
+                        <TableCell
+                          key={column.id}
+                          align={column.align}
+                          sx={{
+                            maxWidth: "20vw",
+                            minWidth: "100px",
+                            maxHeight: "14.5vh",
+                            fontWeight:"bold"
+                          }}
+                        >
+                        <LinkDom 
+                          to={`/Theoric/${row._id}`}
+                        >
                           { value }
                         </LinkDom>
+                      </TableCell>
                       )
                     }
                     return (

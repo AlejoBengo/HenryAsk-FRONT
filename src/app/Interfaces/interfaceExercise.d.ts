@@ -1,3 +1,5 @@
+import { Owner} from "../interface";
+
 export enum RolesEnum{
   ZERO, 
   ONE, 
@@ -37,19 +39,21 @@ export enum TagsEnum{
 }
 
 export interface ExerciseInterface{
+  _id: string
   owner: Owner
   title: string
-  tags: Array<Tags>
+  tags: Array<TagsEnum>
   description: string
   code: string
   test: string
-
+  createdAt: string
+  updatedAt: string
 }
 
 export interface initialStateInterface {
-  exercises: Array<Exercise>
-  exercisesFounded: Array<Exercise>
-  exercise: Exercise
+  exercises: Array<ExerciseInterface>
+  exercisesFounded: Array<ExerciseInterface>
+  exercise: ExerciseInterface
   loading:boolean
 }
 

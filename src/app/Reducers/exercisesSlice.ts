@@ -36,7 +36,7 @@ export const getExercisesByWord = createAsyncThunk(
 );
 
 export const getExerciseById = createAsyncThunk(
-  "exercises/getExerciseById",
+  "exercise/getExerciseById",
   async (id: string) => {
     try {
       const response = (await axios(`/exercise/${id}`)).data;
@@ -46,6 +46,25 @@ export const getExerciseById = createAsyncThunk(
     }
   },
 );
+
+export const deleteExercise = async (id:string) =>{
+  try {
+    await axios.delete(`/exercise?id=${id}`)
+    
+  } catch (error: ErrorType) {
+    console.log(`Error en exercisesSlice:${error}`)
+  }
+};
+
+export const editExercise = async (changesExercise: ExerciseInterface) => {
+  try {
+    await axios.put(`/exercise`,changesExercise)
+    
+  } catch (error: ErrorType) {
+    console.log(`Error en exercisesSlice:${error}`);
+    
+  }
+}
 
 const exercisesReducer = createSlice({
   name: "exercises",

@@ -1,4 +1,4 @@
-
+import { TagsEnum } from "../app/Interfaces/interfaceExercise"
 export interface User {
   _id: string;
   first_name: string;
@@ -143,7 +143,7 @@ export interface ColumnTableExercise {
   maxWidth?:number | string;
   minWidth?: number;
   align?: "center";
-  format?: ( value: string & Array<string> ) => string;
+  format?: ( value: any ) => OverridableComponent<SvgIconTypeMap<{}, "svg">> & { muiName: string; } & string;
 }
 /**
  * @TableTheoric
@@ -154,5 +154,5 @@ export interface ColumnTableTheoric {
   maxWidth?:number | string;
   minWidth?: number;
   align?: "center";
-  format?: ( value: string & Array<string> ) => string;
+  format?: ( value: string & Array<string> ) => OverridableComponent<SvgIconTypeMap<{}, "svg">> & { muiName: string; } & string;
 }

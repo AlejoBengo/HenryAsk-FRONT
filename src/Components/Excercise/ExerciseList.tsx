@@ -6,6 +6,7 @@ import { getAllExercises } from "../../app/Reducers/exercisesSlice";
 /*-----------IMPORT MUI & CSS-----------*/
 import { List, ListItemButton, Collapse, Link } from "@mui/material";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
+import { StyledSpan } from "../Theoric/StyledComponents";
 /*--------------------------------------------------------*/
 
 const ExerciseList = () => {
@@ -29,11 +30,11 @@ const ExerciseList = () => {
         sx={{ width: "100%", overflow: "hidden" }}
         style={{ fontFamily: "Helvetica", display: "flex" }}
       >
-        Ejercicios
+        <StyledSpan>MATERIAL PRÁCTICO</StyledSpan>
         {open ? (
-          <ExpandLess sx={{ width: "100%" }} />
-        ) : (
-          <ExpandMore sx={{ width: "100%" }} />
+          <ExpandLess sx={{ width: "35%" }} />
+          ) : (
+          <ExpandMore sx={{ width: "35%" }} />
         )}
       </ListItemButton>
       {allExercisesLocal.map((exercise: any) => {

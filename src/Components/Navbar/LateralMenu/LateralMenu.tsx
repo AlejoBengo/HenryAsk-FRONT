@@ -82,7 +82,7 @@ export default function LateralMenu(props: any) {
                 ? userLog.avatar
                 : userLog.profile_picture
             }
-            sx={{ width: "100%", height: "auto" }}
+            sx={{ width: "6.25rem", height: "6.25rem" }}
           />
           <Typography variant="subtitle1">{userLog.user_name}</Typography>
           <LinkDom

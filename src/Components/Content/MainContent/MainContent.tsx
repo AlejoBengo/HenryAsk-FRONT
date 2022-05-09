@@ -1,11 +1,10 @@
 /*--------------------------------------------------------*/
 /*-----------IMPORT UTILITIES-----------*/
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import { getAllExercises } from "../../../app/Reducers/exercisesSlice";
-import { fetchAllTheorics } from "../../../app/Reducers/theoricSlice";
-import { theoricTemplate } from "../../../app/Utils/theoricUtilites"
+import { fetchAllTheoricsReducer } from "../../../app/Reducers/theoricSlice";
 /*-----------IMPORT COMPONENTS-----------*/
 import BasicCard1 from "./BasicCard/BasicCard1";
 import TableExercise from "./TableExercise/TableExercise";
@@ -14,9 +13,6 @@ import TableTheoric from "./TableTheoric/TableTheoric";
 import { Container, Box, Typography, Button } from "@mui/material";
 import { Imagen } from "../ContentStyled";
 import img from "../../../Assets/imgMainNoLogeado.jpg";
-import { exerciseTemplate } from "../../../app/Utils/ExerciseUtilities";
-import { ExerciseInterface } from "../../../app/Interfaces/interfaceExercise";
-import { Theoric } from "../../../app/interface"
 /*--------------------------------------------------------*/
 
 let textNoLogin = "Rinde el henry challengue y se parte de Henry!";
@@ -25,27 +21,19 @@ const MainContent = () => {
   const { isAuthenticated } = useAuth0();
   const {user:{ data }, exercises:{exercises},theorics:{allTheorics} } = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
-  let [exercisesLocal,setExercisesLocal] = useState<Array<ExerciseInterface>>([exerciseTemplate]);
-  let [theoricsLocal,setTheoricsLocal] = useState<Array<Theoric>>([theoricTemplate]);
 
 
   useEffect(() => {
     dispatch(getAllExercises())
-    setExercisesLocal(exercisesLocal = exercises)
-    // dispatch(fetchAllTheorics())
-    fetchAllTheorics().then((res) => {
-
-      setTheoricsLocal( res )
-    })
-  }
-  ,[ data, dispatch, setExercisesLocal, setTheoricsLocal ]); // load the info when the user refresh the page
+    dispatch(fetchAllTheoricsReducer())
+  },[ data, dispatch ]); // load the info when the user refresh the page
 
   return (
     <div>
       {isAuthenticated ? 
         <Container>
-          <TableExercise exercisesToRender={exercisesLocal} key={`TableExercise`}/>
-          <TableTheoric theoricsToRender={theoricsLocal} key={`TableTheoric`}/>
+          <TableExercise exercisesToRender={exercises} key={`TableExercise`}/>
+          <TableTheoric theoricsToRender={allTheorics} key={`TableTheoric`}/>
         </Container> 
       : (
         <Container maxWidth={false} sx={{ width: "95vw" }}>

@@ -1,4 +1,7 @@
-export const ownerTemplate= {
+import { Owner } from "../interface"
+import { ExerciseInterface } from "../Interfaces/interfaceExercise"
+
+export const ownerTemplate: Owner= {
   _id:"",
   user_name: "",
   profile_picture: "",
@@ -6,11 +9,14 @@ export const ownerTemplate= {
   avatar: "",
 }
 
-export const exerciseTemplate = {
+export const exerciseTemplate: ExerciseInterface = {
+  _id: "",
   owner: ownerTemplate,
   title: "",
   tags: [],
   description: "",
   code: "",
   test:"",
+  createdAt: "",
+  updatedAt: "",
 }
