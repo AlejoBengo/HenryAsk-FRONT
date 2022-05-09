@@ -24,6 +24,23 @@ export default function PanelAdm(props: any) {
   let [valor, setValor] = React.useState("");
   const navigate = useNavigate();
 
+  // {
+  // OWNER : {user_name, avatar , picture_profile , role }
+  // DESCRIPTION : string mensaje report
+  // STATUS : enum --> pending , rejected , fullfilled
+  // REASON : enum ---> string
+  // POST : {} | 'VACIO'
+  // ANSWER : {} | 'VACIO'
+  // COMMENT : {} | 'VACIO'
+  // }
+
+
+  // EN EL FRONT 
+  // 1 COLUMNA- USUARIO QUE REPORTO 
+  // 2 -  COMMENT | POST | ANSWER  
+  // 3 - DESCRIPCION ---> MODAL QUE SE ABRE Y MUESTRA RAZON Y DESCRIPCION
+  // 4 - STATUS: PENDING , REJECTED , FULFILLED 
+
   useEffect(() => {
     dispatch(fetchUserByEmail(user?.email))
     .then((response) =>response.payload.role !== 5 ? navigate("/Forum") : null);

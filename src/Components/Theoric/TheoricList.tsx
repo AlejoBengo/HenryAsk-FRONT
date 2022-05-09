@@ -5,6 +5,7 @@ import { fetchAllTheorics } from "../../app/Reducers/theoricSlice";
 /*-----------IMPORT MUI & CSS-----------*/
 import { List, ListItemButton, Collapse, Link } from "@mui/material";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
+import { StyledSpan } from "./StyledComponents";
 /*--------------------------------------------------------*/
 
 export default function TheoricList() {
@@ -25,11 +26,11 @@ export default function TheoricList() {
         sx={{ width: "100%", overflow: "hidden" }}
         style={{ fontFamily: "Helvetica", display: "flex" }}
       >
-        TEORICO
+        <StyledSpan>TEORICO</StyledSpan>
         {open ? (
-          <ExpandLess sx={{ width: "100%" }} />
+          <ExpandLess sx={{ width: "35%" }} />
         ) : (
-          <ExpandMore sx={{ width: "100%" }} />
+          <ExpandMore sx={{ width: "35%" }} />
         )}
       </ListItemButton>
       {allTheorics.map((teorico: any) => {
