@@ -18,6 +18,7 @@ export default function TheoricList() {
   const handleOpen = (event: React.MouseEvent<HTMLDivElement>) => {
     setOpen(!open);
   };
+
   return (
     <List sx={{ width: "100%" }}>
       <ListItemButton

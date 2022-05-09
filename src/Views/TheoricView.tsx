@@ -11,6 +11,7 @@ import { Theoric } from "../app/interface";
 import { editTheoric } from "../app/Reducers/theoricSlice";
 import { useParams, useNavigate } from "react-router-dom";
 import { ownerTemplate } from "../app/Utils/userUtilities";
+import TheoricDraft from "../Components/Draft/TheoricDraft";
 /*-----------IMPORT MUI & CSS-----------*/
 import { Button, Modal, TextField, Box } from "@mui/material";
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
@@ -24,7 +25,6 @@ import {
   StyledGrid,
   StyledBoxModal,
   StyledBoxModal2,
-  StyledDivModal2,
 } from "../Components/Theoric/StyledComponents";
 
 /*--------------------------------------------------------*/
@@ -36,6 +36,7 @@ export default function TheoricView() {
   const [theoric, setTheoric] = useState<Theoric>(theoricTemplate);
   const [role, setRole] = useState<number>(0);
   const [open, setOpen] = useState<boolean>(false);
+  const [save, setSave] = useState<boolean>(false);
   const [openDelete, setOpenDelete] = useState<boolean>(false);
   const [editable, setEditable] = useState({
     owner: ownerTemplate,
@@ -46,6 +47,7 @@ export default function TheoricView() {
     comments: [],
     id: "",
   });
+
   useEffect(() => {
     if (id && typeof id === "string") {
       fetchOneTheoric(id).then((res) => {
@@ -90,6 +92,7 @@ export default function TheoricView() {
     }
     editTheoric(editable);
     setOpen(!open);
+    setSave(!save);
     window.location.reload();
   };
 
@@ -160,7 +163,8 @@ export default function TheoricView() {
               value={editable.title}
               multiline
             />
-            <StyledDivModal2>
+            <TheoricDraft save={save} value={editable.content} />
+            {/* <StyledDivModal2>
               <TextField
                 style={{ width: "77vw" }}
                 name="content"
@@ -168,7 +172,7 @@ export default function TheoricView() {
                 value={editable.content}
                 multiline
               />
-            </StyledDivModal2>
+            </StyledDivModal2> */}
             <TextField
               style={{ marginLeft: "1vh", width: "25vw" }}
               name="author"

@@ -68,7 +68,8 @@ export const StyledGrid = styled(Grid)`
   flex-direction: column;
 `;
 
-export const StyledBoxModal = styled(Box)`
+export const StyledBoxModal = styled(Box)(
+  ({ theme }) => `
   margin-top: 10vh;
   margin-left: 10vw;
   width: 80vw;
@@ -78,7 +79,8 @@ export const StyledBoxModal = styled(Box)`
   flex-direction: column;
   justify-content: space-around;
   align-items: flex-start;
-`;
+`
+);
 
 export const StyledDivModal2 = styled("div")(`
   height: 52vh;
