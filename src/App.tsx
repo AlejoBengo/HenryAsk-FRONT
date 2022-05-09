@@ -65,7 +65,7 @@ const App = () => {
         bgcolor={theme.palette.background.default}
         sx={{
           minHeight: "100vh",
-          p: 1,
+          p: 0,
         }}
       >
         <Routes>
