@@ -14,7 +14,11 @@ const initialState: InitialState = {
 export const userProfile = createSlice({
   name: "searchUserName",
   initialState,
-  reducers: {},
+  reducers: {
+    clearUserName: (state) => {
+      state.searchUserName = userTemplate;
+    }
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchUserByUserName.fulfilled, (state, action) => {
       state.searchUserName = action.payload;
@@ -24,5 +28,5 @@ export const userProfile = createSlice({
     });
   },
 });
-
+export const { clearUserName} = userProfile.actions;
 export default userProfile.reducer;

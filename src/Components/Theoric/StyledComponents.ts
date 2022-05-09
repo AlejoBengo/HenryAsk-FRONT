@@ -3,6 +3,11 @@
 import { Paper, Box, Grid, Typography, TextField } from "@mui/material";
 import { styled } from "@mui/material/styles";
 /*--------------------------------------------------------*/
+
+export const StyledSpan = styled("div")`
+width:200px;
+`
+
 export const StyledDiv = styled("div")`
   padding: 1vh;
   overflow-y: auto;

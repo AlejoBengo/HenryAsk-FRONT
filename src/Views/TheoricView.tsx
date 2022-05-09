@@ -12,6 +12,8 @@ import { editTheoric } from "../app/Reducers/theoricSlice";
 import { useParams, useNavigate } from "react-router-dom";
 import { ownerTemplate } from "../app/Utils/userUtilities";
 import TheoricDraft from "../Components/Draft/TheoricDraft";
+import { useAuth0 } from "@auth0/auth0-react";
+import RedirectToLogin from "../Components/RedirectToLogin/RedirectToLogin";
 /*-----------IMPORT MUI & CSS-----------*/
 import { Button, Modal, TextField, Box } from "@mui/material";
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
@@ -47,6 +49,7 @@ export default function TheoricView() {
     comments: [],
     id: "",
   });
+  const { isAuthenticated } = useAuth0();
 
   useEffect(() => {
     if (id && typeof id === "string") {
@@ -106,6 +109,9 @@ export default function TheoricView() {
       navigate("/");
     }
   };
+  if (!isAuthenticated) {
+    return <RedirectToLogin open={true} />;
+  }
 
   return (
     <StyledGrid>

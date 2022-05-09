@@ -14,11 +14,13 @@ import {
   getPostById,
   editPost,
 } from "../app/Utils/postUtilities";
+import { useAuth0 } from "@auth0/auth0-react";
 /*-----------IMPORT COMPONENTS-----------*/
 import { UserShort } from "../Components/UserShort/UserShort";
 import CreateAnswer from "../Components/Creators/CreateAnswer/CreateAnswer";
 import { Comments } from "../Components/Comments/Comments";
 import { AnswerDetails } from "../Components/Answer/AnswerDetails/AnswerDetails";
+import RedirectToLogin from "../Components/RedirectToLogin/RedirectToLogin";
 /*-----------IMPORT MUI & CSS-----------*/
 import {
   Container,
@@ -83,6 +85,7 @@ export const PostDetails = () => {
   });
   const [newTags, setNewTags] = useState<any>([]);
   const [openDialog, setOpenDialog] = React.useState(false);
+  const { isAuthenticated } = useAuth0();
 
   const toggleOpen = () => {
     if (!open) setSelectedAnswer("");
@@ -174,6 +177,9 @@ export const PostDetails = () => {
   // ------------------//
 
   if (error) return <div>Error</div>;
+  if (!isAuthenticated) {
+    return <RedirectToLogin open={true} />;
+  }
   return (
     <Box>
       <Container sx={{ padding: "1em" }}>

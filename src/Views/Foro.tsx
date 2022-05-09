@@ -2,6 +2,7 @@
 /*-----------IMPORT UTILITIES-----------*/
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
 import { Link } from "react-router-dom";
 /*-----------IMPORT COMPONENTS-----------*/
 import TableInstructor from "../Components/Foro/TableInstructor/TableInstructor";
@@ -11,11 +12,14 @@ import { Container, Typography, Button, Grid, Alert } from "@mui/material";
 import { fetchGetAllPosts } from "../app/Reducers/getPostsForum";
 import { useAppSelector, useAppDispatch } from "../app/hooks";
 import { Posts } from "../app/interface";
+import RedirectToLogin from "../Components/RedirectToLogin/RedirectToLogin";
+import Dialog from "../Components/Dialog/Dialog";
 
 let AlumnOrInstructor = ["Alumno", "Instructor"];
 export default function Foro() {
   const userLogin = useAppSelector((state) => state.user.data);
   const posts = useAppSelector((state) => state.getAllPosts.posts);
+  const { isAuthenticated } = useAuth0();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -71,7 +75,9 @@ export default function Foro() {
   // setTimeout(()=> console.log("INSTRUCTOR",postInstructores), 4000)
   //setTimeout(()=> console.log("PREP",postPrep), 4000)
   //setTimeout(()=> console.log("POST",posts), 4000)
-
+  if (!isAuthenticated) {
+    return <RedirectToLogin open={true} />;
+  }
   if (userLogin.role === 1) {
     return (
       <Div>
