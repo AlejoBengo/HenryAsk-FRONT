@@ -1,18 +1,21 @@
-// import * as React from 'react';
-// import CssBaseline from '@mui/material/CssBaseline';
 import Typography from '@mui/material/Typography';
-import { Container, Grid, Box, Link } from "@mui/material";
+import { Grid, Box, Link } from "@mui/material";
 
 function Copyright() {
   return (
-    <Typography variant="body2" color="yellow">
-      {'Copyright © '}
-      <Link color="inherit" underline="none">
-        HenryAsk.com
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
+    <Grid padding='2rem'>
+      <Typography variant="body2" color="yellow" display='flex' justifyContent='center'>
+        Hecho con 💛 por alumnos de Henry.
+      </Typography>
+      <Typography variant="body2" color="yellow" display='flex' justifyContent='center'>
+        {'Henry Ask © '}
+        {new Date().getFullYear()}
+        {' '}
+        <Link color="inherit" underline="none">
+          | Todos los derechos reservados.
+        </Link>{' '}
+      </Typography>
+    </Grid>
   );
 }
 
