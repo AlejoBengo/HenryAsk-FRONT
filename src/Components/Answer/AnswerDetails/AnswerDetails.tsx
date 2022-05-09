@@ -218,10 +218,15 @@ export const AnswerDetails = ({
             Al marcar esta respuesta como la solución, tu publicación se cerrará
             y no será posible añadir más respuestas.
           </DialogContentText>
-          <Button onClick={() => handleClose(true)}>
+          <Button variant="contained" onClick={() => handleClose(true)}>
             Marcar como solución
           </Button>
-          <Button onClick={() => handleClose(false)} autoFocus={true}>
+          <Button
+            variant="contained"
+            color="error"
+            onClick={() => handleClose(false)}
+            autoFocus={true}
+          >
             Cancelar
           </Button>
         </DialogContent>

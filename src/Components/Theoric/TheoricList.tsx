@@ -1,6 +1,7 @@
 /*--------------------------------------------------------*/
 /*-----------IMPORT UTILITIES-----------*/
 import React, { useEffect, useState } from "react";
+import { useAppSelector, useAppDispatch } from "../../app/hooks";
 import { fetchAllTheorics } from "../../app/Reducers/theoricSlice";
 /*-----------IMPORT MUI & CSS-----------*/
 import { List, ListItemButton, Collapse, Link } from "@mui/material";
@@ -10,15 +11,22 @@ import { StyledSpan } from "./StyledComponents";
 
 export default function TheoricList() {
   const [open, setOpen] = useState<boolean>(false);
-  const [allTheorics, setAllTheorics] = useState<any>([]);
+  let [allTheoricsLocal, setAllTheoricsLocal] = useState<any>([]);
+  const {allTheorics} = useAppSelector((state) => state.theorics)
+  const dipatch = useAppDispatch();
 
   useEffect(() => {
-    fetchAllTheorics().then((res) => setAllTheorics(res));
+    // dipatch( fetchAllTheorics() )
+    fetchAllTheorics().then((res) => {
+      setAllTheoricsLocal( res )
+
+    })
   }, []);
 
   const handleOpen = (event: React.MouseEvent<HTMLDivElement>) => {
     setOpen(!open);
   };
+
   return (
     <List sx={{ width: "100%" }}>
       <ListItemButton
@@ -26,14 +34,14 @@ export default function TheoricList() {
         sx={{ width: "100%", overflow: "hidden" }}
         style={{ fontFamily: "Helvetica", display: "flex" }}
       >
-        <StyledSpan>TEORICO</StyledSpan>
+        <StyledSpan>MATERIAL TEÓRICO</StyledSpan>
         {open ? (
           <ExpandLess sx={{ width: "35%" }} />
         ) : (
           <ExpandMore sx={{ width: "35%" }} />
         )}
       </ListItemButton>
-      {allTheorics.map((teorico: any) => {
+      {allTheoricsLocal.map((teorico: any) => {
         return (
           <Collapse
             in={open}

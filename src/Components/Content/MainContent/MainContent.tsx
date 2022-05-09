@@ -1,60 +1,41 @@
 /*--------------------------------------------------------*/
 /*-----------IMPORT UTILITIES-----------*/
-import React from "react";
+import { useEffect } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
+import { useAppDispatch, useAppSelector } from "../../../app/hooks";
+import { getAllExercises } from "../../../app/Reducers/exercisesSlice";
+import { fetchAllTheoricsReducer } from "../../../app/Reducers/theoricSlice";
 /*-----------IMPORT COMPONENTS-----------*/
 import BasicCard1 from "./BasicCard/BasicCard1";
+import TableExercise from "./TableExercise/TableExercise";
+import TableTheoric from "./TableTheoric/TableTheoric";
 /*-----------IMPORT MUI & CSS-----------*/
 import { Container, Box, Typography, Button } from "@mui/material";
 import { Imagen } from "../ContentStyled";
 import img from "../../../Assets/imgMainNoLogeado.jpg";
 /*--------------------------------------------------------*/
 
-let textLoginOne = "Teorico";
-let textLoginTwo = "Practico";
 let textNoLogin = "Rinde el henry challengue y se parte de Henry!";
 
 const MainContent = () => {
   const { isAuthenticated } = useAuth0();
+  const {user:{ data }, exercises:{exercises},theorics:{allTheorics} } = useAppSelector((state) => state);
+  const dispatch = useAppDispatch();
+
+
+  useEffect(() => {
+    dispatch(getAllExercises())
+    dispatch(fetchAllTheoricsReducer())
+  },[ data, dispatch ]); // load the info when the user refresh the page
+
   return (
     <div>
-      {isAuthenticated ? (
-        <Container maxWidth={false} sx={{ width: "95vw" }}>
-          <Box
-            width="100%"
-            display="flex"
-            flexDirection="row"
-            justifyContent="center"
-            marginTop="2.5rem"
-            height="10vh"
-          >
-            <Typography variant="h3"> Que tipo de material buscas</Typography>
-          </Box>
-
-          <Box width="100%" height="50vh" display="flex" flexDirection="row">
-            <Box
-              sx={{
-                width: "100%",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <BasicCard1 text={textLoginOne} />
-            </Box>
-            <Box
-              sx={{
-                width: "100%",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <BasicCard1 text={textLoginTwo} />
-            </Box>
-          </Box>
-        </Container>
-      ) : (
+      {isAuthenticated ? 
+        <Container>
+          <TableExercise exercisesToRender={exercises} key={`TableExercise`}/>
+          <TableTheoric theoricsToRender={allTheorics} key={`TableTheoric`}/>
+        </Container> 
+      : (
         <Container maxWidth={false} sx={{ width: "95vw" }}>
           <Box
             sx={{

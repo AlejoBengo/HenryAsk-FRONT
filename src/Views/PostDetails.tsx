@@ -71,7 +71,7 @@ export const PostDetails = () => {
   const [post, setPost] = useState(postTemplate);
   const [user, setUser] = useState(userTemplate);
   const [error, setError] = useState<boolean>(false);
-  const [postOwner, setPostOwner] = useState(ownerTemplate); //Modificado por Agus al resolverse el tema de las Refs de los modelos
+  const [postOwner, setPostOwner] = useState(ownerTemplate);
   const [postAnswers, setPostAnswers] = useState<Array<string>>([]);
   const [selectedAnswer, setSelectedAnswer] = useState<string>("");
   const [open, setOpen] = useState<boolean>(false);
@@ -84,13 +84,13 @@ export const PostDetails = () => {
     tags: "",
   });
   const [newTags, setNewTags] = useState<any>([]);
+  const [openDialog, setOpenDialog] = React.useState(false);
   const { isAuthenticated } = useAuth0();
 
   const toggleOpen = () => {
     if (!open) setSelectedAnswer("");
     setOpen(!open);
   };
-
   const handleOpenEdit = (event: React.MouseEvent<HTMLButtonElement>) => {
     setOpenEdit(!openEdit);
     setEditable({
@@ -102,24 +102,20 @@ export const PostDetails = () => {
       setEditable({ ...editable, id: id });
     }
   };
-
   const handleEditInputChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     setEditable({ ...editable, [event.target.name]: event.target.value });
   };
-
   const handleEditTags = (event: any) => {
     if (!newTags.includes(event.target.value) && newTags.length < 3) {
       setNewTags([...newTags, event.target.value]);
     }
   };
-
   const handleDelete = (event: any) => {
     const nuevo: Array<string> = newTags.filter((tag: string) => tag !== event);
     setNewTags(nuevo);
   };
-
   const handleSaver = async (event: React.MouseEvent<HTMLButtonElement>) => {
     setEditable({ ...editable, tags: newTags });
     console.log("SOY LA EDICION", editable);
@@ -127,17 +123,22 @@ export const PostDetails = () => {
     setOpenEdit(!openEdit);
     // window.location.reload();
   };
-
   const handleOpenDelete = (event: React.MouseEvent<HTMLButtonElement>) => {
     setOpenDelete(!openDelete);
   };
-
   const handleDeletePost = (event: React.MouseEvent<HTMLButtonElement>) => {
     if (typeof id === "string") {
       deletePost(id);
       handleClickOpen();
       setOpenDelete(!openDelete);
     }
+  };
+  const handleClickOpen = () => {
+    setOpenDialog(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+    navigate("/Forum");
   };
 
   useEffect(() => {
@@ -173,18 +174,6 @@ export const PostDetails = () => {
     }
   }, [selectedAnswer]);
 
-  //dialog delete complete
-  const [openDialog, setOpenDialog] = React.useState(false);
-  const handleClickOpen = () => {
-    setOpenDialog(true);
-    console.log("ENTRO PAPA");
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-    navigate("/Forum");
-  };
-
   // ------------------//
 
   if (error) return <div>Error</div>;
@@ -201,6 +190,7 @@ export const PostDetails = () => {
           subtitle1="Su posteo fue eliminado con exito"
           buttonText="Volver al foro"
         />
+
         <StyledDivButtons>
           {usuario._id === post.owner._id && (
             <Button variant="contained" onClick={handleOpenEdit}>
@@ -217,7 +207,6 @@ export const PostDetails = () => {
             </Button>
           )}
         </StyledDivButtons>
-
         <Modal open={openDelete}>
           <StyledBoxModal2>
             <Button
@@ -237,7 +226,6 @@ export const PostDetails = () => {
             </Button>
           </StyledBoxModal2>
         </Modal>
-
         <Modal open={openEdit}>
           <StyledBoxModal>
             <Button
@@ -306,6 +294,7 @@ export const PostDetails = () => {
             </Button>
           </StyledBoxModal>
         </Modal>
+
         <StyledPaper elevation={2}>
           <Typography
             variant="h3"
@@ -360,6 +349,7 @@ export const PostDetails = () => {
             </div>
           ))}
         </StyledPaper>
+
         {post.open ? <CreateAnswer id={id} /> : null}
       </Container>
       <Comments id={selectedAnswer} toggleOpen={toggleOpen} open={open} />
