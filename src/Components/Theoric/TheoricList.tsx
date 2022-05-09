@@ -12,9 +12,9 @@ export default function TheoricList() {
   const [open, setOpen] = useState<boolean>(false);
   const [allTheorics, setAllTheorics] = useState<any>([]);
 
-  // useEffect(() => {
-  //   fetchAllTheorics().then((res) => setAllTheorics(res));
-  // }, []);
+  useEffect(() => {
+    fetchAllTheorics().then((res) => setAllTheorics(res));
+  }, []);
 
   const handleOpen = (event: React.MouseEvent<HTMLDivElement>) => {
     setOpen(!open);
