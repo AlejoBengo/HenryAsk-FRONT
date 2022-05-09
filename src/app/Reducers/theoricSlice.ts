@@ -33,6 +33,18 @@ export const fetchAllTheorics = async () => {
   }
 };
 
+export const fetchAllTheoricss = createAsyncThunk(
+  "user/fetchAllTheorics",
+  async () => {
+    try {
+      const response = await (await axios(`/theoric`)).data;
+      return response;
+    } catch (err) {
+      console.log(err);
+    }
+  }
+);
+
 export const fetchOneTheoric = async (id: string) => {
   try {
     const response = await (await axios(`/theoric/${id}`)).data;
@@ -41,6 +53,18 @@ export const fetchOneTheoric = async (id: string) => {
     console.log(err);
   }
 };
+
+export const fetchOneTheorics = createAsyncThunk(
+  "user/fetchOneTheorics",
+  async (id: string) => {
+    try {
+      const response = await (await axios(`/theoric/${id}`)).data;
+      return response;
+    } catch (err) {
+      console.log(err);
+    }
+  }
+);
 
 export const editTheoric = async (obj: any) => {
   try {
@@ -65,6 +89,11 @@ export const theoricSlice = createSlice({
     bringAllTheorics: (state) => {
       state.allTheorics = initialState.allTheorics;
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(fetchOneTheorics.fulfilled, (state, action) => {
+      state.oneTheoric = action.payload;
+    });
   },
 });
 

@@ -1,5 +1,6 @@
 /*IMPORT DE UTILITIES*/
 import React, { useEffect, useState } from "react";
+import { useAppSelector } from "../../app/hooks";
 import {
   Editor,
   EditorState,
@@ -8,6 +9,7 @@ import {
   ContentState,
 } from "draft-js";
 import "draft-js/dist/Draft.css";
+import { fetchOneTheoric, editTheoric } from "../../app/Reducers/theoricSlice";
 /*IMPORT DE MUI & CSS*/
 import { ToggleButtonGroup, ToggleButton, Typography } from "@mui/material";
 import FormatBoldIcon from "@mui/icons-material/FormatBold";
@@ -27,20 +29,35 @@ import {
   EditorContainer,
 } from "./StyledComponents";
 
-export default function TheoricDraft(save: any, value: string) {
+export default function TheoricDraft(id: any) {
   const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty()
   );
-  let hola: string;
-  useEffect(() => {
-    hola = value;
-    console.log(hola);
-  }, [value]);
-  // let contenido = ContentState.createFromText("value");
+  const [contentEdition, setContentEdition] = useState({ id: id, content: "" });
 
-  // const [este, seteste] = useState(() =>
-  //   EditorState.createWithContent(contenido)
-  // );
+  useEffect(() => {
+    fetchOneTheoric(id.id).then((res) => {
+      setEditorState(
+        EditorState.createWithContent(ContentState.createFromText(res.content))
+      );
+      setContentEdition({ ...contentEdition, id: id });
+    });
+  }, [id]);
+
+  useEffect(() => {
+    const contenido = editorState
+      .getCurrentContent()
+      .getBlocksAsArray()
+      .map((block: any) => block.getText());
+    console.log("ARRAY: ", contenido.join(""));
+    setContentEdition({ ...contentEdition, content: contenido.join("") });
+  }, [editorState]);
+
+  // useEffect(() => {
+  //   return () => {
+  //     editTheoric(contentEdition);
+  //   };
+  // }, []);
 
   const [aligmentOption, setAligmentOption] = useState<any>("left");
 

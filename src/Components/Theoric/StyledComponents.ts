@@ -5,8 +5,8 @@ import { styled } from "@mui/material/styles";
 /*--------------------------------------------------------*/
 
 export const StyledSpan = styled("div")`
-width:200px;
-`
+  width: 200px;
+`;
 
 export const StyledDiv = styled("div")`
   padding: 1vh;
@@ -33,14 +33,20 @@ export const StyledBox2 = styled(Box)`
   background-color: red;
 `;
 
-export const StyledTypography = styled(Typography)`
+export const StyledTypography = styled(Typography)(
+  ({ theme }) => `
   font-family: helvetica;
-  color: black;
+  color:  ${
+    theme.palette.mode === "light"
+      ? theme.palette.info.main
+      : theme.palette.primary.main
+  };
   font-size: 5vh;
   font-weight: bold;
   text-transform: uppercase;
   margin-left: 1vw;
-`;
+`
+);
 
 export const StyledTypography2 = styled(Typography)`
   font-family: helvetica;
@@ -79,7 +85,11 @@ export const StyledBoxModal = styled(Box)(
   margin-left: 10vw;
   width: 80vw;
   height: 80vh;
-  background-color: #fff;
+  background-color: ${
+    theme.palette.mode === "light"
+      ? theme.palette.secondary.main
+      : theme.palette.info.main
+  };
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -126,8 +136,13 @@ export const StyledBox3 = styled(Box)`
   align-items: center;
 `;
 
-export const StyledBoxModal2 = styled(Box)(`
-  background-color: #fff;
+export const StyledBoxModal2 = styled(Box)(
+  ({ theme }) => `
+  background-color: ${
+    theme.palette.mode === "light"
+      ? theme.palette.secondary.main
+      : theme.palette.info.main
+  };
   margin-top: 20vh;
   margin-left: 25vw;
   height: 30vh;
@@ -136,4 +151,5 @@ export const StyledBoxModal2 = styled(Box)(`
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
-`);
+`
+);

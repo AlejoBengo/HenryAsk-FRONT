@@ -27,6 +27,7 @@ import {
   StyledGrid,
   StyledBoxModal,
   StyledBoxModal2,
+  StyledDivModal2,
 } from "../Components/Theoric/StyledComponents";
 
 /*--------------------------------------------------------*/
@@ -109,6 +110,7 @@ export default function TheoricView() {
       navigate("/");
     }
   };
+
   if (!isAuthenticated) {
     return <RedirectToLogin open={true} />;
   }
@@ -169,8 +171,8 @@ export default function TheoricView() {
               value={editable.title}
               multiline
             />
-            <TheoricDraft save={save} value={editable.content} />
-            {/* <StyledDivModal2>
+            {/* <TheoricDraft id={id} /> */}
+            <StyledDivModal2>
               <TextField
                 style={{ width: "77vw" }}
                 name="content"
@@ -178,7 +180,7 @@ export default function TheoricView() {
                 value={editable.content}
                 multiline
               />
-            </StyledDivModal2> */}
+            </StyledDivModal2>
             <TextField
               style={{ marginLeft: "1vh", width: "25vw" }}
               name="author"
