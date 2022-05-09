@@ -8,7 +8,7 @@ import { ownerTemplate } from "../app/Utils/userUtilities";
 import { ExerciseInterface } from "../app/Interfaces/interfaceExercise";
 import { exerciseTemplate } from "../app/Utils/ExerciseUtilities";
 /*-----------IMPORT MUI & CSS-----------*/
-import { Button, Modal, TextField, Box } from "@mui/material";
+import { Button, Modal, TextField, Box, Typography } from "@mui/material";
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 import {
   StyledDiv,
