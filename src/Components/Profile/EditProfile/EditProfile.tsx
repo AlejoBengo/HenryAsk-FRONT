@@ -37,9 +37,8 @@ export const EditProfile = () => {
   const handleClose = () => setOpen(false);
   //----------------//
 
-
-  //  EJEMPLO DIALOGO ACA SIGUE EN LA LINEA 57 
-  const [openDialog, setOpenDialog] = useState(false);  
+  //  EJEMPLO DIALOGO ACA SIGUE EN LA LINEA 57
+  const [openDialog, setOpenDialog] = useState(false);
   const [modalState, setModalState] = useState("Enviando...");
 
   // ------------------------//
@@ -54,10 +53,15 @@ export const EditProfile = () => {
   };
 
   const handleSave = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setModalState('Enviando'); // seteamos primero 'Enviando' EXACTAMENTE escrito asi , en caso de que la funcion asincronica tome unos segundos y muestre mensaje de que carga
-    setOpenDialog(true) // Abrimos el modal
+    setModalState("Enviando"); // seteamos primero 'Enviando' EXACTAMENTE escrito asi , en caso de que la funcion asincronica tome unos segundos y muestre mensaje de que carga
+    setOpenDialog(true); // Abrimos el modal
     dispatch(remoteUpdateUser(userInfo))
-      .then(() => (dispatch(fetchUserByEmail(userInfo.email)), setModalState("Cambios guardados correctamente"))) // encierro en parentesis las dos acciones y las separo en coma ,
+      .then(
+        () => (
+          dispatch(fetchUserByEmail(userInfo.email)),
+          setModalState("Cambios guardados correctamente")
+        )
+      ) // encierro en parentesis las dos acciones y las separo en coma ,
       // si ya entro aca es porque salio satisfactoriamente la peticion , "Cambios guardados correctamente" COINCIDE con linea 74 y DEBE coincidir
       .catch((err) => {
         console.log(err);
@@ -77,7 +81,7 @@ export const EditProfile = () => {
         modalState={modalState}
         setModalState={setModalState}
       />
-      <Paper sx={{ paddingBottom: "16px" }}>
+      <Paper sx={{ p: 3 }}>
         <Box
           sx={{
             padding: "2rem",
@@ -106,7 +110,6 @@ export const EditProfile = () => {
             xs={12}
             sm={12}
             sx={{
-              paddingRight: "1em",
               display: "flex",
               margin: "0rem 0rem 0em 0em",
               justifyContent: "center",
@@ -131,7 +134,6 @@ export const EditProfile = () => {
             xs={12}
             sm={12}
             sx={{
-              paddingRight: "1em",
               display: "flex",
               margin: "0rem 0rem 2em 0em",
               justifyContent: "center",
@@ -156,7 +158,7 @@ export const EditProfile = () => {
             />
           </Grid>
 
-          <Grid item xs={11} sm={4} sx={{ paddingRight: "1em" }}>
+          <Grid item xs={11} sm={4}>
             <StyledTextField
               variant="filled"
               label="Nombre"
@@ -167,7 +169,7 @@ export const EditProfile = () => {
               helperText={userInfo.first_name === "" ? "Campo obligatorio" : ""}
             ></StyledTextField>
           </Grid>
-          <Grid item xs={11} sm={4} sx={{ paddingRight: "1em" }}>
+          <Grid item xs={11} sm={4}>
             <StyledTextField
               variant="filled"
               label="Apellido"
@@ -178,7 +180,7 @@ export const EditProfile = () => {
               helperText={userInfo.last_name === "" ? "Campo obligatorio" : ""}
             ></StyledTextField>
           </Grid>
-          <Grid item xs={11} sm={4} sx={{ paddingRight: "1em" }}>
+          <Grid item xs={11} sm={4}>
             <StyledTextField
               variant="filled"
               label="Nombre de Usuario"
@@ -189,7 +191,7 @@ export const EditProfile = () => {
               helperText={userInfo.user_name === "" ? "Campo obligatorio" : ""}
             ></StyledTextField>
           </Grid>
-          <Grid item xs={11} sm={6} sx={{ paddingRight: "1em" }}>
+          <Grid item xs={11} sm={6}>
             <StyledTextField
               variant="filled"
               label="País"
@@ -198,7 +200,7 @@ export const EditProfile = () => {
               onChange={(event) => handleInputChange(event)}
             ></StyledTextField>
           </Grid>
-          <Grid item xs={11} sm={6} sx={{ paddingRight: "1em" }}>
+          <Grid item xs={11} sm={6}>
             <StyledTextField
               variant="filled"
               label="Ciudad"
@@ -207,7 +209,7 @@ export const EditProfile = () => {
               onChange={(event) => handleInputChange(event)}
             ></StyledTextField>
           </Grid>
-          <Grid item xs={11} sm={6} sx={{ paddingRight: "1em" }}>
+          <Grid item xs={11} sm={6}>
             <StyledTextField
               variant="filled"
               label="Foto de Perfil"
@@ -216,7 +218,7 @@ export const EditProfile = () => {
               onChange={(event) => handleInputChange(event)}
             ></StyledTextField>
           </Grid>
-          <Grid item xs={11} sm={6} sx={{ paddingRight: "1em" }}>
+          <Grid item xs={11} sm={6}>
             <StyledTextField
               variant="filled"
               label="Foto de Portada"
@@ -225,7 +227,7 @@ export const EditProfile = () => {
               onChange={(event) => handleInputChange(event)}
             ></StyledTextField>
           </Grid>
-          <Grid item xs={11} sm={6} sx={{ paddingRight: "1em" }}>
+          <Grid item xs={11} sm={6}>
             <StyledTextField
               variant="filled"
               label="LinkedIn"
@@ -234,7 +236,7 @@ export const EditProfile = () => {
               onChange={(event) => handleInputChange(event)}
             ></StyledTextField>
           </Grid>
-          <Grid item xs={11} sm={6} sx={{ paddingRight: "1em" }}>
+          <Grid item xs={11} sm={6}>
             <StyledTextField
               variant="filled"
               label="GitHub"
@@ -243,7 +245,7 @@ export const EditProfile = () => {
               onChange={(event) => handleInputChange(event)}
             ></StyledTextField>
           </Grid>
-          <Grid item xs={11} sm={12} sx={{ paddingRight: "1em" }}>
+          <Grid item xs={11} sm={12}>
             <StyledTextField
               variant="filled"
               multiline
@@ -259,7 +261,6 @@ export const EditProfile = () => {
             item
             xs={12}
             sx={{
-              paddingRight: "1em",
               display: "flex",
               justifyContent: "center",
             }}
