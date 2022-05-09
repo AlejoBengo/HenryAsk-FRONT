@@ -20,7 +20,7 @@ import { Theoric } from "../../../app/interface";
 import { useNavigate } from "react-router-dom";
 export const CreateTheoric = () => {
   const user = useAppSelector((state) => state.user.data);
-  const [theoric, setTheoric] = useState<Theoric>(theoricTemplate);
+  const [theoric, setTheoric] = useState(theoricTemplate);
   const [newImage, setNewImage] = useState<string>("");
   const [newComment, setNewComment] = useState<string>("");
   const [open, setOpen] = useState(false);
@@ -86,13 +86,16 @@ export const CreateTheoric = () => {
     }
   };
   useEffect(() => {
-    theoric.owner = {
-      _id: user._id,
-      profile_picture: user.profile_picture,
-      role: user.role,
-      user_name: user.user_name,
-      avatar: user.avatar,
-    };
+    setTheoric({
+      ...theoric,
+      owner: {
+        _id: user._id,
+        profile_picture: user.profile_picture,
+        role: user.role,
+        user_name: user.user_name,
+        avatar: user.avatar,
+      },
+    });
   }, [user]);
 
   return (
