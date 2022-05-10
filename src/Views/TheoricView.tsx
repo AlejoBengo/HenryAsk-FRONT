@@ -4,13 +4,16 @@ import React, { useEffect, useState } from "react";
 import { useAppSelector } from "../app/hooks";
 import {
   fetchOneTheoric,
-  theoricTemplate,
   deleteTheoric,
 } from "../app/Reducers/theoricSlice";
 import { Theoric } from "../app/interface";
 import { editTheoric } from "../app/Reducers/theoricSlice";
 import { useParams, useNavigate } from "react-router-dom";
 import { ownerTemplate } from "../app/Utils/userUtilities";
+import TheoricDraft from "../Components/Draft/TheoricDraft";
+import { useAuth0 } from "@auth0/auth0-react";
+import RedirectToLogin from "../Components/RedirectToLogin/RedirectToLogin";
+import { theoricTemplate } from "../app/Utils/theoricUtilites";
 /*-----------IMPORT MUI & CSS-----------*/
 import { Button, Modal, TextField, Box } from "@mui/material";
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
@@ -36,16 +39,10 @@ export default function TheoricView() {
   const [theoric, setTheoric] = useState<Theoric>(theoricTemplate);
   const [role, setRole] = useState<number>(0);
   const [open, setOpen] = useState<boolean>(false);
+  const [save, setSave] = useState<boolean>(false);
   const [openDelete, setOpenDelete] = useState<boolean>(false);
-  const [editable, setEditable] = useState({
-    owner: ownerTemplate,
-    title: "",
-    content: "",
-    author: "",
-    images: [],
-    comments: [],
-    id: "",
-  });
+  const { isAuthenticated } = useAuth0();
+  const [editable, setEditable] = useState(theoricTemplate);
   useEffect(() => {
     if (id && typeof id === "string") {
       fetchOneTheoric(id).then((res) => {
@@ -55,7 +52,7 @@ export default function TheoricView() {
       setRole(usuario.role);
     }
     if (typeof id === "string") {
-      setEditable({ ...editable, id: id });
+      setEditable({ ...editable, _id: id });
     }
   }, [usuario, id]);
 
@@ -63,7 +60,7 @@ export default function TheoricView() {
     let aux: boolean = !open;
     setOpen(!open);
     if (aux === false) {
-      setEditable({ ...theoric, id: "" });
+      setEditable({ ...theoric, _id: "" });
     }
     if (open === false && typeof id === "string") {
       setEditable({
@@ -73,7 +70,7 @@ export default function TheoricView() {
         author: theoric.author,
         images: theoric.images,
         comments: theoric.comments,
-        id: id,
+        _id: id,
       });
     }
   };
@@ -86,10 +83,11 @@ export default function TheoricView() {
 
   const handleSaver = (event: React.MouseEvent<HTMLButtonElement>) => {
     if (typeof id === "string") {
-      setEditable({ ...editable, id: id });
+      setEditable({ ...editable, _id: id });
     }
     editTheoric(editable);
     setOpen(!open);
+    setSave(!save);
     window.location.reload();
   };
 
@@ -103,6 +101,10 @@ export default function TheoricView() {
       navigate("/");
     }
   };
+
+  if (!isAuthenticated) {
+    return <RedirectToLogin open={true} />;
+  }
 
   return (
     <StyledGrid>
@@ -160,6 +162,7 @@ export default function TheoricView() {
               value={editable.title}
               multiline
             />
+            {/* <TheoricDraft id={id} /> */}
             <StyledDivModal2>
               <TextField
                 style={{ width: "77vw" }}

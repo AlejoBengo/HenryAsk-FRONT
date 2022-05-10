@@ -1,6 +1,4 @@
 import * as React from "react";
-import { useEffect } from "react";
-import { Link } from "react-router-dom";
 import { LinkDom } from "../../Style/StyledComponents";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
@@ -11,12 +9,7 @@ import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import { Box, Avatar, Typography } from "@mui/material";
-import {
-  isAlumnOrInstructor,
-  propsPost,
-  height,
-  Column,
-} from "../../../app/interface";
+import { Column } from "../../../app/interface";
 
 export default function TableInstructor(props: any) {
   const renderHeadTable = props.user; //lane 24

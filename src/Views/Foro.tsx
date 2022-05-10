@@ -2,22 +2,26 @@
 /*-----------IMPORT UTILITIES-----------*/
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
 import { Link } from "react-router-dom";
 /*-----------IMPORT COMPONENTS-----------*/
 import TableInstructor from "../Components/Foro/TableInstructor/TableInstructor";
 /*-----------IMPORT MUI & CSS-----------*/
 import { Div, TituloForo } from "../Components/Style/StyledComponents";
-import { Container, Typography, Button, Grid, Alert } from "@mui/material";
+import { Container, Grid, Alert } from "@mui/material";
 import { fetchGetAllPosts } from "../app/Reducers/getPostsForum";
 import { useAppSelector, useAppDispatch } from "../app/hooks";
 import { Posts } from "../app/interface";
+import RedirectToLogin from "../Components/RedirectToLogin/RedirectToLogin";
+import Dialog from "../Components/Dialog/Dialog";
+import { StyledTypography } from "../Components/Content/MainContent/TableExercise/TableExercise";
 
 let AlumnOrInstructor = ["Alumno", "Instructor"];
 export default function Foro() {
   const userLogin = useAppSelector((state) => state.user.data);
   const posts = useAppSelector((state) => state.getAllPosts.posts);
+  const { isAuthenticated } = useAuth0();
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
 
   // USER LOOGIN ---> USUARIO LOGEAEDO ---> SE MUESTRA SEGUN SU ROL
   useEffect(() => {
@@ -71,28 +75,30 @@ export default function Foro() {
   // setTimeout(()=> console.log("INSTRUCTOR",postInstructores), 4000)
   //setTimeout(()=> console.log("PREP",postPrep), 4000)
   //setTimeout(()=> console.log("POST",posts), 4000)
-
+  if (!isAuthenticated) {
+    return <RedirectToLogin open={true} />;
+  }
   if (userLogin.role === 1) {
     return (
       <Div>
         <Grid container spacing={2}>
           <Grid item xs={12}>
-            <Typography
+            <StyledTypography
               variant="h3"
               textAlign="center"
               margin="1rem 0rem 1rem 0rem"
             >
               Bienvenido/a al <TituloForo>Prep.Course</TituloForo> Forum !
-            </Typography>
+            </StyledTypography>
           </Grid>
           <Grid item xs={12}>
-            <Typography
+            <StyledTypography
               variant="h3"
               textAlign="center"
               margin="1rem 0rem 1rem 0rem"
             >
               Posteos entre <TituloForo>Alumnos</TituloForo>
-            </Typography>
+            </StyledTypography>
           </Grid>
         </Grid>
         <Container maxWidth={false} sx={{ width: "80vw" }}>
@@ -110,13 +116,13 @@ export default function Foro() {
       <Div>
         <Grid container spacing={2}>
           <Grid item xs={12}>
-            <Typography
+            <StyledTypography
               variant="h3"
               textAlign="center"
               margin="1rem 0rem 1rem 0rem"
             >
               Posteos de los <TituloForo>Instructores</TituloForo>
-            </Typography>
+            </StyledTypography>
           </Grid>
         </Grid>
         <Container maxWidth={false} sx={{ width: "80vw" }}>
@@ -129,13 +135,13 @@ export default function Foro() {
         </Container>
         <Grid container spacing={2}>
           <Grid item xs={12}>
-            <Typography
+            <StyledTypography
               variant="h3"
               textAlign="center"
               margin="1rem 0rem 1rem 0rem"
             >
               Posteos entre <TituloForo>Alumnos</TituloForo>
-            </Typography>
+            </StyledTypography>
           </Grid>
         </Grid>
         <Container maxWidth={false} sx={{ width: "80vw" }}>
@@ -155,13 +161,13 @@ export default function Foro() {
           <Container maxWidth={false} sx={{ width: "80vw" }}>
             <Grid container spacing={5}>
               <Grid item xs={12}>
-                <Typography
+                <StyledTypography
                   variant="h3"
                   textAlign="center"
                   margin="1rem 0rem 1rem 0rem"
                 >
                   Posteos de los <TituloForo>Instructores</TituloForo>
-                </Typography>
+                </StyledTypography>
               </Grid>
               <Grid item xs={6}>
                 <Alert variant="filled" severity="success">
@@ -188,13 +194,13 @@ export default function Foro() {
           <Container>
             <Grid container spacing={2}>
               <Grid item xs={12}>
-                <Typography
+                <StyledTypography
                   variant="h3"
                   textAlign="center"
                   margin="1rem 0rem 1rem 0rem"
                 >
                   Posteos entre <TituloForo>Alumnos</TituloForo>
-                </Typography>
+                </StyledTypography>
               </Grid>
             </Grid>
           </Container>
@@ -212,22 +218,22 @@ export default function Foro() {
         <Div>
           <Grid container spacing={2}>
             <Grid item xs={12}>
-              <Typography
+              <StyledTypography
                 variant="h3"
                 textAlign="center"
                 margin="1rem 0rem 1rem 0rem"
               >
                 Bienvenido/a al <TituloForo>Prep.Course</TituloForo> Forum !
-              </Typography>
+              </StyledTypography>
             </Grid>
             <Grid item xs={12}>
-              <Typography
+              <StyledTypography
                 variant="h3"
                 textAlign="center"
                 margin="1rem 0rem 1rem 0rem"
               >
                 Posteos entre <TituloForo>Alumnos</TituloForo>
-              </Typography>
+              </StyledTypography>
             </Grid>
           </Grid>
           <Container maxWidth={false} sx={{ width: "80vw" }}>
