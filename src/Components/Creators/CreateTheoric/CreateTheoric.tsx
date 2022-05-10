@@ -52,7 +52,6 @@ export const CreateTheoric = () => {
       setNewComment("");
     }
   };
-
   const handleDelete = (name: string, value: string) => {
     if (name === "images") {
       let array = theoric.images.filter((image: string) => image != value);
@@ -86,13 +85,16 @@ export const CreateTheoric = () => {
     }
   };
   useEffect(() => {
-    theoric.owner = {
-      _id: user._id,
-      profile_picture: user.profile_picture,
-      role: user.role,
-      user_name: user.user_name,
-      avatar: user.avatar,
-    };
+    setTheoric({
+      ...theoric,
+      owner: {
+        _id: user._id,
+        profile_picture: user.profile_picture,
+        role: user.role,
+        user_name: user.user_name,
+        avatar: user.avatar,
+      },
+    });
   }, [user]);
 
   return (
@@ -127,6 +129,7 @@ export const CreateTheoric = () => {
               onChange={handleInputChange}
             />
           </Grid>
+
           <Grid item xs={12}>
             <StyledTextField
               multiline
@@ -138,6 +141,7 @@ export const CreateTheoric = () => {
               onChange={handleInputChange}
             />
           </Grid>
+
           <Grid item xs={12}>
             <Box
               sx={{

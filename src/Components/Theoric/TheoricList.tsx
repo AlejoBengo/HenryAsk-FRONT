@@ -3,8 +3,9 @@
 import React, { useEffect, useState } from "react";
 import { useAppSelector, useAppDispatch } from "../../app/hooks";
 import { fetchAllTheorics } from "../../app/Reducers/theoricSlice";
+import { Link } from "react-router-dom";
 /*-----------IMPORT MUI & CSS-----------*/
-import { List, ListItemButton, Collapse, Link } from "@mui/material";
+import { List, ListItemButton, Collapse } from "@mui/material";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import { StyledSpan } from "./StyledComponents";
 /*--------------------------------------------------------*/
@@ -12,15 +13,14 @@ import { StyledSpan } from "./StyledComponents";
 export default function TheoricList() {
   const [open, setOpen] = useState<boolean>(false);
   let [allTheoricsLocal, setAllTheoricsLocal] = useState<any>([]);
-  const {allTheorics} = useAppSelector((state) => state.theorics)
+  const { allTheorics } = useAppSelector((state) => state.theorics);
   const dipatch = useAppDispatch();
 
   useEffect(() => {
     // dipatch( fetchAllTheorics() )
     fetchAllTheorics().then((res) => {
-      setAllTheoricsLocal( res )
-
-    })
+      setAllTheoricsLocal(res);
+    });
   }, []);
 
   const handleOpen = (event: React.MouseEvent<HTMLDivElement>) => {
@@ -50,7 +50,7 @@ export default function TheoricList() {
             unmountOnExit
             sx={{ width: "100%" }}
           >
-            <Link href={`/Theoric/${teorico._id}`} underline="none">
+            <Link to={`/Theoric/${teorico._id}`}>
               <List component="div" disablePadding sx={{ width: "100%" }}>
                 <ListItemButton
                   style={{ fontFamily: "Helvetica", display: "flex" }}

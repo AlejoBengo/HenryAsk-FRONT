@@ -2,15 +2,11 @@
 /*-----------IMPORT UTILITIES-----------*/
 import React, { useEffect, useState } from "react";
 import { useAppSelector } from "../app/hooks";
-import {
-  fetchOneTheoric,
-  deleteTheoric,
-} from "../app/Reducers/theoricSlice";
+import { fetchOneTheoric, deleteTheoric } from "../app/Reducers/theoricSlice";
 import { Theoric } from "../app/interface";
 import { editTheoric } from "../app/Reducers/theoricSlice";
 import { useParams, useNavigate } from "react-router-dom";
 import { ownerTemplate } from "../app/Utils/userUtilities";
-import TheoricDraft from "../Components/Draft/TheoricDraft";
 import { useAuth0 } from "@auth0/auth0-react";
 import RedirectToLogin from "../Components/RedirectToLogin/RedirectToLogin";
 import { theoricTemplate } from "../app/Utils/theoricUtilites";
@@ -43,6 +39,7 @@ export default function TheoricView() {
   const [openDelete, setOpenDelete] = useState<boolean>(false);
   const { isAuthenticated } = useAuth0();
   const [editable, setEditable] = useState(theoricTemplate);
+
   useEffect(() => {
     if (id && typeof id === "string") {
       fetchOneTheoric(id).then((res) => {
@@ -162,7 +159,6 @@ export default function TheoricView() {
               value={editable.title}
               multiline
             />
-            {/* <TheoricDraft id={id} /> */}
             <StyledDivModal2>
               <TextField
                 style={{ width: "77vw" }}
@@ -191,7 +187,7 @@ export default function TheoricView() {
       </Box>
       <StyledTypography2>Por: {theoric.author}</StyledTypography2>
       <StyledDiv>
-        <StyledPaper elevation={8}>{theoric.content}</StyledPaper>
+        <StyledPaper elevation={2}>{theoric.content}</StyledPaper>
       </StyledDiv>
 
       <Box
