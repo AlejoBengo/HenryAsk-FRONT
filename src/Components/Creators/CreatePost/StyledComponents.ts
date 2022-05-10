@@ -16,9 +16,8 @@ export const StyledGrid = styled(Grid)`
 `;
 
 export const StyledTextField = styled(TextField)`
-  width: 60vw;
-  height: 10vh;
-  margin: 1vw;
+  width: 100%;
+  margin-y: 1rem;
 `;
 
 export const StyledSelect = styled(Select)`
