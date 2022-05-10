@@ -23,16 +23,18 @@ export const fetchAllTheoricsReducer = createAsyncThunk(
   async () => {
     try {
       const response = await (await axios(`/theoric`)).data;
-      return response ? response : new Error(`No se ha encontrado ningún ejercicio: ${response}`);
+      return response
+        ? response
+        : new Error(`No se ha encontrado ningún ejercicio: ${response}`);
     } catch (error: ErrorType) {
-      console.log(`Error en exercisesSlice:${error.message}`)
+      console.log(`Error en exercisesSlice:${error.message}`);
     }
   }
-) 
+);
 export const fetchAllTheorics = async () => {
   try {
-    const response = await (await axios(`/theoric`)).data;
-    return response;
+    const response = await axios(`/theoric`);
+    return response.data;
   } catch (err) {
     console.log(err);
   }
@@ -63,9 +65,11 @@ export const fetchOneTheoricReducer = createAsyncThunk(
   async (id: string) => {
     try {
       const response = (await axios(`/theoric/${id}`)).data;
-      return response ? response : new Error(`No se ha encontrado ningún ejercicio: ${response}`);
+      return response
+        ? response
+        : new Error(`No se ha encontrado ningún ejercicio: ${response}`);
     } catch (error: ErrorType) {
-      console.log(`Error en theoricsSlice:${error.message}`)
+      console.log(`Error en theoricsSlice:${error.message}`);
     }
   }
 );
@@ -107,15 +111,19 @@ export const theoricsReducer = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder
-    .addCase(fetchAllTheoricsReducer.fulfilled, (state,action:PayloadAction<Array<Theoric>>):void => {
-      state.allTheorics = action.payload;
-    });
-    builder 
-      .addCase(fetchOneTheoricReducer.fulfilled,(state, action: PayloadAction<Theoric>) : void => {
+    builder.addCase(
+      fetchAllTheoricsReducer.fulfilled,
+      (state, action: PayloadAction<Array<Theoric>>): void => {
+        state.allTheorics = action.payload;
+      }
+    );
+    builder.addCase(
+      fetchOneTheoricReducer.fulfilled,
+      (state, action: PayloadAction<Theoric>): void => {
         state.oneTheoric = action.payload;
-    })
-}
+      }
+    );
+  },
 });
 
 export const { clearTheorics } = theoricsReducer.actions;
