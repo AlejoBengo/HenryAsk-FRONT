@@ -2,7 +2,7 @@
 /*-----------IMPORT UTILITIES-----------*/
 import React, { useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
-import { Link, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "../../app/hooks";
 /*-----------IMPORT COMPONENTS-----------*/
@@ -16,7 +16,6 @@ import {
   Box,
   Toolbar,
   IconButton,
-  Typography,
   Menu,
   Container,
   Avatar,
@@ -25,7 +24,6 @@ import {
   MenuItem,
 } from "@mui/material";
 import { Img } from "../Content/ContentStyled";
-import DehazeIcon from "@mui/icons-material/Dehaze";
 import css from "./NavBar.module.css";
 import logo from "./logo.png";
 
@@ -35,7 +33,7 @@ const settings = ["Perfil", "Cerrar Sesion"];
 const Navbar = () => {
   const navigate = useNavigate();
   const DBUser = useAppSelector((state) => state.user.data);
-  const [pivote, setPivote] = useState(false); // para TA y ADM moverse en livertad por forum learning y forum prep
+  const [pivote, setPivote] = useState(false); // para TA y ADM moverse en libertad por forum learning y forum prep
 
   useEffect(() => {
     if (DBUser.role === 3 || DBUser.role === 5) {

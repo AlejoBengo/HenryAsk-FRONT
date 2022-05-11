@@ -111,7 +111,6 @@ export interface Posts {
   question: string;
   description: string;
   owner: Owner; //cambiado de string a any por Agus ya que se resolvió el tema de las Refs
-  ownerData: Array<string>;
   createdAt: string;
   open: boolean;
   answers: Array<string>;

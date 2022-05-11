@@ -62,6 +62,12 @@ const tags: Array<string> = [
   "SQL",
   "Modulo",
   "Otros",
+  "M1",
+  "M2",
+  "M3",
+  "M4",
+  "PI",
+  "PG",
 ];
 
 export const PostDetails = () => {
@@ -118,10 +124,10 @@ export const PostDetails = () => {
   };
   const handleSaver = async (event: React.MouseEvent<HTMLButtonElement>) => {
     setEditable({ ...editable, tags: newTags });
-    console.log("SOY LA EDICION", editable);
+    
     await editPost(editable);
     setOpenEdit(!openEdit);
-    // window.location.reload();
+    window.location.reload();
   };
   const handleOpenDelete = (event: React.MouseEvent<HTMLButtonElement>) => {
     setOpenDelete(!openDelete);
