@@ -1,9 +1,7 @@
 /*--------------------------------------------------------*/
 /*-----------IMPORT UTILITIES-----------*/
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
-import { Link } from "react-router-dom";
 /*-----------IMPORT COMPONENTS-----------*/
 import TableInstructor from "../Components/Foro/TableInstructor/TableInstructor";
 /*-----------IMPORT MUI & CSS-----------*/
@@ -13,7 +11,6 @@ import { fetchGetAllPosts } from "../app/Reducers/getPostsForum";
 import { useAppSelector, useAppDispatch } from "../app/hooks";
 import { Posts } from "../app/interface";
 import RedirectToLogin from "../Components/RedirectToLogin/RedirectToLogin";
-import Dialog from "../Components/Dialog/Dialog";
 import { StyledTypography } from "../Components/Content/MainContent/TableExercise/TableExercise";
 
 let AlumnOrInstructor = ["Alumno", "Instructor"];
@@ -68,6 +65,7 @@ export default function Foro() {
         postAlumnos.push(e);
       if (e.owner.role === 1) postPrep.push(e);
     }
+    return e
   });
 
   //setTimeout(()=> console.log("USER",userLogin), 4000)
@@ -177,7 +175,7 @@ export default function Foro() {
               {/* <Grid item xs={7}></Grid> */}
 
               <Grid item xs={6}>
-                <Alert variant="filled" severity="info">
+                <Alert variant="filled" severity="warning">
                   El propietario de esa discusion aun busca una respuesta!
                 </Alert>
               </Grid>

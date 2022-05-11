@@ -168,9 +168,9 @@ const TableTheoric = (props:any) => {
     <TablePagination
       rowsPerPageOptions={[10, 25, 100]}
       component="div"
-      count={theoricsToRender?.length}
+      count={theoricsToRender?.length ? theoricsToRender.length : 0}
       rowsPerPage={rowsPerPage}
-      page={page}
+      page={page? page : 1}
       onPageChange={handleChangePage}
       onRowsPerPageChange={handleChangeRowsPerPage}
     />
