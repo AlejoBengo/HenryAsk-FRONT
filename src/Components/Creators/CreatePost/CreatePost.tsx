@@ -19,7 +19,7 @@ import {
   Typography,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-import TagIcon from "@mui/icons-material/Tag";
+// import TagIcon from "@mui/icons-material/Tag";
 import {
   StyledGrid,
   StyledSelect,
@@ -219,9 +219,7 @@ const PostForm = () => {
                 {post.tags.map((tag) => {
                   return (
                     <ListItem key={tag}>
-                      <ListItemIcon>
-                        <TagIcon />
-                      </ListItemIcon>
+                      <ListItemIcon>{/* <TagIcon /> */}</ListItemIcon>
                       <ListItemText>{tag}</ListItemText>
                       <Button
                         onClick={() => handleDelete(tag)}
