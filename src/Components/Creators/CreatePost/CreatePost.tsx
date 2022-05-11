@@ -5,17 +5,30 @@ import { postNewPost, postTemplate } from "../../../app/Utils/postUtilities";
 import { useAppSelector, useAppDispatch } from "../../../app/hooks";
 import { Posts, Error } from "../../../app/interface";
 /*-----------IMPORT MUI & CSS-----------*/
-import { MenuItem, IconButton } from "@mui/material";
+import {
+  MenuItem,
+  IconButton,
+  Container,
+  Grid,
+  Paper,
+  Button,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Typography,
+} from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
+import TagIcon from "@mui/icons-material/Tag";
 import {
   StyledGrid,
-  StyledTextField,
   StyledSelect,
   StyledAlert,
   StyledBox,
   StyledBox2,
   StyledButton,
 } from "./StyledComponents";
+import { StyledTextField } from "../../Style/StyledComponents";
 import { useNavigate } from "react-router-dom";
 /*--------------------------------------------------------*/
 
@@ -58,7 +71,7 @@ const PostForm = () => {
         _id: usuario._id,
         user_name: usuario.user_name,
         role: usuario.role,
-        avatar:usuario.avatar,
+        avatar: usuario.avatar,
         profile_picture: usuario.profile_picture,
       },
 
@@ -118,9 +131,8 @@ const PostForm = () => {
       post.question.length > 0 &&
       post.tags.length > 0
     ) {
-     
       dispatch(postNewPost(post))
-        .then((response) =>   navigate(`/post/${response.payload._id}`))
+        .then((response) => navigate(`/post/${response.payload._id}`))
         .catch((err) => console.log(err));
       setPost(postTemplate);
     } else {
@@ -129,63 +141,111 @@ const PostForm = () => {
   };
 
   return (
-    <StyledGrid>
-      <StyledTextField
-        required
-        multiline
-        id="outlined-basic"
-        label="question"
-        variant="outlined"
-        name="question"
-        value={post.question}
-        onChange={(event) => handleInputChange(event)}
-      />
+    //   <StyledGrid>
 
-      <StyledTextField
-        required
-        multiline
-        id="filled-basic"
-        label="Descripción"
-        variant="filled"
-        name="description"
-        value={post.description}
-        onChange={(event) => handleInputChange(event)}
-      />
-
-      <StyledSelect onChange={(event) => handleSelect(event)}>
-        {tags.map((tag) => {
-          return (
-            <MenuItem key={tag} value={tag}>
-              {tag}
-            </MenuItem>
-          );
-        })}
-      </StyledSelect>
-      {error.errorTag.length > 0 && (
-        <StyledAlert severity="info">{error.errorTag}</StyledAlert>
-      )}
-      <StyledBox sx={{ backgroundColor: "info.main" }}>
-        {post.tags.length > 0 &&
-          post.tags.map((tag) => {
-            return (
-              <StyledBox2 key={tag}>
-                <h4>{tag}</h4>
-                <IconButton
-                  onClick={() => handleDelete(tag)}
-                  aria-label="delete"
-                >
-                  <DeleteIcon />
-                </IconButton>
-              </StyledBox2>
-            );
-          })}
-      </StyledBox>
-
-      <StyledButton onClick={handleSubmit}>Crear Discusion</StyledButton>
-      {error.errorSubmit.length > 0 && (
-        <StyledAlert severity="error">{error.errorSubmit}</StyledAlert>
-      )}
-    </StyledGrid>
+    //   </StyledGrid>
+    // );
+    <Container
+      sx={{
+        p: "1rem",
+      }}
+    >
+      <Paper
+        elevation={2}
+        sx={{
+          p: "2rem",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          flexDirection: "column",
+        }}
+      >
+        {" "}
+        <Typography variant="h3" marginBottom={1}>
+          ¡Crea una discusión!
+        </Typography>
+        <Grid
+          container
+          spacing={3}
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Grid item xs={12}>
+            <StyledTextField
+              required
+              multiline
+              id="outlined-basic"
+              label="Tu pregunta"
+              variant="outlined"
+              name="question"
+              value={post.question}
+              onChange={(event) => handleInputChange(event)}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <StyledTextField
+              required
+              multiline
+              minRows={3}
+              maxRows={5}
+              id="filled-basic"
+              label="Descripción"
+              variant="outlined"
+              name="description"
+              value={post.description}
+              onChange={(event) => handleInputChange(event)}
+            />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <StyledTextField select onChange={(event) => handleSelect(event)}>
+              {tags.map((tag) => {
+                return (
+                  <MenuItem key={tag} value={tag}>
+                    {tag}
+                  </MenuItem>
+                );
+              })}
+            </StyledTextField>
+            {error.errorTag.length > 0 && (
+              <StyledAlert severity="info">{error.errorTag}</StyledAlert>
+            )}
+          </Grid>
+          <Grid item xs={12} md={6}>
+            {post.tags.length > 0 && (
+              <List>
+                {post.tags.map((tag) => {
+                  return (
+                    <ListItem key={tag}>
+                      <ListItemIcon>
+                        <TagIcon />
+                      </ListItemIcon>
+                      <ListItemText>{tag}</ListItemText>
+                      <Button
+                        onClick={() => handleDelete(tag)}
+                        aria-label="delete"
+                      >
+                        <DeleteIcon />
+                      </Button>
+                    </ListItem>
+                  );
+                })}
+              </List>
+            )}
+          </Grid>
+          <Grid item xs={3}>
+            <Button onClick={handleSubmit} variant="contained">
+              Crear Discusion
+            </Button>
+            {error.errorSubmit.length > 0 && (
+              <StyledAlert severity="error">{error.errorSubmit}</StyledAlert>
+            )}
+          </Grid>
+        </Grid>
+      </Paper>
+    </Container>
   );
 };
 

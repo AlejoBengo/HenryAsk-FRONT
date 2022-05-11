@@ -1,7 +1,4 @@
-import * as React from 'react';
-import { Container, Box, Typography, Link, CardActionArea, Grid } from "@mui/material";
-import Button from "@mui/material/Button"
-import Footer from "../Components/Home/Footer/Footer";
+import { Container, Box, Typography } from "@mui/material";
 import { useTheme } from '@mui/material';
 
 
@@ -30,6 +27,5 @@ export default function Careers(){
                     </Container>
 
             </Box>
-            <Footer />
         </Box>
     )}

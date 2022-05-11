@@ -13,22 +13,22 @@ const togglePalette = (mode: string): object => {
   if (mode === "light") {
     return {
       primary: {
-        main: "#ffd700",
+        main: "#ffd700", //yellow
       },
       secondary: {
-        main: "#808080",
+        main: "#808080", //grey
       },
       warning: {
-        main: "#ef6c00",
+        main: "#ef6c00", // orange
       },
       info: {
-        main: "#000000",
+        main: "#000000", //black
       },
       error: {
-        main: "#A10702",
+        main: "#A10702", //red
       },
       success: {
-        main: "#00CC66",
+        main: "#00CC66", //green
       },
     };
   } else {

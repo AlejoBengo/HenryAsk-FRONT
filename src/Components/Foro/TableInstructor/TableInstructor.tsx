@@ -8,13 +8,14 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
-import { Box, Avatar, Typography } from "@mui/material";
+import { Box, Avatar, Typography, useTheme } from "@mui/material";
 import { Column } from "../../../app/interface";
 
 export default function TableInstructor(props: any) {
   const renderHeadTable = props.user; //lane 24
   const heigthTable = props.height; //lane 56
   const posts = props.post;
+  const theme = useTheme();
 
   const columns: readonly Column[] = [
     {
@@ -150,7 +151,7 @@ export default function TableInstructor(props: any) {
                         return(
                           <TableCell
                           key="hola"
-                          sx={{ width: "5px" , padding:"0px", margin:"0px", backgroundColor:row.open?"rgb(2, 136, 209)":"rgb(56, 142, 60)",}}
+                          sx={{ width: "5px" , padding:"0px", margin:"0px", backgroundColor:row.open? `${theme.palette.warning.main}` : `${theme.palette.success.main}` }}
                           >
                           </TableCell>
     

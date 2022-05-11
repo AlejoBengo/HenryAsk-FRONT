@@ -1,5 +1,6 @@
 import Typography from '@mui/material/Typography';
-import { Grid, Box, Link } from "@mui/material";
+import { Grid, Box } from "@mui/material";
+import { LinkDom } from '../../Style/StyledComponents';
 
 function Copyright() {
   return (
@@ -8,12 +9,7 @@ function Copyright() {
         Hecho con 💛 por alumnos de Henry.
       </Typography>
       <Typography variant="body2" color="yellow" display='flex' justifyContent='center'>
-        {'Henry Ask © '}
-        {new Date().getFullYear()}
-        {' '}
-        <Link color="inherit" underline="none">
-          | Todos los derechos reservados.
-        </Link>{' '}
+        {`Henry Ask © ${new Date().getFullYear()} | Todos los derechos reservados.`}
       </Typography>
     </Grid>
   );
@@ -35,25 +31,25 @@ export default function StickyFooter() {
                 <Grid item xs={12} sm={6}>
                     <Box borderBottom={1} display='flex' justifyContent='center'>Sobre</Box>
                     <Box display='flex' justifyContent='center'>
-                        <Link href="/about" color='inherit' underline="none">Acerca de</Link>
+                        <LinkDom to="/about" >Acerca de</LinkDom>
                     </Box>
                     <Box display='flex' justifyContent='center'>
-                        <Link href="/careeers" color='inherit' underline="none">Carreras</Link>
+                        <LinkDom to="/careeers" >Carreras</LinkDom>
                     </Box>
                     <Box display='flex' justifyContent='center'>
-                        <Link href="/aboutus" color='inherit' underline="none">Sobre nosotros</Link>
+                        <LinkDom to="/aboutus" >Sobre nosotros</LinkDom>
                     </Box>
                 </Grid>
                 <Grid item xs={12} sm={6}>
                     <Box borderBottom={1} display='flex' justifyContent='center'>Ayuda</Box>
                     <Box display='flex' justifyContent='center'>
-                        <Link href="/contact" color='inherit' underline="none">Contacto</Link>
+                      <LinkDom to="/careeers" >Contacto</LinkDom>
                     </Box>
                     <Box display='flex' justifyContent='center'>
-                        <Link href="/qya" color='inherit' underline="none">Preguntas frecuentes</Link>
+                      <LinkDom to="/careeers" >Preguntas frecuentes</LinkDom>
                     </Box>
                     <Box display='flex' justifyContent='center'>
-                        <Link href="/privacy" color='inherit' underline="none">Política de privacidad</Link>
+                        <LinkDom to="/careeers" >Política de privacidad</LinkDom>
                     </Box>
                 </Grid>
             </Grid>
