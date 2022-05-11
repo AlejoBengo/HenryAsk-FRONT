@@ -12,7 +12,7 @@ import { Button, Modal, TextField, Box, Typography } from "@mui/material";
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 import {
   StyledDiv,
-  StyledBox3,
+  ButtonsContainer,
   StyledTypography,
   StyledTypography2,
   StyledTypography3,
@@ -22,33 +22,40 @@ import {
   StyledBoxModal2,
   StyledDivModal2,
 } from "../Components/Theoric/StyledComponents";
-import { deleteExercise, editExercise, getExerciseById } from "../app/Reducers/exercisesSlice";
+import {
+  deleteExercise,
+  editExercise,
+  getExerciseById,
+} from "../app/Reducers/exercisesSlice";
 /*-----------IMPORT REDUCER-----------*/
 
 /*-----------IMPORT COMPONENTS-----------*/
 
 /*--------------------------------------------------------*/
 
-const ExerciseDetails = () =>{
+const ExerciseDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const {user:{data}, exercises:{exercise}} = useAppSelector((state) => state);
+  const {
+    user: { data },
+    exercises: { exercise },
+  } = useAppSelector((state) => state);
   const [role, setRole] = useState<number>(0);
   const [open, setOpen] = useState<boolean>(false);
   const [openDelete, setOpenDelete] = useState<boolean>(false);
   const [editable, setEditable] = useState<ExerciseInterface>(exerciseTemplate);
-const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (id && typeof id === "string") {
       dispatch(getExerciseById(id));
-      setEditable((editable) => editable = exercise);
-      setRole(( role ) => role = data.role);
+      setEditable((editable) => (editable = exercise));
+      setRole((role) => (role = data.role));
     }
     if (typeof id === "string") {
       setEditable({ ...editable, _id: id });
     }
-  }, [data, id]); 
+  }, [data, id]);
 
   const handleOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
     let aux: boolean = !open;
@@ -98,7 +105,7 @@ const dispatch = useAppDispatch();
   };
 
   return (
-    <StyledGrid sx={{minHeight:"unset"}}>
+    <StyledGrid sx={{ minHeight: "unset" }}>
       <Box
         style={{
           width: "100%",
@@ -109,7 +116,7 @@ const dispatch = useAppDispatch();
       >
         <StyledTypography>{exercise.title}</StyledTypography>
         {role > 3 && (
-          <StyledBox3>
+          <ButtonsContainer>
             <Button variant="contained" onClick={handleOpen}>
               Editar
             </Button>
@@ -120,7 +127,7 @@ const dispatch = useAppDispatch();
             >
               Borrar
             </Button>
-          </StyledBox3>
+          </ButtonsContainer>
         )}
         <Modal open={openDelete}>
           <StyledBoxModal2>
@@ -179,13 +186,22 @@ const dispatch = useAppDispatch();
           </StyledBoxModal>
         </Modal>
       </Box>
-      <StyledTypography2>Creado por: <Typography>{exercise.owner.user_name} </Typography>el <Typography>{exercise.createdAt.length > 0 && exercise.createdAt}</Typography></StyledTypography2>
-      <StyledDiv sx={{height:"100%"}}>
-        <StyledPaper elevation={8} sx={{marginBlock:"3rem"}}>Descripción: {exercise.description}</StyledPaper>
-        <StyledPaper elevation={8} sx={{marginBlock:"3rem"}}>Código: {exercise.code.length > 0 &&
-          exercise.code}</StyledPaper>
-        <StyledPaper elevation={8} sx={{marginBlock:"3rem"}}>Test: {exercise.test.length > 0 &&
-          exercise.test}</StyledPaper>
+      <StyledTypography2>
+        Creado por: <Typography>{exercise.owner.user_name} </Typography>el{" "}
+        <Typography>
+          {exercise.createdAt.length > 0 && exercise.createdAt}
+        </Typography>
+      </StyledTypography2>
+      <StyledDiv sx={{ height: "100%" }}>
+        <StyledPaper elevation={8} sx={{ marginBlock: "3rem" }}>
+          Descripción: {exercise.description}
+        </StyledPaper>
+        <StyledPaper elevation={8} sx={{ marginBlock: "3rem" }}>
+          Código: {exercise.code.length > 0 && exercise.code}
+        </StyledPaper>
+        <StyledPaper elevation={8} sx={{ marginBlock: "3rem" }}>
+          Test: {exercise.test.length > 0 && exercise.test}
+        </StyledPaper>
       </StyledDiv>
       <Box
         style={{
