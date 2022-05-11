@@ -108,6 +108,7 @@ const PostForm = () => {
           ? post.tags
           : [...post.tags, event.target.value],
     });
+
     setError(validator([...post.tags, event.target.value]));
   };
 
@@ -200,7 +201,11 @@ const PostForm = () => {
             />
           </Grid>
           <Grid item xs={12} md={6}>
-            <StyledTextField select onChange={(event) => handleSelect(event)}>
+            <StyledTextField
+              select
+              label="Etiquetas"
+              onChange={(event) => handleSelect(event)}
+            >
               {tags.map((tag) => {
                 return (
                   <MenuItem key={tag} value={tag}>
