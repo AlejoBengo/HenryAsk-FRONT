@@ -175,7 +175,7 @@ export default function Foro() {
               {/* <Grid item xs={7}></Grid> */}
 
               <Grid item xs={6}>
-                <Alert variant="filled" severity="info">
+                <Alert variant="filled" severity="warning">
                   El propietario de esa discusion aun busca una respuesta!
                 </Alert>
               </Grid>
