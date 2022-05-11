@@ -1,10 +1,14 @@
 import React from 'react';
+import ReadMoreModal from './ReadMoreModal';
 /*-----------IMPORT MUI & CSS-----------*/
-import {Table, TableBody, TableCell, TableContainer, TableHead, Paper, TableRow , TablePagination } from '@mui/material';
+import {Table, TableBody, TableCell, TableContainer, TableHead, Paper, TableRow , TablePagination , Button} from '@mui/material';
 import Typography from '@mui/material/Typography';
 import {LinkDom} from '../Style/StyledComponents';
 import { Box } from '@mui/system';
+import { TituloVerMas , ButtonVerMas, SpanVerMas} from '../Style/StyledComponents';
 import Avatar from '@mui/material/Avatar';
+
+
 
 interface Column {
   id: 'name' | 'post' | 'description' | 'status' ;
@@ -14,17 +18,17 @@ interface Column {
 }
 
 const columns: readonly Column[] = [
-  { id: 'name', label: 'Usuario', minWidth: 120, align:'center' },
+  {
+    id: 'status',
+    label: 'Estado',
+    minWidth: 50,
+    align: 'left',
+  },
+  { id: 'name', label: 'Usuario', minWidth: 50, align:'center' },
   { id: 'post', label: 'Post reportado', minWidth: 100, align:'center' },
   {
     id: 'description',
     label: 'Descripcion del report',
-    minWidth: 170,
-    align: 'center',
-  },
-  {
-    id: 'status',
-    label: 'Estado',
     minWidth: 120,
     align: 'center',
   },
@@ -67,9 +71,15 @@ function createData(
 export default function PanelReport(props:any) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [open, setOpen] = React.useState(false);
+  let [infoModal , setInfoModal] = React.useState({});
+
+  const handleClickOpen = (val:any) => {
+    setOpen(true);
+    setInfoModal(infoModal={val})
+  };
 
   const {rows} = props;
-  console.log(rows)
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
   };
@@ -81,11 +91,46 @@ export default function PanelReport(props:any) {
 
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+      <ReadMoreModal open={open} setOpen={setOpen} infoModal={infoModal}/>
       <TableContainer sx={{ maxHeight: 1540 , minHeight:1540}}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
-              {columns.map((column) => (
+              {columns.map((column) =>  {
+                if(column.label==='Estado'){
+                  return (
+                    <TableCell
+                  key={column.id}
+                  align={column.align}
+                  style={{ minWidth:'10%' , fontWeight:"bold",  margin:0 , padding:'0px 0px 0px 8px'}}
+                >
+                  {column.label}
+                </TableCell>
+                  )
+                }
+                if(column.label==='Usuario'){
+                  return (
+                    <TableCell
+                  key={column.id}
+                  align={column.align}
+                  style={{ minWidth:'10%' , fontWeight:"bold",  margin:0 , padding:'0px 0px 0px 0px'}}
+                >
+                  {column.label}
+                </TableCell>
+                  )
+                }
+                if(column.label==='Post reportado'){
+                  return (
+                    <TableCell
+                  key={column.id}
+                  align={column.align}
+                  style={{ minWidth:'10%' , fontWeight:"bold",  margin:0 , padding:'0px 0px 0px 10px'}}
+                >
+                  {column.label}
+                </TableCell>
+                  )
+                }
+                return (
                 <TableCell
                   key={column.id}
                   align={column.align}
@@ -93,7 +138,7 @@ export default function PanelReport(props:any) {
                 >
                   {column.label}
                 </TableCell>
-              ))}
+              )})}
             </TableRow>
           </TableHead>
           <TableBody>
@@ -107,7 +152,7 @@ export default function PanelReport(props:any) {
 
                       if(column.id === "name"){
                         return (
-                          <TableCell align={column.align}>
+                          <TableCell align={column.align} sx={{padding:0 , margin:0 , width:"12%"}}>
                             <Box
                               display="flex"
                               alignItems="center"
@@ -125,29 +170,72 @@ export default function PanelReport(props:any) {
                         )
                       }
                       if(column.id === "post"){
+                        
+                        if(row.post._id){
+                          return(
+                            <TableCell align={column.align} sx={{padding:"0px 0px 0px 10px" , margin:"0px" , width:"19%",}}>
+                            Ir al Posteo
+                          </TableCell>
+                          )
+                        }
+                        if(row.answer._id){
+                          return(
+                            <TableCell align={column.align} sx={{padding:"0px 0px 0px 10px" , margin:"0px" , width:"19%",}}>
+                            Ir a la respuesta
+                          </TableCell>
+                          )
+                        }
+                        if(row.comment.owner){
+                          return(
+                            <TableCell align={column.align} sx={{padding:"0px 0px 0px 10px" , margin:"0px" , width:"19%",}}>
+                            Ir al comentario
+                          </TableCell>
+                          )
+                        }}
+
+
+                        if(column.id === 'status'){
+                          if(row.status === 'FULFILLED'){
+                            return (
+                              <TableCell>
+                                <Box textAlign={column.align} sx={{boxShadow:'1px 1px 8px #00CC66', width:'10px' , height:95 , backgroundColor:'success.main'}}>
+                            </Box>
+                              </TableCell>
+                              
+                            )
+                          }
+                          if(row.status === 'PENDING'){
+                            return (
+                              <TableCell> 
+                                <Box textAlign={column.align} sx={{boxShadow:'1px 1px 8px #ef6c00' , width:'10px', height:95 , backgroundColor:'warning.main'}}>
+                            </Box>
+                              </TableCell>
+                              
+                            )
+                          }
+                          if(row.status === 'REJECTED'){
+                            return (
+                              <TableCell>
+                                <Box textAlign={column.align} sx={{boxShadow:'1px 1px 8px #A10702', width:'10px', height:95, backgroundColor:'error.main'}}>
+                                </Box>
+                              </TableCell>
+                              
+                            )
+                          }
+                        }
+                        let aux = value.split(" ");
+                        let aux2 = aux.slice(0,28);
+                        let aux3 = aux2.join(" ")
+                        
                         return (
-                          <TableCell align={column.align}>
-                            <Box
-                              display="flex"
-                              alignItems="center"
-                              sx={{ flexDirection: "column"}}
-                            >
-                              <Avatar
-                                alt={row.owner.user_name}
-                                src="https://thumbs.dreamstime.com/b/hombre-de-avatar-en-gris-hombres-abstractos-del-la-muestra-perfil-masculino-icono-s%C3%ADmbolo-blanco-fondo-c%C3%ADrculo-ilustraci%C3%B3n-144168114.jpg"
-                              />
-                              <Typography variant="subtitle2" sx={{color:"secondary.main",}}>
-                                <LinkDom to={`#`} color="secondary.main" >{row.owner.user_name}</LinkDom>
-                              </Typography>
+                          <TableCell align={column.align} sx={{maxWidth:"20vw"}}>
+                            <Box>
+                            {aux.length>=28?<ButtonVerMas onClick={(e:any)=>handleClickOpen(row)} sx={{color:'inherit'}}>{aux3}<TituloVerMas><SpanVerMas sx={{color:'primary.main'}}>Ver mas</SpanVerMas></TituloVerMas></ButtonVerMas>: value}
+                            
                             </Box>
                           </TableCell>
                         )
-                      }
-                      return (
-                        <TableCell key={column.id} align={column.align}>
-                          {value}
-                        </TableCell>
-                      );
+                      
                     })}
                   </TableRow>
                 );

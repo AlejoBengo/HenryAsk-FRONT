@@ -78,10 +78,10 @@ export default function PanelAdm(props: any) {
   // 3 - DESCRIPCION ---> MODAL QUE SE ABRE Y MUESTRA RAZON Y DESCRIPCION
   // 4 - STATUS: PENDING , REJECTED , FULFILLED 
 
-  useEffect(() => {
+  /* useEffect(() => {
     dispatch(fetchUserByEmail(user?.email))
     .then((response) =>response.payload.role !== 5 ? navigate("/Forum") : null);
-  }, [user]);
+  }, [user]); */
 
   function handleChange(
     e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
@@ -113,7 +113,7 @@ export default function PanelAdm(props: any) {
             <Typography
               variant="h3"
               component="div"
-              sx={{ color: "secondary.main" }}
+              sx={{ color: "secondary.main", marginTop:"1rem" }}
             >
               Panel de <TituloForo>Administrador</TituloForo>.
             </Typography>
