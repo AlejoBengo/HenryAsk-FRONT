@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Container, Box, Typography, Link, CardActionArea, Grid } from "@mui/material";
 import Collapse from '@mui/material/Collapse';
-import Footer from "../Components/Home/Footer/Footer";
+import Footer from "../Components/Home/Footer/FooterSenior";
 import { useTheme } from '@mui/material';
 
 

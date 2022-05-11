@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Container, Box, Typography, Link, CardActionArea, Grid } from "@mui/material";
 import Button from "@mui/material/Button"
-import Footer from "../Components/Home/Footer/Footer";
+import Footer from "../Components/Home/Footer/FooterSenior";
 import { useTheme } from '@mui/material';
 
 

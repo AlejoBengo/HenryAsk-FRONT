@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Container, Box, Typography, Link, CardActionArea, Grid } from "@mui/material";
-import Footer from "../Components/Home/Footer/Footer";
+import Footer from "../Components/Home/Footer/FooterSenior";
 import { useTheme } from '@mui/material';
 
 export default function About(){

@@ -39,7 +39,9 @@ export default function CardRedirect(){
                             display='flex' 
                             justifyContent='center'>
                                 <Link
-                                href='https://www.soyhenry.com/'>
+                                href='https://www.soyhenry.com/'
+                                rel="noopener" 
+                                target="_blank">
                                     <Button
                                     color= "secondary"
                                     variant='contained'

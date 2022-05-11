@@ -41,10 +41,10 @@ export default function PanelAdm(props: any) {
   // 3 - DESCRIPCION ---> MODAL QUE SE ABRE Y MUESTRA RAZON Y DESCRIPCION
   // 4 - STATUS: PENDING , REJECTED , FULFILLED 
 
-  useEffect(() => {
-    dispatch(fetchUserByEmail(user?.email))
-    .then((response) =>response.payload.role !== 5 ? navigate("/Forum") : null);
-  }, [user]);
+  // useEffect(() => {
+  //   dispatch(fetchUserByEmail(user?.email))
+  //   .then((response) =>response.payload.role !== 5 ? navigate("/Forum") : null);
+  // }, [user]);
 
   function handleChange(
     e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
