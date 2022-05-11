@@ -187,6 +187,11 @@ const Navbar = () => {
                   Contenido Teórico
                 </MenuItem>
               ) : null}
+              {DBUser.role === 5 ? (
+                <MenuItem onClick={() => navigate("/Exercise/Create")}>
+                  Ejercicio
+                </MenuItem>
+              ) : null}
             </Menu>
             <Button
               onClick={handleCloseNavMenu}

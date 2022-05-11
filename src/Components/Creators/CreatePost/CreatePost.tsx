@@ -108,7 +108,7 @@ const PostForm = () => {
           ? post.tags
           : [...post.tags, event.target.value],
     });
-    event.target.value = "";
+
     setError(validator([...post.tags, event.target.value]));
   };
 
