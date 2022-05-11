@@ -27,9 +27,7 @@ export const StyledSelect = styled(Select)`
 `;
 
 export const StyledAlert = styled(Alert)`
-  width: 40vw;
   margin-top: 1vw;
-  margin-left: 1vw;
 `;
 
 export const StyledBox = styled(Box)`

@@ -2,7 +2,7 @@
 /*-----------IMPORT UTILITIES-----------*/
 import React, { useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
-import { Link, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "../../app/hooks";
 /*-----------IMPORT COMPONENTS-----------*/
@@ -28,6 +28,7 @@ import { Img } from "../Content/ContentStyled";
 import DehazeIcon from "@mui/icons-material/Dehaze";
 import css from "./NavBar.module.css";
 import logo from "./logo.png";
+import { LinkDom } from "../Style/StyledComponents";
 
 const pages = ["Material complementario", "Foro"];
 const settings = ["Perfil", "Cerrar Sesion"];
@@ -49,13 +50,19 @@ const Navbar = () => {
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
   );
+  const [anchorElCreate, setAnchorElCreate] =
+    React.useState<null | HTMLElement>(null);
   const { isAuthenticated, user } = useAuth0();
+  const [createMenu, setCreateMenu] = useState(false);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
   };
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
+  };
+  const handleOpenCreateMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElCreate(event.currentTarget);
   };
 
   const handleCloseNavMenu = (
@@ -69,6 +76,9 @@ const Navbar = () => {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
+  };
+  const handleCloseCreateMenu = () => {
+    setAnchorElCreate(null);
   };
 
   return (
@@ -96,7 +106,6 @@ const Navbar = () => {
             </Link>
           </Box>
           <DarkModeButton />
-
           <Box
             sx={{
               flexGrow: 1,
@@ -161,14 +170,26 @@ const Navbar = () => {
               marginRight: "4em",
             }}
           >
-            <Button
-              onClick={handleCloseNavMenu}
-              sx={{ my: 2, color: "white", display: "block" }}
+            {DBUser.role > 0 ? (
+              <Button
+                onClick={handleOpenCreateMenu}
+                sx={{ my: 2, color: "white", display: "block" }}
+              >
+                Publicar
+              </Button>
+            ) : null}
+            <Menu
+              open={Boolean(anchorElCreate)}
+              anchorEl={anchorElCreate}
+              onClose={handleCloseCreateMenu}
             >
-              <Link to="/Ask" className={css.StyledLink}>
-                Crear nueva discusión
-              </Link>
-            </Button>
+              <MenuItem onClick={() => navigate("/Ask")}> Discusión</MenuItem>
+              {DBUser.role === 5 ? (
+                <MenuItem onClick={() => navigate("/Theoric/Create")}>
+                  Contenido Teórico
+                </MenuItem>
+              ) : null}
+            </Menu>
             <Button
               onClick={handleCloseNavMenu}
               sx={{ my: 2, color: "white", display: "block" }}
