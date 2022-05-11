@@ -1,9 +1,7 @@
-import * as React from "react";
-import { Container, Box, Typography, CssBaseline, Grid } from "@mui/material";
+import { Container, Box, Typography, CssBaseline } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { fetchAllUsers } from "../app/Utils/allUsers";
-import Footer from "../Components/Home/Footer/Footer";
 import Carousel from "../Components/Home/Carousel/Carousel";
 import Grids from "../Components/Home/Grids/Grids";
 import Quantity from "../Components/Home/Grids/Quantity";
@@ -44,7 +42,6 @@ export default function Home() {
         <Grids />
       </Box>
       <CardRedirec />
-      <Footer />
     </Box>
   );
 }

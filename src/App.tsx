@@ -34,6 +34,7 @@ import Contact from "./Views/Contact";
 import QA from "./Views/Q&A";
 import Privacy from "./Views/PrivacyPolicies";
 import PanelAdm from "./Views/PanelAdm";
+import Footer from "./Components/Home/Footer/Footer";
 
 const App = () => {
   const { isAuthenticated, user } = useAuth0();
@@ -77,7 +78,6 @@ const App = () => {
           <Route path="/careeers" element={<Careers />} />
           <Route path="/about" element={<About />} />
           <Route path="/aboutus" element={<AboutUs />} />
-          <Route path="/a" element={<LateralMenu />} />
           <Route path="/Theoric/:id" element={<TheoricView />} />
           <Route path="/Content" element={<Content />} />
           <Route path="/Profile/:id" element={<Profile />} />
@@ -90,6 +90,7 @@ const App = () => {
           <Route path="/Exercise/:id" element={<ExerciseDetails />} />
         </Routes>
       </Box>
+      <Footer />
     </ThemeProvider>
   );
 };

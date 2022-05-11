@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Container, Box, Typography, Link, CardActionArea, Grid } from "@mui/material";
 import CardMedia from '@mui/material/CardMedia';
-import Footer from "../Components/Home/Footer/Footer";
 import Q4Tr0 from "../Components/AboutUs/Img/Q4Tr0.jpg";
 import elKefa from "../Components/AboutUs/Img/Agus.jpg";
 import Alejo from "../Components/AboutUs/Img/alejo.jpg";
@@ -283,7 +282,6 @@ export default function AboutUs(){
                     </Box>
                 </Container>
             </Box>
-            <Footer />
         </Box>
     )
 };
