@@ -182,9 +182,9 @@ const TableExercise = (props:any) => {
       <TablePagination
         rowsPerPageOptions={[10, 25, 100]}
         component="div"
-        count={exercisesToRender.length}
+        count={exercisesToRender?.length ? exercisesToRender.length : 0}
         rowsPerPage={rowsPerPage}
-        page={page}
+        page={page? page : 1}
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
       />

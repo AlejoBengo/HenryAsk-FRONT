@@ -76,7 +76,6 @@ export default function About(){
                     
                 </Container>
             </Box>
-            <Footer />
         </Box>
     )
 };

@@ -16,13 +16,13 @@ import {
   Divider,
   Button,
   Box,
-  Link,
   Modal,
   Avatar,
   Skeleton,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { BoxButtons, BoxModalDelete, AreYouSure } from "./StyledComponents";
+import { LinkDom } from "../Style/StyledComponents";
 
 interface Props {
   id: string;
@@ -109,9 +109,9 @@ export const Comments = ({ id, toggleOpen, open }: Props) => {
             justifyContent: "flex-start",
           }}
         >
-          <Link
-            href={`/Profile/${answer.owner._id}`}
-            style={{ marginRight: "1em" }}
+          <LinkDom
+            to={`/Profile/${answer.owner._id}`}
+            sx={{ marginRight: "1em" }}
           >
             {!loading.answer ? (
               <Avatar
@@ -134,7 +134,7 @@ export const Comments = ({ id, toggleOpen, open }: Props) => {
                 animation="pulse"
               />
             )}
-          </Link>
+          </LinkDom>
           {!loading.answer ? (
             <Typography variant="body1">{answer.content}</Typography>
           ) : (
@@ -168,9 +168,9 @@ export const Comments = ({ id, toggleOpen, open }: Props) => {
                     margin: "0.5em",
                   }}
                 >
-                  <Link
-                    href={`/Profile/${comment.owner._id}`}
-                    style={{ marginRight: "1em" }}
+                  <LinkDom
+                    to={`/Profile/${comment.owner._id}`}
+                    sx={{ marginRight: "1em" }}
                   >
                     <Avatar
                       src={
@@ -181,7 +181,7 @@ export const Comments = ({ id, toggleOpen, open }: Props) => {
                           : comment.owner.profile_picture
                       }
                     />
-                  </Link>
+                  </LinkDom>
 
                   <Typography variant="body1">{comment.content}</Typography>
                 </Box>

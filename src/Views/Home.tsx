@@ -1,7 +1,6 @@
-import * as React from "react";
-import { Container, Box, Typography, CssBaseline, Grid } from "@mui/material";
+import { Container, Box, Typography, CssBaseline } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { fetchAllUsers } from "../app/Utils/allUsers";
 import FooterSenior from "../Components/Home/Footer/FooterSenior";
 import Carousel from "../Components/Home/Carousel/Carousel";

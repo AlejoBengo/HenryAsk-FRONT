@@ -1,13 +1,9 @@
 /*--------------------------------------------------------*/
 /*-----------IMPORT UTILITIES-----------*/
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { Owner, User } from "../../app/interface";
-import { Link } from "react-router-dom";
-import { getUserById, userTemplate } from "../../app/Utils/userUtilities";
+import { Owner } from "../../app/interface";
 /*-----------IMPORT MUI & CSS-----------*/
-import AccountCircleRoundedIcon from "@mui/icons-material/AccountCircleRounded";
-import { Avatar, Link as MUILink, Typography } from "@mui/material";
+import { Avatar, Typography } from "@mui/material";
+import { LinkDom } from "../Style/StyledComponents";
 /*--------------------------------------------------------*/
 interface Props {
   user: Owner;
@@ -36,7 +32,7 @@ export const UserShort = ({ user }: Props) => {
         }}
         src={user?.profile_picture.length>0? user.profile_picture : user.avatar.length>0? user.avatar : user.profile_picture}
       />
-      <MUILink href={`/Profile/${user._id}`}>{user?.user_name}</MUILink>
+      <LinkDom to={`/Profile/${user._id}`}>{user?.user_name}</LinkDom>
     </Typography>
   );
 };

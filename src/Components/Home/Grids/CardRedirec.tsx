@@ -1,18 +1,13 @@
 import { 
     CardActionArea, 
-    CardContent, 
     Typography, 
-    Container, 
     Button,
     Link,
     Grid, 
     Card, 
     Box } from '@mui/material';
-    import { useNavigate } from 'react-router-dom';
-
 
 export default function CardRedirect(){
-    const navigate = useNavigate();
 
     return (
         <Box sx={{width: '100%', padding: '1rem'}} >
@@ -33,7 +28,7 @@ export default function CardRedirect(){
                                 padding='3rem'
                                 color='secondary'
                                 >
-                                ¡Sumate a la comunidad!
+                                👩🏽‍🚀¡Sumate a la comunidad!👨🏽‍🚀
                             </Typography>
                             <Box 
                             display='flex' 

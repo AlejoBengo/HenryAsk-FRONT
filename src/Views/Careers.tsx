@@ -3,7 +3,6 @@ import { Container, Box, Typography, Link, CardActionArea, Grid } from "@mui/mat
 import CardMedia from '@mui/material/CardMedia';
 import Button from "@mui/material/Button"
 import CardActions from "@mui/material/CardActions";
-import Footer from "../Components/Home/Footer/FooterSenior";
 import Rocket from "../Components/AboutUs/Img/rocket.gif";
 import { useTheme } from '@mui/material';
 
@@ -186,7 +185,6 @@ export default function Careers(){
                         </CardActionArea>
                     </Box>
             </Box>
-            <Footer />            
         </Box>
     )
 };
