@@ -1,7 +1,7 @@
 /*--------------------------------------------------------*/
 /*-----------IMPORT UTILITIES-----------*/
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { useAppSelector } from "../app/hooks";
 import {
   getUserById,
@@ -18,6 +18,8 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { reportPost } from "../app/Utils/postReport";
 /*-----------IMPORT COMPONENTS-----------*/
 import { UserShort } from "../Components/UserShort/UserShort";
+import { Breadcrumbs, useTheme } from "@mui/material";
+import { StackMigajas } from "../Components/Style/StyledComponents";
 import CreateAnswer from "../Components/Creators/CreateAnswer/CreateAnswer";
 import { Comments } from "../Components/Comments/Comments";
 import { AnswerDetails } from "../Components/Answer/AnswerDetails/AnswerDetails";
@@ -79,6 +81,7 @@ const tags: Array<string> = [
 ];
 
 export const PostDetails = () => {
+  const theme = useTheme();
   const { id } = useParams();
   const navigate = useNavigate();
   const usuario = useAppSelector((state) => state.user.data);
@@ -192,7 +195,7 @@ export const PostDetails = () => {
   };
   const handleSaver = async (event: React.MouseEvent<HTMLButtonElement>) => {
     setEditable({ ...editable, tags: newTags });
-    
+
     await editPost(editable);
     setOpenEdit(!openEdit);
     window.location.reload();
@@ -249,6 +252,44 @@ export const PostDetails = () => {
   }, [selectedAnswer]);
 
   // ------------------//
+  const migajas = [
+    <Link
+      to="/"
+      style={{
+        fontFamily: "Helvetica",
+        textDecoration: "none",
+        color: `${theme.palette.getContrastText(
+          theme.palette.background.default
+        )}`,
+      }}
+    >
+      HOME
+    </Link>,
+    <Link
+      to="/Forum"
+      style={{
+        fontFamily: "Helvetica",
+        textDecoration: "none",
+        color: `${theme.palette.getContrastText(
+          theme.palette.background.default
+        )}`,
+      }}
+    >
+      FORO
+    </Link>,
+    <Link
+      to={`/Post/${id}`}
+      style={{
+        fontFamily: "Helvetica",
+        textDecoration: "none",
+        color: `${theme.palette.getContrastText(
+          theme.palette.background.default
+        )}`,
+      }}
+    >
+      {post.question}
+    </Link>,
+  ];
 
   if (error) return <div>Error</div>;
   if (!isAuthenticated) {
@@ -256,7 +297,10 @@ export const PostDetails = () => {
   }
   return (
     <Box>
-      <Container sx={{ padding: "1em"}}>
+      <StackMigajas spacing={2}>
+        <Breadcrumbs separator="›">{migajas}</Breadcrumbs>
+      </StackMigajas>
+      <Container sx={{ padding: "1em" }}>
         <DialogSuccess
           openDialog={openDialog}
           handleClose={handleClose}
