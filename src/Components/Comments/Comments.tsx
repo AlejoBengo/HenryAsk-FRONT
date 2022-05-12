@@ -38,8 +38,8 @@ export const Comments = ({ id, toggleOpen, open }: Props) => {
     answer: true,
     comments: true,
   });
-  const [openEdit, setOpenEdit] = useState<boolean>(false);
   const [openDelete, setOpenDelete] = useState<boolean>(false);
+  const [commentId, setCommentId] = useState<string>("");
 
   useEffect(() => {
     fetchAnswerById(id)
@@ -65,16 +65,13 @@ export const Comments = ({ id, toggleOpen, open }: Props) => {
     };
   }, [id]);
 
-  const handleOpenDelete = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleOpenDelete = (event: string) => {
     setOpenDelete(!openDelete);
+    setCommentId(event);
   };
 
-  const handleOpenEdit = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setOpenEdit(!openEdit);
-  };
-
-  const handleDelete = (event: string) => {
-    deleteComment(event);
+  const handleDelete = (event: React.MouseEvent<HTMLButtonElement>) => {
+    deleteComment(commentId);
     window.location.reload();
   };
 
@@ -155,7 +152,7 @@ export const Comments = ({ id, toggleOpen, open }: Props) => {
           comments.map((comment, index) => {
             return (
               <Box
-                key={comment._id}
+                key={index}
                 sx={{
                   padding: "1em",
                 }}
@@ -188,7 +185,7 @@ export const Comments = ({ id, toggleOpen, open }: Props) => {
                 {(usuario._id === comment.owner._id || usuario.role > 3) && (
                   <BoxButtons>
                     <Button
-                      onClick={handleOpenDelete}
+                      onClick={() => handleOpenDelete(comment._id)}
                       variant="contained"
                       size="small"
                       color="error"
@@ -198,18 +195,18 @@ export const Comments = ({ id, toggleOpen, open }: Props) => {
                   </BoxButtons>
                 )}
 
-                <Modal open={openDelete}>
+                <Modal key={comment._id} open={openDelete}>
                   <BoxModalDelete>
                     <Button
                       style={{ marginLeft: "53.2vw", marginTop: "-4.7vh" }}
                       variant="contained"
-                      onClick={handleOpenDelete}
+                      onClick={() => handleOpenDelete("")}
                     >
                       Cerrar
                     </Button>
                     <AreYouSure>¿Estás segur@?</AreYouSure>
                     <Button
-                      onClick={() => handleDelete(comment._id)}
+                      onClick={handleDelete}
                       variant="contained"
                       color="error"
                     >
