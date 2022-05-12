@@ -3,12 +3,21 @@
 import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { editTheoric } from "../app/Reducers/theoricSlice";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { ownerTemplate } from "../app/Utils/userUtilities";
 import { ExerciseInterface } from "../app/Interfaces/interfaceExercise";
 import { exerciseTemplate } from "../app/Utils/ExerciseUtilities";
 /*-----------IMPORT MUI & CSS-----------*/
-import { Button, Modal, TextField, Box, Typography } from "@mui/material";
+import {
+  Button,
+  Modal,
+  TextField,
+  Box,
+  Typography,
+  useTheme,
+  Breadcrumbs,
+} from "@mui/material";
+import { StackMigajas } from "../Components/Style/StyledComponents";
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 import {
   StyledDiv,
@@ -34,6 +43,7 @@ import {
 /*--------------------------------------------------------*/
 
 const ExerciseDetails = () => {
+  const theme = useTheme();
   const { id } = useParams();
   const navigate = useNavigate();
   const {
@@ -103,6 +113,46 @@ const ExerciseDetails = () => {
       navigate("/Content");
     }
   };
+
+  const migajas = [
+    <Link
+      to="/"
+      style={{
+        fontFamily: "Helvetica",
+        textDecoration: "none",
+        color: `${theme.palette.getContrastText(
+          theme.palette.background.default
+        )}`,
+      }}
+    >
+      HOME
+    </Link>,
+    <Link
+      to="/Content"
+      style={{
+        fontFamily: "Helvetica",
+        textDecoration: "none",
+        color: `${theme.palette.getContrastText(
+          theme.palette.background.default
+        )}`,
+      }}
+    >
+      MATERIAL
+    </Link>,
+    <Link
+      to={`/Exercise/${id}`}
+      style={{
+        fontFamily: "Helvetica",
+        textDecoration: "none",
+        textTransform: "uppercase",
+        color: `${theme.palette.getContrastText(
+          theme.palette.background.default
+        )}`,
+      }}
+    >
+      {exercise.title}
+    </Link>,
+  ];
 
   return (
     <StyledGrid sx={{ minHeight: "unset" }}>

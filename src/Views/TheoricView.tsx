@@ -5,14 +5,23 @@ import { useAppSelector } from "../app/hooks";
 import { fetchOneTheoric, deleteTheoric } from "../app/Reducers/theoricSlice";
 import { Theoric } from "../app/interface";
 import { editTheoric } from "../app/Reducers/theoricSlice";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { ownerTemplate } from "../app/Utils/userUtilities";
 import { useAuth0 } from "@auth0/auth0-react";
 import RedirectToLogin from "../Components/RedirectToLogin/RedirectToLogin";
 import { theoricTemplate } from "../app/Utils/theoricUtilites";
 /*-----------IMPORT MUI & CSS-----------*/
-import { Button, Modal, TextField, Box, Grid, useTheme } from "@mui/material";
+import {
+  Button,
+  Modal,
+  TextField,
+  Box,
+  Grid,
+  useTheme,
+  Breadcrumbs,
+} from "@mui/material";
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
+import { StackMigajas } from "../Components/Style/StyledComponents";
 import {
   ButtonsContainer,
   StyledTypography,
@@ -100,12 +109,55 @@ export default function TheoricView() {
     }
   };
 
+  const migajas = [
+    <Link
+      to="/"
+      style={{
+        fontFamily: "Helvetica",
+        textDecoration: "none",
+        color: `${theme.palette.getContrastText(
+          theme.palette.background.default
+        )}`,
+      }}
+    >
+      HOME
+    </Link>,
+    <Link
+      to="/Content"
+      style={{
+        fontFamily: "Helvetica",
+        textDecoration: "none",
+        color: `${theme.palette.getContrastText(
+          theme.palette.background.default
+        )}`,
+      }}
+    >
+      MATERIAL
+    </Link>,
+    <Link
+      to={`/Theoric/${id}`}
+      style={{
+        fontFamily: "Helvetica",
+        textDecoration: "none",
+        textTransform: "uppercase",
+        color: `${theme.palette.getContrastText(
+          theme.palette.background.default
+        )}`,
+      }}
+    >
+      {theoric.title}
+    </Link>,
+  ];
+
   if (!isAuthenticated) {
     return <RedirectToLogin open={true} />;
   }
 
   return (
     <Grid style={{ padding: "0.5vh" }}>
+      <StackMigajas spacing={2}>
+        <Breadcrumbs separator="›">{migajas}</Breadcrumbs>
+      </StackMigajas>
       {role > 3 && role < 7 && (
         <ButtonsContainer>
           <Button variant="contained" onClick={handleOpen}>

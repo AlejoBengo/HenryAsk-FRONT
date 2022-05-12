@@ -7,6 +7,8 @@ import {
   Button,
   Box,
   Dialog,
+  Breadcrumbs,
+  useTheme,
   DialogTitle,
   DialogContent,
   DialogContentText,
@@ -15,10 +17,15 @@ import {
   theoricTemplate,
   postTheoric,
 } from "../../../app/Utils/theoricUtilites";
-import { StyledPaper, StyledTextField } from "../../Style/StyledComponents";
+import {
+  StyledPaper,
+  StyledTextField,
+  StackMigajas,
+} from "../../Style/StyledComponents";
 import { Theoric } from "../../../app/interface";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 export const CreateTheoric = () => {
+  const theme = useTheme();
   const user = useAppSelector((state) => state.user.data);
   const [theoric, setTheoric] = useState(theoricTemplate);
   const [newImage, setNewImage] = useState<string>("");
@@ -97,6 +104,45 @@ export const CreateTheoric = () => {
     });
   }, [user]);
 
+  const migajas = [
+    <Link
+      to="/"
+      style={{
+        fontFamily: "Helvetica",
+        textDecoration: "none",
+        color: `${theme.palette.getContrastText(
+          theme.palette.background.default
+        )}`,
+      }}
+    >
+      HOME
+    </Link>,
+    <Link
+      to="/Content"
+      style={{
+        fontFamily: "Helvetica",
+        textDecoration: "none",
+        color: `${theme.palette.getContrastText(
+          theme.palette.background.default
+        )}`,
+      }}
+    >
+      MATERIAL
+    </Link>,
+    <Link
+      to={`/Theoric/Create`}
+      style={{
+        fontFamily: "Helvetica",
+        textDecoration: "none",
+        color: `${theme.palette.getContrastText(
+          theme.palette.background.default
+        )}`,
+      }}
+    >
+      CREAR TEÓRICO
+    </Link>,
+  ];
+
   return (
     <Container
       sx={{
@@ -104,6 +150,12 @@ export const CreateTheoric = () => {
         mt: 2,
       }}
     >
+      <StackMigajas
+        style={{ marginLeft: "-6.5vw", marginTop: "-1vh", marginBottom: "1vh" }}
+        spacing={2}
+      >
+        <Breadcrumbs separator="›">{migajas}</Breadcrumbs>
+      </StackMigajas>
       <StyledPaper elevation={2}>
         <Grid container spacing={3}>
           <Grid item xs={12}>
