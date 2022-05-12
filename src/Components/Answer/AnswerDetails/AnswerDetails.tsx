@@ -23,6 +23,7 @@ import {
   DialogTitle,
   Modal,
 } from "@mui/material";
+import DragIndicatorIcon from "@mui/icons-material/DragIndicator";
 import {
   StyledDiv,
   BotonBorrar,
@@ -61,7 +62,6 @@ export const AnswerDetails = ({
   const [openEdit, setOpenEdit] = useState<boolean>(false);
   const [openDelete, setOpenDelete] = useState<boolean>(false);
   const [editable, setEditable] = useState({ id: "", content: "" });
-
   useEffect(() => {
     if (id && id !== "") {
       fetchAnswerById(id).then((res) => {
@@ -95,7 +95,7 @@ export const AnswerDetails = ({
     setEditable({ ...editable, content: answerData.content });
   };
 
-  const handleOpenDelete = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleOpenDelete = (event: any) => {
     setOpenDelete(!openDelete);
   };
 
@@ -145,6 +145,7 @@ export const AnswerDetails = ({
             <DeleteIcon fontSize="small" />
           </BotonBorrar>
         )}
+
         <Modal open={openEdit}>
           <BoxModal>
             <BotonCerrar
