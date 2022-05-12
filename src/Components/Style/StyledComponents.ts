@@ -160,7 +160,7 @@ export const StyledDivButtons = styled("div")(`
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    margin-left: 70vw;
+    margin-left: 63vw;
     `);
 
 export const StyledDiv = styled("div")(`

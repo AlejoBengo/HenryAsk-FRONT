@@ -12,6 +12,7 @@ export interface User {
   profile_picture: string;
   banner: string;
   biography: string;
+  isBanned:boolean;
   posts: Array<string> & any;
   answers: Array<string> & any;
   comments: Array<string> & any;
@@ -155,3 +156,16 @@ export interface ColumnTableTheoric {
   align?: "center";
   format?: ( value: string & Array<string> ) => OverridableComponent<SvgIconTypeMap<{}, "svg">> & { muiName: string; } & string;
 }
+
+
+// interface report
+export interface Report {
+  owner:User;
+  description:string;
+  status:string;
+  reason:string;
+  post: {} | Posts;
+  answer: {} | Answer;
+  comment: {} | Comment;
+}
+//------//

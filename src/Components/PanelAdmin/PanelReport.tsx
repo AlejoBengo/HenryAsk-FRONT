@@ -1,5 +1,7 @@
 import React from 'react';
 import ReadMoreModal from './ReadMoreModal';
+import { Link, useNavigate } from 'react-router-dom';
+import { fetchAnswerById } from '../../app/Utils/answerUtilities';
 /*-----------IMPORT MUI & CSS-----------*/
 import {Table, TableBody, TableCell, TableContainer, TableHead, Paper, TableRow , TablePagination , Button} from '@mui/material';
 import Typography from '@mui/material/Typography';
@@ -7,6 +9,7 @@ import {LinkDom} from '../Style/StyledComponents';
 import { Box } from '@mui/system';
 import { TituloVerMas , ButtonVerMas, SpanVerMas} from '../Style/StyledComponents';
 import Avatar from '@mui/material/Avatar';
+import { useAppDispatch } from '../../app/hooks';
 
 
 
@@ -69,10 +72,21 @@ function createData(
 ]; */
 
 export default function PanelReport(props:any) {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [open, setOpen] = React.useState(false);
   let [infoModal , setInfoModal] = React.useState({});
+
+
+  //ir al commentario
+  const handlePostComment = (argument:string) =>{
+    fetchAnswerById(argument).then((response) => navigate(`/post/${response.post._id}`))
+  }
+
+  //---------//
+
 
   const handleClickOpen = (val:any) => {
     setOpen(true);
@@ -91,7 +105,7 @@ export default function PanelReport(props:any) {
 
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-      <ReadMoreModal open={open} setOpen={setOpen} infoModal={infoModal}/>
+      <ReadMoreModal open={open} setOpen={setOpen} infoModal={infoModal} handlePostComment={handlePostComment}/>
       <TableContainer sx={{ maxHeight: 1540 , minHeight:1540}}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
@@ -160,7 +174,7 @@ export default function PanelReport(props:any) {
                             >
                               <Avatar
                                 alt={row.owner.user_name}
-                                src="https://thumbs.dreamstime.com/b/hombre-de-avatar-en-gris-hombres-abstractos-del-la-muestra-perfil-masculino-icono-s%C3%ADmbolo-blanco-fondo-c%C3%ADrculo-ilustraci%C3%B3n-144168114.jpg"
+                                src={row.owner.profile_picture.length>0? row.owner.profile_picture : row.owner.avatar.length>0? row.owner.avatar : row.owner.profile_picture }
                               />
                               <Typography variant="subtitle2" sx={{color:"secondary.main",}}>
                                 <LinkDom to={`#`} color="secondary.main" >{row.owner.user_name}</LinkDom>
@@ -171,24 +185,24 @@ export default function PanelReport(props:any) {
                       }
                       if(column.id === "post"){
                         
-                        if(row.post._id){
+                        if(row.post){
                           return(
                             <TableCell align={column.align} sx={{padding:"0px 0px 0px 10px" , margin:"0px" , width:"19%",}}>
-                            Ir al Posteo
+                            <Link to={`/post/${row.post._id}`}>Ir al Posteo</Link>
                           </TableCell>
                           )
                         }
-                        if(row.answer._id){
+                        if(row.answer){
                           return(
                             <TableCell align={column.align} sx={{padding:"0px 0px 0px 10px" , margin:"0px" , width:"19%",}}>
-                            Ir a la respuesta
+                            <Link to={`/post/${row.answer.post}`}>Ir a la Respuesta</Link>
                           </TableCell>
                           )
                         }
-                        if(row.comment.owner){
+                        if(row.comment){
                           return(
                             <TableCell align={column.align} sx={{padding:"0px 0px 0px 10px" , margin:"0px" , width:"19%",}}>
-                            Ir al comentario
+                            <Button onClick={()=>handlePostComment(row.comment.answer)}>Ir al comentario</Button>
                           </TableCell>
                           )
                         }}
@@ -230,7 +244,7 @@ export default function PanelReport(props:any) {
                         return (
                           <TableCell align={column.align} sx={{maxWidth:"20vw"}}>
                             <Box>
-                            {aux.length>=28?<ButtonVerMas onClick={(e:any)=>handleClickOpen(row)} sx={{color:'inherit'}}>{aux3}<TituloVerMas><SpanVerMas sx={{color:'primary.main'}}>Ver mas</SpanVerMas></TituloVerMas></ButtonVerMas>: value}
+                            <ButtonVerMas onClick={(e:any)=>handleClickOpen(row)} sx={{color:'inherit' , minWidth:"80%" , minHeight:"80px"}}>{aux3}<TituloVerMas><SpanVerMas sx={{color:'primary.main'}}>Ver mas</SpanVerMas></TituloVerMas></ButtonVerMas>
                             
                             </Box>
                           </TableCell>

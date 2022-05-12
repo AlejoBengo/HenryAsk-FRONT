@@ -20,6 +20,7 @@ export const userTemplate: User = {
   profile_picture: "",
   banner: "",
   biography: "",
+  isBanned:false,
   own_henry_coin: 0,
   give_henry_coin: 0,
   theoric: [],

@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { fetchUserByUserName } from "../app/Utils/userNameUtilities";
 import { clearUserName } from "../app/Reducers/getUserByUserName";
 import { useAuth0 } from "@auth0/auth0-react";
-import { fetchUserByEmail } from "../app/Reducers/userSlice";
+import { fetchGetAllReport } from "../app/Reducers/getAllReport";
 /*-----------IMPORT Components-----------*/
 import PanelTable from "../Components/PanelAdmin/PanelTable";
 import PanelReport from "../Components/PanelAdmin/PanelReport";
@@ -24,6 +24,13 @@ export default function PanelAdm(props: any) {
   let [valor, setValor] = React.useState("");
   const navigate = useNavigate();
 
+  const reports = useAppSelector((state: any) => state.getAllReport.reports );
+
+  useEffect(()=>{
+    dispatch(fetchGetAllReport())
+  },[])
+
+  setTimeout(()=> console.log(reports), 4000)
   // {
   // OWNER : {user_name, avatar , picture_profile , role }
   // DESCRIPTION : string mensaje report
@@ -225,7 +232,7 @@ export default function PanelAdm(props: any) {
             </Typography>
           </Grid>
           <Grid item xs={12} sm={12} md={12} lg={6}>
-            <PanelReport rows={rows} />
+            <PanelReport rows={reports} />
             
           </Grid>
           <Grid
