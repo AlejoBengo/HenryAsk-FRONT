@@ -68,6 +68,7 @@ const App = () => {
         sx={{
           minHeight: "100vh",
           p: 0,
+          paddingBlock:"3rem",
         }}
       >
         <Routes>

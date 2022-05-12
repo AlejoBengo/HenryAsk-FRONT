@@ -19,6 +19,10 @@ export const LinkDom = styled(Link)`
   &:visited {
     color: unset;
   }
+  &:hover 
+  {
+    text-decoration: underline
+  }
 `;
 
 export const Div = styled("div")(`

@@ -13,6 +13,8 @@ import TableTheoric from "./TableTheoric/TableTheoric";
 import { Container, Box, Typography, Button } from "@mui/material";
 import { Imagen } from "../ContentStyled";
 import img from "../../../Assets/imgMainNoLogeado.jpg";
+import { Theoric } from "../../../app/interface";
+import { ExerciseInterface } from "../../../app/Interfaces/interfaceExercise";
 /*--------------------------------------------------------*/
 
 let textNoLogin = "Rinde el henry challengue y se parte de Henry!";
@@ -21,6 +23,17 @@ const MainContent = () => {
   const { isAuthenticated } = useAuth0();
   const {user:{ data }, exercises:{exercises},theorics:{allTheorics} } = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
+
+  const reverse = (input: Array<Object>) => {
+    let newArray = new Array;
+    for(var i = input.length-1; i >= 0; i--) {
+      newArray.push(input[i]);
+    }
+    return newArray;
+  }
+
+  const exercisesReversed = reverse(exercises);
+  const theoricsReversed = reverse(allTheorics);
 
 
   useEffect(() => {
@@ -32,8 +45,8 @@ const MainContent = () => {
     <div>
       {isAuthenticated ? 
         <Container>
-          <TableExercise exercisesToRender={exercises} key={`TableExercise`}/>
-          <TableTheoric theoricsToRender={allTheorics} key={`TableTheoric`}/>
+          <TableExercise exercisesToRender={exercisesReversed} key={`TableExercise`}/>
+          <TableTheoric theoricsToRender={theoricsReversed} key={`TableTheoric`}/>
         </Container> 
       : (
         <Container maxWidth={false} sx={{ width: "95vw" }}>

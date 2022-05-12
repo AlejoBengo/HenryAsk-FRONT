@@ -19,10 +19,8 @@ export default function CardRedirect(){
                         height: '100%',
                         padding: '3rem',
                         backgroundColor: 'yellow' }}>
-                        <CardActionArea>
                             <Typography
                                 variant="h2" 
-                                component="div" 
                                 display='flex'
                                 justifyContent='center'
                                 padding='3rem'
@@ -45,7 +43,6 @@ export default function CardRedirect(){
                                     </Button>
                                 </Link>
                             </Box>
-                        </CardActionArea>
                     </Card>
                 </Grid>
             </Grid>
