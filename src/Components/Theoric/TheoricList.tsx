@@ -14,15 +14,14 @@ import { LinkDom } from "../Style/StyledComponents";
 export default function TheoricList() {
   const [open, setOpen] = useState<boolean>(false);
   let [allTheoricsLocal, setAllTheoricsLocal] = useState<any>([]);
-  const {allTheorics} = useAppSelector((state) => state.theorics)
+  const { allTheorics } = useAppSelector((state) => state.theorics);
   const dipatch = useAppDispatch();
 
   useEffect(() => {
     // dipatch( fetchAllTheoricsReducer() )
     fetchAllTheorics().then((res) => {
-      setAllTheoricsLocal( res )
-
-    })
+      setAllTheoricsLocal(res);
+    });
   }, []);
 
   const handleOpen = (event: React.MouseEvent<HTMLDivElement>) => {
@@ -52,7 +51,7 @@ export default function TheoricList() {
             unmountOnExit
             sx={{ width: "100%" }}
           >
-            <LinkDom to={`/Theoric/${teorico._id}`} >
+            <LinkDom to={`/Theoric/${teorico._id}`}>
               <List component="div" disablePadding sx={{ width: "100%" }}>
                 <ListItemButton
                   style={{ fontFamily: "Helvetica", display: "flex" }}

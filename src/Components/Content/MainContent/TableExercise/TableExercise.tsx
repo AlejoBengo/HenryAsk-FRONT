@@ -93,7 +93,7 @@ const TableExercise = (props:any) => {
           🚀 Desarrolla tu potencial con <TituloForo>Ejercicios</TituloForo>
       </StyledTypography>
       <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-      <TableContainer sx={{ maxHeight: 440 }}>
+      <TableContainer sx={{ maxHeight: 1040 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
@@ -192,7 +192,7 @@ const TableExercise = (props:any) => {
         component="div"
         count={exercisesToRender?.length ? exercisesToRender.length : 0}
         rowsPerPage={rowsPerPage}
-        page={page? page : 1}
+        page={page}
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
       />

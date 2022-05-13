@@ -28,8 +28,10 @@ import {
   Box,
   Typography,
   Button,
+  useTheme
 } from "@mui/material";
 /*--------------------------------------------------------*/
+
 
 interface Error {
   errorSubmit: string;
@@ -39,6 +41,7 @@ export default function CreateAnswer(id: any) {
   const usuario = useAppSelector((state) => state.user.data);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const theme = useTheme();
 
   const [answer, setAnswer] = useState<Answer>(answerTemplate);
   const [error, setError] = useState<Error>({ errorSubmit: "" });
@@ -127,7 +130,9 @@ export default function CreateAnswer(id: any) {
               alignItems: "center",
             }}
           >
-            <Typography variant="h6" align="center">
+            <Typography variant="h6" align="center" color={theme.palette.getContrastText(
+              theme.palette.background.default
+            )}>
               {modalState}
             </Typography>
             {modalState === "Enviando" && <CircularProgress />}

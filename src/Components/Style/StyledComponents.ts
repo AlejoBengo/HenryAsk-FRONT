@@ -1,7 +1,7 @@
 /*--------------------------------------------------------*/
 /*-----------IMPORT UTILITIES-----------*/
 import { styled } from "@mui/system";
-import { Paper, TextField, Box, Select } from "@mui/material";
+import { Paper, TextField, Box, Select, Stack } from "@mui/material";
 import LateralItem from "../Navbar/LateralMenu/LateralItem";
 import { Link } from "react-router-dom";
 /*--------------------------------------------------------*/
@@ -27,10 +27,10 @@ export const LinkDom = styled(Link)`
 
 export const Div = styled("div")(`
     width: 100%;
-    height:auto;
+    height: auto;
+    margin-top: 0;
     `);
 
-    
 //text-shadow: 4px 4px 4px rgb(255,255,0);
 export const TituloForo = styled("span")(`
 
@@ -103,17 +103,17 @@ export const StyledButton2 = styled("button")(`
     cursor: pointer;
     `);
 
-export const StyledBoxModal = styled(Box)`
+export const StyledBoxModal = styled(Box)(({theme})=>`
+  background-color: ${theme.palette.mode === "dark" ? "#000000" : "#fff"};
   width: 75vw;
   height: 55vh;
   margin-left: 12.5vw;
   margin-top: 15vh;
-  background-color: #fff;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: flex-start;
-`;
+`);
 
 export const StyledBoxChoosed = styled(Box)`
   width: 30vw;
@@ -123,13 +123,12 @@ export const StyledBoxChoosed = styled(Box)`
   justify-content: space-evenly;
 `;
 
-export const StyledSelect = styled(Select)`
-  width: 15vw;
-  background-color: #fff;
-  family-font: helvetica;
-  color: black;
-  margin-left: 0.5vw;
-`;
+export const StyledSelect = styled(Select)(({theme}) =>`
+background-color: ${theme.palette.mode === "dark" ? "#000000" : "#fff"};
+width: 15vw;
+family-font: helvetica;
+margin-left: 0.5vw;
+`);
 
 export const StyledDivButtons = styled("div")(`
     width: 15vw;
@@ -174,19 +173,19 @@ display: grid;
 grid-template-columns: 60% 40%;
 grid-gap: 20px;
 padding-left: 2%;
-`)
+`);
 
 export const CodeArea = styled("div")(`
 background-color: white;
 border-radius: 1em;
 padding-bottom: 5%;
-`)
+`);
 
 export const CodeAreaHeader = styled("div")(`
 display: grid;
 grid-template-columns: 50% 30%;
 text-align: center;
-`)
+`);
 
 export const CodeButton = styled("button")(`
 background-color: #4CAF50; /* Green */
@@ -199,5 +198,17 @@ display: inline-block;
 font-size: 16px;
 margin-top: 1%;
 margin-bottom: 1%;
-`)
+`);
 
+export const StackMigajas = styled(Stack)(
+  ({ theme }) => `
+  width: 70vw;
+  margin-left: 1vh;
+  padding:1vh;
+  background-color: ${
+    theme.palette.mode === "light"
+      ? theme.palette.secondary.main
+      : theme.palette.info.main
+  };
+`
+);

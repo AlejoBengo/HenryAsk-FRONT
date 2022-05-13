@@ -170,7 +170,7 @@ const TableTheoric = (props:any) => {
       component="div"
       count={theoricsToRender?.length ? theoricsToRender.length : 0}
       rowsPerPage={rowsPerPage}
-      page={page? page : 1}
+      page={page}
       onPageChange={handleChangePage}
       onRowsPerPageChange={handleChangeRowsPerPage}
     />

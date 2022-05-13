@@ -35,6 +35,7 @@ import QA from "./Views/Q&A";
 import Privacy from "./Views/PrivacyPolicies";
 import PanelAdm from "./Views/PanelAdm";
 import Footer from "./Components/Home/Footer/Footer";
+import CreateExercise from "./Components/Creators/CreateExercise/CreateExercise";
 
 const App = () => {
   const { isAuthenticated, user } = useAuth0();
@@ -68,7 +69,8 @@ const App = () => {
         sx={{
           minHeight: "100vh",
           p: 0,
-          paddingBlock:"3rem",
+          paddingTop:"1rem",
+          paddingBottom:"3rem",
         }}
       >
         <Routes>
@@ -86,7 +88,8 @@ const App = () => {
           <Route path="/Post/:id" element={<PostDetails />} />
           <Route path="/Forum/" element={<Foro />} />
           <Route path="/Ask" element={<CreatePost />} />
-          <Route path="/Theoric/Create" element={<CreateTheoric />} />{" "}
+          <Route path="/Theoric/Create" element={<CreateTheoric />} />
+          <Route path="/Exercise/Create" element={<CreateExercise />} />
           <Route path="/PanelAdm" element={<PanelAdm />} />
           <Route path="/Exercise/:id" element={<ExerciseDetails />} />
         </Routes>

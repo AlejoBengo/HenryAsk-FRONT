@@ -35,7 +35,7 @@ export default function Draft() {
   };
   const _onTab = (event: any) => {
     event.preventDefault();
-    const space = "  ";
+    const space = "    ";
     const currentState = editorState;
     const newState = Modifier.replaceText(
       currentState.getCurrentContent(),

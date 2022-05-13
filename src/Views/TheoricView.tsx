@@ -2,37 +2,43 @@
 /*-----------IMPORT UTILITIES-----------*/
 import React, { useEffect, useState } from "react";
 import { useAppSelector } from "../app/hooks";
-import {
-  fetchOneTheoric,
-  deleteTheoric,
-} from "../app/Reducers/theoricSlice";
+import { fetchOneTheoric, deleteTheoric } from "../app/Reducers/theoricSlice";
 import { Theoric } from "../app/interface";
 import { editTheoric } from "../app/Reducers/theoricSlice";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { ownerTemplate } from "../app/Utils/userUtilities";
-import TheoricDraft from "../Components/Draft/TheoricDraft";
 import { useAuth0 } from "@auth0/auth0-react";
 import RedirectToLogin from "../Components/RedirectToLogin/RedirectToLogin";
 import { theoricTemplate } from "../app/Utils/theoricUtilites";
 /*-----------IMPORT MUI & CSS-----------*/
-import { Button, Modal, TextField, Box } from "@mui/material";
-import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 import {
-  StyledDiv,
-  StyledBox3,
+  Button,
+  Modal,
+  TextField,
+  Box,
+  Grid,
+  useTheme,
+  Breadcrumbs,
+} from "@mui/material";
+import LocalOfferIcon from "@mui/icons-material/LocalOffer";
+import { StackMigajas } from "../Components/Style/StyledComponents";
+import {
+  ButtonsContainer,
   StyledTypography,
   StyledTypography2,
   StyledTypography3,
   StyledPaper,
-  StyledGrid,
+  InfoContainer,
   StyledBoxModal,
   StyledBoxModal2,
+  InfoSubContainer,
   StyledDivModal2,
 } from "../Components/Theoric/StyledComponents";
 
 /*--------------------------------------------------------*/
 
 export default function TheoricView() {
+  const theme = useTheme();
   const { id } = useParams();
   const navigate = useNavigate();
   const usuario = useAppSelector((state) => state.user.data);
@@ -43,6 +49,7 @@ export default function TheoricView() {
   const [openDelete, setOpenDelete] = useState<boolean>(false);
   const { isAuthenticated } = useAuth0();
   const [editable, setEditable] = useState(theoricTemplate);
+
   useEffect(() => {
     if (id && typeof id === "string") {
       fetchOneTheoric(id).then((res) => {
@@ -102,116 +109,159 @@ export default function TheoricView() {
     }
   };
 
+  const migajas = [
+    <Link
+      to="/"
+      style={{
+        fontFamily: "Helvetica",
+        textDecoration: "none",
+        color: `${theme.palette.getContrastText(
+          theme.palette.background.default
+        )}`,
+      }}
+    >
+      HOME
+    </Link>,
+    <Link
+      to="/Content"
+      style={{
+        fontFamily: "Helvetica",
+        textDecoration: "none",
+        color: `${theme.palette.getContrastText(
+          theme.palette.background.default
+        )}`,
+      }}
+    >
+      MATERIAL
+    </Link>,
+    <Link
+      to={`/Theoric/${id}`}
+      style={{
+        fontFamily: "Helvetica",
+        textDecoration: "none",
+        textTransform: "uppercase",
+        color: `${theme.palette.getContrastText(
+          theme.palette.background.default
+        )}`,
+      }}
+    >
+      {theoric.title}
+    </Link>,
+  ];
+
   if (!isAuthenticated) {
     return <RedirectToLogin open={true} />;
   }
 
   return (
-    <StyledGrid>
-      <Box
-        style={{
-          width: "100%",
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
-      >
-        <StyledTypography>{theoric.title}</StyledTypography>
-        {role > 3 && (
-          <StyledBox3>
-            <Button variant="contained" onClick={handleOpen}>
-              Editar
-            </Button>
-            <Button
-              color="error"
-              variant="contained"
-              onClick={handleOpenDelete}
-            >
-              Borrar
-            </Button>
-          </StyledBox3>
-        )}
-        <Modal open={openDelete}>
-          <StyledBoxModal2>
-            <Button
-              variant="contained"
-              style={{ marginLeft: "43.2vw", marginTop: "-4vh" }}
-              onClick={handleOpenDelete}
-            >
-              Cerrar
-            </Button>
-            <StyledTypography>¿Estás segur@?</StyledTypography>
-            <Button variant="contained" color="error" onClick={handleDelete}>
-              Borrar
-            </Button>
-          </StyledBoxModal2>
-        </Modal>
-        <Modal open={open}>
-          <StyledBoxModal>
-            <Button
-              style={{ marginLeft: "74vw", marginTop: "-0.2vh" }}
-              variant="contained"
-              onClick={handleOpen}
-            >
-              Close
-            </Button>
-            <TextField
-              style={{ width: "45vw", marginLeft: "1vh" }}
-              name="title"
-              onChange={handleInputChange}
-              value={editable.title}
-              multiline
-            />
-            {/* <TheoricDraft id={id} /> */}
-            <StyledDivModal2>
-              <TextField
-                style={{ width: "77vw" }}
-                name="content"
-                onChange={handleInputChange}
-                value={editable.content}
-                multiline
-              />
-            </StyledDivModal2>
-            <TextField
-              style={{ marginLeft: "1vh", width: "25vw" }}
-              name="author"
-              onChange={handleInputChange}
-              value={editable.author}
-              multiline
-            />
-            <Button
-              style={{ marginLeft: "74.85vw", marginBottom: "-0.2vh" }}
-              variant="contained"
-              onClick={handleSaver}
-            >
-              Save
-            </Button>
-          </StyledBoxModal>
-        </Modal>
-      </Box>
-      <StyledTypography2>Por: {theoric.author}</StyledTypography2>
-      <StyledDiv>
-        <StyledPaper elevation={8}>{theoric.content}</StyledPaper>
-      </StyledDiv>
+    <Grid style={{ padding: "0.5vh" }}>
+      <StackMigajas spacing={2}>
+        <Breadcrumbs separator="›">{migajas}</Breadcrumbs>
+      </StackMigajas>
+      {role > 3 && role < 7 && (
+        <ButtonsContainer>
+          <Button variant="contained" onClick={handleOpen}>
+            Editar
+          </Button>
+          <Button color="error" variant="contained" onClick={handleOpenDelete}>
+            Borrar
+          </Button>
+        </ButtonsContainer>
+      )}
 
-      <Box
-        style={{
-          display: "flex",
-          marginTop: "2.5vh",
-          justifyContent: "flex-end",
-        }}
-      >
-        {theoric.comments.length > 0 &&
-          theoric.comments.map((com: string) => {
-            return <StyledTypography3> {com} </StyledTypography3>;
-          })}
-        <LocalOfferIcon />
-      </Box>
+      <InfoContainer>
+        <StyledTypography>{theoric.title}</StyledTypography>
+
+        {/*Subcontenedor con todo el teorico menos el titulo*/}
+        <InfoSubContainer>
+          <StyledTypography2>Por: {theoric.author}</StyledTypography2>
+
+          <StyledPaper elevation={4}>{theoric.content}</StyledPaper>
+
+          <Box
+            style={{
+              display: "flex",
+              marginTop: "2.5vh",
+              justifyContent: "flex-end",
+            }}
+          >
+            {theoric.comments.length > 0 &&
+              theoric.comments.map((com: string) => {
+                return <StyledTypography3> {com} </StyledTypography3>;
+              })}
+            <LocalOfferIcon
+              style={{
+                color: `${theme.palette.getContrastText(
+                  theme.palette.background.default
+                )}`,
+              }}
+            />
+          </Box>
+        </InfoSubContainer>
+      </InfoContainer>
 
       {theoric.images.length > 0 &&
         theoric.images.map((img: string) => {
           return <img src={img} alt="" />;
         })}
-    </StyledGrid>
+
+      <Modal open={openDelete}>
+        <StyledBoxModal2>
+          <Button
+            variant="contained"
+            style={{ marginLeft: "43.2vw", marginTop: "-4vh" }}
+            onClick={handleOpenDelete}
+          >
+            Cerrar
+          </Button>
+          <StyledTypography>¿Estás segur@?</StyledTypography>
+          <Button variant="contained" color="error" onClick={handleDelete}>
+            Borrar
+          </Button>
+        </StyledBoxModal2>
+      </Modal>
+
+      <Modal open={open}>
+        <StyledBoxModal>
+          <Button
+            style={{ marginLeft: "74vw", marginTop: "-0.2vh" }}
+            variant="contained"
+            onClick={handleOpen}
+          >
+            Close
+          </Button>
+          <TextField
+            style={{ width: "45vw", marginLeft: "1vh" }}
+            name="title"
+            onChange={handleInputChange}
+            value={editable.title}
+            multiline
+          />
+          <StyledDivModal2>
+            <TextField
+              style={{ width: "77vw" }}
+              name="content"
+              onChange={handleInputChange}
+              value={editable.content}
+              multiline
+            />
+          </StyledDivModal2>
+          <TextField
+            style={{ marginLeft: "1vh", width: "25vw" }}
+            name="author"
+            onChange={handleInputChange}
+            value={editable.author}
+            multiline
+          />
+          <Button
+            style={{ marginLeft: "74.85vw", marginBottom: "-0.2vh" }}
+            variant="contained"
+            onClick={handleSaver}
+          >
+            Save
+          </Button>
+        </StyledBoxModal>
+      </Modal>
+    </Grid>
   );
 }
