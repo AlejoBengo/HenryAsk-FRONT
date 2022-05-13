@@ -1,5 +1,6 @@
 /*--------------------------------------------------------*/
 import Activity from "../Components/Profile/Activity";
+import bannerDefault from '../Components/Profile/bannerDefault/bannerDefault.jpg';
 /*-----------IMPORT UTILITIES-----------*/
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
@@ -29,7 +30,6 @@ import {
   CardMedia,
   CardContent,
 } from "@mui/material";
-import { profile } from "console";
 
 /*--------------------------------------------------------*/
 
@@ -40,7 +40,7 @@ const Item = styled(Paper)(({ theme }) => ({
   textAlign: "center",
   color: theme.palette.text.secondary,
 }));
-const StyledAvatar = styled(Avatar)(
+export const StyledAvatar = styled(Avatar)(
   ({ theme }) => `
   position: relative;
   top: -10vh;
@@ -126,123 +126,120 @@ export default function Profile() {
       <StackMigajas spacing={2}>
         <Breadcrumbs separator="›">{migajas}</Breadcrumbs>
       </StackMigajas>
-      <Container>
-        <Container
-          // maxWidth="md"
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            padding: "1em",
-          }}
-        >
-          <Card sx={{ minWidth: "100%" }}>
-            <CardMedia
-              component="img"
-              image={userProfile.banner || "https://via.placeholder.com/1000"}
-              alt={userProfile.user_name + " banner"}
-              sx={{
-                width: "100%",
-                height: "20vh",
-              }}
+      <Container
+        // maxWidth="md"
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          padding: "1em",
+        }}
+      >
+        <Card sx={{ minWidth: "100%" }}>
+          <CardMedia
+            component="img"
+            image={userProfile.banner || bannerDefault}
+            alt={userProfile.user_name + " banner"}
+            sx={{
+              width: "100%",
+              height: "20vh",
+            }}
+          />
+          <Box width="100%" display="flex" justifyContent="space-between">
+            <StyledAvatar
+              alt={userProfile.first_name} //if the image can't be loaded then will show the first alt's letter (user's firstname)
+              src={
+                userProfile.profile_picture.length > 0
+                  ? userProfile.profile_picture
+                  : userProfile.avatar
+                  ? userProfile.avatar
+                  : userProfile.profile_picture
+              }
             />
-            <Box width="100%" display="flex" justifyContent="space-between">
-              <StyledAvatar
-                alt={userProfile.first_name} //if the image can't be loaded then will show the first alt's letter (user's firstname)
-                src={
-                  userProfile.profile_picture.length > 0
-                    ? userProfile.profile_picture
-                    : userProfile.avatar
-                    ? userProfile.avatar
-                    : userProfile.profile_picture
-                }
-              />
-              <BuyMeACoffe handleClose={handleClose} open={open} />
-              {user._id !== userProfile._id &&
-              userProfile.role < 4 &&
-              user.role < 4 ? (
-                <Button
-                  onClick={handleOpen}
-                  variant="contained"
-                  color="primary"
-                  sx={{ height: "20%" }}
-                  startIcon={<CoffeeIcon />}
-                >
-                  Regalame un cafecito😋
-                </Button>
-              ) : null}
-            </Box>
-
-            <CardContent>
-              <Typography variant="h5">
-                {`${userProfile.first_name} ${userProfile.last_name} | ${userProfile.user_name}`}
-                {id === user._id && (
-                  <Button
-                    variant="contained"
-                    onClick={() => navigate(`/Profile/${id}/Edit`)}
-                    sx={{
-                      marginLeft: "1em",
-                      fontSize: "1rem",
-                    }}
-                    startIcon={<EditIcon />}
-                  >
-                    Editar Información
-                  </Button>
-                )}
-              </Typography>
-              <Typography variant="caption" gutterBottom>
-                {`${userProfile.country}${
-                  userProfile.city && ` | ${userProfile.city} `
-                }`}
-                | {`${roles[userProfile.role]}`}
-              </Typography>
-              <Typography variant="body1" my={3}>
-                {userProfile.biography}
-              </Typography>
-              <Box
-                display="flex"
-                justifyContent="space-around"
-                alignItems="center"
-                justifySelf="flex-start"
-                sx={{ width: "100px" }}
-                mt={1}
+            <BuyMeACoffe handleClose={handleClose} open={open} />
+            {user._id !== userProfile._id &&
+            userProfile.role < 4 &&
+            user.role < 4 ? (
+              <Button
+                onClick={handleOpen}
+                variant="contained"
+                color="primary"
+                sx={{ height: "20%" }}
+                startIcon={<CoffeeIcon />}
               >
-                {userProfile.github !== "" && (
-                  <Link href={userProfile.github} rel="noopener" target="_blank">
-                    <Avatar
-                      sx={{
-                        bgcolor: "info.main",
-                        color: "info.contrastText",
-                      }}
-                    >
-                      <GitHubIcon />
-                    </Avatar>
-                  </Link>
-                )}
-                {userProfile.linkedin !== "" && (
-                  <Link
-                    href={userProfile.linkedin}
-                    rel="noopener"
-                    target="_blank"
-                  >
-                    <Avatar
-                      sx={{
-                        bgcolor: "info.main",
-                        color: "info.contrastText",
-                      }}
-                    >
-                      <LinkedInIcon />
-                    </Avatar>
-                  </Link>
-                )}
-              </Box>
-            </CardContent>
-          </Card>
-        </Container>
+                Regalame un cafecito😋
+              </Button>
+            ) : null}
+          </Box>
 
-        <Container>
+          <CardContent>
+            <Typography variant="h5">
+              {`${userProfile.first_name} ${userProfile.last_name} | ${userProfile.user_name}`}
+              {id === user._id && (
+                <Button
+                  variant="contained"
+                  onClick={() => navigate(`/Profile/${id}/Edit`)}
+                  sx={{
+                    marginLeft: "1em",
+                    fontSize: "1rem",
+                  }}
+                  startIcon={<EditIcon />}
+                >
+                  Editar Información
+                </Button>
+              )}
+            </Typography>
+            <Typography variant="caption" gutterBottom>
+              {`${userProfile.country}${
+                userProfile.city && ` | ${userProfile.city} `
+              }`}
+              | {`${roles[userProfile.role]}`}
+            </Typography>
+            <Typography variant="body1" my={3}>
+              {userProfile.biography}
+            </Typography>
+            <Box
+              display="flex"
+              justifyContent="space-around"
+              alignItems="center"
+              justifySelf="flex-start"
+              sx={{ width: "100px" }}
+              mt={1}
+            >
+              {userProfile.github !== "" && (
+                <Link href={userProfile.github} rel="noopener" target="_blank">
+                  <Avatar
+                    sx={{
+                      bgcolor: "info.main",
+                      color: "info.contrastText",
+                    }}
+                  >
+                    <GitHubIcon />
+                  </Avatar>
+                </Link>
+              )}
+              {userProfile.linkedin !== "" && (
+                <Link
+                  href={userProfile.linkedin}
+                  rel="noopener"
+                  target="_blank"
+                >
+                  <Avatar
+                    sx={{
+                      bgcolor: "info.main",
+                      color: "info.contrastText",
+                    }}
+                  >
+                    <LinkedInIcon />
+                  </Avatar>
+                </Link>
+              )}
+            </Box>
+          </CardContent>
+        </Card>
+      </Container>
+      <Container>
           <Activity />
-        </Container>
       </Container>
     </>
   );

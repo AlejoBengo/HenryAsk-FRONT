@@ -5,6 +5,7 @@ import {
   answerTemplate,
   fetchAnswerById,
 } from "../../app/Utils/answerUtilities";
+import { reportPost } from "../../app/Utils/postReport";
 import { Answer, Comment } from "../../app/interface";
 import {
   getCommentsByAnswerID,
@@ -19,10 +20,28 @@ import {
   Modal,
   Avatar,
   Skeleton,
+  Menu,
+  MenuItem,
+  IconButton,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  Grid,
+  FormControl,
+  InputLabel,
+  Select,
+  DialogActions,
 } from "@mui/material";
+import { TituloForo, StyledTextField } from "../Style/StyledComponents";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { BoxButtons, BoxModalDelete, AreYouSure } from "./StyledComponents";
 import { LinkDom } from "../Style/StyledComponents";
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import CheckIcon from "@mui/icons-material/Check";
+
+
+
 
 interface Props {
   id: string;
@@ -40,6 +59,7 @@ export const Comments = ({ id, toggleOpen, open }: Props) => {
   });
   const [openEdit, setOpenEdit] = useState<boolean>(false);
   const [openDelete, setOpenDelete] = useState<boolean>(false);
+  const [commentId , setCommentId] = useState<any>({});
 
   useEffect(() => {
     fetchAnswerById(id)
@@ -65,19 +85,82 @@ export const Comments = ({ id, toggleOpen, open }: Props) => {
     };
   }, [id]);
 
-  const handleOpenDelete = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleOpenDeleteComment = () => {
     setOpenDelete(!openDelete);
   };
 
-  const handleOpenEdit = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setOpenEdit(!openEdit);
-  };
-
-  const handleDelete = (event: string) => {
-    deleteComment(event);
+  const handleDelete = (event:React.MouseEvent<HTMLButtonElement>) => {
+    deleteComment(commentId);
     window.location.reload();
   };
 
+  const [anchorElComment, setanchorElComment] = React.useState<null | HTMLElement>(null);
+  const [openModalReport, setOpenModalReport] = React.useState(false);
+  let [infoReport, setInfoReport] = React.useState<any>({
+    reason:'',
+    description:'',
+    owner:usuario,
+    status:'PENDING',
+    post:{},
+    answer:{},
+    comment:{},
+  });
+  const user = useAppSelector((state) => state.user.data);
+  const handleCloseMenu = () => {
+    setanchorElComment(null);
+  };
+  const handleOpenModalReportC = () => {
+    setOpenModalReport(true);
+    setanchorElComment(null);
+    setInfoReport(infoReport={...infoReport, owner:usuario, comment:commentId})
+  };
+
+  const handleMenuComment = (event: React.MouseEvent<HTMLElement>, id:any) => {
+    setanchorElComment(event.currentTarget);
+    setCommentId(id);
+  };
+  const handleCloseModalReport = () => {
+    setanchorElComment(null);
+    setOpenModalReport(false);
+    setInfoReport(infoReport={
+      reason:'',
+      description:'',
+      owner:usuario,
+      status:'PENDING',
+      post:{},
+      answer:{},
+      comment:{},
+    })
+  };
+  const handleChangeOption = (event:any) => {
+    setInfoReport(infoReport = {...infoReport , reason:event.target.value});
+  };
+  const handleDescriptionChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setInfoReport( infoReport= {
+      ...infoReport,
+      description: event.target.value,
+    });
+  };
+  const handleSubmitModalReport = () => {
+    setanchorElComment(null);
+    setOpenModalReport(false);
+    if(infoReport.reason==="" || infoReport.description===''){
+      alert('debes colocar una razon de report o enviar descripcion del reporte')
+    }else{
+      console.log(infoReport);
+      reportPost(infoReport).then((response)=> (setInfoReport(infoReport={
+        reason:'',
+        description:'',
+        owner:usuario,
+        status:'PENDING',
+        post:{},
+        answer:{},
+        comment:{},
+      })),null)
+    }
+  }
   return (
     <Drawer
       open={open}
@@ -147,7 +230,7 @@ export const Comments = ({ id, toggleOpen, open }: Props) => {
         </Box>
       </Box>
       <Divider />
-      <Typography variant="h6" gutterBottom sx={{ marginTop: "1em" }}>
+      <Typography variant="h6" gutterBottom sx={{ marginTop: "1em"}}>
         Comentarios
       </Typography>
       <Box sx={{ overflowY: "scroll" }}>
@@ -164,31 +247,64 @@ export const Comments = ({ id, toggleOpen, open }: Props) => {
                   sx={{
                     display: "flex",
                     alignItems: "center",
-                    justifyContent: "flex-start",
+                    justifyContent: "space-between",
                     margin: "0.5em",
                   }}
                 >
-                  <LinkDom
-                    to={`/Profile/${comment.owner._id}`}
-                    sx={{ marginRight: "1em" }}
+                  <Box
+                   sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "flex-start",
+                    margin: "0.5em",
+                  }}
                   >
-                    <Avatar
-                      src={
-                        comment.owner.profile_picture.length > 0
-                          ? comment.owner.profile_picture
-                          : comment.owner.avatar.length > 0
-                          ? comment.owner.avatar
-                          : comment.owner.profile_picture
-                      }
-                    />
-                  </LinkDom>
-
-                  <Typography variant="body1">{comment.content}</Typography>
+                    <LinkDom
+                      to={`/Profile/${comment.owner._id}`}
+                      sx={{ marginRight: "1em" }}
+                    >
+                      <Avatar
+                        src={
+                          comment.owner.profile_picture.length > 0
+                            ? comment.owner.profile_picture
+                            : comment.owner.avatar.length > 0
+                            ? comment.owner.avatar
+                            : comment.owner.profile_picture
+                        }
+                      />
+                    </LinkDom>
+                    <Typography variant="body1">{comment.content}</Typography>
+                  </Box>
+                  
+                  <Box>
+                    <IconButton onClick={(e)=>handleMenuComment(e, comment)} aria-label="delete" size="large">
+                      <MoreVertIcon fontSize="inherit" />
+                    </IconButton>
+                  </Box>
                 </Box>
-                {(usuario._id === comment.owner._id || usuario.role > 3) && (
+                <Menu
+                 id={comment._id}
+                key={comment._id}
+                anchorEl={anchorElComment}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                open={Boolean(anchorElComment)}
+                onClose={handleCloseMenu}
+              >
+                {(user._id === comment.owner._id || user.role>3) && (<MenuItem key={Math.random()}  onClick={handleOpenDeleteComment}>Eliminar comentario</MenuItem>)}
+                <MenuItem key={Math.random()} onClick={handleOpenModalReportC}>Reportar comentario</MenuItem>
+              </Menu>
+               {/*  {(usuario._id === comment.owner._id || usuario.role > 3) && (
                   <BoxButtons>
                     <Button
-                      onClick={handleOpenDelete}
+                      onClick={()=>handleOpenDeleteComment(comment._id)}
                       variant="contained"
                       size="small"
                       color="error"
@@ -196,20 +312,19 @@ export const Comments = ({ id, toggleOpen, open }: Props) => {
                       <DeleteIcon />
                     </Button>
                   </BoxButtons>
-                )}
-
+                )} */}
                 <Modal open={openDelete}>
                   <BoxModalDelete>
                     <Button
                       style={{ marginLeft: "53.2vw", marginTop: "-4.7vh" }}
                       variant="contained"
-                      onClick={handleOpenDelete}
+                      onClick={handleOpenDeleteComment}
                     >
                       Cerrar
                     </Button>
                     <AreYouSure>¿Estás segur@?</AreYouSure>
                     <Button
-                      onClick={() => handleDelete(comment._id)}
+                      onClick={handleDelete}
                       variant="contained"
                       color="error"
                     >
@@ -231,8 +346,77 @@ export const Comments = ({ id, toggleOpen, open }: Props) => {
             />
           </Box>
         )}
+        <div>
+                    <Dialog
+                      open={openModalReport}
+                      /* onClose={handleCloseModalReport} */
+                      aria-labelledby="alert-dialog-title"
+                      aria-describedby="alert-dialog-description"
+                      maxWidth="md"
+                    >
+                    <DialogTitle id="alert-dialog-title" textAlign="center" sx={{display:"flex", justifyContent:"space-between" , alignItems:"center"}}>
+                      <div style={{width:"2.5vw"}}><img style={{width:"100%" , height:"auto"}} src='https://startupeable.com/directorio/wp-content/uploads/2021/03/d4face92a7abc37a414e0bc3acf4ff23ec588438.png'/></div>
+                    <Box><TituloForo sx={{borderBottom:"6px solid yellow"}}>Reportar Posteo</TituloForo></Box>
+                    <Button onClick={handleCloseModalReport} sx={{color:"error.main", fontSize:"15px" ,}} color="error" variant="outlined">X</Button>
+                  </DialogTitle>
+                  <Divider/>
+                  <DialogContent>
+                    <DialogContentText id="alert-dialog-description" sx={{minHeight:"20vh"}}>
+                    <Grid container spacing={2} sx={{width:"40vw"}}>
+                      <Grid item xs={12} > 
+                      <TituloForo sx={{borderBottom:"6px solid yellow" , fontWeight:"bold"}}>Razon:</TituloForo>
+                      </Grid>
+                      <Grid item xs={6} padding="0px" sx={{ display:"flex" , alignItems:"center" , height:"80px"}}>
+                        <FormControl sx={{ minWidth: 120 ,  width:"100%"}} size="small" error={infoReport.reason?false : true}>
+                            <InputLabel id="demo-select-small" >Elija una razon</InputLabel>
+                            <Select
+                              labelId="demo-select-small"
+                              id="demo-select-small"
+                              value={infoReport.reason}
+                              label="Elija una razon"
+                              onChange={handleChangeOption}
+                              sx={{width:"100%"}}
+                            >
+                              <MenuItem value="Información erronea.">Información erronea</MenuItem>
+                              <MenuItem value='Es spam.'>Es spam</MenuItem>
+                              <MenuItem value='Lenguaje o símbolos que incitan al odio.'>Lenguaje o símbolos que incitan al odio</MenuItem>
+                              <MenuItem value='Bullying o acoso.'>Bullying o acoso</MenuItem>
+                              <MenuItem value='Este usuario se hace pasar por mí.'>Este usuario se hace pasar por mí</MenuItem>
+                              <MenuItem value='Contiene información personal.'>Contiene información personal</MenuItem>
+                            </Select>
+                          </FormControl>
+                      </Grid>
+                      <Grid item xs={6} sx={{display:"flex" , alignItems:"center"}}>
+                        <Box display="flex" alignItems="center">{infoReport.reason}{infoReport.reason? <CheckIcon/> : null }</Box>
+                      </Grid>
+                      <Grid item xs={12}>
+                        <StyledTextField
+                          variant="filled"
+                          multiline
+                          label="Descripcion del reporte"
+                          name="description"
+                          value={infoReport.description}
+                          onChange={(event) => handleDescriptionChange(event)}
+                          minRows={3}
+                          maxRows={5}
+                        ></StyledTextField>
+                      </Grid>
+                      </Grid>
+                    </DialogContentText>
+                  </DialogContent>
+                  <Divider/>
+                      <DialogActions sx={{padding:2}}>
+                        <Button onClick={handleSubmitModalReport} autoFocus color="error">
+                          Reportar
+                        </Button>
+                      </DialogActions>
+                    </Dialog>
+                </div>
+
       </Box>
       <CreateComment answerId={answer._id} />
     </Drawer>
   );
 };
+
+

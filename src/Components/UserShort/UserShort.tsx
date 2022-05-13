@@ -13,8 +13,8 @@ export const UserShort = ({ user }: Props) => {
     <Typography display={"flex"} variant="caption" alignItems="center">
       <Avatar
         sx={{
-          width: "40px",
-          height: "40px",
+          width: "50px",
+          height: "50px",
           display: "inline",
           mx: 1,
           zIndex: 2,
@@ -25,14 +25,14 @@ export const UserShort = ({ user }: Props) => {
             content: "''",
             display: "block",
             backgroundColor: "primary.light",
-            width: "40px",
-            height: "40px",
+            width: "50px",
+            height: "50px",
             position: "absolute",
           },
         }}
         src={user?.profile_picture.length>0? user.profile_picture : user.avatar.length>0? user.avatar : user.profile_picture}
       />
-      <LinkDom to={`/Profile/${user._id}`}>{user?.user_name}</LinkDom>
+      <LinkDom style={{fontSize:"20px" , fontWeight:"bold" , textDecoration:"underline"}} to={`/Profile/${user._id}`}>{user?.user_name} :</LinkDom>
     </Typography>
   );
 };

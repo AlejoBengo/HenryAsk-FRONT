@@ -8,7 +8,6 @@ import {
     Box } from '@mui/material';
 
 export default function CardRedirect(){
-
     return (
         <Box sx={{width: '100%', padding: '1rem'}} >
             <Grid container >
@@ -20,7 +19,7 @@ export default function CardRedirect(){
                         padding: '3rem',
                         backgroundColor: 'yellow' }}>
                             <Typography
-                                variant="h2" 
+                                variant="h2"
                                 display='flex'
                                 justifyContent='center'
                                 padding='3rem'
@@ -32,9 +31,9 @@ export default function CardRedirect(){
                             display='flex' 
                             justifyContent='center'>
                                 <Link
-                                underline='none'
-                                target="_blank"
-                                href='https://www.soyhenry.com/'>
+                                href='https://www.soyhenry.com/'
+                                rel="noopener" 
+                                target="_blank">
                                     <Button
                                     color= "secondary"
                                     variant='contained'
@@ -47,5 +46,5 @@ export default function CardRedirect(){
                 </Grid>
             </Grid>
         </Box>
-    )
-}
+    );
+};
