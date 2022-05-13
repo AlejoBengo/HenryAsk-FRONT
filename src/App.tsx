@@ -31,10 +31,11 @@ import AboutUs from "./Views/AboutUs";
 import About from "./Views/About";
 import Careers from "./Views/Careers";
 import Contact from "./Views/Contact";
-import QA from "./Views/Q&A";
-import Privacy from "./Views/PrivacyPolicies";
+import Qa from "./Views/Q&A";
+import Privacy from "./Views/PrivacyPolitics";
 import PanelAdm from "./Views/PanelAdm";
-import Footer from "./Components/Home/Footer/Footer";
+import Footer from "./Components/Home/Footer/FooterSenior";
+import Header from './Components/HomeSenior/Header';
 import Search from "./Views/Search";
 
 const App = () => {
@@ -63,6 +64,7 @@ const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
+      <Header />
       <Navbar />
       <Box
         bgcolor={theme.palette.background.default}
@@ -74,7 +76,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/privacy" element={<Privacy />} />
-          <Route path="/qya" element={<QA />} />
+          <Route path="/qya" element={<Qa />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/careeers" element={<Careers />} />
           <Route path="/about" element={<About />} />
