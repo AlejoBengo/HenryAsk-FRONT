@@ -3,15 +3,17 @@ import React from 'react';
 import { useEffect } from 'react';
 import { fetchAllUsers } from '../../app/Utils/allUsers';
 import { useAppDispatch , useAppSelector } from '../../app/hooks';
+import { editIsBanned } from '../../app/Utils/editUser';
 import { User } from '../../app/interface';
 /*-----------IMPORT Components-----------*/
 import SelectRole from './SelectRole';
 import DialogSuccess from '../Dialog/DialogSuccess';
 /*-----------IMPORT MUI & CSS-----------*/
 import {Table, TableBody, TableCell, TableContainer, TableHead, Paper, TableRow , TablePagination , Box} from '@mui/material'
+import {Button} from '@mui/material'
 
 interface Column {
-  id: 'user_name' | 'first_name' | 'role' ;
+  id: 'user_name' | 'isBanned' | 'role' ;
   label: string;
   minWidth?: number;
   align?: 'center' | 'left';
@@ -19,7 +21,7 @@ interface Column {
 
 const columns:Array<Column> = [
   { id: 'user_name', label: 'Nombre de Usuario', minWidth: 170, align:'left' },
-  { id: 'first_name', label: 'Puede Postear', minWidth: 100, align:'center' },
+  { id: 'isBanned', label: 'Puede Postear', minWidth: 100, align:'center' },
   {
     id: 'role',
     label: 'Rol',
@@ -35,7 +37,6 @@ export default function PanelTable(props:any) {
   const [rowsPerPage, setRowsPerPage] = React.useState(25);
   const userByUserName = useAppSelector((state) => state.searchUserName.searchUserName);
   const [openDialog, setOpenDialog] = React.useState(false); // dialog
-
   useEffect(()=>{
     dispatch(fetchAllUsers())
   },[])
@@ -57,6 +58,19 @@ export default function PanelTable(props:any) {
     setOpenDialog(false);
   };
 //---------------
+//BANEOS 
+  const handleDesban = (info:any)=>{
+    let aux = {...info , isBanned:false};
+    editIsBanned(aux)
+    .then(()=> window.location.reload());
+  }
+  
+  const handleBan = (info:any)=>{
+    let aux = {...info , isBanned:true};
+    editIsBanned(aux)
+    .then(()=> window.location.reload());
+  }
+// ======>
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
       <TableContainer sx={{ maxHeight: 1540 , minHeight:1540}}>
@@ -112,6 +126,21 @@ export default function PanelTable(props:any) {
                                 <SelectRole valor={value} usuario={usuario} handleClickOpen={handleClickOpen}/>
                           </TableCell>
                           )
+                      }
+                      if(column.id==="isBanned"){
+                        if(row.isBanned){
+                          return(
+                          <TableCell key={column.id} align={column.align}>
+                              <Button onClick={()=> handleDesban(row)} color="success">Pulsa para Desbanear</Button>
+                        </TableCell>
+                          )
+                        }else{
+                          return(
+                            <TableCell key={column.id} align={column.align}>
+                            <Button onClick={()=> handleBan(row)} color="error">Pulsa para Banear</Button>
+                          </TableCell>
+                          )
+                        }
                       }
                       return (
                         <TableCell key={column.id} align={column.align}>
