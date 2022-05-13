@@ -9,67 +9,57 @@ import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { useEffect } from "react";
 import { fetchAllUsers } from "../app/Utils/allUsers";
 import Carousel from "../Components/Home/Carousel/Carousel";
-import { Link } from "react-router-dom";
-import Breadcrumbs from "@mui/material/Breadcrumbs";
-import { StackMigajas } from "../Components/Style/StyledComponents";
 import Grids from "../Components/Home/Grids/Grids";
 import Quantity from "../Components/Home/Grids/Quantity";
 import CardRedirec from "../Components/Home/Grids/CardRedirec";
+import Cards from "../Components/HomeSenior/Cards/Cards";
+import Ranking from "../Components/HomeSenior/Ranking";
+import PosteosAlumnos from "../Components/HomeSenior/PosteosAlumnos";
 
 export default function Home() {
   const theme = useTheme();
   const dispatch = useAppDispatch();
 
   const users = useAppSelector((state: any) => state.allUser);
+  const userRole = useAppSelector((state) => state.user.data);
 
   useEffect(() => {
     dispatch(fetchAllUsers);
-  }, []);
+  }, [userRole]);
 
-  const migajas = [
-    <Link
-      to="/"
-      style={{
-        fontFamily: "Helvetica",
-        textDecoration: "none",
-        color: `${theme.palette.getContrastText(
-          theme.palette.background.default
-        )}`,
-      }}
-    >
-      HOME
-    </Link>,
-  ];
-
-  return (
-    <Box sx={{ width: "100%", padding: "0px", margin: "0px" }}>
-      <StackMigajas spacing={2}>
-        <Breadcrumbs separator="›">{migajas}</Breadcrumbs>
-      </StackMigajas>
-      <Carousel />
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          minHeight: "100vh",
-        }}
-      >
-        <CssBaseline />
-        <Container component="main" sx={{ mt: 8, mb: 2 }} maxWidth="xl">
-          <Typography
-            variant="h2"
-            component="h1"
-            gutterBottom
-            display="flex"
-            justifyContent="center"
-          >
-            {`+${users ? users.allUsers.length : null} usuarios se han sumado`}
-          </Typography>
-        </Container>
-        {/* <Quantity /> */}
-        <Grids />
+  if(userRole.role <= 0 ){
+    return (
+      <Box sx={{ width: "100%", padding: "0px", margin: "0px" }}>
+        <Carousel />
+        <Box sx={{width: '100%', padding: '1rem'}}>
+          <CssBaseline />
+          <Container component="main" sx={{ mt: 8, mb: 2 }} maxWidth="xl">
+            <Typography
+              variant="h2"
+              component="h1"
+              gutterBottom
+              display="flex"
+              justifyContent="center"
+            >
+              {`+${users ? users.allUsers.length : null} usuarios se han sumado`}
+            </Typography>
+          </Container>
+          <Quantity />
+          <Grids />
+        </Box>
+        <CardRedirec />
       </Box>
-      <CardRedirec />
-    </Box>
-  );
-}
+    );
+  } else {
+    return (
+      <Box>
+        <CssBaseline />
+        <Box>
+          <Ranking />
+        </Box>
+        <Cards />
+        <PosteosAlumnos />
+      </Box>
+    );
+  };
+};

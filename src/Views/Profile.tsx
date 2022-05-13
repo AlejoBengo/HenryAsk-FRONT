@@ -1,5 +1,6 @@
 /*--------------------------------------------------------*/
 import Activity from "../Components/Profile/Activity";
+import bannerDefault from '../Components/Profile/bannerDefault/bannerDefault.jpg';
 /*-----------IMPORT UTILITIES-----------*/
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
@@ -40,7 +41,7 @@ const Item = styled(Paper)(({ theme }) => ({
   textAlign: "center",
   color: theme.palette.text.secondary,
 }));
-const StyledAvatar = styled(Avatar)(
+export const StyledAvatar = styled(Avatar)(
   ({ theme }) => `
   position: relative;
   top: -10vh;
@@ -138,7 +139,7 @@ export default function Profile() {
         <Card sx={{ minWidth: "100%" }}>
           <CardMedia
             component="img"
-            image={userProfile.banner || "https://via.placeholder.com/1000"}
+            image={userProfile.banner || bannerDefault}
             alt={userProfile.user_name + " banner"}
             sx={{
               width: "100%",
@@ -240,7 +241,7 @@ export default function Profile() {
       </Container>
 
       <Container>
-        <Activity />
+          <Activity />
       </Container>
     </Container>
   );

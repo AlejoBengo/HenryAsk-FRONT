@@ -34,7 +34,8 @@ import Contact from "./Views/Contact";
 import Qa from "./Views/Q&A";
 import Privacy from "./Views/PrivacyPolitics";
 import PanelAdm from "./Views/PanelAdm";
-import Footer from "./Components/Home/Footer/Footer";
+import Footer from "./Components/Home/Footer/FooterSenior";
+import Header from './Components/HomeSenior/Header';
 import Search from "./Views/Search";
 
 const App = () => {
@@ -63,6 +64,7 @@ const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
+      <Header />
       <Navbar />
       <Box
         bgcolor={theme.palette.background.default}
