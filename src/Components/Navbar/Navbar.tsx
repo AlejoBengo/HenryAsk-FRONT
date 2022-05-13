@@ -27,6 +27,7 @@ import { Img } from "../Content/ContentStyled";
 import css from "./NavBar.module.css";
 import logo from "./logo.png";
 import { LinkDom } from "../Style/StyledComponents";
+import { SearchBar } from "../SearchBar/SearchBar";
 
 const pages = ["Material complementario", "Foro"];
 const settings = ["Perfil", "Cerrar Sesion"];
@@ -82,7 +83,11 @@ const Navbar = () => {
   return (
     <AppBar
       position="sticky"
-      sx={{ maxHeight: "5rem", minHeight: "5rem", backgroundColor: "#000" }}
+      sx={{
+        maxHeight: "5rem",
+        minHeight: "5rem",
+        backgroundColor: "info.main",
+      }}
     >
       <Container maxWidth={false}>
         <Toolbar sx={{ height: "5rem" }} disableGutters>
@@ -104,6 +109,7 @@ const Navbar = () => {
             </Link>
           </Box>
           <DarkModeButton />
+          <SearchBar />
           <Box
             sx={{
               flexGrow: 1,
@@ -182,12 +188,12 @@ const Navbar = () => {
               onClose={handleCloseCreateMenu}
             >
               <MenuItem onClick={() => navigate("/Ask")}> Discusión</MenuItem>
-              {DBUser.role === 5 ? (
+              {DBUser.role >= 5 ? (
                 <MenuItem onClick={() => navigate("/Theoric/Create")}>
                   Contenido Teórico
                 </MenuItem>
               ) : null}
-              {DBUser.role === 5 ? (
+              {DBUser.role >= 5 ? (
                 <MenuItem onClick={() => navigate("/Exercise/Create")}>
                   Ejercicio
                 </MenuItem>
