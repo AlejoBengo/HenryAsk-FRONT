@@ -2,45 +2,42 @@
 /*-----------IMPORT UTILITIES-----------*/
 import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
-import { editTheoric } from "../app/Reducers/theoricSlice";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { ownerTemplate } from "../app/Utils/userUtilities";
 import { ExerciseInterface } from "../app/Interfaces/interfaceExercise";
 import { exerciseTemplate } from "../app/Utils/ExerciseUtilities";
+import { CodeEditor } from "../Components/CodeEditor/CodeEditor";
 /*-----------IMPORT MUI & CSS-----------*/
 import {
   Button,
   Modal,
   TextField,
   Box,
-  Typography,
   useTheme,
   Breadcrumbs,
 } from "@mui/material";
 import { StackMigajas } from "../Components/Style/StyledComponents";
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 import {
-  StyledDiv,
   ButtonsContainer,
-  StyledTypography,
-  StyledTypography2,
   StyledTypography3,
-  StyledPaper,
   StyledGrid,
   StyledBoxModal,
   StyledBoxModal2,
   StyledDivModal2,
 } from "../Components/Theoric/StyledComponents";
 import {
+  BoxExcerciceContainer,
+  StyledTypography,
+  CreatorNameText,
+  StyledPaper,
+  CreatedAt,
+} from "../Components/Excercise/StyledComponents";
+import {
   deleteExercise,
   editExercise,
   getExerciseById,
 } from "../app/Reducers/exercisesSlice";
-/*-----------IMPORT REDUCER-----------*/
-
-/*-----------IMPORT COMPONENTS-----------*/
-
-/*--------------------------------------------------------*/
 
 const ExerciseDetails = () => {
   const theme = useTheme();
@@ -65,6 +62,7 @@ const ExerciseDetails = () => {
     if (typeof id === "string") {
       setEditable({ ...editable, _id: id });
     }
+    console.log("SOY USER: ", data);
   }, [data, id]);
 
   const handleOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -153,119 +151,117 @@ const ExerciseDetails = () => {
       {exercise.title}
     </Link>,
   ];
-
   return (
-    <StyledGrid sx={{ minHeight: "unset" }}>
-      <Box
-        style={{
-          width: "100%",
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
-      >
+    <StyledGrid>
+      <StackMigajas spacing={2}>
+        <Breadcrumbs separator="›">{migajas}</Breadcrumbs>
+      </StackMigajas>
+
+      {role > 3 && (
+        <ButtonsContainer>
+          <Button variant="contained" onClick={handleOpen}>
+            Editar
+          </Button>
+          <Button color="error" variant="contained" onClick={handleOpenDelete}>
+            Borrar
+          </Button>
+        </ButtonsContainer>
+      )}
+
+      <Modal open={openDelete}>
+        <StyledBoxModal2>
+          <Button
+            variant="contained"
+            style={{ marginLeft: "43.2vw", marginTop: "-4vh" }}
+            onClick={handleOpenDelete}
+          >
+            Cerrar
+          </Button>
+          <StyledTypography>¿Estás segur@?</StyledTypography>
+          <Button variant="contained" color="error" onClick={handleDelete}>
+            Borrar
+          </Button>
+        </StyledBoxModal2>
+      </Modal>
+      <Modal open={open}>
+        <StyledBoxModal>
+          <Button
+            style={{ marginLeft: "74vw", marginTop: "-0.2vh" }}
+            variant="contained"
+            onClick={handleOpen}
+          >
+            Close
+          </Button>
+          <TextField
+            style={{ width: "45vw", marginLeft: "1vh" }}
+            name="title"
+            onChange={handleInputChange}
+            value={editable.title}
+            multiline
+          />
+          <StyledDivModal2>
+            <TextField
+              style={{ width: "77vw" }}
+              name="description"
+              onChange={handleInputChange}
+              value={editable.description}
+              multiline
+            />
+          </StyledDivModal2>
+          <TextField
+            style={{ marginLeft: "1vh", width: "25vw" }} // tags, test
+            name="code"
+            onChange={handleInputChange}
+            value={editable.code}
+            multiline
+          />
+          <Button
+            style={{ marginLeft: "74.85vw", marginBottom: "-0.2vh" }}
+            variant="contained"
+            onClick={handleSaver}
+          >
+            Save
+          </Button>
+        </StyledBoxModal>
+      </Modal>
+
+      <BoxExcerciceContainer>
         <StyledTypography>{exercise.title}</StyledTypography>
-        {role > 3 && (
-          <ButtonsContainer>
-            <Button variant="contained" onClick={handleOpen}>
-              Editar
-            </Button>
-            <Button
-              color="error"
-              variant="contained"
-              onClick={handleOpenDelete}
-            >
-              Borrar
-            </Button>
-          </ButtonsContainer>
-        )}
-        <Modal open={openDelete}>
-          <StyledBoxModal2>
-            <Button
-              variant="contained"
-              style={{ marginLeft: "43.2vw", marginTop: "-4vh" }}
-              onClick={handleOpenDelete}
-            >
-              Cerrar
-            </Button>
-            <StyledTypography>¿Estás segur@?</StyledTypography>
-            <Button variant="contained" color="error" onClick={handleDelete}>
-              Borrar
-            </Button>
-          </StyledBoxModal2>
-        </Modal>
-        <Modal open={open}>
-          <StyledBoxModal>
-            <Button
-              style={{ marginLeft: "74vw", marginTop: "-0.2vh" }}
-              variant="contained"
-              onClick={handleOpen}
-            >
-              Close
-            </Button>
-            <TextField
-              style={{ width: "45vw", marginLeft: "1vh" }}
-              name="title"
-              onChange={handleInputChange}
-              value={editable.title}
-              multiline
-            />
-            <StyledDivModal2>
-              <TextField
-                style={{ width: "77vw" }}
-                name="description"
-                onChange={handleInputChange}
-                value={editable.description}
-                multiline
-              />
-            </StyledDivModal2>
-            <TextField
-              style={{ marginLeft: "1vh", width: "25vw" }} // tags, test
-              name="code"
-              onChange={handleInputChange}
-              value={editable.code}
-              multiline
-            />
-            <Button
-              style={{ marginLeft: "74.85vw", marginBottom: "-0.2vh" }}
-              variant="contained"
-              onClick={handleSaver}
-            >
-              Save
-            </Button>
-          </StyledBoxModal>
-        </Modal>
-      </Box>
-      <StyledTypography2>
-        Creado por: <Typography>{exercise.owner.user_name} </Typography>el{" "}
-        <Typography>
+
+        <CreatorNameText>By: {exercise.owner.user_name}</CreatorNameText>
+
+        <CreatedAt>
           {exercise.createdAt.length > 0 && exercise.createdAt}
-        </Typography>
-      </StyledTypography2>
-      <StyledDiv sx={{ height: "100%" }}>
-        <StyledPaper elevation={8} sx={{ marginBlock: "3rem" }}>
+        </CreatedAt>
+
+        <StyledPaper elevation={8} style={{ marginTop: "0.5vh" }}>
           Descripción: {exercise.description}
         </StyledPaper>
+
         <StyledPaper elevation={8} sx={{ marginBlock: "3rem" }}>
           Código: {exercise.code.length > 0 && exercise.code}
         </StyledPaper>
+
         <StyledPaper elevation={8} sx={{ marginBlock: "3rem" }}>
-          Test: {exercise.test.length > 0 && exercise.test}
+          Test: {exercise.test && exercise.test}
         </StyledPaper>
-      </StyledDiv>
-      <Box
-        style={{
-          display: "flex",
-          marginTop: "2.5vh",
-          justifyContent: "flex-end",
-        }}
-      >
-        {exercise.tags.length > 0 &&
-          exercise.tags.map((tag: string) => {
-            return <StyledTypography3> {tag} </StyledTypography3>;
-          })}
-        <LocalOfferIcon />
-      </Box>
+
+        <Box
+          style={{
+            display: "flex",
+            marginTop: "2.5vh",
+            justifyContent: "flex-end",
+          }}
+        >
+          {exercise.tags.length > 0 &&
+            exercise.tags.map((tag: string) => {
+              return <StyledTypography3> {tag} </StyledTypography3>;
+            })}
+          <LocalOfferIcon />
+        </Box>
+      </BoxExcerciceContainer>
+
+      <CodeEditor value={"exercise"} />
     </StyledGrid>
   );
 };

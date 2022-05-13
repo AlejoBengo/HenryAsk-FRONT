@@ -9,13 +9,15 @@ import {
   CodeButton,
 } from "../Style/StyledComponents";
 
+import { Box } from "@mui/material";
+
 interface Props {
   value: string;
 }
 
-export const CodeEditor = ({ value }: Props) => {
+export const ExeCodeEditor = ({ value }: Props) => {
   return (
-    <>
+    <Box>
       <h1>Editor de codigo</h1>
       <GridContainter>
         <CodeArea>
@@ -34,6 +36,6 @@ export const CodeEditor = ({ value }: Props) => {
           <textarea className="codemirror-textarea"></textarea>
         </CodeArea>
       </GridContainter>
-    </>
+    </Box>
   );
 };
