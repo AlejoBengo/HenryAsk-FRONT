@@ -20,13 +20,11 @@ export default function MiEditor({ coding, testing }: Data) {
   const [test, setTest] = useState("");
 
   useEffect(() => {
-    if (coding.length > 0) {
-      setCode(coding);
-    }
-    if (testing.length > 0) {
-      setTest(testing);
-    }
+    setCode(coding);
+    setTest(testing);
   }, [coding, testing]);
+
+  const handleExecturor = (event: React.MouseEvent<HTMLButtonElement>) => {};
 
   return (
     <EditorsContainer>
@@ -54,7 +52,7 @@ export default function MiEditor({ coding, testing }: Data) {
             setTest(value);
           }}
         />
-        <Executer variant="contained" size="small">
+        <Executer variant="contained" size="small" onClick={handleExecturor}>
           Ejecutar!
         </Executer>
       </EditorTest>

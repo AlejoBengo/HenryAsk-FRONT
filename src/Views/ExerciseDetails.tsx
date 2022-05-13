@@ -260,7 +260,6 @@ const ExerciseDetails = () => {
           <LocalOfferIcon />
         </Box>
       </BoxExcerciceContainer>
-
       <MiEditor coding={exercise.code} testing={exercise.test} />
     </StyledGrid>
   );
