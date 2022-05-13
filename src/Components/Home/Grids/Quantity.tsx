@@ -12,10 +12,13 @@ export default function Quantity(){
     // const exerc = useAppSelector((state) => state.exercises)
     const dispatch = useAppDispatch();
 
-    fetchAllTheorics().then((res: any) => setTheoric(res));
+    
 
-    useEffect(() => {dispatch(fetchGetAllPosts(10))}, []);
+    useEffect(() => {dispatch(fetchGetAllPosts(10))
+        fetchAllTheorics().then((res: any) => setTheoric(res));
+    }, []);
     // useEffect(() => {dispatch(getAllExercises())});
+    
 
     return(
         <Container>

@@ -9,6 +9,7 @@ import Dai from "../Components/AboutUs/Img/Dai.jpg";
 import Marko from "../Components/AboutUs/Img/Marko.jpg";
 import Saul from "../Components/AboutUs/Img/Saul.jpg";
 import { useTheme } from '@mui/material';
+import Rocket from '../Components/AboutUs/Img/rocket.png';
 
 
 
@@ -25,10 +26,15 @@ export default function AboutUs(){
                     justifyContent: "center",
                     alignItems: "center",                    
                 }}>                
-                <Container sx={{ mt: 8, mb: 2, display: 'flex',flexDirection: 'column', fontWeight: "bold", justifyContent: "center", alignItems: "center" }}>
+                <Container sx={{ mt: 8, mb: 2, display: 'flex',flexDirection: 'column', fontWeight: "bold", justifyContent: "center", alignItems: "center" }}>                
+                <Box sx={{display: 'flex', flexDirection: 'row', justifyContent: "center", alignItems: "center",}}>
+                    <img src={Rocket} alt="" height= "60em" width= "60em" />
                     <Typography color={theme.palette.getContrastText(theme.palette.background.default)} variant="h2" component="h1" gutterBottom display='flex' justifyContent='center'>
                         Sobre Nosotros
                     </Typography>
+                    <img src={Rocket} alt="" height= "60em" width= "60em" />
+                </Box>
+                    
                     <Box sx={{ height: "100%", width: "80%", backgroundColor: "black", color: "rgb(255, 255, 1)", fontWeight: "bold", padding: "1em", borderRadius: "1em"}}>
                     <Typography variant="body2" color="rgb(255, 255, 1)">
                     Nuestra propuesta es una aplicación web diseñada para que la comunidad pueda solventar sus dudas, practicar y ayudar a sus compañeros con el fin de fortalecer la solidaridad y participación de los alumnos.
@@ -39,7 +45,7 @@ export default function AboutUs(){
                     </Typography>
 
                     {/* --------------------------------------- */}
-                    <Box sx={{ height: "100%", width: "80%", backgroundColor: "black", color: "rgb(255, 255, 1)", fontWeight: "bold", padding: "1em", borderRadius: "1em"}}>
+                    <Box sx={{ height: "100%", width: "60%", backgroundColor: "black", color: "rgb(255, 255, 1)", fontWeight: "bold", padding: "1em", borderRadius: "1em"}}>
                     <Typography variant="h4" component="h3" gutterBottom display='flex' justifyContent='center'>
                         Back End
                     </Typography>

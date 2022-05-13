@@ -30,7 +30,7 @@ import AboutUs from "./Views/AboutUs";
 import About from "./Views/About";
 import Careers from "./Views/Careers";
 import Contact from "./Views/Contact";
-import QA from "./Views/Q&A";
+import Qa from "./Views/Q&A";
 import Privacy from "./Views/PrivacyPolicies";
 import PanelAdm from "./Views/PanelAdm";
 
@@ -71,7 +71,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/privacy" element={<Privacy />} />
-          <Route path="/qya" element={<QA />} />
+          <Route path="/qya" element={<Qa />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/careeers" element={<Careers />} />
           <Route path="/about" element={<About />} />

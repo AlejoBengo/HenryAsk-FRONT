@@ -4,7 +4,8 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from "@mui/material/Button"
 import CardActions from "@mui/material/CardActions";
 import Footer from "../Components/Home/Footer/Footer";
-import Rocket from "../Components/AboutUs/Img/rocket.gif";
+import Rocket from "../Components/AboutUs/Img/rocket.png";
+import Rocket2 from "../Components/AboutUs/Img/rocket.gif";
 import { useTheme } from '@mui/material';
 
 
@@ -21,11 +22,16 @@ export default function Careers(){
                     justifyContent: "center",
                     alignItems: "center",               
                     
-                }}>                
+                }}>
+                
                 <Container component="main" sx={{ mt: 8, mb: 2 }} maxWidth="sm">
+                <Box sx={{display: 'flex', flexDirection: 'row', justifyContent: "center", alignItems: "center",}}>
+                    <img src={Rocket} alt="" height= "60em" width= "60em" />
                     <Typography color={theme.palette.getContrastText(theme.palette.background.default)} variant="h2" component="h1" gutterBottom display='flex' justifyContent='center'>
-                        Carreras
+                    CARRERAS
                     </Typography>
+                    <img src={Rocket} alt="" height= "60em" width= "60em" />
+                </Box>
 
                     <Typography color={theme.palette.getContrastText(theme.palette.background.default)} variant="h4" component="h3" gutterBottom display='flex' justifyContent='center'>
                         Invertimos en tu educación
@@ -44,7 +50,7 @@ export default function Careers(){
                          <Grid item xs={4}>
                             <CardMedia
                                 component="img"
-                                image={Rocket}
+                                image={Rocket2}
                                 alt=""
                                 sx={{
                                     width: "160px",
@@ -107,7 +113,7 @@ export default function Careers(){
                         <Grid item xs={4}>
                             <CardMedia
                                 component="img"
-                                image={Rocket}
+                                image={Rocket2}
                                 alt=""
                                 sx={{
                                     width: "160px",
@@ -149,7 +155,7 @@ export default function Careers(){
                          <Grid item xs={4}>
                             <CardMedia
                                 component="img"
-                                image={Rocket}
+                                image={Rocket2}
                                 alt=""
                                 sx={{
                                     width: "160px",

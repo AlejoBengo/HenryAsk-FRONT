@@ -34,6 +34,7 @@ export const postNewPost = createAsyncThunk(
   }
 );
 
+
 export const editAnswerChildInPost = async (id: string | undefined) => {
   try {
     let post = await (await axios.get(`/post/${id}`)).data;
@@ -68,3 +69,5 @@ export const closePost = async (id: string | undefined) => {
     return error;
   }
 };
+
+
