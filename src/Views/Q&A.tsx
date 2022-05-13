@@ -196,6 +196,5 @@ export default function Qa(){
                     </Container>
 
             </Box>
-            <Footer />
         </Box>
     )}    

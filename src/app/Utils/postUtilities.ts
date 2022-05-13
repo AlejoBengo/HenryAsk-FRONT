@@ -8,7 +8,6 @@ export const postTemplate: Posts = {
   question: "",
   description: "",
   owner: ownerTemplate,
-  ownerData: [],
   createdAt: "",
   open: true,
   answers: [],

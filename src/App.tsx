@@ -25,6 +25,7 @@ import CreatePost from "./Components/Creators/CreatePost/CreatePost";
 import { CreateTheoric } from "./Components/Creators/CreateTheoric/CreateTheoric";
 import LateralMenu from "./Components/Navbar/LateralMenu/LateralMenu";
 import TheoricView from "./Views/TheoricView";
+import ExerciseDetails from "./Views/ExerciseDetails";
 import Home from "./Views/Home";
 import AboutUs from "./Views/AboutUs";
 import About from "./Views/About";
@@ -33,6 +34,7 @@ import Contact from "./Views/Contact";
 import Qa from "./Views/Q&A";
 import Privacy from "./Views/PrivacyPolicies";
 import PanelAdm from "./Views/PanelAdm";
+import Footer from "./Components/Home/Footer/Footer";
 
 const App = () => {
   const { isAuthenticated, user } = useAuth0();
@@ -76,7 +78,6 @@ const App = () => {
           <Route path="/careeers" element={<Careers />} />
           <Route path="/about" element={<About />} />
           <Route path="/aboutus" element={<AboutUs />} />
-          <Route path="/a" element={<LateralMenu />} />
           <Route path="/Theoric/:id" element={<TheoricView />} />
           <Route path="/Content" element={<Content />} />
           <Route path="/Profile/:id" element={<Profile />} />
@@ -86,8 +87,10 @@ const App = () => {
           <Route path="/Ask" element={<CreatePost />} />
           <Route path="/Theoric/Create" element={<CreateTheoric />} />{" "}
           <Route path="/PanelAdm" element={<PanelAdm />} />
+          <Route path="/Exercise/:id" element={<ExerciseDetails />} />
         </Routes>
       </Box>
+      <Footer />
     </ThemeProvider>
   );
 };

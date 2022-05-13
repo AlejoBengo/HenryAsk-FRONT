@@ -5,8 +5,8 @@ import { styled } from "@mui/material/styles";
 /*--------------------------------------------------------*/
 
 export const StyledSpan = styled("div")`
-width:200px;
-`
+  width: 200px;
+`;
 
 export const StyledDiv = styled("div")`
   padding: 1vh;
@@ -33,22 +33,26 @@ export const StyledBox2 = styled(Box)`
   background-color: red;
 `;
 
-export const StyledTypography = styled(Typography)`
+export const StyledTypography = styled(Typography)(
+  ({ theme }) => `
   font-family: helvetica;
-  color: black;
+  color:  ${theme.palette.getContrastText(theme.palette.background.default)};
   font-size: 5vh;
   font-weight: bold;
   text-transform: uppercase;
   margin-left: 1vw;
-`;
+`
+);
 
-export const StyledTypography2 = styled(Typography)`
+export const StyledTypography2 = styled(Typography)(
+  ({ theme }) => `
   font-family: helvetica;
-  color: black;
-  font-size: 2vh;
-  margin-top: 1vh;
+  color: ${theme.palette.getContrastText(theme.palette.background.default)};
+  font-size: 3vh;
+  margin-bottom: 1vh;
   margin-left: 1vw;
-`;
+`
+);
 
 export const StyledTypography3 = styled(Typography)`
   font-family: helvetica;
@@ -59,31 +63,49 @@ export const StyledTypography3 = styled(Typography)`
   margin-right: 1vh;
 `;
 
-export const StyledPaper = styled(Paper)`
+export const StyledPaper = styled(Paper)(
+  ({ theme }) => `
   font-family: helvetica;
-  color: black;
-  font-size: 3vh;
-  width: 95vw;
+  font-size: 2.5vh;
+  color: ${theme.palette.getContrastText(theme.palette.background.default)};
+  width: 97vw;
   padding: 1vw;
-  over-flow: hidden;
-`;
+  overflow-y: auto;
+  height: 78vh;
+
+  &::-webkit-scrollbar {
+    width: 15px;
+    background-color: #fff;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: rgb(39, 37, 37);
+    border-radius: 10px;
+  }
+`
+);
 
 export const StyledGrid = styled(Grid)`
   display: flex;
   flex-direction: column;
 `;
 
-export const StyledBoxModal = styled(Box)`
+export const StyledBoxModal = styled(Box)(
+  ({ theme }) => `
   margin-top: 10vh;
   margin-left: 10vw;
   width: 80vw;
   height: 80vh;
-  background-color: #fff;
+  background-color: ${
+    theme.palette.mode === "light"
+      ? theme.palette.secondary.main
+      : theme.palette.info.main
+  };
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: flex-start;
-`;
+`
+);
 
 export const StyledDivModal2 = styled("div")(`
   height: 52vh;
@@ -117,15 +139,21 @@ export const StyledDivModal = styled("div")(`
   bottom: 11vh;
 `);
 
-export const StyledBox3 = styled(Box)`
+export const ButtonsContainer = styled(Box)`
   width: 15vw;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  margin-left: 80vw;
 `;
 
-export const StyledBoxModal2 = styled(Box)(`
-  background-color: #fff;
+export const StyledBoxModal2 = styled(Box)(
+  ({ theme }) => `
+  background-color: ${
+    theme.palette.mode === "light"
+      ? theme.palette.secondary.main
+      : theme.palette.info.main
+  };
   margin-top: 20vh;
   margin-left: 25vw;
   height: 30vh;
@@ -134,4 +162,21 @@ export const StyledBoxModal2 = styled(Box)(`
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
-`);
+`
+);
+
+export const InfoContainer = styled(Box)`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const InfoSubContainer = styled(Box)`
+  width: 98vw;
+  height: 90vh;
+  display: flex;
+  padding: 1vh;
+  flex-direction: column;
+  justify-content: space-between;
+`;

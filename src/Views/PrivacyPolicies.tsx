@@ -216,6 +216,5 @@ export default function Careers(){
                     </Container>
                     
             </Box>
-            <Footer />
         </Box>
     )}

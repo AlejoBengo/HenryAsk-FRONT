@@ -3,6 +3,7 @@
 import React, { useEffect } from "react";
 import { useAppSelector, useAppDispatch } from "../../../app/hooks";
 import TheoricList from "../../Theoric/TheoricList";
+import ExerciseList from "../../Excercise/ExerciseList";
 import NoteAddIcon from "@mui/icons-material/NoteAdd";
 import AcordeonMenu from "./AcordeonMenu";
 import { fetchAllUsers } from "../../../app/Utils/allUsers";
@@ -81,7 +82,7 @@ export default function LateralMenu(props: any) {
                 ? userLog.avatar
                 : userLog.profile_picture
             }
-            sx={{ width: "100%", height: "auto" }}
+            sx={{ width: "6.25rem", height: "6.25rem" }}
           />
           <Typography variant="subtitle1">{userLog.user_name}</Typography>
           <LinkDom
@@ -128,7 +129,7 @@ export default function LateralMenu(props: any) {
 
       <Stack sx={{ width: "100%" }}>
         <TheoricList />
-        <TheoricList />
+        <ExerciseList />
       </Stack>
     </Box>
   );

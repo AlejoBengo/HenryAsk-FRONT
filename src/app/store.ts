@@ -5,6 +5,9 @@ import getPosts from "./Reducers/getPostsForum";
 import allUsers from "./Reducers/allUserSlice";
 import busquedaUserName from "./Reducers/getUserByUserName";
 import mode from "./Reducers/modeReducer";
+import exercisesReducer from './Reducers/exercisesSlice';
+import theoricsReducer from "./Reducers/theoricSlice";
+import getAllReport from "./Reducers/getAllReport";
 
 export const store = configureStore({
   reducer: {
@@ -14,6 +17,9 @@ export const store = configureStore({
     searchUserName: busquedaUserName,
     allUser: allUsers,
     mode,
+    theorics: theoricsReducer,
+    exercises: exercisesReducer,
+    getAllReport:getAllReport,
   },
 });
 

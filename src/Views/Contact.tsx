@@ -9,8 +9,8 @@ import Rocket from '../Components/AboutUs/Img/rocket.png';
 
 
 
-
-export default function Careers(){
+export default function Careers() {
+  
 
     const theme = useTheme();
     

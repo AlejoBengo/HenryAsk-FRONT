@@ -7,6 +7,8 @@ import {
   Button,
   Box,
   Dialog,
+  Breadcrumbs,
+  useTheme,
   DialogTitle,
   DialogContent,
   DialogContentText,
@@ -15,12 +17,17 @@ import {
   theoricTemplate,
   postTheoric,
 } from "../../../app/Utils/theoricUtilites";
-import { StyledPaper, StyledTextField } from "../../Style/StyledComponents";
+import {
+  StyledPaper,
+  StyledTextField,
+  StackMigajas,
+} from "../../Style/StyledComponents";
 import { Theoric } from "../../../app/interface";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 export const CreateTheoric = () => {
+  const theme = useTheme();
   const user = useAppSelector((state) => state.user.data);
-  const [theoric, setTheoric] = useState<Theoric>(theoricTemplate);
+  const [theoric, setTheoric] = useState(theoricTemplate);
   const [newImage, setNewImage] = useState<string>("");
   const [newComment, setNewComment] = useState<string>("");
   const [open, setOpen] = useState(false);
@@ -52,7 +59,6 @@ export const CreateTheoric = () => {
       setNewComment("");
     }
   };
-
   const handleDelete = (name: string, value: string) => {
     if (name === "images") {
       let array = theoric.images.filter((image: string) => image != value);
@@ -86,14 +92,56 @@ export const CreateTheoric = () => {
     }
   };
   useEffect(() => {
-    theoric.owner = {
-      _id: user._id,
-      profile_picture: user.profile_picture,
-      role: user.role,
-      user_name: user.user_name,
-      avatar: user.avatar,
-    };
+    setTheoric({
+      ...theoric,
+      owner: {
+        _id: user._id,
+        profile_picture: user.profile_picture,
+        role: user.role,
+        user_name: user.user_name,
+        avatar: user.avatar,
+      },
+    });
   }, [user]);
+
+  const migajas = [
+    <Link
+      to="/"
+      style={{
+        fontFamily: "Helvetica",
+        textDecoration: "none",
+        color: `${theme.palette.getContrastText(
+          theme.palette.background.default
+        )}`,
+      }}
+    >
+      HOME
+    </Link>,
+    <Link
+      to="/Content"
+      style={{
+        fontFamily: "Helvetica",
+        textDecoration: "none",
+        color: `${theme.palette.getContrastText(
+          theme.palette.background.default
+        )}`,
+      }}
+    >
+      MATERIAL
+    </Link>,
+    <Link
+      to={`/Theoric/Create`}
+      style={{
+        fontFamily: "Helvetica",
+        textDecoration: "none",
+        color: `${theme.palette.getContrastText(
+          theme.palette.background.default
+        )}`,
+      }}
+    >
+      CREAR TEÓRICO
+    </Link>,
+  ];
 
   return (
     <Container
@@ -102,6 +150,12 @@ export const CreateTheoric = () => {
         mt: 2,
       }}
     >
+      <StackMigajas
+        style={{ marginLeft: "-6.5vw", marginTop: "-1vh", marginBottom: "1vh" }}
+        spacing={2}
+      >
+        <Breadcrumbs separator="›">{migajas}</Breadcrumbs>
+      </StackMigajas>
       <StyledPaper elevation={2}>
         <Grid container spacing={3}>
           <Grid item xs={12}>
@@ -127,6 +181,7 @@ export const CreateTheoric = () => {
               onChange={handleInputChange}
             />
           </Grid>
+
           <Grid item xs={12}>
             <StyledTextField
               multiline
@@ -138,6 +193,7 @@ export const CreateTheoric = () => {
               onChange={handleInputChange}
             />
           </Grid>
+
           <Grid item xs={12}>
             <Box
               sx={{

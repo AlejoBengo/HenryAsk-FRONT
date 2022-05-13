@@ -1,24 +1,33 @@
 /*--------------------------------------------------------*/
 /*-----------IMPORT UTILITIES-----------*/
 import React, { useEffect, useState } from "react";
+import { useAppSelector, useAppDispatch } from "../../app/hooks";
 import { fetchAllTheorics } from "../../app/Reducers/theoricSlice";
+import { fetchAllTheoricsReducer } from "../../app/Reducers/theoricSlice";
 /*-----------IMPORT MUI & CSS-----------*/
-import { List, ListItemButton, Collapse, Link } from "@mui/material";
+import { List, ListItemButton, Collapse } from "@mui/material";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import { StyledSpan } from "./StyledComponents";
+import { LinkDom } from "../Style/StyledComponents";
 /*--------------------------------------------------------*/
 
 export default function TheoricList() {
   const [open, setOpen] = useState<boolean>(false);
-  const [allTheorics, setAllTheorics] = useState<any>([]);
+  let [allTheoricsLocal, setAllTheoricsLocal] = useState<any>([]);
+  const { allTheorics } = useAppSelector((state) => state.theorics);
+  const dipatch = useAppDispatch();
 
   useEffect(() => {
-    fetchAllTheorics().then((res) => setAllTheorics(res));
+    // dipatch( fetchAllTheoricsReducer() )
+    fetchAllTheorics().then((res) => {
+      setAllTheoricsLocal(res);
+    });
   }, []);
 
   const handleOpen = (event: React.MouseEvent<HTMLDivElement>) => {
     setOpen(!open);
   };
+
   return (
     <List sx={{ width: "100%" }}>
       <ListItemButton
@@ -26,14 +35,14 @@ export default function TheoricList() {
         sx={{ width: "100%", overflow: "hidden" }}
         style={{ fontFamily: "Helvetica", display: "flex" }}
       >
-        <StyledSpan>TEORICO</StyledSpan>
+        <StyledSpan>MATERIAL TEÓRICO</StyledSpan>
         {open ? (
           <ExpandLess sx={{ width: "35%" }} />
         ) : (
           <ExpandMore sx={{ width: "35%" }} />
         )}
       </ListItemButton>
-      {allTheorics.map((teorico: any) => {
+      {allTheoricsLocal?.map((teorico: any) => {
         return (
           <Collapse
             in={open}
@@ -42,7 +51,7 @@ export default function TheoricList() {
             unmountOnExit
             sx={{ width: "100%" }}
           >
-            <Link href={`/Theoric/${teorico._id}`} underline="none">
+            <LinkDom to={`/Theoric/${teorico._id}`}>
               <List component="div" disablePadding sx={{ width: "100%" }}>
                 <ListItemButton
                   style={{ fontFamily: "Helvetica", display: "flex" }}
@@ -50,7 +59,7 @@ export default function TheoricList() {
                   {teorico.title}
                 </ListItemButton>
               </List>
-            </Link>
+            </LinkDom>
           </Collapse>
         );
       })}

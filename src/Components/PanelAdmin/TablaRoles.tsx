@@ -18,7 +18,7 @@ const rows = [
   createData(5, 'Administrador'),
   createData(6, 'Henry Mentor'),
   createData(7, 'Henry Hero'),
-  createData(8, 'Staf de Henry'),
+  createData(8, 'Staff de Henry'),
   createData(9, 'Graduado'),
 ];
 
