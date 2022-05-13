@@ -1,13 +1,9 @@
 /*--------------------------------------------------------*/
 /*-----------IMPORT UTILITIES-----------*/
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { Owner, User } from "../../app/interface";
-import { Link } from "react-router-dom";
-import { getUserById, userTemplate } from "../../app/Utils/userUtilities";
+import { Owner } from "../../app/interface";
 /*-----------IMPORT MUI & CSS-----------*/
-import AccountCircleRoundedIcon from "@mui/icons-material/AccountCircleRounded";
-import { Avatar, Link as MUILink, Typography } from "@mui/material";
+import { Avatar, Typography } from "@mui/material";
+import { LinkDom } from "../Style/StyledComponents";
 /*--------------------------------------------------------*/
 interface Props {
   user: Owner;
@@ -17,8 +13,8 @@ export const UserShort = ({ user }: Props) => {
     <Typography display={"flex"} variant="caption" alignItems="center">
       <Avatar
         sx={{
-          width: "40px",
-          height: "40px",
+          width: "50px",
+          height: "50px",
           display: "inline",
           mx: 1,
           zIndex: 2,
@@ -29,14 +25,14 @@ export const UserShort = ({ user }: Props) => {
             content: "''",
             display: "block",
             backgroundColor: "primary.light",
-            width: "40px",
-            height: "40px",
+            width: "50px",
+            height: "50px",
             position: "absolute",
           },
         }}
         src={user?.profile_picture.length>0? user.profile_picture : user.avatar.length>0? user.avatar : user.profile_picture}
       />
-      <MUILink href={`/Profile/${user._id}`}>{user?.user_name}</MUILink>
+      <LinkDom style={{fontSize:"20px" , fontWeight:"bold" , textDecoration:"underline"}} to={`/Profile/${user._id}`}>{user?.user_name} :</LinkDom>
     </Typography>
   );
 };

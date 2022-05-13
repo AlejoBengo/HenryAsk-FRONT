@@ -18,14 +18,13 @@ import {
   Typography,
   List,
 } from "@mui/material";
-// import { StarsIcon } from "@mui/icons-material";
+import  StarsIcon  from "@mui/icons-material/Stars";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import { yellow } from "@mui/material/colors";
 import ForumIcon from "@mui/icons-material/Forum";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import { LateralItemStyled, LinkDom } from "../../Style/StyledComponents";
-
 /*--------------------------------------------------------*/
 
 export default function LateralMenu(props: any) {
@@ -70,7 +69,12 @@ export default function LateralMenu(props: any) {
       >
         <Box
           width="37%"
-          sx={{ height: "100%", margin: "2em 0em -1em 0em" }}
+          sx={{ 
+            height: "100%", 
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center"
+          }}
           flexDirection="column"
         >
           <Avatar
@@ -89,7 +93,9 @@ export default function LateralMenu(props: any) {
             onClick={toggleDrawer(anchor, false)}
             to={`/Profile/${userLog._id}`}
           >
+            <Typography variant="subtitle1">
             Ir al Perfil
+            </Typography>
           </LinkDom>
         </Box>
       </Box>
@@ -106,7 +112,7 @@ export default function LateralMenu(props: any) {
           <LinkDom onClick={toggleDrawer(anchor, false)} to="#">
             <LateralItemStyled
               text="Henry Coins Ranking"
-              // icon={<StarsIcon />}
+              icon={<StarsIcon />}
             />
           </LinkDom>
         </LinkDom>

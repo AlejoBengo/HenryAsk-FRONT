@@ -70,9 +70,7 @@ export default function SwipeableTextMobileStepper() {
                 <AutoPlaySwipeableViews
                     axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
                     index={activeStep}
-                    onChangeIndex={handleStepChange}
-                    enableMouseEvents
-                >
+                    onChangeIndex={handleStepChange}>
                     {images.map((step, index) => (
                         Math.abs(activeStep - index) <= 2 ? (
                         <Box
@@ -80,7 +78,6 @@ export default function SwipeableTextMobileStepper() {
                             sx={{
                             height: 400,
                             display: 'block',
-                            // maxWidth: 800,
                             overflow: 'hidden',
                             width: '100%',
                             }}

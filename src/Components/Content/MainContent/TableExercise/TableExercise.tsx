@@ -38,21 +38,29 @@ const TableExercise = (props:any) => {
   };
   
   const columns: readonly ColumnTableExercise[] = [
-    { id: 'owner', label: 'Creador', minWidth: 170 },
-    { id: 'title', label: 'Título', minWidth: 100 },
+    { id: 'owner',
+      label: 'Creador',
+      align: 'center',
+      minWidth: 100 
+    },
+    { id: 'title',
+      label: 'Título',
+      align: 'center',
+      minWidth: 200 
+    },
     {
       id: 'description',
       label: 'Descripción',
-      minWidth: 170,
+      minWidth: 250,
       align: 'center',
-      format: (value: string) => value.split("").length>28
-        ?`${value.split("").slice(0,28).join("")}...`
+      format: (value: string) => value.split(" ").length>28
+        ?`${value.split(" ").slice(0,28).join(" ")}...`
         : value,
     },
     {
       id: 'code',
       label: 'Código',
-      minWidth: 170,
+      minWidth: 50,
       align: 'center',
       format: (value)=> value.length
         ? <CheckIcon data-testid="CheckIcon" fontSize="large" color="success"></CheckIcon>
@@ -61,7 +69,7 @@ const TableExercise = (props:any) => {
     {
       id: 'test',
       label: 'Test',
-      minWidth: 170,
+      minWidth: 50,
       align: 'center',
       format: (value)=> value.length
         ? <CheckIcon data-testid="CheckIcon" fontSize="large" color="success"></CheckIcon>
@@ -70,7 +78,7 @@ const TableExercise = (props:any) => {
     {
       id: 'tags',
       label: 'Tags',
-      minWidth: 170,
+      minWidth: 100,
       align: 'center',
       format: ( value ) => `# ${value.join(" ")}`
     },
@@ -81,11 +89,11 @@ const TableExercise = (props:any) => {
       <StyledTypography
       variant="h3"
       textAlign="center"
-      margin="3rem 0rem 2rem 0rem">
+      padding="3rem 0rem 2rem 0rem">
           🚀 Desarrolla tu potencial con <TituloForo>Ejercicios</TituloForo>
       </StyledTypography>
       <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-      <TableContainer sx={{ maxHeight: 440 }}>
+      <TableContainer sx={{ maxHeight: 1040 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
@@ -182,7 +190,7 @@ const TableExercise = (props:any) => {
       <TablePagination
         rowsPerPageOptions={[10, 25, 100]}
         component="div"
-        count={exercisesToRender.length}
+        count={exercisesToRender?.length ? exercisesToRender.length : 0}
         rowsPerPage={rowsPerPage}
         page={page}
         onPageChange={handleChangePage}

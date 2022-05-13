@@ -5,11 +5,14 @@ import {
   Editor,
   EditorState,
   RichUtils,
+  convertFromRaw,
   Modifier,
   ContentState,
 } from "draft-js";
 import "draft-js/dist/Draft.css";
 import { fetchOneTheoric, editTheoric } from "../../app/Reducers/theoricSlice";
+import { postTheoric } from "../../app/Utils/theoricUtilites";
+import { Theoric } from "../../app/interface";
 /*IMPORT DE MUI & CSS*/
 import { ToggleButtonGroup, ToggleButton, Typography } from "@mui/material";
 import FormatBoldIcon from "@mui/icons-material/FormatBold";
@@ -29,29 +32,43 @@ import {
   EditorContainer,
 } from "./StyledComponents";
 
-export default function TheoricDraft(id: any) {
+interface Props {
+  value: Theoric;
+  setter: Function;
+}
+
+export default function TheoricDraft({ value, setter }: Props) {
   const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty()
   );
-  const [contentEdition, setContentEdition] = useState({ id: id, content: "" });
 
-  useEffect(() => {
-    fetchOneTheoric(id.id).then((res) => {
-      setEditorState(
-        EditorState.createWithContent(ContentState.createFromText(res.content))
-      );
-      setContentEdition({ ...contentEdition, id: id });
-    });
-  }, [id]);
+  // useEffect(() => {
+  //   setEditorState(
+  //     EditorState.createWithContent(convertFromRaw(value.content))
+  //   );
+  // }, [value]);
 
-  useEffect(() => {
-    const contenido = editorState
-      .getCurrentContent()
-      .getBlocksAsArray()
-      .map((block: any) => block.getText());
-    console.log("ARRAY: ", contenido.join(""));
-    setContentEdition({ ...contentEdition, content: contenido.join("") });
-  }, [editorState]);
+  // useEffect(() => {
+  //   setter({ ...value, content: editorState });
+  // }, [editorState]);
+
+  // useEffect(() => {
+  //   fetchOneTheoric(id.id).then((res) => {
+  //     setEditorState(
+  //       EditorState.createWithContent(ContentState.createFromText(res.content))
+  //     );
+  //     setContentEdition({ ...contentEdition, id: id });
+  //   });
+  // }, [id]);
+
+  // useEffect(() => {
+  //   const contenido = editorState
+  //     .getCurrentContent()
+  //     .getBlocksAsArray()
+  //     .map((block: any) => block.getText());
+  //   console.log("ARRAY: ", contenido.join(""));
+  //   setContentEdition({ ...contentEdition, content: contenido.join("") });
+  // }, [editorState]);
 
   // useEffect(() => {
   //   return () => {

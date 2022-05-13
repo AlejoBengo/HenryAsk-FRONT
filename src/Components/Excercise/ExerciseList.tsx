@@ -4,9 +4,10 @@ import React, { useEffect, useState } from "react";
 import { useAppSelector, useAppDispatch } from "../../app/hooks";
 import { getAllExercises } from "../../app/Reducers/exercisesSlice";
 /*-----------IMPORT MUI & CSS-----------*/
-import { List, ListItemButton, Collapse, Link } from "@mui/material";
+import { List, ListItemButton, Collapse } from "@mui/material";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import { StyledSpan } from "../Theoric/StyledComponents";
+import { LinkDom } from "../Style/StyledComponents";
 /*--------------------------------------------------------*/
 
 const ExerciseList = () => {
@@ -17,7 +18,7 @@ const ExerciseList = () => {
 
   useEffect(() => {
     dispatch( getAllExercises() )
-    exercises.length && setAllExercisesLocal(allExercisesLocal = exercises )
+    exercises?.length && setAllExercisesLocal(allExercisesLocal = exercises )
   }, []);
 
   const handleOpen = (event: React.MouseEvent<HTMLDivElement>) => {
@@ -37,7 +38,7 @@ const ExerciseList = () => {
           <ExpandMore sx={{ width: "35%" }} />
         )}
       </ListItemButton>
-      {allExercisesLocal.map((exercise: any) => {
+      {allExercisesLocal?.map((exercise: any) => {
         return (
           <Collapse
             in={open}
@@ -46,7 +47,7 @@ const ExerciseList = () => {
             unmountOnExit
             sx={{ width: "100%" }}
           >
-            <Link href={`/Exercise/${exercise._id}`} underline="none">
+            <LinkDom to={`/Exercise/${exercise._id}`}>
               <List component="div" disablePadding sx={{ width: "100%" }}>
                 <ListItemButton
                   style={{ fontFamily: "Helvetica", display: "flex" }}
@@ -54,7 +55,7 @@ const ExerciseList = () => {
                   {exercise.title}
                 </ListItemButton>
               </List>
-            </Link>
+            </LinkDom>
           </Collapse>
         );
       })}

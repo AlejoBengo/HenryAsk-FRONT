@@ -11,7 +11,7 @@ import Grid from '@mui/material/Grid';
 export default function Grids() {
     return (
         <Container>
-                <Grid container spacing={5}>
+            <Grid container spacing={5}>
                 <Grid item xs={12} sm={4}>
                     <Card sx={{ maxWidth: 345 }}>
                         <CardActionArea>

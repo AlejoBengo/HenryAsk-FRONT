@@ -1,19 +1,13 @@
 import { 
     CardActionArea, 
-    CardContent, 
     Typography, 
-    Container, 
     Button,
     Link,
     Grid, 
     Card, 
     Box } from '@mui/material';
-    import { useNavigate } from 'react-router-dom';
-
 
 export default function CardRedirect(){
-    const navigate = useNavigate();
-
     return (
         <Box sx={{width: '100%', padding: '1rem'}} >
             <Grid container >
@@ -24,22 +18,22 @@ export default function CardRedirect(){
                         height: '100%',
                         padding: '3rem',
                         backgroundColor: 'yellow' }}>
-                        <CardActionArea>
                             <Typography
-                                variant="h2" 
-                                component="div" 
+                                variant="h2"
                                 display='flex'
                                 justifyContent='center'
                                 padding='3rem'
                                 color='secondary'
                                 >
-                                ¡Sumate a la comunidad!
+                                👩🏽‍🚀¡Sumate a la comunidad!👨🏽‍🚀
                             </Typography>
                             <Box 
                             display='flex' 
                             justifyContent='center'>
                                 <Link
-                                href='https://www.soyhenry.com/'>
+                                href='https://www.soyhenry.com/'
+                                rel="noopener" 
+                                target="_blank">
                                     <Button
                                     color= "secondary"
                                     variant='contained'
@@ -48,10 +42,9 @@ export default function CardRedirect(){
                                     </Button>
                                 </Link>
                             </Box>
-                        </CardActionArea>
                     </Card>
                 </Grid>
             </Grid>
         </Box>
-    )
-}
+    );
+};

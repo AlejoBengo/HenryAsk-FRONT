@@ -1,23 +1,26 @@
 /*--------------------------------------------------------*/
 /*-----------IMPORT UTILITIES-----------*/
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Link } from "react-router-dom";
 /*-----------IMPORT COMPONENTS-----------*/
 import TableInstructor from "../Components/Foro/TableInstructor/TableInstructor";
 /*-----------IMPORT MUI & CSS-----------*/
-import { Div, TituloForo } from "../Components/Style/StyledComponents";
-import { Container, Grid, Alert } from "@mui/material";
+import {
+  Div,
+  TituloForo,
+  StackMigajas,
+} from "../Components/Style/StyledComponents";
+import { Container, Grid, Alert, Breadcrumbs, useTheme } from "@mui/material";
 import { fetchGetAllPosts } from "../app/Reducers/getPostsForum";
 import { useAppSelector, useAppDispatch } from "../app/hooks";
 import { Posts } from "../app/interface";
 import RedirectToLogin from "../Components/RedirectToLogin/RedirectToLogin";
-import Dialog from "../Components/Dialog/Dialog";
 import { StyledTypography } from "../Components/Content/MainContent/TableExercise/TableExercise";
 
 let AlumnOrInstructor = ["Alumno", "Instructor"];
 export default function Foro() {
+  const theme = useTheme();
   const userLogin = useAppSelector((state) => state.user.data);
   const posts = useAppSelector((state) => state.getAllPosts.posts);
   const { isAuthenticated } = useAuth0();
@@ -68,6 +71,7 @@ export default function Foro() {
         postAlumnos.push(e);
       if (e.owner.role === 1) postPrep.push(e);
     }
+    return e;
   });
 
   //setTimeout(()=> console.log("USER",userLogin), 4000)
@@ -75,18 +79,48 @@ export default function Foro() {
   // setTimeout(()=> console.log("INSTRUCTOR",postInstructores), 4000)
   //setTimeout(()=> console.log("PREP",postPrep), 4000)
   //setTimeout(()=> console.log("POST",posts), 4000)
+
+  const migajas = [
+    <Link
+      to="/"
+      style={{
+        fontFamily: "Helvetica",
+        textDecoration: "none",
+        color: `${theme.palette.getContrastText(
+          theme.palette.background.default
+        )}`,
+      }}
+    >
+      HOME
+    </Link>,
+    <Link
+      to="/Forum"
+      style={{
+        fontFamily: "Helvetica",
+        textDecoration: "none",
+        color: `${theme.palette.getContrastText(
+          theme.palette.background.default
+        )}`,
+      }}
+    >
+      FORO
+    </Link>,
+  ];
   if (!isAuthenticated) {
     return <RedirectToLogin open={true} />;
   }
   if (userLogin.role === 1) {
     return (
       <Div>
+        <StackMigajas spacing={2}>
+          <Breadcrumbs separator="›">{migajas}</Breadcrumbs>
+        </StackMigajas>
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <StyledTypography
               variant="h3"
               textAlign="center"
-              margin="1rem 0rem 1rem 0rem"
+              padding="3rem 0rem 3rem 0rem"
             >
               Bienvenido/a al <TituloForo>Prep.Course</TituloForo> Forum !
             </StyledTypography>
@@ -95,7 +129,7 @@ export default function Foro() {
             <StyledTypography
               variant="h3"
               textAlign="center"
-              margin="1rem 0rem 1rem 0rem"
+              padding="3rem 0rem 3rem 0rem"
             >
               Posteos entre <TituloForo>Alumnos</TituloForo>
             </StyledTypography>
@@ -114,6 +148,9 @@ export default function Foro() {
   } else if (userLogin.role === 2) {
     return (
       <Div>
+        <StackMigajas spacing={2}>
+          <Breadcrumbs separator="›">{migajas}</Breadcrumbs>
+        </StackMigajas>
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <StyledTypography
@@ -138,7 +175,7 @@ export default function Foro() {
             <StyledTypography
               variant="h3"
               textAlign="center"
-              margin="1rem 0rem 1rem 0rem"
+              padding="3rem 0rem 3rem 0rem"
             >
               Posteos entre <TituloForo>Alumnos</TituloForo>
             </StyledTypography>
@@ -158,13 +195,16 @@ export default function Foro() {
     return (
       <>
         <Div>
+          <StackMigajas spacing={2}>
+            <Breadcrumbs separator="›">{migajas}</Breadcrumbs>
+          </StackMigajas>
           <Container maxWidth={false} sx={{ width: "80vw" }}>
             <Grid container spacing={5}>
               <Grid item xs={12}>
                 <StyledTypography
                   variant="h3"
                   textAlign="center"
-                  margin="1rem 0rem 1rem 0rem"
+                  padding="3rem 0rem 3rem 0rem"
                 >
                   Posteos de los <TituloForo>Instructores</TituloForo>
                 </StyledTypography>
@@ -177,7 +217,7 @@ export default function Foro() {
               {/* <Grid item xs={7}></Grid> */}
 
               <Grid item xs={6}>
-                <Alert variant="filled" severity="info">
+                <Alert variant="filled" severity="warning">
                   El propietario de esa discusion aun busca una respuesta!
                 </Alert>
               </Grid>
@@ -197,7 +237,7 @@ export default function Foro() {
                 <StyledTypography
                   variant="h3"
                   textAlign="center"
-                  margin="1rem 0rem 1rem 0rem"
+                  padding="3rem 0rem 3rem 0rem"
                 >
                   Posteos entre <TituloForo>Alumnos</TituloForo>
                 </StyledTypography>
@@ -221,7 +261,7 @@ export default function Foro() {
               <StyledTypography
                 variant="h3"
                 textAlign="center"
-                margin="1rem 0rem 1rem 0rem"
+                padding="3rem 0rem 1rem 0rem"
               >
                 Bienvenido/a al <TituloForo>Prep.Course</TituloForo> Forum !
               </StyledTypography>
@@ -230,7 +270,7 @@ export default function Foro() {
               <StyledTypography
                 variant="h3"
                 textAlign="center"
-                margin="1rem 0rem 1rem 0rem"
+                padding="3rem 0rem 3rem 0rem"
               >
                 Posteos entre <TituloForo>Alumnos</TituloForo>
               </StyledTypography>

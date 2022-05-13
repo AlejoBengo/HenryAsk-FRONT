@@ -1,35 +1,105 @@
-import * as React from 'react';
-import { Container, Box, Typography, Link, CardActionArea, Grid } from "@mui/material";
-import Footer from "../Components/Home/Footer/Footer";
-import { useTheme } from '@mui/material';
+import {
+  Container,
+  Box,
+  Typography,
+  useTheme,
+  Breadcrumbs,
+} from "@mui/material";
+import { Link } from "react-router-dom";
+import { StackMigajas } from "../Components/Style/StyledComponents";
 
-export default function About(){
+export default function About() {
+  const theme = useTheme();
 
-    const theme = useTheme();
+  const migajas = [
+    <Link
+      to="/"
+      style={{
+        fontFamily: "Helvetica",
+        textDecoration: "none",
+        color: `${theme.palette.getContrastText(
+          theme.palette.background.default
+        )}`,
+      }}
+    >
+      HOME
+    </Link>,
+    <Link
+      to="/about"
+      style={{
+        fontFamily: "Helvetica",
+        textDecoration: "none",
+        color: `${theme.palette.getContrastText(
+          theme.palette.background.default
+        )}`,
+      }}
+    >
+      ABOUT
+    </Link>,
+  ];
 
-    return(
-        <Box sx={{width: '100%', padding: '0'}}>            
-            <Box
-                sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: "center",
-                    alignItems: "center"
-                }}>                
-                <Container component="main" sx={{ mt: 8, mb: 2 }} maxWidth="sm">
-                    <Typography color={theme.palette.getContrastText(theme.palette.background.default)} variant="h2" component="h1" gutterBottom display='flex' justifyContent='center'>
-                        HENRY ASK
-                    </Typography>
+  return (
+    <Box sx={{ width: "100%", padding: "0" }}>
+      <StackMigajas spacing={2}>
+        <Breadcrumbs separator="›">{migajas}</Breadcrumbs>
+      </StackMigajas>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Container component="main" sx={{ mt: 8, mb: 2, display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center"}} maxWidth="sm">
+          <Typography
+            color={theme.palette.getContrastText(
+              theme.palette.background.default
+            )}
+            variant="h2"
+            component="h1"
+            gutterBottom
+            display="flex"
+            justifyContent="center"
+          >
+            HENRY ASK
+          </Typography>
 
-                    <Box sx={{ boxShadow: "15px", height: "100%", width: "100%", backgroundColor: "black", color: "rgb(255, 255, 1)", fontWeight: "bold", padding: "1em", borderRadius: "1em"}}>
-                    <Typography  variant="body2" color="rgb(255, 255, 1)">
-                    Nuestra propuesta es una aplicación web diseñada para que la comunidad pueda solventar sus dudas, practicar y ayudar a sus compañeros con el fin de fortalecer la solidaridad y participación de los alumnos.
-                    </Typography>
-                    </Box>
+          <Box
+            sx={{
+              boxShadow: "15px",
+              height: "100%",
+              width: "100%",
+              backgroundColor: "black",
+              color: "rgb(255, 255, 1)",
+              fontWeight: "bold",
+              padding: "1em",
+              borderRadius: "1em",
+            }}
+          >
+            <Typography variant="body2" color="rgb(255, 255, 1)">
+              Nuestra propuesta es una aplicación web diseñada para que la
+              comunidad pueda solventar sus dudas, practicar y ayudar a sus
+              compañeros con el fin de fortalecer la solidaridad y participación
+              de los alumnos.
+            </Typography>
+          </Box>
 
-                    <Typography color={theme.palette.getContrastText(theme.palette.background.default)} variant="h5" component="h4" gutterBottom display='flex' justifyContent='center'>
-                    El contenido de la página se dividirá de la siguiente forma:
-                    </Typography>
+          <Typography
+            color={theme.palette.getContrastText(
+              theme.palette.background.default
+            )}
+            variant="h6"
+            component="h5"
+            gutterBottom
+            display="flex"
+            justifyContent="center"
+          >
+            El contenido de la página se dividirá de la siguiente forma:
+          </Typography>
 
                     <Box sx={{ marginBottom: "1rem" ,height: "100%", width: "100%", backgroundColor: "black", color: "rgb(255, 255, 1)", fontWeight: "bold", padding: "1em", borderRadius: "1em"}}>
                     <Typography variant="body2" color="rgb(255, 255, 1)">
@@ -75,8 +145,7 @@ export default function About(){
 
                     
                 </Container>
-            </Box>
-            <Footer />
+            </Box>            
         </Box>
     )
 };

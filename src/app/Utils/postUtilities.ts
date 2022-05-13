@@ -8,7 +8,6 @@ export const postTemplate: Posts = {
   question: "",
   description: "",
   owner: ownerTemplate,
-  ownerData: [],
   createdAt: "",
   open: true,
   answers: [],
@@ -33,6 +32,7 @@ export const postNewPost = createAsyncThunk(
     return info.data;
   }
 );
+
 
 export const editAnswerChildInPost = async (id: string | undefined) => {
   try {
@@ -68,3 +68,5 @@ export const closePost = async (id: string | undefined) => {
     return error;
   }
 };
+
+
