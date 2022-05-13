@@ -1,4 +1,4 @@
-import { TagsEnum } from "../app/Interfaces/interfaceExercise"
+import { TagsEnum } from "../app/Interfaces/interfaceExercise";
 export interface User {
   _id: string;
   first_name: string;
@@ -12,6 +12,7 @@ export interface User {
   profile_picture: string;
   banner: string;
   biography: string;
+  isBanned:boolean;
   posts: Array<string> & any;
   answers: Array<string> & any;
   comments: Array<string> & any;
@@ -21,7 +22,11 @@ export interface User {
   excersices: Array<string>;
   github: string;
   linkedin: string;
-  avatar:"https://res.cloudinary.com/henryask/image/upload/v1651459729/avatares/unicorn_ntmtyp.png" | "https://res.cloudinary.com/henryask/image/upload/v1651459728/avatares/pig_tzhrjl.png" | "https://res.cloudinary.com/henryask/image/upload/v1651459728/avatares/pigeon_yfv9ka.png"| "";
+  avatar:
+    | "https://res.cloudinary.com/henryask/image/upload/v1651459729/avatares/unicorn_ntmtyp.png"
+    | "https://res.cloudinary.com/henryask/image/upload/v1651459728/avatares/pig_tzhrjl.png"
+    | "https://res.cloudinary.com/henryask/image/upload/v1651459728/avatares/pigeon_yfv9ka.png"
+    | "";
 }
 export interface InitialState {
   data: User;
@@ -83,7 +88,7 @@ export enum Tags {
 export interface Column {
   id: "name" | "question" | "description" | "tags" | "open";
   label: string;
-  maxWidth?:number | string;
+  maxWidth?: number | string;
   minWidth?: number;
   align?: "right" | "center";
   format?: (value: number) => string;
@@ -98,7 +103,7 @@ export interface Owner {
   _id: string;
   user_name: string;
   profile_picture: string;
-  avatar:string;
+  avatar: string;
   role: 0 | 1 | 2 | 3 | 4 | 5;
 }
 
@@ -107,7 +112,6 @@ export interface Posts {
   question: string;
   description: string;
   owner: Owner; //cambiado de string a any por Agus ya que se resolvió el tema de las Refs
-  ownerData: Array<string>;
   createdAt: string;
   open: boolean;
   answers: Array<string>;
@@ -136,23 +140,49 @@ export interface Error {
 }
 /**
  * @TableExercise
-*/
+ */
 export interface ColumnTableExercise {
   id: "owner" | "title" | "description" | "code" | "test" | "tags";
   label: "Creador" | "Título" | "Descripción" | "Código" | "Test" | "Tags";
-  maxWidth?:number | string;
+  maxWidth?: number | string;
   minWidth?: number;
   align?: "center";
-  format?: ( value: any ) => OverridableComponent<SvgIconTypeMap<{}, "svg">> & { muiName: string; } & string;
+  format?: (value: any) => OverridableComponent<SvgIconTypeMap<{}, "svg">> & {
+    muiName: string;
+  } & string;
 }
 /**
  * @TableTheoric
-*/
+ */
 export interface ColumnTableTheoric {
   id: "owner" | "title" | "content" | "author" | "images" | "comments";
-  label: "Creador" | "Título" | "Contenido" | "Autor" | "Imágenes" | "Comentarios";
-  maxWidth?:number | string;
+  label:
+    | "Creador"
+    | "Título"
+    | "Contenido"
+    | "Autor"
+    | "Imágenes"
+    | "Comentarios";
+  maxWidth?: number | string;
   minWidth?: number;
   align?: "center";
-  format?: ( value: string & Array<string> ) => OverridableComponent<SvgIconTypeMap<{}, "svg">> & { muiName: string; } & string;
+  format?: (value: string & Array<string>) => OverridableComponent<
+    SvgIconTypeMap<{}, "svg">
+  > & {
+    muiName: string;
+  } & string;
 }
+
+
+
+// interface report
+export interface Report {
+  owner:User;
+  description:string;
+  status:string;
+  reason:string;
+  post: {} | Posts;
+  answer: {} | Answer;
+  comment: {} | Comment;
+}
+//------//

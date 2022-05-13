@@ -1,12 +1,13 @@
-import { 
-  Container, 
-  Box, 
-  Typography, 
-  CssBaseline } from "@mui/material";
+import {
+  Container,
+  Box,
+  Typography,
+  CssBaseline,
+  useTheme,
+} from "@mui/material";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { useEffect } from "react";
 import { fetchAllUsers } from "../app/Utils/allUsers";
-// import FooterSenior from "../Components/Home/Footer/FooterSenior";
 import Carousel from "../Components/Home/Carousel/Carousel";
 import Grids from "../Components/Home/Grids/Grids";
 import Quantity from "../Components/Home/Grids/Quantity";
@@ -16,6 +17,7 @@ import Ranking from "../Components/HomeSenior/Ranking";
 import PosteosAlumnos from "../Components/HomeSenior/PosteosAlumnos";
 
 export default function Home() {
+  const theme = useTheme();
   const dispatch = useAppDispatch();
 
   const users = useAppSelector((state: any) => state.allUser);

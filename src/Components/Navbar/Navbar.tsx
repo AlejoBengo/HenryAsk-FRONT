@@ -26,6 +26,8 @@ import {
 import { Img } from "../Content/ContentStyled";
 import css from "./NavBar.module.css";
 import logo from "./logo.png";
+import { LinkDom } from "../Style/StyledComponents";
+import { SearchBar } from "../SearchBar/SearchBar";
 
 const pages = ["Material complementario", "Foro"];
 const settings = ["Perfil", "Cerrar Sesion"];
@@ -47,13 +49,19 @@ const Navbar = () => {
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
   );
+  const [anchorElCreate, setAnchorElCreate] =
+    React.useState<null | HTMLElement>(null);
   const { isAuthenticated, user } = useAuth0();
+  const [createMenu, setCreateMenu] = useState(false);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
   };
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
+  };
+  const handleOpenCreateMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElCreate(event.currentTarget);
   };
 
   const handleCloseNavMenu = (
@@ -68,11 +76,18 @@ const Navbar = () => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+  const handleCloseCreateMenu = () => {
+    setAnchorElCreate(null);
+  };
 
   return (
     <AppBar
       position="sticky"
-      sx={{ maxHeight: "5rem", minHeight: "5rem", backgroundColor: "#000" }}
+      sx={{
+        maxHeight: "5rem",
+        minHeight: "5rem",
+        backgroundColor: "info.main",
+      }}
     >
       <Container maxWidth={false}>
         <Toolbar sx={{ height: "5rem" }} disableGutters>
@@ -94,7 +109,7 @@ const Navbar = () => {
             </Link>
           </Box>
           <DarkModeButton />
-
+          <SearchBar />
           <Box
             sx={{
               flexGrow: 1,
@@ -159,14 +174,31 @@ const Navbar = () => {
               marginRight: "4em",
             }}
           >
-            <Button
-              onClick={handleCloseNavMenu}
-              sx={{ my: 2, color: "white", display: "block" }}
+            {DBUser.role > 0 ? (
+              <Button
+                onClick={handleOpenCreateMenu}
+                sx={{ my: 2, color: "white", display: "block" }}
+              >
+                Publicar
+              </Button>
+            ) : null}
+            <Menu
+              open={Boolean(anchorElCreate)}
+              anchorEl={anchorElCreate}
+              onClose={handleCloseCreateMenu}
             >
-              <Link to="/Ask" className={css.StyledLink}>
-                Crear nueva discusión
-              </Link>
-            </Button>
+              <MenuItem onClick={() => navigate("/Ask")}> Discusión</MenuItem>
+              {DBUser.role >= 5 ? (
+                <MenuItem onClick={() => navigate("/Theoric/Create")}>
+                  Contenido Teórico
+                </MenuItem>
+              ) : null}
+              {DBUser.role >= 5 ? (
+                <MenuItem onClick={() => navigate("/Exercise/Create")}>
+                  Ejercicio
+                </MenuItem>
+              ) : null}
+            </Menu>
             <Button
               onClick={handleCloseNavMenu}
               sx={{ my: 2, color: "white", display: "block" }}

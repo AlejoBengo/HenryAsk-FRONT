@@ -27,7 +27,6 @@ export default function Activity() {
     const { id }: any = useParams();
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
-
     
     useEffect(() => {
         dispatch(fetchProfile(id));

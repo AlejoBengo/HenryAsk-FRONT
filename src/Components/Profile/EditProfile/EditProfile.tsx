@@ -2,28 +2,33 @@
 /*-----------IMPORT UTILITIES-----------*/
 import React, { useState } from "react";
 import { useAppSelector, useAppDispatch } from "../../../app/hooks";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 import { userTemplate } from "../../../app/Utils/userUtilities";
 import ModalEditProfile from "./ModalEditProfile";
 import DialogSuccess from "../../Dialog/DialogSuccess";
 import Dialog from "../../Dialog/Dialog";
 /*-----------IMPORT MUI & CSS-----------*/
-import Container from "@mui/material/Container";
 import EditIcon from "@mui/icons-material/Edit";
-import Button from "@mui/material/Button";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import Grid from "@mui/material/Grid";
-import Paper from "@mui/material/Paper";
-import { StyledTextField } from "../../Style/StyledComponents";
+import { StyledTextField, StackMigajas } from "../../Style/StyledComponents";
 import {
   remoteUpdateUser,
   fetchUserByEmail,
 } from "../../../app/Reducers/userSlice";
-import { Avatar } from "@mui/material";
+import {
+  Avatar,
+  useTheme,
+  Typography,
+  Breadcrumbs,
+  Box,
+  Grid,
+  Paper,
+  Button,
+  Container,
+} from "@mui/material";
 /*--------------------------------------------------------*/
 
 export const EditProfile = () => {
+  const theme = useTheme();
   const user = useAppSelector((state) => state.user.data);
   let [userInfo, setUserInfo] = useState({ ...userTemplate, ...user });
   const { id } = useParams();
@@ -69,9 +74,59 @@ export const EditProfile = () => {
         //manejos de errores tambien en el front
       });
   };
+
+  const migajas = [
+    <Link
+      to="/"
+      style={{
+        fontFamily: "Helvetica",
+        textDecoration: "none",
+        color: `${theme.palette.getContrastText(
+          theme.palette.background.default
+        )}`,
+      }}
+    >
+      HOME
+    </Link>,
+    <Link
+      to={`/Profile/${id}`}
+      style={{
+        fontFamily: "Helvetica",
+        textDecoration: "none",
+        color: `${theme.palette.getContrastText(
+          theme.palette.background.default
+        )}`,
+      }}
+    >
+      PROFILE
+    </Link>,
+    <Link
+      to={`/Profile/${id}/Edit`}
+      style={{
+        fontFamily: "Helvetica",
+        textDecoration: "none",
+        color: `${theme.palette.getContrastText(
+          theme.palette.background.default
+        )}`,
+      }}
+    >
+      EDIT PROFILE
+    </Link>,
+  ];
+
   if (user._id != id) navigate(`/Profile/${id}`);
   return (
     <Container sx={{ paddingBottom: "16px", paddingTop: "20px" }}>
+      <StackMigajas
+        style={{
+          marginLeft: "-6.7vw",
+          marginTop: "-1.8vh",
+          marginBottom: "1vh",
+        }}
+        spacing={2}
+      >
+        <Breadcrumbs separator="›">{migajas}</Breadcrumbs>
+      </StackMigajas>
       <Dialog
         openDialog={openDialog}
         setOpenDialog={setOpenDialog}

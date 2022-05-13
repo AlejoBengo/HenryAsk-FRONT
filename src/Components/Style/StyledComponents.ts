@@ -1,7 +1,7 @@
 /*--------------------------------------------------------*/
 /*-----------IMPORT UTILITIES-----------*/
 import { styled } from "@mui/system";
-import { Paper, TextField, Box, Select } from "@mui/material";
+import { Paper, TextField, Box, Select, Button , Stack } from "@mui/material";
 import LateralItem from "../Navbar/LateralMenu/LateralItem";
 import { Link } from "react-router-dom";
 /*--------------------------------------------------------*/
@@ -23,15 +23,43 @@ export const LinkDom = styled(Link)`
 
 export const Div = styled("div")(`
     width: 100%;
-    height:auto;
+    height: auto;
+    margin-top: -1vh;
     `);
 
-    
 //text-shadow: 4px 4px 4px rgb(255,255,0);
 export const TituloForo = styled("span")(`
 
 border-bottom:10px solid rgb(255,255,0);
 `);
+export const TituloVerMas = styled("div")(`
+position:absolute;
+opacity:0;
+z-index:500;
+width:100%;
+height:100%;
+font-size:2em;
+font-weight:bold;
+border-radius:15px;
+transition:0.2s;
+&:hover{
+  opacity:1;
+  background-color:rgba(0, 0, 0, 0.8);
+}
+`);
+export const SpanVerMas=styled("span")(`
+width:100%;
+height:100%;
+display:flex;
+justify-content:center;
+align-items:center;
+`)
+export const ButtonVerMas = styled(Button)(`
+text-transform:none;
+padding:10px;
+border-radius:15px;
+position:relative;
+`)
 
 export const StyledPaper = styled(Paper)`
   display: flex;
@@ -132,7 +160,7 @@ export const StyledDivButtons = styled("div")(`
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    margin-left: 70vw;
+    margin-left: 63vw;
     `);
 
 export const StyledDiv = styled("div")(`
@@ -170,19 +198,19 @@ display: grid;
 grid-template-columns: 60% 40%;
 grid-gap: 20px;
 padding-left: 2%;
-`)
+`);
 
 export const CodeArea = styled("div")(`
 background-color: white;
 border-radius: 1em;
 padding-bottom: 5%;
-`)
+`);
 
 export const CodeAreaHeader = styled("div")(`
 display: grid;
 grid-template-columns: 50% 30%;
 text-align: center;
-`)
+`);
 
 export const CodeButton = styled("button")(`
 background-color: #4CAF50; /* Green */
@@ -195,5 +223,18 @@ display: inline-block;
 font-size: 16px;
 margin-top: 1%;
 margin-bottom: 1%;
-`)
+`);
 
+export const StackMigajas = styled(Stack)(
+  ({ theme }) => `
+  margin-top: 1vh;
+  width: 70vw;
+  margin-left: 1vh;
+  padding:1vh;
+  background-color: ${
+    theme.palette.mode === "light"
+      ? theme.palette.secondary.main
+      : theme.palette.info.main
+  };
+`
+);
