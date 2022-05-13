@@ -35,6 +35,7 @@ import Qa from "./Views/Q&A";
 import Privacy from "./Views/PrivacyPolicies";
 import PanelAdm from "./Views/PanelAdm";
 import Footer from "./Components/Home/Footer/Footer";
+import Search from "./Views/Search";
 
 const App = () => {
   const { isAuthenticated, user } = useAuth0();
@@ -88,6 +89,7 @@ const App = () => {
           <Route path="/Theoric/Create" element={<CreateTheoric />} />{" "}
           <Route path="/PanelAdm" element={<PanelAdm />} />
           <Route path="/Exercise/:id" element={<ExerciseDetails />} />
+          <Route path="/Search/" element={<Search />} />
         </Routes>
       </Box>
       <Footer />
