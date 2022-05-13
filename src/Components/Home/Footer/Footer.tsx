@@ -43,13 +43,13 @@ export default function StickyFooter() {
                 <Grid item xs={12} sm={6}>
                     <Box borderBottom={1} display='flex' justifyContent='center'>Ayuda</Box>
                     <Box display='flex' justifyContent='center'>
-                      <LinkDom to="/careeers" >Contacto</LinkDom>
+                      <LinkDom to="/contact" >Contacto</LinkDom>
                     </Box>
                     <Box display='flex' justifyContent='center'>
-                      <LinkDom to="/careeers" >Preguntas frecuentes</LinkDom>
+                      <LinkDom to="/qya" >Preguntas frecuentes</LinkDom>
                     </Box>
                     <Box display='flex' justifyContent='center'>
-                        <LinkDom to="/careeers" >Política de privacidad</LinkDom>
+                        <LinkDom to="/privacy" >Política de privacidad</LinkDom>
                     </Box>
                 </Grid>
             </Grid>

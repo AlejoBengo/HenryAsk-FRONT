@@ -11,7 +11,7 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 
-export default function Careers(){
+export default function Politics(){
 
     const theme = useTheme();
     

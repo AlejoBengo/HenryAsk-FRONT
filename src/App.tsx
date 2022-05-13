@@ -32,7 +32,7 @@ import About from "./Views/About";
 import Careers from "./Views/Careers";
 import Contact from "./Views/Contact";
 import Qa from "./Views/Q&A";
-import Privacy from "./Views/PrivacyPolicies";
+import Privacy from "./Views/PrivacyPolitics";
 import PanelAdm from "./Views/PanelAdm";
 import Footer from "./Components/Home/Footer/Footer";
 import Search from "./Views/Search";

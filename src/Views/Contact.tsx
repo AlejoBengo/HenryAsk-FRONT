@@ -68,9 +68,7 @@ export default function Careers() {
                             }} type="submit" value="Send Message"
                             >Enviar</Button>
                     </Box>
-                    </Container>
-
-            </Box>
-            <Footer />
+                </Container>
+            </Box>            
         </Box>
     )}

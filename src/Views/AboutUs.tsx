@@ -70,7 +70,7 @@ export default function AboutUs() {
                         <img src={Rocket} alt="" height= "60em" width= "60em" />
                     </Box>
                     
-                    <Box sx={{ height: "100%", width: "80%", backgroundColor: "black", color: "rgb(255, 255, 1)", fontWeight: "bold", padding: "1em", borderRadius: "1em"}}>
+                    <Box sx={{ height: "100%", width: "70%", backgroundColor: "black", color: "rgb(255, 255, 1)", fontWeight: "bold", padding: "1em", borderRadius: "1em"}}>
                         <Typography variant="body2" color="rgb(255, 255, 1)">
                             Nuestra propuesta es una aplicación web diseñada para que la comunidad pueda solventar sus dudas, practicar y ayudar a sus compañeros con el fin de fortalecer la solidaridad y participación de los alumnos.
                         </Typography>
@@ -89,7 +89,7 @@ export default function AboutUs() {
 
                          {/* --------------------------------------- */}
           
-                        <Box sx={{ height: "100%", width: "60%", backgroundColor: "black", color: "rgb(255, 255, 1)", fontWeight: "bold", padding: "1em", borderRadius: "1em"}}>
+                        <Box sx={{ height: "100%", width: "100%", backgroundColor: "black", color: "rgb(255, 255, 1)", fontWeight: "bold", padding: "1em", borderRadius: "1em"}}>
                             <Typography variant="h4" component="h3" gutterBottom display='flex' justifyContent='center'>
                                 Back End            
                             </Typography>
