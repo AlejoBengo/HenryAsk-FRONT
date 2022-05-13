@@ -6,7 +6,7 @@ import { useParams, useNavigate, Link } from "react-router-dom";
 import { ownerTemplate } from "../app/Utils/userUtilities";
 import { ExerciseInterface } from "../app/Interfaces/interfaceExercise";
 import { exerciseTemplate } from "../app/Utils/ExerciseUtilities";
-import { CodeEditor } from "../Components/CodeEditor/CodeEditor";
+import MiEditor from "../Components/CodeEditor/MiEditor";
 /*-----------IMPORT MUI & CSS-----------*/
 import {
   Button,
@@ -261,7 +261,7 @@ const ExerciseDetails = () => {
         </Box>
       </BoxExcerciceContainer>
 
-      <CodeEditor value={"exercise"} />
+      <MiEditor coding={exercise.code} testing={exercise.test} />
     </StyledGrid>
   );
 };
