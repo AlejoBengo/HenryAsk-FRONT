@@ -233,10 +233,10 @@ export const StackMigajas = styled(Stack)(
   width: 70vw;
   margin-left: 1vh;
   padding:1vh;
-  background-color: ${
+  /* background-color: ${
     theme.palette.mode === "light"
       ? theme.palette.secondary.main
       : theme.palette.info.main
-  };
+  } */;
 `
 );

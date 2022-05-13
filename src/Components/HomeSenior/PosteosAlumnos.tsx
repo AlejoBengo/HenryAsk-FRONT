@@ -103,8 +103,7 @@ export default function PosteosAlumnos(){
                             <AutoPlaySwipeableViews
                             axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
                             index={activeStep}
-                            onChangeIndex={handleStepChange}
-                            enableMouseEvents>
+                            onChangeIndex={handleStepChange}>
                                 {reverseArr(postAlumnos).slice(0, 15).map((el) => (
                                     <Grid>
                                         <CardMedia

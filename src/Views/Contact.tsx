@@ -3,7 +3,6 @@ import emailjs from "emailjs-com";
 import TextareaAutosize from '@mui/material/TextareaAutosize';
 import { Container, Box, Typography, Input } from "@mui/material";
 import Button from "@mui/material/Button"
-import Footer from "../Components/Home/Footer/Footer";
 import { useTheme } from '@mui/material';
 import Rocket from '../Components/AboutUs/Img/rocket.png';
 

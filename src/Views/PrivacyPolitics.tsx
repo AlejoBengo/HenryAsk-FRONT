@@ -1,7 +1,5 @@
 import * as React from 'react';
 import { Container, Box, Typography, Link, Grid } from "@mui/material";
-
-import Footer from "../Components/Home/Footer/Footer";
 import { useTheme } from '@mui/material';
 import Rocket from '../Components/AboutUs/Img/rocket.png';
 
