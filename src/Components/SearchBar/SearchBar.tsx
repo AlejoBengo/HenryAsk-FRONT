@@ -8,13 +8,11 @@ import { getSearchResults } from "../../app/Reducers/searchSlice";
 export const SearchBar = () => {
   const [searchValue, setSearchValue] = useState("");
   const dispatch = useAppDispatch();
-  const linkRef = useRef<typeof Link>(null);
   const navigate = useNavigate();
   const handleSearch = () => {
     dispatch(getSearchResults(searchValue));
     navigate("/Search");
   };
-  const theme = useTheme();
 
   return (
     <Box
@@ -27,6 +25,7 @@ export const SearchBar = () => {
         variant="filled"
         label="Buscar por palabra"
         value={searchValue}
+        autoComplete="new-password"
         onChange={(event) => {
           setSearchValue(event.target.value);
         }}
@@ -54,10 +53,10 @@ export const SearchBar = () => {
           },
         }}
         InputLabelProps={{
-          sx: { color: "primary.main" },
+          sx: { color: "primary.light" },
         }}
         inputProps={{
-          sx: { color: "primary.main" },
+          sx: { color: "primary.light" },
         }}
       />
       <Button

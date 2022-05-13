@@ -12,6 +12,7 @@ import { useAppSelector } from "../app/hooks";
 import React, { useState } from "react";
 import { LinkDom } from "../Components/Style/StyledComponents";
 import { Tag as TagIcon } from "@mui/icons-material";
+import { UserShort } from "../Components/UserShort/UserShort";
 
 interface tabPannelProps {
   children: React.ReactNode;
@@ -85,6 +86,16 @@ export const Search = () => {
                           border: "1px solid",
                           borderColor: "primary.dark",
                           mr: 1,
+                          zIndex: 2,
+                          "&:before": {
+                            content: "''",
+                            width: "100%",
+                            height: "100%",
+                            display: "block",
+                            position: "absolute",
+                            backgroundColor: "primary.light",
+                            zIndex: -1,
+                          },
                         }}
                       />
                     </LinkDom>
@@ -120,7 +131,7 @@ export const Search = () => {
           {posts.length ? (
             posts.map((post, index) => {
               return (
-                <Box key={post._id}>
+                <Box key={post._id} sx={{ mt: 1 }}>
                   <LinkDom to={`/Post/${post._id}`}>
                     <Typography
                       variant="h5"
@@ -144,6 +155,7 @@ export const Search = () => {
                   >
                     <TagIcon /> {post.tags.join(",")}
                   </Typography>
+                  {index < posts.length - 1 ? <Divider /> : null}
                 </Box>
               );
             })
@@ -155,23 +167,77 @@ export const Search = () => {
         </TabPanel>
         <TabPanel value={tabIndex} index={2}>
           {exercises.length ? (
-            exercises.map((exercise) => {
-              return <Box></Box>;
+            exercises.map((exercise, index) => {
+              return (
+                <Box key={exercise._id} sx={{ mt: 1 }}>
+                  <LinkDom to={`/exercise/${exercise._id}`}>
+                    <Typography
+                      variant="h5"
+                      sx={{
+                        textDecoration: "underline",
+                        color: "primary.dark",
+                      }}
+                    >
+                      {exercise.title}
+                    </Typography>
+                  </LinkDom>
+                  <Typography variant="body2">
+                    {exercise.description.split(" ").slice(0, 30).join(" ")}
+                    {exercise.description.split("").length > 30 ? "..." : null}
+                  </Typography>
+                  <Typography
+                    variant="caption"
+                    display={"flex"}
+                    alignItems="center"
+                    sx={{ mt: 0.5 }}
+                  >
+                    <TagIcon /> {exercise.tags.join(",")}
+                  </Typography>
+                  {index < exercises.length - 1 ? <Divider /> : null}
+                </Box>
+              );
             })
           ) : (
             <Typography variant="body1">
-              No se pudo encontrar ninguna discusión
+              No se pudo encontrar ningun ejercicio
             </Typography>
           )}
         </TabPanel>
         <TabPanel value={tabIndex} index={3}>
-          {exercises.length ? (
-            exercises.map((exercise) => {
-              return <Box></Box>;
+          {theorics.length ? (
+            theorics.map((theoric, index) => {
+              return (
+                <Box key={theoric._id} sx={{ mt: 1 }}>
+                  <LinkDom to={`/theoric/${theoric._id}`}>
+                    <Typography
+                      variant="h5"
+                      sx={{
+                        textDecoration: "underline",
+                        color: "primary.dark",
+                      }}
+                    >
+                      {theoric.title}
+                    </Typography>
+                  </LinkDom>
+                  <Typography variant="body2">
+                    {theoric.content.split(" ").slice(0, 30).join(" ")}
+                    {theoric.content.split("").length > 30 ? "..." : null}
+                  </Typography>
+                  <Typography
+                    variant="caption"
+                    display={"flex"}
+                    alignItems="center"
+                    sx={{ mt: 0.5 }}
+                  >
+                    <TagIcon /> {theoric.comments.join(",")}
+                  </Typography>
+                  {index < theorics.length - 1 ? <Divider /> : null}
+                </Box>
+              );
             })
           ) : (
             <Typography variant="body1">
-              No se pudo encontrar contenido te
+              No se pudo encontrar contenido teórico
             </Typography>
           )}
         </TabPanel>
