@@ -4,6 +4,7 @@ import React, { useEffect } from "react";
 import { postNewPost, postTemplate } from "../../../app/Utils/postUtilities";
 import { useAppSelector, useAppDispatch } from "../../../app/hooks";
 import { Posts, Error } from "../../../app/interface";
+import { Link, useNavigate } from "react-router-dom";
 /*-----------IMPORT MUI & CSS-----------*/
 import {
   MenuItem,
@@ -15,11 +16,13 @@ import {
   List,
   ListItem,
   ListItemIcon,
+  Breadcrumbs,
+  useTheme,
   ListItemText,
   Typography,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-import TagIcon from "@mui/icons-material/Tag";
+// import TagIcon from "@mui/icons-material/Tag";
 import {
   StyledGrid,
   StyledSelect,
@@ -28,8 +31,7 @@ import {
   StyledBox2,
   StyledButton,
 } from "./StyledComponents";
-import { StyledTextField } from "../../Style/StyledComponents";
-import { useNavigate } from "react-router-dom";
+import { StyledTextField, StackMigajas } from "../../Style/StyledComponents";
 /*--------------------------------------------------------*/
 
 const validator = (tags: Array<string>) => {
@@ -45,6 +47,7 @@ const validator = (tags: Array<string>) => {
 };
 
 const PostForm = () => {
+  const theme = useTheme();
   const usuario = useAppSelector((state) => state.user.data);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -141,6 +144,45 @@ const PostForm = () => {
     }
   };
 
+  const migajas = [
+    <Link
+      to="/"
+      style={{
+        fontFamily: "Helvetica",
+        textDecoration: "none",
+        color: `${theme.palette.getContrastText(
+          theme.palette.background.default
+        )}`,
+      }}
+    >
+      HOME
+    </Link>,
+    <Link
+      to="/Forum"
+      style={{
+        fontFamily: "Helvetica",
+        textDecoration: "none",
+        color: `${theme.palette.getContrastText(
+          theme.palette.background.default
+        )}`,
+      }}
+    >
+      FORO
+    </Link>,
+    <Link
+      to={`/Ask`}
+      style={{
+        fontFamily: "Helvetica",
+        textDecoration: "none",
+        color: `${theme.palette.getContrastText(
+          theme.palette.background.default
+        )}`,
+      }}
+    >
+      CREAR POST
+    </Link>,
+  ];
+
   return (
     //   <StyledGrid>
 
@@ -151,6 +193,12 @@ const PostForm = () => {
         p: "1rem",
       }}
     >
+      <StackMigajas
+        style={{ marginLeft: "-6.5vw", marginTop: "-1vh", marginBottom: "1vh" }}
+        spacing={2}
+      >
+        <Breadcrumbs separator="›">{migajas}</Breadcrumbs>
+      </StackMigajas>
       <Paper
         elevation={2}
         sx={{
@@ -161,7 +209,6 @@ const PostForm = () => {
           flexDirection: "column",
         }}
       >
-        {" "}
         <Typography variant="h3" marginBottom={1}>
           ¡Crea una discusión!
         </Typography>
@@ -224,9 +271,7 @@ const PostForm = () => {
                 {post.tags.map((tag) => {
                   return (
                     <ListItem key={tag}>
-                      <ListItemIcon>
-                        <TagIcon />
-                      </ListItemIcon>
+                      <ListItemIcon>{/* <TagIcon /> */}</ListItemIcon>
                       <ListItemText>{tag}</ListItemText>
                       <Button
                         onClick={() => handleDelete(tag)}

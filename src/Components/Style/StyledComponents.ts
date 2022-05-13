@@ -1,7 +1,7 @@
 /*--------------------------------------------------------*/
 /*-----------IMPORT UTILITIES-----------*/
 import { styled } from "@mui/system";
-import { Paper, TextField, Box, Select } from "@mui/material";
+import { Paper, TextField, Box, Select, Stack } from "@mui/material";
 import LateralItem from "../Navbar/LateralMenu/LateralItem";
 import { Link } from "react-router-dom";
 /*--------------------------------------------------------*/
@@ -23,10 +23,10 @@ export const LinkDom = styled(Link)`
 
 export const Div = styled("div")(`
     width: 100%;
-    height:auto;
+    height: auto;
+    margin-top: -1vh;
     `);
 
-    
 //text-shadow: 4px 4px 4px rgb(255,255,0);
 export const TituloForo = styled("span")(`
 
@@ -170,19 +170,19 @@ display: grid;
 grid-template-columns: 60% 40%;
 grid-gap: 20px;
 padding-left: 2%;
-`)
+`);
 
 export const CodeArea = styled("div")(`
 background-color: white;
 border-radius: 1em;
 padding-bottom: 5%;
-`)
+`);
 
 export const CodeAreaHeader = styled("div")(`
 display: grid;
 grid-template-columns: 50% 30%;
 text-align: center;
-`)
+`);
 
 export const CodeButton = styled("button")(`
 background-color: #4CAF50; /* Green */
@@ -195,5 +195,18 @@ display: inline-block;
 font-size: 16px;
 margin-top: 1%;
 margin-bottom: 1%;
-`)
+`);
 
+export const StackMigajas = styled(Stack)(
+  ({ theme }) => `
+  margin-top: 1vh;
+  width: 70vw;
+  margin-left: 1vh;
+  padding:1vh;
+  background-color: ${
+    theme.palette.mode === "light"
+      ? theme.palette.secondary.main
+      : theme.palette.info.main
+  };
+`
+);
