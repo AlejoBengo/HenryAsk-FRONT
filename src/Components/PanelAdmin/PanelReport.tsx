@@ -37,40 +37,6 @@ const columns: readonly Column[] = [
   },
 ];
 
-/* interface Data {
-  name: string;
-  post: string;
-  description: string;
-  status:string;
-}
-
-function createData(
-  name: string,
-  post: string,
-  description: string,
-  status:string
-): Data {
-  return { name, post, description, status};
-} */
-
-/* const rows = [
-  createData('India', "true", "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Amet magni mollitia repellat quibusdam ab voluptatum eius blanditiis veritatis delectus aut. Dolores veritatis asperiores mollitia fuga perferendis distinctio pariatur voluptatem explicabo.", "Eliminar"),
-  createData('China', "true", "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Amet magni mollitia repellat quibusdam ab voluptatum eius blanditiis veritatis delectus aut. Dolores veritatis asperiores mollitia fuga perferendis distinctio pariatur voluptatem explicabo.", "Eliminar"),
-  createData('Italy', "true", "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Amet magni mollitia repellat quibusdam ab voluptatum eius blanditiis veritatis delectus aut. Dolores veritatis asperiores mollitia fuga perferendis distinctio pariatur voluptatem explicabo.", "Eliminar"),
-  createData('United', "true", "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Amet magni mollitia repellat quibusdam ab voluptatum eius blanditiis veritatis delectus aut. Dolores veritatis asperiores mollitia fuga perferendis distinctio pariatur voluptatem explicabo.", "Eliminar"),
-  createData('Canada', "true", "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Amet magni mollitia repellat quibusdam ab voluptatum eius blanditiis veritatis delectus aut. Dolores veritatis asperiores mollitia fuga perferendis distinctio pariatur voluptatem explicabo.", "Eliminar"),
-  createData('Australia', "true", "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Amet magni mollitia repellat quibusdam ab voluptatum eius blanditiis veritatis delectus aut. Dolores veritatis asperiores mollitia fuga perferendis distinctio pariatur voluptatem explicabo.", "Eliminar"),
-  createData('Germany', "true", "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Amet magni mollitia repellat quibusdam ab voluptatum eius blanditiis veritatis delectus aut. Dolores veritatis asperiores mollitia fuga perferendis distinctio pariatur voluptatem explicabo.", "Eliminar"),
-  createData('Ireland', "true", "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Amet magni mollitia repellat quibusdam ab voluptatum eius blanditiis veritatis delectus aut. Dolores veritatis asperiores mollitia fuga perferendis distinctio pariatur voluptatem explicabo.", "Eliminar"),
-  createData('Mexico', "true", "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Amet magni mollitia repellat quibusdam ab voluptatum eius blanditiis veritatis delectus aut. Dolores veritatis asperiores mollitia fuga perferendis distinctio pariatur voluptatem explicabo.", "Eliminar"),
-  createData('Japan', "true", "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Amet magni mollitia repellat quibusdam ab voluptatum eius blanditiis veritatis delectus aut. Dolores veritatis asperiores mollitia fuga perferendis distinctio pariatur voluptatem explicabo.", "Eliminar"),
-  createData('France', "true", "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Amet magni mollitia repellat quibusdam ab voluptatum eius blanditiis veritatis delectus aut. Dolores veritatis asperiores mollitia fuga perferendis distinctio pariatur voluptatem explicabo.", "Eliminar"),
-  createData('United', "true", "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Amet magni mollitia repellat quibusdam ab voluptatum eius blanditiis veritatis delectus aut. Dolores veritatis asperiores mollitia fuga perferendis distinctio pariatur voluptatem explicabo.", "Eliminar"),
-  createData('Russia', "true", "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Amet magni mollitia repellat quibusdam ab voluptatum eius blanditiis veritatis delectus aut. Dolores veritatis asperiores mollitia fuga perferendis distinctio pariatur voluptatem explicabo.", "Eliminar"),
-  createData('Nigeria', "true", "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Amet magni mollitia repellat quibusdam ab voluptatum eius blanditiis veritatis delectus aut. Dolores veritatis asperiores mollitia fuga perferendis distinctio pariatur voluptatem explicabo.", "Eliminar"),
-  createData('Brazil', "true", "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Amet magni mollitia repellat quibusdam ab voluptatum eius blanditiis veritatis delectus aut. Dolores veritatis asperiores mollitia fuga perferendis distinctio pariatur voluptatem explicabo.", "Eliminar"),
-]; */
-
 export default function PanelReport(props:any) {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -156,9 +122,7 @@ export default function PanelReport(props:any) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              .map((row:any) => {
+            {rows?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row:any) => {
                 return (
                   <TableRow hover role="checkbox" tabIndex={-1} key={row.name}>
                     {columns.map((column) => {
@@ -188,21 +152,21 @@ export default function PanelReport(props:any) {
                         if(row.post){
                           return(
                             <TableCell align={column.align} sx={{padding:"0px 0px 0px 10px" , margin:"0px" , width:"19%",}}>
-                            <Link to={`/post/${row.post._id}`}>Ir al Posteo</Link>
+                            <LinkDom to={`/post/${row.post._id}`}>Ir al Posteo</LinkDom>
                           </TableCell>
                           )
                         }
                         if(row.answer){
                           return(
                             <TableCell align={column.align} sx={{padding:"0px 0px 0px 10px" , margin:"0px" , width:"19%",}}>
-                            <Link to={`/post/${row.answer.post}`}>Ir a la Respuesta</Link>
+                            <LinkDom to={`/post/${row.answer.post}`}>Ir a la Respuesta</LinkDom>
                           </TableCell>
                           )
                         }
                         if(row.comment){
                           return(
                             <TableCell align={column.align} sx={{padding:"0px 0px 0px 10px" , margin:"0px" , width:"19%",}}>
-                            <Button onClick={()=>handlePostComment(row.comment.answer)}>Ir al comentario</Button>
+                            <Button sx={{textTransform:"none" , color:"info.main" }} onClick={()=>handlePostComment(row.comment.answer)}>Ir al comentario</Button>
                           </TableCell>
                           )
                         }}

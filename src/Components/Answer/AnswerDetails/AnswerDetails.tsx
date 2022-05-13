@@ -206,10 +206,8 @@ export const AnswerDetails = ({
   return (
     <>
       <Grid container spacing={2}>
-        <Grid item xs={9} sx={{margin:"1rem 0em 0em 1rem"}}>
-          <Typography variant="h4" align="left" gutterBottom>
-              {post.answers?.length} Respuestas
-          </Typography>
+        <Grid item xs={9} sx={{margin:"1rem 0em 0em 1rem", display:"flex", alignItems:"center"}}>
+        <UserShort user={answerData.owner} />
         </Grid>
         <Grid item xs={2.7} sx={{display:"flex", justifyContent:"end", alignItems:"center"}}>
           <Box>
@@ -312,7 +310,7 @@ export const AnswerDetails = ({
       </Grid>
       
       <StyledDiv>
-        <Typography
+       {/*  <Typography
           variant="caption"
           align="left"
           display={"flex"}
@@ -320,7 +318,7 @@ export const AnswerDetails = ({
         >
           Respondido por
           <UserShort user={answerData.owner} />
-        </Typography>
+        </Typography> */}
 
        {/*  {user._id === answerData.owner._id && (
           <BotonEditar onClick={handleOpenEdit}>Editar</BotonEditar>

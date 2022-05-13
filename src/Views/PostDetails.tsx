@@ -526,7 +526,9 @@ export const PostDetails = () => {
             </Typography>
           </Box>
           <Divider sx={{ marginBottom: 1 }} />
-
+          <Typography variant="h4" align="left" gutterBottom>
+              {post.answers?.length} Respuestas
+          </Typography>
           {postAnswers?.map((answer: any, index: number) => (
             <div key={answer.id}>
               <AnswerDetails

@@ -39,7 +39,7 @@ export default function PanelAdm(props: any) {
     dispatch(fetchGetAllReport())
   },[])
 
-  setTimeout(()=> console.log(reports), 4000)
+
   // {
   // OWNER : {user_name, avatar , picture_profile , role }
   // DESCRIPTION : string mensaje report
@@ -57,7 +57,7 @@ export default function PanelAdm(props: any) {
   //four = 'Bullying o acoso.',
   //five = 'Este usuario se hace pasar por mí.',
   //six = 'Contiene información personal.'
-
+/* 
   const rows = [{
     owner: {user_name:'user_name', avatar:'' , profile_picture:'https://st2.depositphotos.com/1009634/7235/v/950/depositphotos_72350117-stock-illustration-no-user-profile-picture-hand.jpg' , role:5},
     description: 'Esta persona hizo un comentario desubicado , estoy totalemente en contra de lo que puso, quiero que lo sancionen porfavor. es un tipo muy racista , no tolero sus comentarios ni su persona',
@@ -86,7 +86,7 @@ export default function PanelAdm(props: any) {
     comment:{content:'este es el comentario reportado', owner:{props:'...'}, answer:{post:{_id:'_id'}}},
   },
 ]
-
+ */
 
   // EN EL FRONT 
   // 1 COLUMNA- USUARIO QUE REPORTO 
@@ -272,7 +272,7 @@ export default function PanelAdm(props: any) {
               </Typography>
             </Grid>
             <Grid item xs={12} sm={12} md={12} lg={6}>
-              <PanelReport />
+              <PanelReport rows={reports}/>
             </Grid>
             <Grid
               item
