@@ -62,6 +62,36 @@ export default function Activity() {
     setActiveStep2(activeStep2);
   };
 
+  const handleNext = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  };
+  const handleNext1 = () => {
+    setActiveStep1((prevActiveStep1) => prevActiveStep1 + 1);
+  };
+  const handleNext2 = () => {
+    setActiveStep2((prevActiveStep2) => prevActiveStep2 + 1);
+  };
+
+  const handleBack = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  };
+  const handleBack1 = () => {
+    setActiveStep1((prevActiveStep1) => prevActiveStep1 - 1);
+  };
+  const handleBack2 = () => {
+    setActiveStep2((prevActiveStep2) => prevActiveStep2 - 1);
+  };
+
+  const handleStepChange = (step: number) => {
+    setActiveStep(activeStep);
+  };
+  const handleStepChange1 = (step: number) => {
+    setActiveStep1(activeStep1);
+  };
+  const handleStepChange2 = (step: number) => {
+    setActiveStep2(activeStep2);
+  };
+
   return (
     <Box sx={{ height: "30vh" }}>
       <Grid>
