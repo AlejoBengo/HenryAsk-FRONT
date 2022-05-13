@@ -80,7 +80,6 @@ export default function SwipeableTextMobileStepper() {
                             sx={{
                             height: 400,
                             display: 'block',
-                            // maxWidth: 800,
                             overflow: 'hidden',
                             width: '100%',
                             }}

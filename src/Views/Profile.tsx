@@ -40,7 +40,7 @@ const Item = styled(Paper)(({ theme }) => ({
   textAlign: "center",
   color: theme.palette.text.secondary,
 }));
-const StyledAvatar = styled(Avatar)(
+export const StyledAvatar = styled(Avatar)(
   ({ theme }) => `
   position: relative;
   top: -10vh;
@@ -196,7 +196,7 @@ export default function Profile() {
       </Container>
 
       <Container>
-        <Activity />
+          <Activity />
       </Container>
 
     </Container>

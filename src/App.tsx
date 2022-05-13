@@ -34,7 +34,8 @@ import Contact from "./Views/Contact";
 import QA from "./Views/Q&A";
 import Privacy from "./Views/PrivacyPolicies";
 import PanelAdm from "./Views/PanelAdm";
-import Footer from "./Components/Home/Footer/Footer";
+import Footer from "./Components/Home/Footer/FooterSenior";
+import Header from './Components/HomeSenior/Header';
 
 const App = () => {
   const { isAuthenticated, user } = useAuth0();
@@ -62,6 +63,7 @@ const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
+      <Header />
       <Navbar />
       <Box
         bgcolor={theme.palette.background.default}

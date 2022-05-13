@@ -15,10 +15,8 @@ export default function Quantity() {
   useEffect(() => {
     dispatch(fetchGetAllPosts(10));
     fetchAllTheorics().then((res: any) => setTheoric(res));
+    dispatch(getAllExercises());
   }, []);
-  useEffect(() => {dispatch(getAllExercises())});
-
-  console.log(exerc)
 
   return (
     <Container>
@@ -56,4 +54,4 @@ export default function Quantity() {
       </Grid>
     </Container>
   );
-}
+};

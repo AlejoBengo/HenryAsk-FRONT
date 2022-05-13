@@ -8,7 +8,6 @@ import {
     Box } from '@mui/material';
 
 export default function CardRedirect(){
-
     return (
         <Box sx={{width: '100%', padding: '1rem'}} >
             <Grid container >
@@ -19,10 +18,8 @@ export default function CardRedirect(){
                         height: '100%',
                         padding: '3rem',
                         backgroundColor: 'yellow' }}>
-                        <CardActionArea>
                             <Typography
-                                variant="h2" 
-                                component="div" 
+                                variant="h2"
                                 display='flex'
                                 justifyContent='center'
                                 padding='3rem'
@@ -45,10 +42,9 @@ export default function CardRedirect(){
                                     </Button>
                                 </Link>
                             </Box>
-                        </CardActionArea>
                     </Card>
                 </Grid>
             </Grid>
         </Box>
-    )
-}
+    );
+};
