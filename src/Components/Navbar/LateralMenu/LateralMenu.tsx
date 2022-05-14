@@ -18,13 +18,14 @@ import {
   Typography,
   List,
 } from "@mui/material";
-import  StarsIcon  from "@mui/icons-material/Stars";
+import { Stars as StarsIcon } from "@mui/icons-material";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import { yellow } from "@mui/material/colors";
 import ForumIcon from "@mui/icons-material/Forum";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import { LateralItemStyled, LinkDom } from "../../Style/StyledComponents";
+import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd';
 /*--------------------------------------------------------*/
 
 export default function LateralMenu(props: any) {
@@ -69,11 +70,11 @@ export default function LateralMenu(props: any) {
       >
         <Box
           width="37%"
-          sx={{ 
-            height: "100%", 
+          sx={{
+            height: "100%",
             display: "flex",
             alignItems: "center",
-            justifyContent: "center"
+            justifyContent: "center",
           }}
           flexDirection="column"
         >
@@ -93,9 +94,7 @@ export default function LateralMenu(props: any) {
             onClick={toggleDrawer(anchor, false)}
             to={`/Profile/${userLog._id}`}
           >
-            <Typography variant="subtitle1">
-            Ir al Perfil
-            </Typography>
+            <Typography variant="subtitle1">Ir al Perfil</Typography>
           </LinkDom>
         </Box>
       </Box>
@@ -109,7 +108,7 @@ export default function LateralMenu(props: any) {
           <LateralItemStyled text="Material" icon={<MenuBookIcon />} />
         </LinkDom>
         <LinkDom onClick={toggleDrawer(anchor, false)} to="#">
-          <LinkDom onClick={toggleDrawer(anchor, false)} to="#">
+          <LinkDom onClick={toggleDrawer(anchor, false)} to="/Ranking">
             <LateralItemStyled
               text="Henry Coins Ranking"
               icon={<StarsIcon />}
@@ -122,6 +121,16 @@ export default function LateralMenu(props: any) {
             icon={<NoteAddIcon />}
           />
         </LinkDom>
+        {
+          userLog.role >= 3 ? (
+            <LinkDom onClick={toggleDrawer(anchor, false)} to="/Forum/News">
+            <LateralItemStyled
+              text="Foro Futuros Henry's"
+              icon={<BookmarkAddIcon/>}
+            />
+          </LinkDom>
+          ):null
+        }
         {userLog.role === 5 ? (
           <LinkDom onClick={toggleDrawer(anchor, false)} to="/PanelAdm">
             <LateralItemStyled

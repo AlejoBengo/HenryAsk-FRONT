@@ -267,7 +267,7 @@ export default function Grids() {
                                         </Grid>
                                         <Grid display='flex' justifyContent='center'>
                                             <Button
-                                            onClick={() => navigate(`/Theoric/${el._id}`)}
+                                            onClick={() => navigate(`/Exercise/${el._id}`)}
                                             variant="contained" 
                                             color={theme.palette.mode === 'dark' ? 'primary' : 'secondary'}><ArrowForwardIosIcon /></Button>
                                         </Grid>
