@@ -25,6 +25,7 @@ import ForumIcon from "@mui/icons-material/Forum";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import { LateralItemStyled, LinkDom } from "../../Style/StyledComponents";
+import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd';
 /*--------------------------------------------------------*/
 
 export default function LateralMenu(props: any) {
@@ -122,6 +123,16 @@ export default function LateralMenu(props: any) {
             icon={<NoteAddIcon />}
           />
         </LinkDom>
+        {
+          userLog.role >= 3 ? (
+            <LinkDom onClick={toggleDrawer(anchor, false)} to="/Forum/News">
+            <LateralItemStyled
+              text="Foro Futuros Henry's"
+              icon={<BookmarkAddIcon/>}
+            />
+          </LinkDom>
+          ):null
+        }
         {userLog.role === 5 ? (
           <LinkDom onClick={toggleDrawer(anchor, false)} to="/PanelAdm">
             <LateralItemStyled

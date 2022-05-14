@@ -38,6 +38,7 @@ import CreateExercise from "./Components/Creators/CreateExercise/CreateExercise"
 import Footer from "./Components/Home/Footer/FooterSenior";
 import Header from './Components/HomeSenior/Header';
 import Search from "./Views/Search";
+import ForumNews from "./Views/ForumNews";
 
 const App = () => {
   const { isAuthenticated, user } = useAuth0();
@@ -96,6 +97,7 @@ const App = () => {
           <Route path="/PanelAdm" element={<PanelAdm />} />
           <Route path="/Exercise/:id" element={<ExerciseDetails />} />
           <Route path="/Search/" element={<Search />} />
+          <Route path="/Forum/News" element={<ForumNews/>}/>
         </Routes>
       </Box>
       <Footer />
