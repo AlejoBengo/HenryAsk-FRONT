@@ -47,7 +47,6 @@ const ExerciseList = () => {
             unmountOnExit
             sx={{ width: "100%" }}
           >
-            length
             <LinkDom to={`/Exercise/${exercise._id}`}>
               <List component="div" disablePadding sx={{ width: "100%" }}>
                 <ListItemButton
