@@ -93,7 +93,7 @@ export default function PosteosAlumnos(){
             gutterBottom 
             variant="h2"
             textAlign='center'>
-                Última actividad de <TituloForo>alumnos</TituloForo>
+                Últimos posteos de <TituloForo>alumnos</TituloForo>
             </Typography>
 
             <Grid container spacing={5} sx={{ display: 'flex', justifyContent: 'center' }}>

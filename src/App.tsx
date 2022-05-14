@@ -41,6 +41,7 @@ import Header from "./Components/HomeSenior/Header";
 import Search from "./Views/Search";
 import HenryCoinsRanking from "./Views/HenryCoinsRanking";
 import { toggleMode, setMode } from "./app/Reducers/modeReducer";
+import ForumNews from "./Views/ForumNews";
 
 const App = () => {
   const [cookies, setCookie, removeCookie] = useCookies();
@@ -111,6 +112,7 @@ const App = () => {
           <Route path="/Exercise/:id" element={<ExerciseDetails />} />
           <Route path="/Search/" element={<Search />} />
           <Route path="/Ranking/" element={<HenryCoinsRanking />} />
+          <Route path="/Forum/News" element={<ForumNews />} />
         </Routes>
       </Box>
       <Footer />

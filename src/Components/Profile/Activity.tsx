@@ -126,7 +126,9 @@ export default function Activity() {
                                         </Typography>
                                     </Grid>
                                     <Grid display='flex' justifyContent='center' paddingBottom='0.5rem'>
-                                        {`Realizado:${step.createdAt.slice(0, 10)}`}
+                                        <Typography>
+                                            {`Realizado:${step.createdAt.slice(0, 10)}`}
+                                        </Typography>
                                     </Grid>
                                     <Grid display='flex' justifyContent='center'>
                                         <Button
@@ -205,7 +207,9 @@ export default function Activity() {
                                         </Typography>
                                     </Grid>
                                     <Grid display='flex' justifyContent='center' paddingBottom='0.5rem'>
-                                        {`Realizado:${step.createdAt.slice(0, 10)}`}
+                                        <Typography>
+                                            {`Realizado:${step.createdAt.slice(0, 10)}`}
+                                        </Typography>
                                     </Grid>
                                     <Grid display='flex' justifyContent='center'>
                                         <Button
@@ -284,14 +288,16 @@ export default function Activity() {
                                     </Grid>
 
                                     <Grid display='flex' justifyContent='center' paddingBottom='0.5rem'>
-                                        {`Realizado:${step.createdAt.slice(0, 10)}`}
+                                        <Typography>
+                                            {`Realizado:${step.createdAt.slice(0, 10)}`}
+                                        </Typography>
                                     </Grid>
                                     <Grid display='flex' justifyContent='center'>
-                                        <Button
-                                        // onClick={() => navigate(`/Post/${step.answer}`)}
+                                        {/* <Button
+                                        onClick={() => navigate(`/Post/${step.answer}`)}
                                         variant="contained" 
                                         color={theme.palette.mode === 'dark' ? 'primary' : 'secondary'} 
-                                        sx={{height:"10%"}}>Ir</Button>
+                                        sx={{height:"10%"}}>Ir</Button> */}
                                     </Grid>
                                 </Grid>
                             ))}

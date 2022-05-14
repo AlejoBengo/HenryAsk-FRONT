@@ -151,7 +151,6 @@ export const PostDetails = () => {
 
   const handleSubmitModalReport = () => {
     setOpenModalReport(false);
-    console.log("1", infoReport.owner)
     setInfoReport(infoReport={...infoReport, owner:usuario})
     reportPost(infoReport).then((response)=> (setInfoReport(infoReport={
       reason:'',
@@ -309,7 +308,7 @@ export const PostDetails = () => {
           buttonText="Volver al foro"
         />
 
-        <StyledDivButtons>{/* error se rompe en pantalla grande */}
+        <StyledDivButtons>
           {usuario._id === post.owner._id && (
             <Button variant="contained" onClick={handleOpenEdit}>
               Editar
