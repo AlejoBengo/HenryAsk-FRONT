@@ -151,7 +151,6 @@ export const PostDetails = () => {
 
   const handleSubmitModalReport = () => {
     setOpenModalReport(false);
-    console.log("1", infoReport.owner)
     setInfoReport(infoReport={...infoReport, owner:usuario})
     reportPost(infoReport).then((response)=> (setInfoReport(infoReport={
       reason:'',
@@ -309,7 +308,7 @@ export const PostDetails = () => {
           buttonText="Volver al foro"
         />
 
-        <StyledDivButtons>{/* error se rompe en pantalla grande */}
+        <StyledDivButtons>
           {usuario._id === post.owner._id && (
             <Button variant="contained" onClick={handleOpenEdit}>
               Editar
@@ -372,7 +371,7 @@ export const PostDetails = () => {
             <StyledSelect onChange={(event) => handleEditTags(event)}>
               {tags.map((tag) => {
                 return (
-                  <MenuItem value={tag} key={tag}>
+                  <MenuItem value={tag} key={tag} >
                     {tag}
                   </MenuItem>
                 );
@@ -392,7 +391,11 @@ export const PostDetails = () => {
                       }}
                       key={tag}
                     >
-                      <h4>{tag}</h4>
+                      <h4
+                        style={{color:`${theme.palette.getContrastText(theme.palette.background.default)}`}}
+                      >
+                        {tag}
+                      </h4>
                       <IconButton
                         onClick={() => handleDelete(tag)}
                         aria-label="delete"

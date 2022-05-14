@@ -1,7 +1,6 @@
 import * as React from "react";
 import emailjs from "emailjs-com";
 import { Container, Box, Typography, Input } from "@mui/material";
-// import Footer from "../Components/Home/Footer/Footer";
 import TextareaAutosize from "@mui/material/TextareaAutosize";
 import Button from "@mui/material/Button";
 import { useTheme } from "@mui/material";

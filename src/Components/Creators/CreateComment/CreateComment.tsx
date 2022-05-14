@@ -6,6 +6,7 @@ import {
   Modal,
   TextField,
   Typography,
+  useTheme
 } from "@mui/material";
 import { Button, Box } from "@mui/material";
 import { useAppSelector } from "../../../app/hooks";
@@ -23,6 +24,8 @@ export const CreateComment = ({ answerId }: Props) => {
   const [open, setOpen] = useState(false);
   const [modalState, setModalState] = useState("Enviando...");
   const navigate = useNavigate();
+  const theme = useTheme();
+
   const handleCommentSend = () => {
     setOpen(true);
     setModalState("Enviando...");
@@ -104,7 +107,9 @@ export const CreateComment = ({ answerId }: Props) => {
               alignItems: "center",
             }}
           >
-            <Typography variant="h6" align="center">
+            <Typography variant="h6" align="center" color={theme.palette.getContrastText(
+              theme.palette.background.default
+            )}>
               {modalState}
             </Typography>
             {modalState === "Enviando" && <CircularProgress />}

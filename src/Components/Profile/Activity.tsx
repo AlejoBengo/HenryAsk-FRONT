@@ -122,7 +122,6 @@ export default function Activity() {
             <AutoPlaySwipeableViews
               index={activeStep}
               onChangeIndex={handleStepChange}
-              enableMouseEvents
             >
               {reverseArr(userProfile.posts)
                 .slice(0, 6)
@@ -231,7 +230,6 @@ export default function Activity() {
             <AutoPlaySwipeableViews
               index={activeStep1}
               onChangeIndex={handleStepChange1}
-              enableMouseEvents
             >
               {reverseArr(userProfile.answers)
                 .slice(0, 6)
@@ -348,7 +346,6 @@ export default function Activity() {
             <AutoPlaySwipeableViews
               index={activeStep2}
               onChangeIndex={handleStepChange2}
-              enableMouseEvents
             >
               {reverseArr(userProfile.comments)
                 .slice(0, 6)

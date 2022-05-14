@@ -32,34 +32,34 @@ const TableTheoric = (props:any) => {
     { 
       id: 'owner', 
       label: 'Creador', 
-      minWidth: 170 ,
       align: 'center',
+      minWidth: 100,
     },
     { 
       id: 'title', 
       label: 'Título',
-      minWidth: 100,
-      align: 'center', 
+      align: 'center',
+      minWidth: 200,
     },
     {
       id: 'content',
       label: 'Contenido',
-      minWidth: 170,
+      minWidth: 250,
       align: 'center',
       format: (value: string) => value.split(" ").length > 28
         ?`${value.split(" ").slice(0,28).join(" ")}...`
-        : value,
+        :`${value}holasss`,
     },
     {
       id: 'author',
       label: 'Autor',
-      minWidth: 170,
+      minWidth: 100,
       align: 'center',
     },
     {
       id: 'images',
       label: 'Imágenes',
-      minWidth: 170,
+      minWidth: 50,
       align: 'center',
       format: (value)=> value.length
         ? <CheckIcon data-testid="CheckIcon" fontSize="large" color="success"></CheckIcon>
@@ -68,7 +68,7 @@ const TableTheoric = (props:any) => {
     {
       id: 'comments',
       label: 'Comentarios',
-      minWidth: 170,
+      minWidth: 50,
       align: 'center',
       format: (value)=> value.length
         ? <CheckIcon data-testid="CheckIcon" fontSize="large" color="success"></CheckIcon>
@@ -81,13 +81,13 @@ const TableTheoric = (props:any) => {
       <StyledTypography
       variant="h3"
       textAlign="center"
-      margin="4rem 0rem 2rem 0rem">
+      padding="4rem 0rem 2rem 0rem">
           🧠 Aumenta tus conocimientos con <TituloForo>Posteos Teóricos</TituloForo>
       </StyledTypography>
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
     <TableContainer sx={{ maxHeight: 440 }}>
       <Table stickyHeader aria-label="sticky table">
-        <TableHead>
+        <TableHead >
           <TableRow>
             {columns.map((column) => (
               <TableCell
@@ -170,7 +170,7 @@ const TableTheoric = (props:any) => {
       component="div"
       count={theoricsToRender?.length ? theoricsToRender.length : 0}
       rowsPerPage={rowsPerPage}
-      page={page? page : 1}
+      page={page}
       onPageChange={handleChangePage}
       onRowsPerPageChange={handleChangeRowsPerPage}
     />

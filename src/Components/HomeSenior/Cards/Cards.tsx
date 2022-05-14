@@ -134,8 +134,7 @@ export default function Grids() {
                         <CardActionArea>
                             <AutoPlaySwipeableViews
                             index={activeStep}
-                            onChangeIndex={handleStepChange}
-                            enableMouseEvents>
+                            onChangeIndex={handleStepChange}>
                                 {reverseArr(theoric).slice(0, 6).map((el: any) => (
                                     <Grid>
                                         <Grid sx={{ height: 350, display:'grid', padding:'1rem' }}>
@@ -227,8 +226,7 @@ export default function Grids() {
                             <CardActionArea>
                                 <AutoPlaySwipeableViews
                                 index={activeStep1}
-                                onChangeIndex={handleStepChange1}
-                                enableMouseEvents>
+                                onChangeIndex={handleStepChange1}>
                                 {reverseArr(exerc.exercises).slice(0, 6).map((el: any) => (
                                     <Grid>
                                         <Grid sx={{ height: 350, display:'grid', padding:'1rem' }}>
@@ -269,7 +267,7 @@ export default function Grids() {
                                         </Grid>
                                         <Grid display='flex' justifyContent='center'>
                                             <Button
-                                            onClick={() => navigate(`/Theoric/${el._id}`)}
+                                            onClick={() => navigate(`/Exercise/${el._id}`)}
                                             variant="contained" 
                                             color={theme.palette.mode === 'dark' ? 'primary' : 'secondary'}><ArrowForwardIosIcon /></Button>
                                         </Grid>
@@ -318,8 +316,7 @@ export default function Grids() {
                             <CardActionArea>
                                 <AutoPlaySwipeableViews
                                 index={activeStep2}
-                                onChangeIndex={handleStepChange2}
-                                enableMouseEvents>
+                                onChangeIndex={handleStepChange2}>
                                 {reverseArr(postInstructores).slice(0, 6).map((el: any) => (
                                     <Grid>
                                         <Grid sx={{ height: 350, display:'grid', padding:'1rem' }}>
