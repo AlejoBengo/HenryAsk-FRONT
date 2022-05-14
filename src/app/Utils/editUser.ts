@@ -16,4 +16,13 @@ export const fetchIdUserBan = async (id:string) =>{
    
   
      
-  
+export const deleteUserPanel = async (id:string) =>{
+    try{
+        const response = await (await axios.delete(`/user/?id=${id}`)).data;
+        return response;
+    } catch(error){
+        console.log("catch delete user panel" , error)
+    }
+}
+   
+   
