@@ -174,7 +174,7 @@ const Navbar = () => {
               marginRight: "4em",
             }}
           >
-            {DBUser.role > 0 ? (
+            {DBUser.role >= 0 ? (
               <Button
                 onClick={handleOpenCreateMenu}
                 sx={{ my: 2, color: "white", display: "block" }}

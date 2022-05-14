@@ -107,8 +107,7 @@ export default function Activity() {
                     <Card sx={theme.palette.mode === 'dark' ? { backgroundImage:'none'} : { background:'yellow'}}>
                         <AutoPlaySwipeableViews
                         index={activeStep}
-                        onChangeIndex={handleStepChange}
-                        enableMouseEvents>
+                        onChangeIndex={handleStepChange}>
                             {reverseArr(userProfile.posts).slice(0, 6).map((step: any) => (
                                 <Grid>
                                     <Grid sx={{ height: 230, display:'grid', padding:'1rem' }}>
@@ -184,8 +183,7 @@ export default function Activity() {
                     <Card sx={theme.palette.mode === 'dark' ? { backgroundImage:'none'} : { background:'yellow'}}>
                         <AutoPlaySwipeableViews
                         index={activeStep1}
-                        onChangeIndex={handleStepChange1}
-                        enableMouseEvents>
+                        onChangeIndex={handleStepChange1}>
                             {reverseArr(userProfile.answers).slice(0, 6).map((step: any) => (
                                 <Grid>
                                     <Grid sx={{ height: 230, display:'grid', padding:'1rem' }}>
@@ -264,8 +262,7 @@ export default function Activity() {
                     <Card sx={theme.palette.mode === 'dark' ? { backgroundImage:'none'} : { background:'yellow'}}>
                         <AutoPlaySwipeableViews
                         index={activeStep2}
-                        onChangeIndex={handleStepChange2}
-                        enableMouseEvents>
+                        onChangeIndex={handleStepChange2}>
                             {reverseArr(userProfile.comments).slice(0, 6).map((step: any) => (
                                 <Grid>
                                     <Grid sx={{ height: 230, display: 'grid', padding:'1rem' }}>

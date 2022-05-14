@@ -30,7 +30,6 @@ import {
   CardMedia,
   CardContent,
 } from "@mui/material";
-import { profile } from "console";
 
 /*--------------------------------------------------------*/
 
@@ -123,8 +122,8 @@ export default function Profile() {
   //If not includes "id" in dependencies's array when u're in a profile's detail of some user
   // and go to your profile's detail, this component dont render the change.
   return (
-    <Container>
-      <StackMigajas style={{ marginLeft: "-6.7vw" }} spacing={2}>
+    <>
+      <StackMigajas spacing={2}>
         <Breadcrumbs separator="›">{migajas}</Breadcrumbs>
       </StackMigajas>
       <Container
@@ -239,10 +238,9 @@ export default function Profile() {
           </CardContent>
         </Card>
       </Container>
-
       <Container>
           <Activity />
       </Container>
-    </Container>
+    </>
   );
 }

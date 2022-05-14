@@ -18,3 +18,11 @@
 }*{
   color: #00CC66,
 } */
+:root{
+  --color-primary-light: #ffd700;
+  --color-secondary-light: #808080;
+  --color-warning-light: #ef6c00;
+  --color-info-light: #000000;
+  --color-error-light: #A10702;
+  --color-success-light: #00CC66;
+}

@@ -34,9 +34,12 @@ import Contact from "./Views/Contact";
 import Qa from "./Views/Q&A";
 import Privacy from "./Views/PrivacyPolitics";
 import PanelAdm from "./Views/PanelAdm";
+import CreateExercise from "./Components/Creators/CreateExercise/CreateExercise";
 import Footer from "./Components/Home/Footer/FooterSenior";
 import Header from './Components/HomeSenior/Header';
 import Search from "./Views/Search";
+import HenryCoinsRanking from "./Views/HenryCoinsRanking";
+import ForumNews from "./Views/ForumNews";
 
 const App = () => {
   const { isAuthenticated, user } = useAuth0();
@@ -71,6 +74,8 @@ const App = () => {
         sx={{
           minHeight: "100vh",
           p: 0,
+          paddingTop:"1rem",
+          paddingBottom:"3rem",
         }}
       >
         <Routes>
@@ -88,10 +93,13 @@ const App = () => {
           <Route path="/Post/:id" element={<PostDetails />} />
           <Route path="/Forum/" element={<Foro />} />
           <Route path="/Ask" element={<CreatePost />} />
-          <Route path="/Theoric/Create" element={<CreateTheoric />} />{" "}
+          <Route path="/Theoric/Create" element={<CreateTheoric />} />
+          <Route path="/Exercise/Create" element={<CreateExercise />} />
           <Route path="/PanelAdm" element={<PanelAdm />} />
           <Route path="/Exercise/:id" element={<ExerciseDetails />} />
           <Route path="/Search/" element={<Search />} />
+          <Route path="/Ranking/" element={<HenryCoinsRanking />} />
+          <Route path="/Forum/News" element={<ForumNews/>}/>
         </Routes>
       </Box>
       <Footer />

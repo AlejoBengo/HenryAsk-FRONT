@@ -184,21 +184,17 @@ const PostForm = () => {
   ];
 
   return (
-    //   <StyledGrid>
-
-    //   </StyledGrid>
-    // );
+    <>
+      <StackMigajas
+        spacing={2}
+      >
+        <Breadcrumbs separator="›">{migajas}</Breadcrumbs>
+      </StackMigajas>
     <Container
       sx={{
         p: "1rem",
       }}
     >
-      <StackMigajas
-        style={{ marginLeft: "-6.5vw", marginTop: "-1vh", marginBottom: "1vh" }}
-        spacing={2}
-      >
-        <Breadcrumbs separator="›">{migajas}</Breadcrumbs>
-      </StackMigajas>
       <Paper
         elevation={2}
         sx={{
@@ -295,7 +291,8 @@ const PostForm = () => {
           </Grid>
         </Grid>
       </Paper>
-    </Container>
+    </Container> 
+    </>
   );
 };
 

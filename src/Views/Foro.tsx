@@ -2,7 +2,7 @@
 /*-----------IMPORT UTILITIES-----------*/
 import { useEffect } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 /*-----------IMPORT COMPONENTS-----------*/
 import TableInstructor from "../Components/Foro/TableInstructor/TableInstructor";
 /*-----------IMPORT MUI & CSS-----------*/
@@ -21,6 +21,7 @@ import { StyledTypography } from "../Components/Content/MainContent/TableExercis
 let AlumnOrInstructor = ["Alumno", "Instructor"];
 export default function Foro() {
   const theme = useTheme();
+  const navigate = useNavigate()
   const userLogin = useAppSelector((state) => state.user.data);
   const posts = useAppSelector((state) => state.getAllPosts.posts);
   const { isAuthenticated } = useAuth0();
@@ -28,6 +29,9 @@ export default function Foro() {
 
   // USER LOOGIN ---> USUARIO LOGEAEDO ---> SE MUESTRA SEGUN SU ROL
   useEffect(() => {
+    if(userLogin.role === 0){
+      navigate('/Forum/News')
+    }
     if (userLogin.role === 1) {
       // USUARIO DEL PREP
       dispatch(fetchGetAllPosts(1));
@@ -120,7 +124,7 @@ export default function Foro() {
             <StyledTypography
               variant="h3"
               textAlign="center"
-              margin="1rem 0rem 1rem 0rem"
+              padding="3rem 0rem 3rem 0rem"
             >
               Bienvenido/a al <TituloForo>Prep.Course</TituloForo> Forum !
             </StyledTypography>
@@ -129,7 +133,7 @@ export default function Foro() {
             <StyledTypography
               variant="h3"
               textAlign="center"
-              margin="1rem 0rem 1rem 0rem"
+              padding="3rem 0rem 3rem 0rem"
             >
               Posteos entre <TituloForo>Alumnos</TituloForo>
             </StyledTypography>
@@ -175,7 +179,7 @@ export default function Foro() {
             <StyledTypography
               variant="h3"
               textAlign="center"
-              margin="1rem 0rem 1rem 0rem"
+              padding="3rem 0rem 3rem 0rem"
             >
               Posteos entre <TituloForo>Alumnos</TituloForo>
             </StyledTypography>
@@ -204,7 +208,7 @@ export default function Foro() {
                 <StyledTypography
                   variant="h3"
                   textAlign="center"
-                  margin="1rem 0rem 1rem 0rem"
+                  padding="3rem 0rem 3rem 0rem"
                 >
                   Posteos de los <TituloForo>Instructores</TituloForo>
                 </StyledTypography>
@@ -237,7 +241,7 @@ export default function Foro() {
                 <StyledTypography
                   variant="h3"
                   textAlign="center"
-                  margin="1rem 0rem 1rem 0rem"
+                  padding="3rem 0rem 3rem 0rem"
                 >
                   Posteos entre <TituloForo>Alumnos</TituloForo>
                 </StyledTypography>
@@ -261,7 +265,7 @@ export default function Foro() {
               <StyledTypography
                 variant="h3"
                 textAlign="center"
-                margin="1rem 0rem 1rem 0rem"
+                padding="3rem 0rem 1rem 0rem"
               >
                 Bienvenido/a al <TituloForo>Prep.Course</TituloForo> Forum !
               </StyledTypography>
@@ -270,7 +274,7 @@ export default function Foro() {
               <StyledTypography
                 variant="h3"
                 textAlign="center"
-                margin="1rem 0rem 1rem 0rem"
+                padding="3rem 0rem 3rem 0rem"
               >
                 Posteos entre <TituloForo>Alumnos</TituloForo>
               </StyledTypography>
