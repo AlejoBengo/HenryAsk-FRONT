@@ -12,7 +12,7 @@ export interface User {
   profile_picture: string;
   banner: string;
   biography: string;
-  isBanned:boolean;
+  isBanned: boolean;
   posts: Array<string> & any;
   answers: Array<string> & any;
   comments: Array<string> & any;
@@ -27,6 +27,7 @@ export interface User {
     | "https://res.cloudinary.com/henryask/image/upload/v1651459728/avatares/pig_tzhrjl.png"
     | "https://res.cloudinary.com/henryask/image/upload/v1651459728/avatares/pigeon_yfv9ka.png"
     | "";
+  createdAt?: string;
 }
 export interface InitialState {
   data: User;
@@ -173,14 +174,12 @@ export interface ColumnTableTheoric {
   } & string;
 }
 
-
-
 // interface report
 export interface Report {
-  owner:User;
-  description:string;
-  status:string;
-  reason:string;
+  owner: User;
+  description: string;
+  status: string;
+  reason: string;
   post: {} | Posts;
   answer: {} | Answer;
   comment: {} | Comment;

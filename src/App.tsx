@@ -36,6 +36,7 @@ import Privacy from "./Views/PrivacyPolicies";
 import PanelAdm from "./Views/PanelAdm";
 import Footer from "./Components/Home/Footer/Footer";
 import Search from "./Views/Search";
+import HenryCoinsRanking from "./Views/HenryCoinsRanking";
 
 const App = () => {
   const { isAuthenticated, user } = useAuth0();
@@ -90,6 +91,7 @@ const App = () => {
           <Route path="/PanelAdm" element={<PanelAdm />} />
           <Route path="/Exercise/:id" element={<ExerciseDetails />} />
           <Route path="/Search/" element={<Search />} />
+          <Route path="/Ranking/" element={<HenryCoinsRanking />} />
         </Routes>
       </Box>
       <Footer />
