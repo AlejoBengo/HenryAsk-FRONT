@@ -239,7 +239,7 @@ const ExerciseDetails = () => {
       <StyledTypography2>
         Creado por: <Typography>{exercise.owner.user_name} </Typography>el{" "}
         <Typography>
-          {exercise.createdAt.length > 0 && exercise.createdAt}
+          {exercise.createdAt?.length > 0 && exercise.createdAt}
         </Typography>
       </StyledTypography2>
       <StyledDiv sx={{ height: "100%" }}>
@@ -247,10 +247,10 @@ const ExerciseDetails = () => {
           Descripción: {exercise.description}
         </StyledPaper>
         <StyledPaper elevation={8} sx={{ marginBlock: "3rem" }}>
-          Código: {exercise.code.length > 0 && exercise.code}
+          Código: {exercise.code?.length > 0 && exercise.code}
         </StyledPaper>
         <StyledPaper elevation={8} sx={{ marginBlock: "3rem" }}>
-          Test: {exercise.test.length > 0 && exercise.test}
+          Test: {exercise.test?.length > 0 && exercise.test}
         </StyledPaper>
       </StyledDiv>
       <Box
@@ -260,8 +260,8 @@ const ExerciseDetails = () => {
           justifyContent: "flex-end",
         }}
       >
-        {exercise.tags.length > 0 &&
-          exercise.tags.map((tag: string) => {
+        {exercise.tags?.length > 0 &&
+          exercise.tags?.map((tag: string) => {
             return <StyledTypography3> {tag} </StyledTypography3>;
           })}
         <LocalOfferIcon />

@@ -22,6 +22,8 @@ import {
 import { StackMigajas } from "../../Style/StyledComponents";
 import { Imagen } from "../ContentStyled";
 import img from "../../../Assets/imgMainNoLogeado.jpg";
+import { Theoric } from "../../../app/interface";
+import { ExerciseInterface } from "../../../app/Interfaces/interfaceExercise";
 /*--------------------------------------------------------*/
 
 let textNoLogin = "Rinde el henry challengue y se parte de Henry!";
@@ -35,6 +37,18 @@ const MainContent = () => {
     theorics: { allTheorics },
   } = useAppSelector((state) => state);
   const dispatch = useAppDispatch();
+
+  const reverse = (input: Array<Object>) => {
+    let newArray = new Array;
+    for(var i = input.length-1; i >= 0; i--) {
+      newArray.push(input[i]);
+    }
+    return newArray;
+  }
+
+  const exercisesReversed = reverse(exercises);
+  const theoricsReversed = reverse(allTheorics);
+
 
   useEffect(() => {
     dispatch(getAllExercises());
@@ -70,18 +84,20 @@ const MainContent = () => {
 
   return (
     <div>
+      <StackMigajas
+        spacing={2}
+      >
+        <Breadcrumbs separator="›">{migajas}</Breadcrumbs>
+      </StackMigajas>
       {isAuthenticated ? (
-        <Container style={{ marginTop: "-1vh" }}>
-          <StackMigajas
-            style={{
-              marginLeft: "-6.7vw",
-            }}
-            spacing={2}
-          >
-            <Breadcrumbs separator="›">{migajas}</Breadcrumbs>
-          </StackMigajas>
-          <TableExercise exercisesToRender={exercises} key={`TableExercise`} />
-          <TableTheoric theoricsToRender={allTheorics} key={`TableTheoric`} />
+        <Container 
+          maxWidth={false}
+          sx={{
+            width: "80vw"
+          }}
+        >
+          <TableExercise exercisesToRender={exercisesReversed} key={`TableExercise`}/>
+          <TableTheoric theoricsToRender={theoricsReversed} key={`TableTheoric`}/>
         </Container>
       ) : (
         <Container maxWidth={false} sx={{ width: "95vw" }}>

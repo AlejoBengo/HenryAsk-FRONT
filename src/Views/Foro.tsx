@@ -120,7 +120,7 @@ export default function Foro() {
             <StyledTypography
               variant="h3"
               textAlign="center"
-              margin="1rem 0rem 1rem 0rem"
+              padding="3rem 0rem 3rem 0rem"
             >
               Bienvenido/a al <TituloForo>Prep.Course</TituloForo> Forum !
             </StyledTypography>
@@ -129,7 +129,7 @@ export default function Foro() {
             <StyledTypography
               variant="h3"
               textAlign="center"
-              margin="1rem 0rem 1rem 0rem"
+              padding="3rem 0rem 3rem 0rem"
             >
               Posteos entre <TituloForo>Alumnos</TituloForo>
             </StyledTypography>
@@ -175,7 +175,7 @@ export default function Foro() {
             <StyledTypography
               variant="h3"
               textAlign="center"
-              margin="1rem 0rem 1rem 0rem"
+              padding="3rem 0rem 3rem 0rem"
             >
               Posteos entre <TituloForo>Alumnos</TituloForo>
             </StyledTypography>
@@ -204,7 +204,7 @@ export default function Foro() {
                 <StyledTypography
                   variant="h3"
                   textAlign="center"
-                  margin="1rem 0rem 1rem 0rem"
+                  padding="3rem 0rem 3rem 0rem"
                 >
                   Posteos de los <TituloForo>Instructores</TituloForo>
                 </StyledTypography>
@@ -237,7 +237,7 @@ export default function Foro() {
                 <StyledTypography
                   variant="h3"
                   textAlign="center"
-                  margin="1rem 0rem 1rem 0rem"
+                  padding="3rem 0rem 3rem 0rem"
                 >
                   Posteos entre <TituloForo>Alumnos</TituloForo>
                 </StyledTypography>
@@ -261,7 +261,7 @@ export default function Foro() {
               <StyledTypography
                 variant="h3"
                 textAlign="center"
-                margin="1rem 0rem 1rem 0rem"
+                padding="3rem 0rem 1rem 0rem"
               >
                 Bienvenido/a al <TituloForo>Prep.Course</TituloForo> Forum !
               </StyledTypography>
@@ -270,7 +270,7 @@ export default function Foro() {
               <StyledTypography
                 variant="h3"
                 textAlign="center"
-                margin="1rem 0rem 1rem 0rem"
+                padding="3rem 0rem 3rem 0rem"
               >
                 Posteos entre <TituloForo>Alumnos</TituloForo>
               </StyledTypography>
