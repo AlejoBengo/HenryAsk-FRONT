@@ -84,6 +84,7 @@ export const HenryCoinsRanking = () => {
           </TableHead>
           <TableBody>
             {sortedUsers
+              .reverse()
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((user, index) => {
                 return (

@@ -98,7 +98,7 @@ export const EditProfile = () => {
         )}`,
       }}
     >
-      PROFILE
+      PERFIL
     </Link>,
     <Link
       to={`/Profile/${id}/Edit`}
@@ -110,7 +110,7 @@ export const EditProfile = () => {
         )}`,
       }}
     >
-      EDIT PROFILE
+      EDITAR PERFIL
     </Link>,
   ];
 
