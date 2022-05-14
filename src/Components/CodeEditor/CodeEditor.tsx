@@ -1,7 +1,6 @@
 /*--------------------------------------------------------*/
 /*-----------IMPORT UTILITIES-----------*/
-import React from "react";
-import CodeMirror from './codemirror-5.65.3/lib/codemirror.js';
+import React from "react";import CodeMirror from './codemirror-5.65.3/lib/codemirror.js';
 /*--------------------------------------------------------*/
 import { GridContainter, CodeArea, CodeAreaHeader, CodeButton } from "../Style/StyledComponents";
 import TextareaAutosize from '@mui/material/TextareaAutosize';

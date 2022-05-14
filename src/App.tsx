@@ -39,6 +39,7 @@ import Footer from "./Components/Home/Footer/FooterSenior";
 import Header from './Components/HomeSenior/Header';
 import Search from "./Views/Search";
 
+
 const App = () => {
   const { isAuthenticated, user } = useAuth0();
   const navigate = useNavigate();
@@ -77,7 +78,7 @@ const App = () => {
         }}
       >
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home />} />          
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/qya" element={<Qa />} />
           <Route path="/contact" element={<Contact />} />

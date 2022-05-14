@@ -88,7 +88,6 @@ export default function AboutUs() {
                         </Typography>
 
                          {/* --------------------------------------- */}
-          
                         <Box sx={{ height: "100%", width: "100%", backgroundColor: "black", color: "rgb(255, 255, 1)", fontWeight: "bold", padding: "1em", borderRadius: "1em"}}>
                             <Typography variant="h4" component="h3" gutterBottom display='flex' justifyContent='center'>
                                 Back End            
@@ -232,9 +231,7 @@ export default function AboutUs() {
                             Front End
                             </Typography>
             
-                            {/* ------------------------Saul----------------------------- */}
-
-                   
+                            {/* ------------------------Saul----------------------------- */}                   
                             <CardActionArea>
                             <Link
                                 href="https://www.linkedin.com/in/saul-paez1004"
