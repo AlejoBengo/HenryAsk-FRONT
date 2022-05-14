@@ -17,13 +17,19 @@ interface Data {
 }
 
 export default function MiEditor({ coding, testing }: Data) {
-  const [data, setData] = useState({ code: "", test: "" });
+  const [code, setCode] = useState("");
+  const [test, setTest] = useState("");
 
   useEffect(() => {
-    setData({ code: coding, test: testing });
+    setCode(coding);
+    setTest(testing);
   }, [coding, testing]);
 
   const handleExecturor = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const data = {
+      code: code,
+      test: test,
+    };
     testExercice(data).then((res) => {
       console.log(res);
     });
@@ -34,25 +40,26 @@ export default function MiEditor({ coding, testing }: Data) {
       <EditorCode>
         <Title>SOLUCIÓN</Title>
         <CodeMirror
-          value={data.code}
+          value={code}
           theme={oneDark}
           height="38vh"
           placeholder="Tu código..."
           extensions={[javascript({ jsx: true })]}
           onChange={(value, viewUpdate) => {
-            setData({ ...data, code: value });
+            setCode(value);
           }}
         />
       </EditorCode>
       <EditorTest>
         <Title>TESTS</Title>
         <CodeMirror
-          value={data.test}
+          value={test}
           theme={oneDark}
+          placeholder="Los tests..."
           height="27vh"
           extensions={[javascript({ jsx: true })]}
           onChange={(value, viewUpdate) => {
-            setData({ ...data, test: value });
+            setTest(value);
           }}
         />
         <Executer

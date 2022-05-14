@@ -62,7 +62,6 @@ const ExerciseDetails = () => {
     if (typeof id === "string") {
       setEditable({ ...editable, _id: id });
     }
-    console.log("SOY USER: ", data);
   }, [data, id]);
 
   const handleOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
