@@ -172,7 +172,6 @@ export default function TheoricView() {
       <InfoContainer>
         <StyledTypography>{theoric.title}</StyledTypography>
 
-        {/*Subcontenedor con todo el teorico menos el titulo*/}
         <InfoSubContainer>
           <StyledTypography2>Por: {theoric.author}</StyledTypography2>
 

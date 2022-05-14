@@ -225,42 +225,48 @@ const ExerciseDetails = () => {
         </StyledBoxModal>
       </Modal>
 
-      <BoxExcerciceContainer>
-        <StyledTypography>{exercise.title}</StyledTypography>
+      <Box
+        style={{
+          display: "flex",
+          marginTop: "1vh",
+          height: "87.3vh",
+        }}
+      >
+        <BoxExcerciceContainer>
+          <StyledTypography>{exercise.title}</StyledTypography>
 
-        <CreatorNameText>By: {exercise.owner.user_name}</CreatorNameText>
+          <Box
+            style={{
+              display: "flex",
+              justifyContent: "flex-end",
+            }}
+          >
+            {exercise.tags.length > 0 &&
+              exercise.tags.map((tag: string) => {
+                return <StyledTypography3> {tag} </StyledTypography3>;
+              })}
+            <LocalOfferIcon
+              style={{
+                color: `${theme.palette.getContrastText(
+                  theme.palette.background.default
+                )}`,
+              }}
+            />
+          </Box>
 
-        <CreatedAt>
-          {exercise.createdAt.length > 0 && exercise.createdAt}
-        </CreatedAt>
+          <CreatorNameText>By: {exercise.owner.user_name}</CreatorNameText>
 
-        <StyledPaper elevation={8} style={{ marginTop: "0.5vh" }}>
-          Descripción: {exercise.description}
-        </StyledPaper>
+          <CreatedAt>
+            {exercise.createdAt.length > 0 && exercise.createdAt}
+          </CreatedAt>
 
-        <StyledPaper elevation={8} sx={{ marginBlock: "3rem" }}>
-          Código: {exercise.code.length > 0 && exercise.code}
-        </StyledPaper>
+          <StyledPaper elevation={8} style={{ marginTop: "0.5vh" }}>
+            Descripción: {exercise.description}
+          </StyledPaper>
+        </BoxExcerciceContainer>
 
-        <StyledPaper elevation={8} sx={{ marginBlock: "3rem" }}>
-          Test: {exercise.test && exercise.test}
-        </StyledPaper>
-
-        <Box
-          style={{
-            display: "flex",
-            marginTop: "2.5vh",
-            justifyContent: "flex-end",
-          }}
-        >
-          {exercise.tags.length > 0 &&
-            exercise.tags.map((tag: string) => {
-              return <StyledTypography3> {tag} </StyledTypography3>;
-            })}
-          <LocalOfferIcon />
-        </Box>
-      </BoxExcerciceContainer>
-      <MiEditor coding={exercise.code} testing={exercise.test} />
+        <MiEditor coding={exercise.code} testing={exercise.test} />
+      </Box>
     </StyledGrid>
   );
 };

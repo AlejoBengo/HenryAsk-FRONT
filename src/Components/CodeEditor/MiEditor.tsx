@@ -9,6 +9,7 @@ import {
   Executer,
   EditorsContainer,
 } from "./MyStyledEditor";
+import { testExercice } from "../../app/Utils/testing";
 
 interface Data {
   coding: string;
@@ -16,43 +17,50 @@ interface Data {
 }
 
 export default function MiEditor({ coding, testing }: Data) {
-  const [code, setCode] = useState("");
-  const [test, setTest] = useState("");
+  const [data, setData] = useState({ code: "", test: "" });
 
   useEffect(() => {
-    setCode(coding);
-    setTest(testing);
+    setData({ code: coding, test: testing });
   }, [coding, testing]);
 
-  const handleExecturor = (event: React.MouseEvent<HTMLButtonElement>) => {};
+  const handleExecturor = (event: React.MouseEvent<HTMLButtonElement>) => {
+    testExercice(data).then((res) => {
+      console.log(res);
+    });
+  };
 
   return (
     <EditorsContainer>
       <EditorCode>
         <Title>SOLUCIÓN</Title>
         <CodeMirror
-          value={code}
+          value={data.code}
           theme={oneDark}
-          height="30vh"
+          height="38vh"
           placeholder="Tu código..."
           extensions={[javascript({ jsx: true })]}
           onChange={(value, viewUpdate) => {
-            setCode(value);
+            setData({ ...data, code: value });
           }}
         />
       </EditorCode>
       <EditorTest>
         <Title>TESTS</Title>
         <CodeMirror
-          value={test}
+          value={data.test}
           theme={oneDark}
-          height="19vh"
+          height="27vh"
           extensions={[javascript({ jsx: true })]}
           onChange={(value, viewUpdate) => {
-            setTest(value);
+            setData({ ...data, test: value });
           }}
         />
-        <Executer variant="contained" size="small" onClick={handleExecturor}>
+        <Executer
+          style={{ marginBottom: "0.4vh" }}
+          variant="contained"
+          size="small"
+          onClick={handleExecturor}
+        >
           Ejecutar!
         </Executer>
       </EditorTest>
