@@ -12,6 +12,7 @@ import { useAppSelector, useAppDispatch } from "./app/hooks";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { createOptions } from "./Assets/theme/options";
 import { Box } from "@mui/material";
+import { useCookies } from "react-cookie";
 /*-----------IMPORT REDUCER-----------*/
 import { fetchUserByEmail } from "./app/Reducers/userSlice";
 /*-----------IMPORT COMPONENTS-----------*/
@@ -36,11 +37,13 @@ import Privacy from "./Views/PrivacyPolitics";
 import PanelAdm from "./Views/PanelAdm";
 import CreateExercise from "./Components/Creators/CreateExercise/CreateExercise";
 import Footer from "./Components/Home/Footer/FooterSenior";
-import Header from './Components/HomeSenior/Header';
+import Header from "./Components/HomeSenior/Header";
 import Search from "./Views/Search";
 import HenryCoinsRanking from "./Views/HenryCoinsRanking";
+import { toggleMode, setMode } from "./app/Reducers/modeReducer";
 
 const App = () => {
+  const [cookies, setCookie, removeCookie] = useCookies();
   const { isAuthenticated, user } = useAuth0();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -55,12 +58,22 @@ const App = () => {
   }, [user]);
 
   useEffect(() => {
+    let colorMode = cookies.colorMode;
+    if (colorMode) dispatch(setMode(colorMode));
+  }, [dispatch]);
+
+  useEffect(() => {
     if (isAuthenticated && DBUser.user_name === "") {
       navigate(`/Profile/${DBUser?._id}/Edit`);
     }
   }, [DBUser]);
 
   useEffect(() => {
+    setCookie("colorMode", mode, {
+      path: "/",
+      expires: new Date("December 31, 2038"),
+    });
+
     setTheme(createTheme(createOptions(mode)));
   }, [mode]);
 
@@ -73,8 +86,8 @@ const App = () => {
         sx={{
           minHeight: "100vh",
           p: 0,
-          paddingTop:"1rem",
-          paddingBottom:"3rem",
+          paddingTop: "1rem",
+          paddingBottom: "3rem",
         }}
       >
         <Routes>
