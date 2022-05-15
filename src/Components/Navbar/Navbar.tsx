@@ -67,7 +67,7 @@ const Navbar = () => {
   const handleCloseNavMenu = (
     event: React.MouseEvent<HTMLLIElement | HTMLButtonElement>
   ) => {
-    console.log("Hola", event);
+
     let target = event.target;
     // if (target.name === "Perfil") {
     // setAnchorElNav(null);

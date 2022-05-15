@@ -191,7 +191,7 @@ export default function Activity() {
                                         alignItems:'center'}}>
                                             <Avatar
                                             alt={userProfile.first_name}
-                                            src={userProfile.profile_picture.length > 0
+                                            src={userProfile.profile_picture?.length > 0
                                             ? userProfile.profile_picture
                                             : userProfile.avatar
                                             ? userProfile.avatar
@@ -268,7 +268,7 @@ export default function Activity() {
                                         alignItems: 'center'}}>
                                             <Avatar
                                             alt={userProfile.first_name}
-                                            src={userProfile.profile_picture.length > 0
+                                            src={userProfile.profile_picture?.length > 0
                                             ? userProfile.profile_picture
                                             : userProfile.avatar
                                             ? userProfile.avatar
