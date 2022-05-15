@@ -75,6 +75,10 @@ export const EditProfile = () => {
       });
   };
 
+  const handleCancel = (event: React.MouseEvent<HTMLButtonElement>) => {
+    navigate(`/Profile/${id}`);
+  };
+
   const migajas = [
     <Link
       to="/"
@@ -331,6 +335,19 @@ export const EditProfile = () => {
               }
             >
               Guardar
+            </Button>
+            <Button
+              color="primary"
+              variant="contained"
+              onClick={handleCancel}
+              style={{ marginLeft: "1.5vw" }}
+              disabled={
+                userInfo.first_name === "" ||
+                userInfo.last_name === "" ||
+                userInfo.user_name === ""
+              }
+            >
+              Cancelar
             </Button>
           </Grid>
         </Grid>
