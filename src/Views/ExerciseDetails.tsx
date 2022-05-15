@@ -189,7 +189,7 @@ const ExerciseDetails = () => {
             variant="contained"
             onClick={handleOpen}
           >
-            Close
+            Cerrar
           </Button>
           <TextField
             style={{ width: "45vw", marginLeft: "1vh" }}
@@ -219,7 +219,7 @@ const ExerciseDetails = () => {
             variant="contained"
             onClick={handleSaver}
           >
-            Save
+            Guardar
           </Button>
         </StyledBoxModal>
       </Modal>
