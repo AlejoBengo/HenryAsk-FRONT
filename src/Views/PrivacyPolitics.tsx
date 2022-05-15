@@ -1,8 +1,16 @@
 import * as React from "react";
-import { Container, Box, Typography, Link, Grid } from "@mui/material";
+import {
+  Container,
+  Box,
+  Typography,
+  Link,
+  Grid,
+  Breadcrumbs,
+} from "@mui/material";
 import { useTheme } from "@mui/material";
 import Rocket from "../Components/AboutUs/Img/rocket.png";
-
+import { Link as LinkR } from "react-router-dom";
+import { StackMigajas } from "../Components/Style/StyledComponents";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
@@ -10,9 +18,37 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 export default function Politics() {
   const theme = useTheme();
-
+  const migajas = [
+    <LinkR
+      to="/"
+      style={{
+        fontFamily: "Helvetica",
+        textDecoration: "none",
+        color: `${theme.palette.getContrastText(
+          theme.palette.background.default
+        )}`,
+      }}
+    >
+      HOME
+    </LinkR>,
+    <LinkR
+      to="/privacy"
+      style={{
+        fontFamily: "Helvetica",
+        textDecoration: "none",
+        color: `${theme.palette.getContrastText(
+          theme.palette.background.default
+        )}`,
+      }}
+    >
+      POLÍTICAS DE PRIVACIDAD
+    </LinkR>,
+  ];
   return (
     <Box sx={{ width: "100%", padding: "0" }}>
+      <StackMigajas spacing={2}>
+        <Breadcrumbs separator="›">{migajas}</Breadcrumbs>
+      </StackMigajas>
       <Box
         sx={{
           display: "flex",

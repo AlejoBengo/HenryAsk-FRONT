@@ -1,6 +1,6 @@
 import * as React from "react";
 import emailjs from "emailjs-com";
-import { Container, Box, Typography, Input } from "@mui/material";
+import { Container, Box, Typography, Input, Breadcrumbs } from "@mui/material";
 import TextareaAutosize from "@mui/material/TextareaAutosize";
 import Button from "@mui/material/Button";
 import { useTheme } from "@mui/material";
@@ -8,6 +8,8 @@ import Rocket from "../Components/AboutUs/Img/rocket.png";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
+import { Link } from "react-router-dom";
+import { StackMigajas } from "../Components/Style/StyledComponents";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 export default function Qa() {
@@ -33,9 +35,37 @@ export default function Qa() {
       );
     e.target.reset();
   }
-
+  const migajas = [
+    <Link
+      to="/"
+      style={{
+        fontFamily: "Helvetica",
+        textDecoration: "none",
+        color: `${theme.palette.getContrastText(
+          theme.palette.background.default
+        )}`,
+      }}
+    >
+      HOME
+    </Link>,
+    <Link
+      to="/qya"
+      style={{
+        fontFamily: "Helvetica",
+        textDecoration: "none",
+        color: `${theme.palette.getContrastText(
+          theme.palette.background.default
+        )}`,
+      }}
+    >
+      PREGUNTAS FRECUENTES
+    </Link>,
+  ];
   return (
     <Box sx={{ width: "100%", padding: "0" }}>
+      <StackMigajas spacing={2}>
+        <Breadcrumbs separator="›">{migajas}</Breadcrumbs>
+      </StackMigajas>
       <Box
         sx={{
           display: "flex",
