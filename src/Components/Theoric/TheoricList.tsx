@@ -5,7 +5,7 @@ import { useAppSelector, useAppDispatch } from "../../app/hooks";
 import { fetchAllTheorics } from "../../app/Reducers/theoricSlice";
 import { fetchAllTheoricsReducer } from "../../app/Reducers/theoricSlice";
 /*-----------IMPORT MUI & CSS-----------*/
-import { List, ListItemButton, Collapse } from "@mui/material";
+import { List, ListItemButton, Collapse, Typography } from "@mui/material";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import { StyledSpan } from "./StyledComponents";
 import { LinkDom } from "../Style/StyledComponents";
@@ -35,7 +35,11 @@ export default function TheoricList() {
         sx={{ width: "100%", overflow: "hidden" }}
         style={{ fontFamily: "Helvetica", display: "flex" }}
       >
-        <StyledSpan>MATERIAL TEÓRICO</StyledSpan>
+        <StyledSpan>
+          <Typography style={{ fontWeight: "bold", letterSpacing: "0.1vw" }}>
+            MATERIAL TEÓRICO
+          </Typography>
+        </StyledSpan>
         {open ? (
           <ExpandLess sx={{ width: "35%" }} />
         ) : (

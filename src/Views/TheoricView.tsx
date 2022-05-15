@@ -172,7 +172,6 @@ export default function TheoricView() {
       <InfoContainer>
         <StyledTypography>{theoric.title}</StyledTypography>
 
-        {/*Subcontenedor con todo el teorico menos el titulo*/}
         <InfoSubContainer>
           <StyledTypography2>Por: {theoric.author}</StyledTypography2>
 
@@ -228,7 +227,7 @@ export default function TheoricView() {
             variant="contained"
             onClick={handleOpen}
           >
-            Close
+            Cerrar
           </Button>
           <TextField
             style={{ width: "45vw", marginLeft: "1vh" }}
@@ -258,7 +257,7 @@ export default function TheoricView() {
             variant="contained"
             onClick={handleSaver}
           >
-            Save
+            Guardar
           </Button>
         </StyledBoxModal>
       </Modal>

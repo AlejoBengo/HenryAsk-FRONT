@@ -13,17 +13,18 @@ import { LinkDom } from "../Style/StyledComponents";
 const ExerciseList = () => {
   const [open, setOpen] = useState<boolean>(false);
   let [allExercisesLocal, setAllExercisesLocal] = useState<any>([]);
-  const { exercises } = useAppSelector((state) => state.exercises)
+  const { exercises } = useAppSelector((state) => state.exercises);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch( getAllExercises() )
-    exercises?.length && setAllExercisesLocal(allExercisesLocal = exercises )
-  }, []);
+    dispatch(getAllExercises());
+    exercises?.length && setAllExercisesLocal((allExercisesLocal = exercises));
+  }, [exercises, dispatch]);
 
   const handleOpen = (event: React.MouseEvent<HTMLDivElement>) => {
     setOpen(!open);
   };
+
   return (
     <List sx={{ width: "100%" }}>
       <ListItemButton
@@ -34,7 +35,7 @@ const ExerciseList = () => {
         <StyledSpan>MATERIAL PRÁCTICO</StyledSpan>
         {open ? (
           <ExpandLess sx={{ width: "35%" }} />
-          ) : (
+        ) : (
           <ExpandMore sx={{ width: "35%" }} />
         )}
       </ListItemButton>
@@ -61,5 +62,5 @@ const ExerciseList = () => {
       })}
     </List>
   );
-}
+};
 export default ExerciseList;

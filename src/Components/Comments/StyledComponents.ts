@@ -9,7 +9,6 @@ export const BoxButtons = styled(Box)`
   width: 5vw;
   display: flex;
   justify-content: space-between;
-  }
 `;
 
 export const BoxModalDelete = styled(Box)`
