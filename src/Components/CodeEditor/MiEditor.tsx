@@ -17,8 +17,8 @@ interface Data {
 }
 
 export default function MiEditor({ coding, testing }: Data) {
-  const [code, setCode] = useState("");
-  const [test, setTest] = useState("");
+  const [code, setCode] = useState<string>("");
+  const [test, setTest] = useState<string>("");
 
   useEffect(() => {
     setCode(coding);

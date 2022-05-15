@@ -19,11 +19,12 @@ const ExerciseList = () => {
   useEffect(() => {
     dispatch(getAllExercises());
     exercises?.length && setAllExercisesLocal((allExercisesLocal = exercises));
-  }, []);
+  }, [exercises, dispatch]);
 
   const handleOpen = (event: React.MouseEvent<HTMLDivElement>) => {
     setOpen(!open);
   };
+
   return (
     <List sx={{ width: "100%" }}>
       <ListItemButton

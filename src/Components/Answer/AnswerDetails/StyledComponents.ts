@@ -83,7 +83,11 @@ export const BoxModal = styled(Box)(
     height: 35vh;
     margin-top: 15vh;
     margin-left: 20vw;
-    background-color: #fff;
+    background-color: ${
+      theme.palette.mode === "light"
+        ? theme.palette.secondary.main
+        : theme.palette.info.main
+    };
     display: flex;
     flex-direction: column;
     justify-content: space-between;

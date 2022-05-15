@@ -421,30 +421,6 @@ export const AnswerDetails = ({
       </Grid>
 
       <StyledDiv>
-        {/*  <Typography
-          variant="caption"
-          align="left"
-          display={"flex"}
-          alignItems="center"
-        >
-          Respondido por
-          <UserShort user={answerData.owner} />
-        </Typography> */}
-
-        {/*  {user._id === answerData.owner._id && (
-          <BotonEditar onClick={handleOpenEdit}>Editar</BotonEditar>
-        )}
-        {(user._id === answerData.owner._id || user.role > 3) && (
-          <BotonBorrar
-            onClick={handleOpenDelete}
-            color="error"
-            variant="contained"
-          >
-            <DeleteIcon fontSize="small" />
-          </BotonBorrar>
-        )}
-
-        )} */}
         <Modal open={openEdit}>
           <BoxModal>
             <BotonCerrar
@@ -461,9 +437,12 @@ export const AnswerDetails = ({
                 onChange={handleInputChange}
               />
             </ModalTextFieldContainer>
-            <BotonGuardar onClick={handleSaver}>Guardar</BotonGuardar>
+            <BotonGuardar variant="contained" onClick={handleSaver}>
+              Guardar
+            </BotonGuardar>
           </BoxModal>
         </Modal>
+
         <Modal open={openDelete}>
           <BoxModal2>
             <BotonCerrar

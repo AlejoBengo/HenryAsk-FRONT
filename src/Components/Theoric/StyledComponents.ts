@@ -6,6 +6,7 @@ import { styled } from "@mui/material/styles";
 
 export const StyledSpan = styled("div")`
   width: 200px;
+  font-weight: bold;
 `;
 
 export const StyledDiv = styled("div")`
