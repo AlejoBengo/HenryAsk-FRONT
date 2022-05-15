@@ -1,7 +1,7 @@
 /*--------------------------------------------------------*/
 /*-----------IMPORT UTILITIES-----------*/
 import { styled } from "@mui/system";
-import { Paper, TextField, Box, Select, Button , Stack } from "@mui/material";
+import { Paper, TextField, Box, Select, Button, Stack } from "@mui/material";
 import LateralItem from "../Navbar/LateralMenu/LateralItem";
 import { Link } from "react-router-dom";
 /*--------------------------------------------------------*/
@@ -19,9 +19,8 @@ export const LinkDom = styled(Link)`
   &:visited {
     color: unset;
   }
-  &:hover 
-  {
-    text-decoration: underline
+  &:hover {
+    text-decoration: underline;
   }
 `;
 
@@ -51,19 +50,19 @@ transition:0.2s;
   background-color:rgba(0, 0, 0, 0.8);
 }
 `);
-export const SpanVerMas=styled("span")(`
+export const SpanVerMas = styled("span")(`
 width:100%;
 height:100%;
 display:flex;
 justify-content:center;
 align-items:center;
-`)
+`);
 export const ButtonVerMas = styled(Button)(`
 text-transform:none;
 padding:10px;
 border-radius:15px;
 position:relative;
-`)
+`);
 
 export const StyledPaper = styled(Paper)`
   display: flex;
@@ -131,7 +130,8 @@ export const StyledButton2 = styled("button")(`
     cursor: pointer;
     `);
 
-export const StyledBoxModal = styled(Box)(({theme})=>`
+export const StyledBoxModal = styled(Box)(
+  ({ theme }) => `
   background-color: ${theme.palette.mode === "dark" ? "#000000" : "#fff"};
   width: 75vw;
   height: 55vh;
@@ -141,7 +141,8 @@ export const StyledBoxModal = styled(Box)(({theme})=>`
   flex-direction: column;
   justify-content: space-around;
   align-items: flex-start;
-`);
+`
+);
 
 export const StyledBoxChoosed = styled(Box)`
   width: 30vw;
@@ -151,12 +152,14 @@ export const StyledBoxChoosed = styled(Box)`
   justify-content: space-evenly;
 `;
 
-export const StyledSelect = styled(Select)(({theme}) =>`
+export const StyledSelect = styled(Select)(
+  ({ theme }) => `
 background-color: ${theme.palette.mode === "dark" ? "#000000" : "#fff"};
 width: 15vw;
 family-font: helvetica;
 margin-left: 0.5vw;
-`);
+`
+);
 
 export const StyledDivButtons = styled("div")(`
     width: 15vw;
@@ -182,8 +185,13 @@ export const StyledDiv = styled("div")(`
     }
     `);
 
-export const StyledBoxModal2 = styled(Box)(`
-  background-color: #fff;
+export const StyledBoxModal2 = styled(Box)(
+  ({ theme }) => `
+background-color: ${
+    theme.palette.mode === "light"
+      ? theme.palette.secondary.main
+      : theme.palette.info.main
+  };
   margin-top: 20vh;
   margin-left: 25vw;
   height: 30vh;
@@ -192,7 +200,8 @@ export const StyledBoxModal2 = styled(Box)(`
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-`);
+`
+);
 
 //--------------style Code Editor
 
