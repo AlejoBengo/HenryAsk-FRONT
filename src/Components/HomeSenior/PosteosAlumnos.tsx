@@ -42,17 +42,19 @@ export default function PosteosAlumnos(){
     console.log(post)
 
     post.map((el: object | any) => {
-        if(userRole.role === 2) {
-            if (el.owner && el.owner.role === 2) {
-              postAlumnos.push(el);
-            }
-        } else if(userRole.role === 1) {
-            if(el.owner && el.owner.role === 1) {
-                postAlumnos.push(el);
-            }
-        } else if(userRole.role > 3){
-            if(el.owner.role > 1 && el.owner.role < 4){
-                postAlumnos.push(el);
+        if(el.owner){
+            if(userRole.role === 2) {
+                if (el.owner && el.owner.role === 2) {
+                  postAlumnos.push(el);
+                }
+            } else if(userRole.role === 1) {
+                if(el.owner && el.owner.role === 1) {
+                    postAlumnos.push(el);
+                }
+            } else if(userRole.role > 3){
+                if(el.owner.role > 1 && el.owner.role < 4){
+                    postAlumnos.push(el);
+                }
             }
         }
         return el;

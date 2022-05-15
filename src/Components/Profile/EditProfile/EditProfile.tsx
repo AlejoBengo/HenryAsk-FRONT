@@ -24,7 +24,10 @@ import {
   Paper,
   Button,
   Container,
+  IconButton
 } from "@mui/material";
+import BuyMeACoffe from "./BuyMeACoffe";
+import HelpIcon from '@mui/icons-material/Help';
 /*--------------------------------------------------------*/
 
 export const EditProfile = () => {
@@ -45,7 +48,6 @@ export const EditProfile = () => {
   //  EJEMPLO DIALOGO ACA SIGUE EN LA LINEA 57
   const [openDialog, setOpenDialog] = useState(false);
   const [modalState, setModalState] = useState("Enviando...");
-
   // ------------------------//
 
   const handleInputChange = (
@@ -74,6 +76,16 @@ export const EditProfile = () => {
         //manejos de errores tambien en el front
       });
   };
+
+  //Modal leer mas buy me coffe
+  let [openInfo , setOpenInfo] = React.useState(false);
+  const handleCloseInfo = () => {
+    setOpenInfo(false);
+  }
+  const handleOpenInfo = () => {
+    setOpenInfo(true);
+  }
+  // ====== / 
 
   const migajas = [
     <Link
@@ -300,6 +312,26 @@ export const EditProfile = () => {
               onChange={(event) => handleInputChange(event)}
             ></StyledTextField>
           </Grid>
+          {
+            user.role >= 2 ? 
+            <>
+          <Grid item xs={11} sm={11}>
+            <StyledTextField
+              variant="filled"
+              label="Link Buy me a Coffee"
+              name="coffee"
+              value={userInfo.coffee}
+              onChange={(event) => handleInputChange(event)}/>
+          </Grid>
+          <Grid item xs={1}>
+          <BuyMeACoffe handleCloseInfo={handleCloseInfo} openInfo={openInfo} />
+             <IconButton onClick={handleOpenInfo} aria-label="delete" size="large" color="info">
+              <HelpIcon fontSize="inherit" />
+            </IconButton>
+           </Grid>
+           </> : null
+          }
+          
           <Grid item xs={11} sm={12}>
             <StyledTextField
               variant="filled"
