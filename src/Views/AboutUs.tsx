@@ -59,7 +59,7 @@ export default function AboutUs() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
-          alignItems: "center",
+          alignItems: "center",          
         }}
       >
         <Container
@@ -83,9 +83,7 @@ export default function AboutUs() {
           >
             <img src={Rocket} alt="" height="60em" width="60em" />
             <Typography
-              color={theme.palette.getContrastText(
-                theme.palette.background.default
-              )}
+              sx={{color:"title.main"}}
               variant="h2"
               component="h1"
               gutterBottom
@@ -101,24 +99,24 @@ export default function AboutUs() {
             sx={{
               height: "100%",
               width: "70%",
-              backgroundColor: "black",
-              color: "rgb(255, 255, 1)",
+              backgroundColor: "black",              
               fontWeight: "bold",
               padding: "1em",
               borderRadius: "1em",
+              border: "2px solid",
+              borderColor: "border.main",
             }}
           >
-            <Typography variant="body2" color="rgb(255, 255, 1)">
+            <Typography variant="body2" color="white">
               Nuestra propuesta es una aplicación web diseñada para que la
               comunidad pueda solventar sus dudas, practicar y ayudar a sus
               compañeros con el fin de fortalecer la solidaridad y participación
               de los alumnos.
             </Typography>
+          </Box>
 
             <Typography
-              color={theme.palette.getContrastText(
-                theme.palette.background.default
-              )}
+              sx={{color:"title.main"}}
               variant="h3"
               component="h2"
               gutterBottom
@@ -132,15 +130,17 @@ export default function AboutUs() {
             <Box
               sx={{
                 height: "100%",
-                width: "100%",
-                backgroundColor: "black",
-                color: "rgb(255, 255, 1)",
+                width: "70%",
+                backgroundColor: "black",                
                 fontWeight: "bold",
                 padding: "1em",
                 borderRadius: "1em",
+                border: "2px solid",
+                borderColor: "border.main",
               }}
             >
               <Typography
+                color="white"
                 variant="h4"
                 component="h3"
                 gutterBottom
@@ -159,6 +159,7 @@ export default function AboutUs() {
                   target="_blank"
                 >
                   <Grid
+                    padding="2em"
                     container
                     spacing={2}
                     columns={10}
@@ -175,12 +176,13 @@ export default function AboutUs() {
                           width: "200px",
                           height: "200px",
                           border: "2px solid",
-                          borderColor: "primary.mein",
+                          borderColor: "primary.main",
                         }}
                       />
                     </Grid>
                     <Grid item xs={6}>
                       <Typography
+                        color="yellow"
                         variant="h5"
                         component="h4"
                         gutterBottom
@@ -191,13 +193,12 @@ export default function AboutUs() {
                       </Typography>
                       <Typography
                         variant="body2"
-                        color="text.secondary"
+                        color="white"
                         component="div"
                         sx={{
                           textAlign: "center",
                           marginTop: "1rem",
-                          marginBottom: "1rem",
-                          color: "rgb(255, 255, 1)",
+                          marginBottom: "1rem",                          
                         }}
                       >
                         Full-Stack Developer, en un proceso de constante
@@ -221,6 +222,7 @@ export default function AboutUs() {
                   target="_blank"
                 >
                   <Grid
+                    padding="2em"
                     container
                     spacing={2}
                     columns={10}
@@ -237,30 +239,30 @@ export default function AboutUs() {
                           width: "200px",
                           height: "200px",
                           border: "2px solid",
-                          borderColor: "primary.mein",
+                          borderColor: "primary.main",                          
                         }}
                       />
                     </Grid>
 
                     <Grid item xs={6}>
                       <Typography
+                        color= "yellow"
                         variant="h5"
                         component="h4"
                         gutterBottom
                         display="flex"
-                        justifyContent="center"
+                        justifyContent="center"                        
                       >
                         Daiana Agustina Grillia
                       </Typography>
                       <Typography
                         variant="body2"
-                        color="text.secondary"
+                        color="white"
                         component="div"
                         sx={{
                           textAlign: "center",
                           marginTop: "1rem",
-                          marginBottom: "0.5rem",
-                          color: "rgb(255, 255, 1)",
+                          marginBottom: "0.5rem",                          
                         }}
                       >
                         Como Full-Stack sé desenvolverme tanto en Front-end como
@@ -279,6 +281,7 @@ export default function AboutUs() {
               {/* ----------------------------------------------------- */}
 
               <Typography
+                color="white"
                 variant="h4"
                 component="h3"
                 gutterBottom
@@ -297,6 +300,7 @@ export default function AboutUs() {
                   target="_blank"
                 >
                   <Grid
+                    padding="2em"
                     container
                     spacing={2}
                     columns={10}
@@ -313,13 +317,14 @@ export default function AboutUs() {
                           width: "200px",
                           height: "200px",
                           border: "2px solid",
-                          borderColor: "primary.mein",
+                          borderColor: "primary.main",
                         }}
                       />
                     </Grid>
 
                     <Grid item xs={6}>
                       <Typography
+                        color="yellow"
                         variant="h5"
                         component="h4"
                         gutterBottom
@@ -330,13 +335,12 @@ export default function AboutUs() {
                       </Typography>
                       <Typography
                         variant="body2"
-                        color="text.secondary"
+                        color="white"
                         component="div"
                         sx={{
                           textAlign: "center",
                           marginTop: "1rem",
-                          marginBottom: "0.5rem",
-                          color: "rgb(255, 255, 1)",
+                          marginBottom: "0.5rem",                          
                         }}
                       >
                         Actualmente estudio el segundo semestre de la carrera de
@@ -359,6 +363,7 @@ export default function AboutUs() {
                   target="_blank"
                 >
                   <Grid
+                    padding="2em"
                     container
                     spacing={2}
                     columns={10}
@@ -375,13 +380,14 @@ export default function AboutUs() {
                           width: "200px",
                           height: "200px",
                           border: "2px solid",
-                          borderColor: "primary.mein",
+                          borderColor: "primary.main",
                         }}
                       />
                     </Grid>
 
                     <Grid item xs={6}>
                       <Typography
+                        color="yellow"
                         variant="h5"
                         component="h4"
                         gutterBottom
@@ -391,14 +397,13 @@ export default function AboutUs() {
                         Marko Ayala
                       </Typography>
                       <Typography
-                        variant="body2"
-                        color="text.secondary"
+                        color="white"
+                        variant="body2"                        
                         component="div"
                         sx={{
                           textAlign: "center",
                           marginTop: "1rem",
-                          marginBottom: "0.5rem",
-                          color: "rgb(255, 255, 1)",
+                          marginBottom: "0.5rem",                          
                         }}
                       >
                         Mi actual meta es graduarme como Desarrollador web Full
@@ -414,6 +419,7 @@ export default function AboutUs() {
 
               {/* -------------------------------------- */}
               <Typography
+                color="white"
                 variant="h4"
                 component="h3"
                 gutterBottom
@@ -432,6 +438,7 @@ export default function AboutUs() {
                   target="_blank"
                 >
                   <Grid
+                    padding="2em"
                     container
                     spacing={2}
                     columns={10}
@@ -448,12 +455,13 @@ export default function AboutUs() {
                           width: "200px",
                           height: "200px",
                           border: "2px solid",
-                          borderColor: "primary.mein",
+                          borderColor: "primary.main",
                         }}
                       />
                     </Grid>
                     <Grid item xs={6}>
                       <Typography
+                        color="yellow"
                         variant="h5"
                         component="h4"
                         gutterBottom
@@ -464,13 +472,12 @@ export default function AboutUs() {
                       </Typography>
                       <Typography
                         variant="body2"
-                        color="text.secondary"
+                        color="white"
                         component="div"
                         sx={{
                           textAlign: "center",
                           marginTop: "1rem",
-                          marginBottom: "0.5rem",
-                          color: "rgb(255, 255, 1)",
+                          marginBottom: "0.5rem",                          
                         }}
                       >
                         El liderazgo es una característica esencial en mí,
@@ -495,6 +502,7 @@ export default function AboutUs() {
                   target="_blank"
                 >
                   <Grid
+                    padding="2em"                  
                     container
                     spacing={2}
                     columns={10}
@@ -511,12 +519,13 @@ export default function AboutUs() {
                           width: "200px",
                           height: "200px",
                           border: "2px solid",
-                          borderColor: "primary.mein",
+                          borderColor: "primary.main",
                         }}
                       />
                     </Grid>
                     <Grid item xs={6}>
                       <Typography
+                        color="yellow"
                         variant="h5"
                         component="h4"
                         gutterBottom
@@ -527,13 +536,12 @@ export default function AboutUs() {
                       </Typography>
                       <Typography
                         variant="body2"
-                        color="text.secondary"
+                        color="white"
                         component="div"
                         sx={{
                           textAlign: "center",
                           marginTop: "1rem",
-                          marginBottom: "0.5rem",
-                          color: "rgb(255, 255, 1)",
+                          marginBottom: "0.5rem",                          
                         }}
                       >
                         Me apasionan profundamente las técnicas de aprendizaje,
@@ -548,7 +556,7 @@ export default function AboutUs() {
                 </Link>
               </CardActionArea>
             </Box>
-          </Box>
+          
         </Container>
       </Box>
     </Box>

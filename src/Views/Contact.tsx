@@ -99,9 +99,7 @@ export default function Careers() {
           >
             <img src={Rocket} alt="" height="60em" width="60em" />
             <Typography
-              color={theme.palette.getContrastText(
-                theme.palette.background.default
-              )}
+              sx={{color: "title.main"}}
               variant="h2"
               component="h1"
               gutterBottom
@@ -113,9 +111,7 @@ export default function Careers() {
             <img src={Rocket} alt="" height="60em" width="60em" />
           </Box>
           <Typography
-            color={theme.palette.getContrastText(
-              theme.palette.background.default
-            )}
+            sx={{color: "title.main"}}
             variant="h4"
             component="h3"
             gutterBottom
@@ -135,7 +131,7 @@ export default function Careers() {
               justifyContent: "center",
               alignItems: "center",
               border: "2px solid",
-              borderColor: "primary.mein",
+              borderColor: "border.main",
               borderRadius: "20px",
               padding: "10px",
             }}
@@ -147,7 +143,8 @@ export default function Careers() {
             <Input type="text" placeholder="Asunto" name="user_subject" />
 
             <TextareaAutosize
-              style={{ marginTop: "20px", width: 400, height: 300 }}
+              style={{ marginTop: "20px", width: 400, height: 300, border: "2px solid",
+              borderColor: "border.main",}}
               id=""
               placeholder="Tu mensaje"
               name="user_message"
@@ -158,6 +155,8 @@ export default function Careers() {
                 backgroundColor: "rgb(255, 255, 1)",
                 color: "black",
                 fontWeight: "bold",
+                border: "2px solid",
+                borderColor: "border.main",
               }}
               type="submit"
               value="Send Message"

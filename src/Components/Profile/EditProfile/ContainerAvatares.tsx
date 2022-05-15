@@ -19,7 +19,8 @@ export default function ContainerAvatares(props:any) {
     <ImageList sx={{ width: "34rem", height: "34rem" , overflow:"hidden"}} cols={3} rowHeight={190}>
       {itemData.map((item) => (
 
-        <Button onClick={(e) =>(handleClick(item.img), handleClose())} value={item.img} sx={{padding:"0px" , margin:"0px" , height:"auto"}}>
+        <Button onClick={(e) =>(handleClick(item.img), handleClose())} value={item.img} sx={{padding:"0px" , margin:"0px" , height:"auto", border: "1px solid", 
+        borderColor: "border.main"}}>
           <Img
             src={`${item.img}?w=164&h=164&fit=crop&auto=format`}
             srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
