@@ -64,9 +64,7 @@ export default function About() {
           maxWidth="sm"
         >
           <Typography
-            color={theme.palette.getContrastText(
-              theme.palette.background.default
-            )}
+            sx={{color:"title.main"}}
             variant="h2"
             component="h1"
             gutterBottom
@@ -88,7 +86,7 @@ export default function About() {
               borderRadius: "1em",
             }}
           >
-            <Typography variant="body2" color="rgb(255, 255, 1)">
+            <Typography variant="body2" color="white">
               Nuestra propuesta es una aplicación web diseñada para que la
               comunidad pueda solventar sus dudas, practicar y ayudar a sus
               compañeros con el fin de fortalecer la solidaridad y participación
@@ -97,9 +95,7 @@ export default function About() {
           </Box>
 
           <Typography
-            color={theme.palette.getContrastText(
-              theme.palette.background.default
-            )}
+            sx={{color:"title.main"}}
             variant="h6"
             component="h5"
             gutterBottom
@@ -121,7 +117,7 @@ export default function About() {
               borderRadius: "1em",
             }}
           >
-            <Typography variant="body2" color="rgb(255, 255, 1)">
+            <Typography variant="body2" color="white">
               • Sección con material teórico y práctico organizado según el
               módulo al que se pertenezca. En cuanto a lo primero, se presentará
               todo el material brindado en Henry, y para lo segundo, los
@@ -141,7 +137,7 @@ export default function About() {
               borderRadius: "1em",
             }}
           >
-            <Typography variant="body2" color="rgb(255, 255, 1)">
+            <Typography variant="body2" color="white">
               • Sección de foro donde cada estudiante podrá publicar sus
               inquietudes e interrogantes y, a su vez, el resto de la comunidad
               será capaz de aportar respuestas y debatir sobre las soluciones ya
@@ -162,7 +158,7 @@ export default function About() {
               borderRadius: "1em",
             }}
           >
-            <Typography variant="body2" color="rgb(255, 255, 1)">
+            <Typography variant="body2" color="white">
               • Sección de ranking de reconocimientos. Los estudiantes con una
               participación activa y certera serán reconocidos por sus
               compañeros, otorgándoles HenryCoins (un sistema que podría ser
@@ -182,7 +178,7 @@ export default function About() {
               borderRadius: "1em",
             }}
           >
-            <Typography variant="body2" color="rgb(255, 255, 1)">
+            <Typography variant="body2" color="white">
               • Sección con enlaces a páginas brindadas tanto por alumnos como
               por instructores, que sirvan como soporte para acrecentar el
               conocimiento (videos, contenido teórico, material práctico, etc.).
@@ -201,7 +197,7 @@ export default function About() {
               borderRadius: "1em",
             }}
           >
-            <Typography variant="body2" color="rgb(255, 255, 1)">
+            <Typography variant="body2" color="white">
               • Sección de perfiles. Cada usuario podrá acceder a su propio
               perfil y al de sus compañeros, donde podrá ver su información
               personal pública, los HenryCoins que tiene y su registro de
@@ -221,7 +217,7 @@ export default function About() {
               borderRadius: "1em",
             }}
           >
-            <Typography variant="body2" color="rgb(255, 255, 1)">
+            <Typography variant="body2" color="white">
               Si bien Slack es un espacio donde la comunidad puede intercambiar
               información, preguntar y responder, organizar reuniones, entre
               otras cosas, el problema es que no existe ningún tipo de filtro
@@ -242,7 +238,7 @@ export default function About() {
               borderRadius: "1em",
             }}
           >
-            <Typography variant="body2" color="rgb(255, 255, 1)">
+            <Typography variant="body2" color="white">
               Nuestra propuesta sirve como una solución a este dilema, aportando
               un espacio para modularizar la información disponible y que se le
               ofrece a la comunidad de Henry como una herramienta auxiliar para

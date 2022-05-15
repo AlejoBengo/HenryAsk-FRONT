@@ -84,12 +84,13 @@ const App = () => {
       <Header />
       <Navbar />
       <Box
-        bgcolor={theme.palette.background.default}
+        
         sx={{
           minHeight: "100vh",
           p: 0,
           paddingTop: "1rem",
           paddingBottom: "3rem",
+          backgroundColor:"background.main",
         }}
       >
         <Routes>
