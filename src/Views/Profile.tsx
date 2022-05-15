@@ -1,6 +1,6 @@
 /*--------------------------------------------------------*/
 import Activity from "../Components/Profile/Activity";
-import bannerDefault from '../Components/Profile/bannerDefault/bannerDefault.jpg';
+import bannerDefault from "../Components/Profile/bannerDefault/bannerDefault.jpg";
 /*-----------IMPORT UTILITIES-----------*/
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
@@ -112,7 +112,7 @@ export default function Profile() {
         )}`,
       }}
     >
-      PROFILE
+      PERFIL
     </LinkR>,
   ];
 
@@ -239,7 +239,7 @@ export default function Profile() {
         </Card>
       </Container>
       <Container>
-          <Activity />
+        <Activity />
       </Container>
     </>
   );

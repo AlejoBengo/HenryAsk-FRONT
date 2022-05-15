@@ -6,6 +6,7 @@ import { styled } from "@mui/material/styles";
 
 export const StyledSpan = styled("div")`
   width: 200px;
+  font-weight: bold;
 `;
 
 export const StyledDiv = styled("div")`
@@ -54,14 +55,16 @@ export const StyledTypography2 = styled(Typography)(
 `
 );
 
-export const StyledTypography3 = styled(Typography)`
+export const StyledTypography3 = styled(Typography)(
+  ({ theme }) => `
   font-family: helvetica;
-  color: black;
+  color: ${theme.palette.getContrastText(theme.palette.background.default)};
   text-transform: uppercase;
   font-size: 2vh;
   font-weight: bold;
   margin-right: 1vh;
-`;
+`
+);
 
 export const StyledPaper = styled(Paper)(
   ({ theme }) => `

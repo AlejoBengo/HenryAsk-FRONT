@@ -43,6 +43,7 @@ import HenryCoinsRanking from "./Views/HenryCoinsRanking";
 import { toggleMode, setMode } from "./app/Reducers/modeReducer";
 import ForumNews from "./Views/ForumNews";
 
+
 const App = () => {
   const [cookies, setCookie, removeCookie] = useCookies();
   const { isAuthenticated, user } = useAuth0();
@@ -92,7 +93,7 @@ const App = () => {
         }}
       >
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home />} />          
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/qya" element={<Qa />} />
           <Route path="/contact" element={<Contact />} />
