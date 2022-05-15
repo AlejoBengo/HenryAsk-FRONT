@@ -45,7 +45,7 @@ export default function AboutUs() {
         )}`,
       }}
     >
-      SOBRE NOSOTR@S
+      SOBRE NOSOTROS
     </LinkR>,
   ];
 
@@ -129,7 +129,6 @@ export default function AboutUs() {
             </Typography>
 
             {/* --------------------------------------- */}
-
             <Box
               sx={{
                 height: "100%",
@@ -290,7 +289,6 @@ export default function AboutUs() {
               </Typography>
 
               {/* ------------------------Saul----------------------------- */}
-
               <CardActionArea>
                 <Link
                   href="https://www.linkedin.com/in/saul-paez1004"
