@@ -46,7 +46,7 @@ const togglePalette = (mode: string): object => {
         main: "#000000",
       },
       error: {
-        main: "#A10702",
+        main: "#E61D16",
       },
       success: {
         main: "#00CC66",
