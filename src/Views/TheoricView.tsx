@@ -158,7 +158,7 @@ export default function TheoricView() {
       <StackMigajas spacing={2}>
         <Breadcrumbs separator="›">{migajas}</Breadcrumbs>
       </StackMigajas>
-      {role > 3 && role < 7 && (
+      {role > 3 && role < 6 && (
         <ButtonsContainer>
           <Button variant="contained" onClick={handleOpen}>
             Editar
@@ -223,7 +223,7 @@ export default function TheoricView() {
       <Modal open={open}>
         <StyledBoxModal>
           <Button
-            style={{ marginLeft: "74vw", marginTop: "-0.2vh" }}
+            style={{ marginLeft: "73.1vw", marginTop: "-0.2vh" }}
             variant="contained"
             onClick={handleOpen}
           >
@@ -253,7 +253,7 @@ export default function TheoricView() {
             multiline
           />
           <Button
-            style={{ marginLeft: "74.85vw", marginBottom: "-0.2vh" }}
+            style={{ marginLeft: "72.3vw", marginBottom: "-0.2vh" }}
             variant="contained"
             onClick={handleSaver}
           >
