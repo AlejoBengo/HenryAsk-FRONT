@@ -12,8 +12,11 @@ export const createOptions = (mode: PaletteMode) => {
 const togglePalette = (mode: string): object => {
   if (mode === "light") {
     return {
+      comen: {
+        main: "black", 
+      },
       title: {
-        main: "black", //blanco humo
+        main: "black", 
       },
       primary: {
         main: "#ffd700", //yellow
@@ -42,8 +45,11 @@ const togglePalette = (mode: string): object => {
     };
   } else {
     return {
+      comen: {
+        main: "white", 
+      },
       title: {
-        main: "yellow", //blanco humo
+        main: "yellow", 
       },
       primary: {
         main: "#ffd700",
@@ -58,7 +64,7 @@ const togglePalette = (mode: string): object => {
         main: "#000000",
       },
       error: {
-        main: "#A10702",
+        main: "#E61D16",
       },
       success: {
         main: "#00CC66",
@@ -67,7 +73,7 @@ const togglePalette = (mode: string): object => {
         main: "#121212",
       },
       border: {
-        main: "yellow", //dorde div
+        main: "yellow", //borde div
       },
     };
   }

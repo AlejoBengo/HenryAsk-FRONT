@@ -5,8 +5,7 @@ import {
     Grid, 
     Paper, 
     Avatar,
-    Button,
-    Box}from '@mui/material';
+    Button }from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import MobileStepper from '@mui/material/MobileStepper';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';

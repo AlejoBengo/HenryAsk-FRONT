@@ -82,11 +82,11 @@ export default function PosteosAlumnos() {
       ret.push(arr[i]);
     }
     return ret;
-  }
+  };
 
-  maxSteps = reverseArr(postAlumnos).length
-    ? reverseArr(postAlumnos).slice(0, 15).length
-    : 1;
+  maxSteps = reverseArr(postAlumnos).length 
+  ? reverseArr(postAlumnos).slice(0, 15).length 
+  : 1;
 
   return (
     <Paper sx={{ padding: "1rem", margin: "2rem" }}>
@@ -95,119 +95,89 @@ export default function PosteosAlumnos() {
       </Typography>
 
       <Grid
-        container
-        spacing={5}
-        sx={{ display: "flex", justifyContent: "center" }}
-      >
+      container
+      spacing={5}
+      sx={{ display: "flex", justifyContent: "center" }}>
         <Grid item xs={12} sm={9}>
           <Card
             sx={
-              theme.palette.mode === "dark"
-                ? { backgroundImage: "none" }
-                : { background: "yellow" }
-            }
-          >
+            theme.palette.mode === "dark"
+            ? { backgroundImage: "none" }
+            : { background: "yellow" }}>
             <CardActionArea>
               <AutoPlaySwipeableViews
-                axis={theme.direction === "rtl" ? "x-reverse" : "x"}
-                index={activeStep}
-                onChangeIndex={handleStepChange}
-              >
-                {reverseArr(postAlumnos)
-                  .slice(0, 15)
-                  .map((el) => (
+              axis={theme.direction === "rtl" ? "x-reverse" : "x"}
+              index={activeStep}
+              onChangeIndex={handleStepChange}>
+                {reverseArr(postAlumnos).slice(0, 15).map((el) => (
                     <Grid>
                       <CardMedia
-                        component="img"
-                        image={
-                          el.owner.banner ? el.owner.banner : bannerDefault
-                        }
-                        alt={el.owner.user_name + " banner"}
-                        sx={{
-                          width: "100%",
-                          height: "20vh",
-                        }}
-                      />
+                      component="img"
+                      image={el.owner.banner ? el.owner.banner : bannerDefault}
+                      alt={el.owner.user_name + " banner"}
+                      sx={{
+                      width: "100%",
+                      height: "20vh"}}/>
                       <Grid
-                        width="100%"
-                        display="flex"
-                        justifyContent="space-between"
-                      >
+                      width="100%"
+                      display="flex"
+                      justifyContent="space-between">
                         <StyledAvatar
                           alt={el.owner.first_name}
                           src={
-                            el.owner.profile_picture.length > 0
-                              ? el.owner.profile_picture
-                              : el.owner.avatar
-                              ? el.owner.avatar
-                              : el.owner.profile_picture
-                          }
-                        />
+                          el.owner.profile_picture.length > 0
+                          ? el.owner.profile_picture
+                          : el.owner.avatar
+                          ? el.owner.avatar
+                          : el.owner.profile_picture}/>
                       </Grid>
                       <Grid
                         sx={{
-                          height: 200,
-                          display: "grid",
-                          margin: "3rem",
-                          marginTop: "0rem",
-                          marginBottom: "0rem",
-                        }}
-                      >
+                        height: 200,
+                        display: "grid",
+                        margin: "3rem",
+                        marginTop: "0rem",
+                        marginBottom: "0rem"}}>
                         <Typography
                           variant="h5"
                           component="div"
                           display="flex"
                           justifyContent="center"
                           style={{
-                            textDecoration: "underline",
-                            fontSize: "2rem",
-                          }}
-                          sx={
-                            theme.palette.mode === "dark"
-                              ? { color: "yellow" }
-                              : { color: "black" }
-                          }
-                        >
+                          textDecoration: "underline",
+                          fontSize: "2rem"}}
+                          sx={theme.palette.mode === "dark" 
+                          ? { color: "yellow" } 
+                          : { color: "black" }}>
                           {el.question}
                         </Typography>
                         <Typography
                           display="flex"
                           justifyContent="center"
-                          variant="subtitle1"
-                        >
-                          {el.description.length >= 300
-                            ? `${content(el.description)}...`
-                            : el.description}
+                          variant="subtitle1">
+                          {el.description.length >= 300 
+                          ? `${content(el.description)}...`
+                          : el.description}
                         </Typography>
                       </Grid>
                       <Grid
-                        sx={{
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                        }}
-                      >
+                      sx={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center"}}>
                         <Typography
                           variant="h6"
                           component="div"
                           display="flex"
-                          justifyContent="center"
-                        >
-                          {`Por: ${el.owner.first_name.concat(
-                            ` ${el.owner.last_name}`
-                          )} | ${el.owner.user_name}`}
+                          justifyContent="center">
+                          {`Por: ${el.owner.first_name.concat(` ${el.owner.last_name}`)} | ${el.owner.user_name}`}
                         </Typography>
                       </Grid>
                       <Grid display="flex" justifyContent="center">
                         <Button
-                          onClick={() => navigate(`/Post/${el._id}`)}
-                          variant="contained"
-                          color={
-                            theme.palette.mode === "dark"
-                              ? "primary"
-                              : "secondary"
-                          }
-                        >
+                        onClick={() => navigate(`/Post/${el._id}`)}
+                        variant="contained"
+                        color={theme.palette.mode === "dark" ? "primary" : "secondary"}>
                           <ArrowForwardIosIcon />
                         </Button>
                       </Grid>
@@ -216,41 +186,38 @@ export default function PosteosAlumnos() {
               </AutoPlaySwipeableViews>
 
               <MobileStepper
-                sx={{ backgroundColor: "transparent" }}
-                steps={maxSteps}
-                position="static"
-                activeStep={activeStep}
-                nextButton={
-                  <Button
-                    size="small"
-                    onClick={handleNext}
-                    disabled={activeStep === maxSteps - 1}
-                  >
-                    {theme.direction === "rtl" ? (
-                      <KeyboardArrowLeft />
-                    ) : (
-                      <KeyboardArrowRight />
-                    )}
-                  </Button>
-                }
-                backButton={
-                  <Button
-                    size="small"
-                    onClick={handleBack}
-                    disabled={activeStep === 0}
-                  >
-                    {theme.direction === "rtl" ? (
-                      <KeyboardArrowRight />
-                    ) : (
-                      <KeyboardArrowLeft />
-                    )}
-                  </Button>
-                }
-              />
+              sx={{ backgroundColor: "transparent" }}
+              steps={maxSteps}
+              position="static"
+              activeStep={activeStep}
+              nextButton={
+                <Button
+                size="small"
+                onClick={handleNext}
+                disabled={activeStep === maxSteps - 1}>
+                  {theme.direction === "rtl" ? (
+                    <KeyboardArrowLeft />
+                  ) : (
+                    <KeyboardArrowRight />
+                  )}
+                </Button>
+              }
+              backButton={
+                <Button
+                size="small"
+                onClick={handleBack}
+                disabled={activeStep === 0}>
+                  {theme.direction === "rtl" ? (
+                    <KeyboardArrowRight />
+                  ) : (
+                    <KeyboardArrowLeft />
+                  )}
+                </Button>
+              }/>
             </CardActionArea>
           </Card>
         </Grid>
       </Grid>
     </Paper>
   );
-}
+};

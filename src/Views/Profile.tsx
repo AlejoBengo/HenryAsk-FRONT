@@ -1,6 +1,8 @@
 /*--------------------------------------------------------*/
 import Activity from "../Components/Profile/Activity";
-import bannerDefault from "../Components/Profile/bannerDefault/bannerDefault.jpg";
+import HenryCoins from "../Components/Profile/HenryCoins";
+import bannerDefault from '../Components/Profile/bannerDefault/bannerDefault.jpg';
+
 /*-----------IMPORT UTILITIES-----------*/
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
@@ -15,6 +17,7 @@ import BuyMeACoffe from "../Components/Profile/EditProfile/BuyMeACoffe";
 import { fetchProfile, clearProfile } from "../app/Reducers/userProfileSlice";
 /*-----------IMPORT MUI & CSS-----------*/
 import CoffeeIcon from "@mui/icons-material/Coffee";
+import { LinkDom } from "../Components/Style/StyledComponents";
 import EditIcon from "@mui/icons-material/Edit";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
@@ -29,6 +32,7 @@ import {
   Card,
   CardMedia,
   CardContent,
+  Grid
 } from "@mui/material";
 
 /*--------------------------------------------------------*/
@@ -85,9 +89,7 @@ export default function Profile() {
   const userProfile = useAppSelector((state) => state.profile.profile); //state.profile?
   const user = useAppSelector((state) => state.user.data);
 
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+
 
   const migajas = [
     <LinkR
@@ -156,19 +158,20 @@ export default function Profile() {
                   : userProfile.profile_picture
               }
             />
-            <BuyMeACoffe handleClose={handleClose} open={open} />
             {user._id !== userProfile._id &&
-            userProfile.role < 4 &&
-            user.role < 4 ? (
-              <Button
-                onClick={handleOpen}
-                variant="contained"
-                color="primary"
-                sx={{ height: "20%" }}
-                startIcon={<CoffeeIcon />}
-              >
-                Regalame un cafecito😋
-              </Button>
+            userProfile.role >= 2 &&
+            user.role >= 2 && userProfile.coffee? (
+              <a href={userProfile.coffee} target="_blank" style={{ height: "20%" , textDecoration:"none"}}>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  sx={{ height: "20%" }}
+                  startIcon={<CoffeeIcon />}
+                  endIcon={<CoffeeIcon />}
+                >
+                  Regalame un cafecito
+                </Button>
+              </a>
             ) : null}
           </Box>
 
@@ -236,8 +239,18 @@ export default function Profile() {
               )}
             </Box>
           </CardContent>
+          
+          <Card>
+            <HenryCoins />
+          </Card>
+          
         </Card>
       </Container>
+
+      {/* <Container>
+        <HenryCoins />
+      </Container> */}
+
       <Container>
         <Activity />
       </Container>

@@ -22,12 +22,21 @@ export interface User {
   excersices: Array<string>;
   github: string;
   linkedin: string;
+  coffee:string;
   avatar:
     | "https://res.cloudinary.com/henryask/image/upload/v1651459729/avatares/unicorn_ntmtyp.png"
     | "https://res.cloudinary.com/henryask/image/upload/v1651459728/avatares/pig_tzhrjl.png"
     | "https://res.cloudinary.com/henryask/image/upload/v1651459728/avatares/pigeon_yfv9ka.png"
+    | 'https://res.cloudinary.com/henryask/image/upload/v1651879289/avatares/secret_wqhn3g.png'
+    | 'https://res.cloudinary.com/henryask/image/upload/v1651879289/avatares/score_hghnpc.png'
+    | 'https://res.cloudinary.com/henryask/image/upload/v1651879289/avatares/sandwich_s6vidk.png'
+    | 'https://res.cloudinary.com/henryask/image/upload/v1651879289/avatares/speedrun_t56kga.png'
+    | 'https://res.cloudinary.com/henryask/image/upload/v1651879289/avatares/ice_breaker_fyfsw4.png'
+    | 'https://res.cloudinary.com/henryask/image/upload/v1651879289/avatares/movie_k5yk2g.png'
     | "";
   createdAt?: string;
+  coffee: string;
+  userCoin: Array<string>;
 }
 export interface InitialState {
   data: User;
