@@ -9,6 +9,7 @@ import App from "./App";
 import "./index.css";
 import axios from "axios";
 import { CookiesProvider } from "react-cookie";
+import ScrollToTop from "./Components/Scroll Restoration/ScrollRestoration";
 axios.defaults.baseURL = process.env.REACT_APP_BACKEND;
 
 const container = document.getElementById("root")!;
@@ -23,6 +24,7 @@ root.render(
         redirectUri={window.location.origin}
       >
         <Router>
+        <ScrollToTop/>
           <CookiesProvider>
             <App />
           </CookiesProvider>

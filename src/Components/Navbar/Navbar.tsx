@@ -83,6 +83,10 @@ const Navbar = () => {
     setAnchorElCreate(null);
   };
 
+  const handleOnClickLogoHome = () => {
+    window.scrollTo(0, 0);
+  }
+
 // handle de si estas baneado en publicar discusion 
 
   const handleClickOpenBanned = () => {
@@ -134,7 +138,7 @@ let [inputDelete , setInputDelete] = React.useState<any>("");
             sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
           >
             <LateralMenu user={DBUser} />
-            <Link to="/">
+            <Link to="/" onClick={handleOnClickLogoHome}>
               <Img
                 src={logo}
                 alt="no responde img"
