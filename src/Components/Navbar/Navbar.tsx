@@ -5,11 +5,14 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "../../app/hooks";
+import { deleteUserPanel } from "../../app/Utils/editUser";
 /*-----------IMPORT COMPONENTS-----------*/
 import { LoginButton } from "../ButtonsOutLogin/LoginButton/LoginButton";
 import { LogoutButton } from "../ButtonsOutLogin/LogoutButton/LogoutButton";
 import LateralMenu from "./LateralMenu/LateralMenu";
 import DarkModeButton from "../ThemeModeButton/ThemeModeButton";
+import IsBannedModal from "./LateralMenu/isBannedModal";
+import ModalDeleteAccount from "./ModalDeleteAccount";
 /*-----------IMPORT MUI & CSS-----------*/
 import {
   AppBar,
@@ -30,13 +33,14 @@ import { LinkDom } from "../Style/StyledComponents";
 import { SearchBar } from "../SearchBar/SearchBar";
 
 const pages = ["Material complementario", "Foro"];
-const settings = ["Perfil", "Cerrar Sesion"];
+const settings = ["Perfil", "Eliminar Cuenta", "Cerrar Sesion"];
 
 const Navbar = () => {
   const navigate = useNavigate();
   const DBUser = useAppSelector((state) => state.user.data);
   const [pivote, setPivote] = useState(false); // para TA y ADM moverse en libertad por forum learning y forum prep
-
+  const [openBanned, setOpenBanned] = React.useState(false);
+  const { logout } = useAuth0();
   useEffect(() => {
     if (DBUser.role === 3 || DBUser.role === 5) {
       setPivote(true);
@@ -66,8 +70,7 @@ const Navbar = () => {
 
   const handleCloseNavMenu = (
     event: React.MouseEvent<HTMLLIElement | HTMLButtonElement>
-  ) => {
-
+  ) => {  
     let target = event.target;
     // if (target.name === "Perfil") {
     // setAnchorElNav(null);
@@ -80,6 +83,41 @@ const Navbar = () => {
     setAnchorElCreate(null);
   };
 
+  const handleOnClickLogoHome = () => {
+    window.scrollTo(0, 0);
+  }
+
+// handle de si estas baneado en publicar discusion 
+
+  const handleClickOpenBanned = () => {
+    setOpenBanned(true);
+  };
+
+  const handleCloseBanned = () => {
+    setOpenBanned(false);
+    setAnchorElCreate(null);
+  };
+// ================//
+
+// handle eliminar cuenta  + estado local
+const [deleteAccount , setDeleteAccount] = React.useState(false);
+let [inputDelete , setInputDelete] = React.useState<any>("");
+  const handleOpenDeleteAccount = () => {
+    setDeleteAccount(true);
+  }
+  const handleCloseDeleteAccount = () => {
+    setDeleteAccount(false);
+  }
+  const handleChangeDelete = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setInputDelete(event.target.value)
+  }
+  const handleDeleteUser = () => {
+    deleteUserPanel(DBUser._id).then(()=> setInputDelete("Eliminado147")).then(()=> logout({ returnTo: window.location.origin }))
+  }
+  const handleSuccessDelete = () => {
+    window.location.reload();
+  }
+// ===========//
   return (
     <AppBar
       position="sticky"
@@ -100,7 +138,7 @@ const Navbar = () => {
             sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
           >
             <LateralMenu user={DBUser} />
-            <Link to="/">
+            <Link to="/" onClick={handleOnClickLogoHome}>
               <Img
                 src={logo}
                 alt="no responde img"
@@ -174,7 +212,7 @@ const Navbar = () => {
               marginRight: "4em",
             }}
           >
-            {DBUser.role > 0 ? (
+            {DBUser.role >= 0 ? (
               <Button
                 onClick={handleOpenCreateMenu}
                 sx={{ my: 2, color: "white", display: "block" }}
@@ -187,7 +225,8 @@ const Navbar = () => {
               anchorEl={anchorElCreate}
               onClose={handleCloseCreateMenu}
             >
-              <MenuItem onClick={() => navigate("/Ask")}> Discusión</MenuItem>
+              <IsBannedModal handleCloseBanned={handleCloseBanned} openBanned={openBanned}/>
+              <MenuItem onClick={() => DBUser.isBanned? handleClickOpenBanned() : navigate("/Ask")}> Discusión</MenuItem>
               {DBUser.role >= 5 ? (
                 <MenuItem onClick={() => navigate("/Theoric/Create")}>
                   Contenido Teórico
@@ -237,6 +276,7 @@ const Navbar = () => {
                   />
                 </IconButton>
               </Tooltip>
+              <ModalDeleteAccount handleCloseDeleteAccount={handleCloseDeleteAccount} deleteAccount={deleteAccount} handleChangeDelete={handleChangeDelete} inputDelete={inputDelete} handleDeleteUser={handleDeleteUser} handleSuccessDelete={handleSuccessDelete}/>
               <Menu
                 sx={{ mt: "45px" }}
                 id="menu-appbar"
@@ -255,12 +295,22 @@ const Navbar = () => {
               >
                 {settings.map((setting) => (
                   <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    {setting !== "Cerrar Sesion" ? (
+                    {setting === "Perfil" ? (
                       <Button
                         color="inherit"
                         sx={{ width: "100%", height: "100%" }}
                         onClick={() => {
                           navigate(`/Profile/${DBUser?._id}`);
+                        }}
+                      >
+                        {setting}
+                      </Button>
+                    ) : setting==="Eliminar Cuenta"?(
+                      <Button
+                        color="inherit"
+                        sx={{ width: "100%", height: "100%" }}
+                        onClick={() => {
+                          handleOpenDeleteAccount();
                         }}
                       >
                         {setting}

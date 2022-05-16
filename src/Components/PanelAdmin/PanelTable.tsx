@@ -4,13 +4,17 @@ import { useEffect } from 'react';
 import { fetchAllUsers } from '../../app/Utils/allUsers';
 import { useAppDispatch , useAppSelector } from '../../app/hooks';
 import { editIsBanned } from '../../app/Utils/editUser';
+import { deleteUserPanel } from '../../app/Utils/editUser';
 import { User } from '../../app/interface';
 /*-----------IMPORT Components-----------*/
 import SelectRole from './SelectRole';
 import DialogSuccess from '../Dialog/DialogSuccess';
 /*-----------IMPORT MUI & CSS-----------*/
-import {Table, TableBody, TableCell, TableContainer, TableHead, Paper, TableRow , TablePagination , Box} from '@mui/material'
+import {Table, TableBody, TableCell, TableContainer, TableHead, Paper, TableRow , TablePagination , Box , IconButton} from '@mui/material'
 import {Button} from '@mui/material'
+import DialogDeleteUser from './DialogDeleteUser';
+import CloseIcon from '@mui/icons-material/Close';
+
 
 interface Column {
   id: 'user_name' | 'isBanned' | 'role' ;
@@ -37,6 +41,7 @@ export default function PanelTable(props:any) {
   const [rowsPerPage, setRowsPerPage] = React.useState(25);
   const userByUserName = useAppSelector((state) => state.searchUserName.searchUserName);
   const [openDialog, setOpenDialog] = React.useState(false); // dialog
+  const [openDialogDelete, setOpenDialogDelete] = React.useState(false);
   useEffect(()=>{
     dispatch(fetchAllUsers())
   },[])
@@ -62,17 +67,38 @@ export default function PanelTable(props:any) {
   const handleDesban = (info:any)=>{
     let aux = {...info , isBanned:false};
     editIsBanned(aux)
-    .then(()=> window.location.reload());
+    .then(()=> window.location.reload())
+    .catch((error)=> console.log(error));
   }
   
   const handleBan = (info:any)=>{
+    console.log(info)
     let aux = {...info , isBanned:true};
     editIsBanned(aux)
-    .then(()=> window.location.reload());
+    .then(()=> window.location.reload())
+    .catch((error)=> console.log(error));
   }
 // ======>
+
+// HANDLE DELETE USER
+let [infoDelete , setInfoDelete] = React.useState({})
+const handleCloseModalDelete = () => {
+  setOpenDialogDelete(false);
+  setInfoDelete({});
+};
+const handleOpenModalDelete = (info:any) => {
+  setOpenDialogDelete(true);
+  setInfoDelete(info);
+}
+const borrarUsuario = (id:string) => {
+  deleteUserPanel(id)
+  .then(()=>window.location.reload())
+  .catch((error)=> console.log(error))
+}
+//==============//
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+      <DialogDeleteUser handleCloseModalDelete={handleCloseModalDelete} openDialogDelete={openDialogDelete} infoDelete={infoDelete} borrarUsuario={borrarUsuario}/>
       <TableContainer sx={{ maxHeight: 1540 , minHeight:1540}}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
@@ -122,8 +148,11 @@ export default function PanelTable(props:any) {
                       let usuario = row
                       if(column.id === "role"){
                           return (
-                          <TableCell key={column.id} align={column.align}>
+                          <TableCell key={column.id} align={column.align} sx={{display:"flex", alignItems:"center"}}>
                                 <SelectRole valor={value} usuario={usuario} handleClickOpen={handleClickOpen}/>
+                                <IconButton onClick={()=>handleOpenModalDelete(row)} aria-label="delete" color="error">
+                                  <CloseIcon />
+                                </IconButton> 
                           </TableCell>
                           )
                       }

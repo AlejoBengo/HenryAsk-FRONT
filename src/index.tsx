@@ -8,6 +8,8 @@ import { useAuth0 } from "@auth0/auth0-react";
 import App from "./App";
 import "./index.css";
 import axios from "axios";
+import { CookiesProvider } from "react-cookie";
+import ScrollToTop from "./Components/Scroll Restoration/ScrollRestoration";
 axios.defaults.baseURL = process.env.REACT_APP_BACKEND;
 
 const container = document.getElementById("root")!;
@@ -22,7 +24,10 @@ root.render(
         redirectUri={window.location.origin}
       >
         <Router>
-          <App />
+        <ScrollToTop/>
+          <CookiesProvider>
+            <App />
+          </CookiesProvider>
         </Router>
       </Auth0Provider>
     </Provider>

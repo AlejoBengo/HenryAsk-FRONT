@@ -5,8 +5,7 @@ import {
     Grid, 
     Paper, 
     Avatar,
-    Button,
-    Box}from '@mui/material';
+    Button }from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import MobileStepper from '@mui/material/MobileStepper';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
@@ -267,7 +266,7 @@ export default function Grids() {
                                         </Grid>
                                         <Grid display='flex' justifyContent='center'>
                                             <Button
-                                            onClick={() => navigate(`/Theoric/${el._id}`)}
+                                            onClick={() => navigate(`/Exercise/${el._id}`)}
                                             variant="contained" 
                                             color={theme.palette.mode === 'dark' ? 'primary' : 'secondary'}><ArrowForwardIosIcon /></Button>
                                         </Grid>

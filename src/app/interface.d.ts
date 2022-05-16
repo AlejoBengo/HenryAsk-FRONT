@@ -12,7 +12,7 @@ export interface User {
   profile_picture: string;
   banner: string;
   biography: string;
-  isBanned:boolean;
+  isBanned: boolean;
   posts: Array<string> & any;
   answers: Array<string> & any;
   comments: Array<string> & any;
@@ -22,11 +22,21 @@ export interface User {
   excersices: Array<string>;
   github: string;
   linkedin: string;
+  coffee:string;
   avatar:
     | "https://res.cloudinary.com/henryask/image/upload/v1651459729/avatares/unicorn_ntmtyp.png"
     | "https://res.cloudinary.com/henryask/image/upload/v1651459728/avatares/pig_tzhrjl.png"
     | "https://res.cloudinary.com/henryask/image/upload/v1651459728/avatares/pigeon_yfv9ka.png"
+    | 'https://res.cloudinary.com/henryask/image/upload/v1651879289/avatares/secret_wqhn3g.png'
+    | 'https://res.cloudinary.com/henryask/image/upload/v1651879289/avatares/score_hghnpc.png'
+    | 'https://res.cloudinary.com/henryask/image/upload/v1651879289/avatares/sandwich_s6vidk.png'
+    | 'https://res.cloudinary.com/henryask/image/upload/v1651879289/avatares/speedrun_t56kga.png'
+    | 'https://res.cloudinary.com/henryask/image/upload/v1651879289/avatares/ice_breaker_fyfsw4.png'
+    | 'https://res.cloudinary.com/henryask/image/upload/v1651879289/avatares/movie_k5yk2g.png'
     | "";
+  createdAt?: string;
+  coffee: string;
+  userCoin: Array<string>;
 }
 export interface InitialState {
   data: User;
@@ -173,14 +183,12 @@ export interface ColumnTableTheoric {
   } & string;
 }
 
-
-
 // interface report
 export interface Report {
-  owner:User;
-  description:string;
-  status:string;
-  reason:string;
+  owner: User;
+  description: string;
+  status: string;
+  reason: string;
   post: {} | Posts;
   answer: {} | Answer;
   comment: {} | Comment;

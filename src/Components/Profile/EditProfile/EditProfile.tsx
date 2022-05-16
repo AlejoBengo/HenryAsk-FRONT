@@ -1,6 +1,7 @@
 /*--------------------------------------------------------*/
 /*-----------IMPORT UTILITIES-----------*/
 import React, { useState } from "react";
+import bannerDefault from "../bannerDefault/bannerDefault.jpg";
 import { useAppSelector, useAppDispatch } from "../../../app/hooks";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import { userTemplate } from "../../../app/Utils/userUtilities";
@@ -8,6 +9,7 @@ import ModalEditProfile from "./ModalEditProfile";
 import DialogSuccess from "../../Dialog/DialogSuccess";
 import Dialog from "../../Dialog/Dialog";
 /*-----------IMPORT MUI & CSS-----------*/
+
 import EditIcon from "@mui/icons-material/Edit";
 import { StyledTextField, StackMigajas } from "../../Style/StyledComponents";
 import {
@@ -24,7 +26,16 @@ import {
   Paper,
   Button,
   Container,
+  IconButton,
+   CardMedia,
+  Card,
 } from "@mui/material";
+
+ 
+import { StyledAvatar } from "../../../Views/Profile";
+import { callbackify } from "util";
+import BuyMeACoffe from "./BuyMeACoffe";
+import HelpIcon from '@mui/icons-material/Help';
 /*--------------------------------------------------------*/
 
 export const EditProfile = () => {
@@ -36,6 +47,7 @@ export const EditProfile = () => {
   const navigate = useNavigate();
 
   // ----------> Modal edit Profile
+  const [banner, setBanner] = React.useState("");
   const [avatar, setAvatar] = React.useState("");
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -45,13 +57,12 @@ export const EditProfile = () => {
   //  EJEMPLO DIALOGO ACA SIGUE EN LA LINEA 57
   const [openDialog, setOpenDialog] = useState(false);
   const [modalState, setModalState] = useState("Enviando...");
-
   // ------------------------//
 
   const handleInputChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    setUserInfo({
+    setUserInfo(userInfo={
       ...userInfo,
       [event.target.name]: event.target.value,
     });
@@ -71,9 +82,22 @@ export const EditProfile = () => {
       .catch((err) => {
         console.log(err);
         setModalState("Error al hacer los cambios"); // en caso de entrar al catch mando mensaje de error que COINCIDE  con la prop de error en linea 75 , de esta forma tenemos renderizaods
-        //manejos de errores tambien en el front
-      });
+        //manejos de errores tambien en el front        
+      });      
   };
+  const handleCancel = (event: React.MouseEvent<HTMLButtonElement>) => {
+    navigate(`/Profile/${id}`);
+  };
+
+  //Modal leer mas buy me coffe
+  let [openInfo , setOpenInfo] = React.useState(false);
+  const handleCloseInfo = () => {
+    setOpenInfo(false);
+  }
+  const handleOpenInfo = () => {
+    setOpenInfo(true);
+  }
+  // ====== / 
 
   const migajas = [
     <Link
@@ -98,7 +122,7 @@ export const EditProfile = () => {
         )}`,
       }}
     >
-      PROFILE
+      PERFIL
     </Link>,
     <Link
       to={`/Profile/${id}/Edit`}
@@ -110,23 +134,17 @@ export const EditProfile = () => {
         )}`,
       }}
     >
-      EDIT PROFILE
+      EDITAR PERFIL
     </Link>,
   ];
 
   if (user._id != id) navigate(`/Profile/${id}`);
   return (
-    <Container sx={{ paddingBottom: "16px", paddingTop: "20px" }}>
-      <StackMigajas
-        style={{
-          marginLeft: "-6.7vw",
-          marginTop: "-1.8vh",
-          marginBottom: "1vh",
-        }}
-        spacing={2}
-      >
+    <>
+    <StackMigajas>
         <Breadcrumbs separator="›">{migajas}</Breadcrumbs>
       </StackMigajas>
+    <Container sx={{ paddingBottom: "16px", paddingTop: "20px" }}>      
       <Dialog
         openDialog={openDialog}
         setOpenDialog={setOpenDialog}
@@ -136,42 +154,28 @@ export const EditProfile = () => {
         modalState={modalState}
         setModalState={setModalState}
       />
-      <Paper sx={{ p: 3 }}>
-        <Box
-          sx={{
-            padding: "2rem",
-          }}
-        >
-          <Typography
-            variant="h4"
-            color="primary"
-            gutterBottom
-            textAlign="center"
-          >
+      <Paper sx={{ p: 3 , minWidth: "100%"  }}>
+
+      <Box sx={{display: 'flex', flexDirection: 'column', justifyContent: "center", alignItems: "center" }}>                  
+          <Typography sx={{color: "title.main"}} variant="h4" component="h3" gutterBottom display='flex' justifyContent='center'>
             Edita tu información personal
           </Typography>
-        </Box>
-        <Grid
-          container
-          spacing={2}
-          sx={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-around",
-          }}
-        >
-          <Grid
-            item
-            xs={12}
-            sm={12}
-            sx={{
-              display: "flex",
-              margin: "0rem 0rem 0em 0em",
-              justifyContent: "center",
-            }}
-          >
-            <Avatar
-              sx={{ width: "14rem", height: "13rem", objectFit: "cover" }}
+
+          <Card sx={{ minWidth: "100%" , padding:"1em"}}>
+            <CardMedia
+              component="img"
+              image={userInfo.banner || bannerDefault}
+              alt={userInfo.user_name + " banner"}
+              sx={{
+                width: "100%",
+                height: "30vh",
+                border: "2px solid", 
+                borderColor: "border.main",
+                borderRadius: "20px"
+              }}
+            />
+            <StyledAvatar
+              sx={{ left: "0em", width:"30vh", height:"30vh" , marginInline:"auto" , border: "4px solid", borderColor: "border.main" }}
               alt={user.user_name}
               src={
                 userInfo.profile_picture.length > 0
@@ -182,8 +186,32 @@ export const EditProfile = () => {
                   ? userInfo.avatar
                   : userInfo.profile_picture
               }
-            />
-          </Grid>
+            />            
+            </Card>
+            <Button
+              sx={{border: "2px solid", 
+              borderColor: "border.main",
+              }}
+              variant="contained"
+              startIcon={<EditIcon />}
+              onClick={handleOpen}
+            >
+              Elegir Avatar
+            </Button>                   
+      </Box>
+
+        <Grid
+          container
+          spacing={2}
+          sx={{
+            display: "flex",            
+            flexDirection: "row",            
+            justifyContent: "space-around",            
+          }}
+        >          
+
+
+
           <Grid
             item
             xs={12}
@@ -194,13 +222,7 @@ export const EditProfile = () => {
               justifyContent: "center",
             }}
           >
-            <Button
-              variant="contained"
-              startIcon={<EditIcon />}
-              onClick={handleOpen}
-            >
-              Elegir Avatar
-            </Button>
+            
             <ModalEditProfile
               open={open}
               setOpen={setOpen}
@@ -209,7 +231,7 @@ export const EditProfile = () => {
               userInfo={userInfo}
               setUserInfo={setUserInfo}
               avatar={avatar}
-              setAvatar={setAvatar}
+              setAvatar={setAvatar}              
             />
           </Grid>
 
@@ -300,6 +322,26 @@ export const EditProfile = () => {
               onChange={(event) => handleInputChange(event)}
             ></StyledTextField>
           </Grid>
+          {
+            user.role >= 2 ? 
+            <>
+          <Grid item xs={11} sm={11}>
+            <StyledTextField
+              variant="filled"
+              label="Coffee"
+              name="coffee"
+              value={userInfo.coffee}
+              onChange={(event) => handleInputChange(event)}/>
+          </Grid>
+          <Grid item xs={1}>
+          <BuyMeACoffe handleCloseInfo={handleCloseInfo} openInfo={openInfo} />
+             <IconButton onClick={handleOpenInfo} aria-label="delete" size="large" color="inherit">
+              <HelpIcon fontSize="inherit" />
+            </IconButton>
+           </Grid>
+           </> : null
+          }
+          
           <Grid item xs={11} sm={12}>
             <StyledTextField
               variant="filled"
@@ -319,8 +361,10 @@ export const EditProfile = () => {
               display: "flex",
               justifyContent: "center",
             }}
-          >
+          >            
             <Button
+              sx={{border: "2px solid", 
+              borderColor: "border.main"}}
               color="primary"
               variant="contained"
               onClick={handleSave}
@@ -332,9 +376,25 @@ export const EditProfile = () => {
             >
               Guardar
             </Button>
+            <Button
+              sx={{border: "2px solid", 
+              borderColor: "border.main"}}
+              color="primary"
+              variant="contained"
+              onClick={handleCancel}
+              style={{ marginLeft: "1.5vw" }}
+              disabled={
+                userInfo.first_name === "" ||
+                userInfo.last_name === "" ||
+                userInfo.user_name === ""
+              }
+            >
+              Cancelar
+            </Button>
           </Grid>
         </Grid>
       </Paper>
     </Container>
+    </>
   );
 };

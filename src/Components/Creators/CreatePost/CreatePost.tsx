@@ -8,7 +8,7 @@ import { Link, useNavigate } from "react-router-dom";
 /*-----------IMPORT MUI & CSS-----------*/
 import {
   MenuItem,
-  IconButton,
+  Box,
   Container,
   Grid,
   Paper,
@@ -144,6 +144,10 @@ const PostForm = () => {
     }
   };
 
+  const handleCancel = (event: React.MouseEvent<HTMLButtonElement>) => {
+    navigate(`/`);
+  };
+
   const migajas = [
     <Link
       to="/"
@@ -185,113 +189,122 @@ const PostForm = () => {
 
   return (
     <>
-      <StackMigajas
-        spacing={2}
-      >
+      <StackMigajas spacing={2}>
         <Breadcrumbs separator="›">{migajas}</Breadcrumbs>
       </StackMigajas>
-    <Container
-      sx={{
-        p: "1rem",
-      }}
-    >
-      <Paper
-        elevation={2}
+      <Container
         sx={{
-          p: "2rem",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          flexDirection: "column",
+          p: "1rem",
         }}
       >
-        <Typography variant="h3" marginBottom={1}>
-          ¡Crea una discusión!
-        </Typography>
-        <Grid
-          container
-          spacing={3}
+        <Paper
+          elevation={2}
           sx={{
+            p: "2rem",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
+            flexDirection: "column",
           }}
         >
-          <Grid item xs={12}>
-            <StyledTextField
-              required
-              multiline
-              id="outlined-basic"
-              label="Tu pregunta"
-              variant="outlined"
-              name="question"
-              value={post.question}
-              onChange={(event) => handleInputChange(event)}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <StyledTextField
-              required
-              multiline
-              minRows={3}
-              maxRows={5}
-              id="filled-basic"
-              label="Descripción"
-              variant="outlined"
-              name="description"
-              value={post.description}
-              onChange={(event) => handleInputChange(event)}
-            />
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <StyledTextField
-              select
-              label="Etiquetas"
-              onChange={(event) => handleSelect(event)}
-            >
-              {tags.map((tag) => {
-                return (
-                  <MenuItem key={tag} value={tag}>
-                    {tag}
-                  </MenuItem>
-                );
-              })}
-            </StyledTextField>
-            {error.errorTag.length > 0 && (
-              <StyledAlert severity="info">{error.errorTag}</StyledAlert>
-            )}
-          </Grid>
-          <Grid item xs={12} md={6}>
-            {post.tags.length > 0 && (
-              <List>
-                {post.tags.map((tag) => {
+          <Typography variant="h3" marginBottom={1}>
+            ¡Crea una discusión!
+          </Typography>
+          <Grid
+            container
+            spacing={3}
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Grid item xs={12}>
+              <StyledTextField
+                required
+                multiline
+                id="outlined-basic"
+                label="Tu pregunta"
+                variant="outlined"
+                name="question"
+                value={post.question}
+                onChange={(event) => handleInputChange(event)}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <StyledTextField
+                required
+                multiline
+                minRows={3}
+                maxRows={5}
+                id="filled-basic"
+                label="Descripción"
+                variant="outlined"
+                name="description"
+                value={post.description}
+                onChange={(event) => handleInputChange(event)}
+              />
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <StyledTextField
+                select
+                label="Etiquetas"
+                onChange={(event) => handleSelect(event)}
+              >
+                {tags.map((tag) => {
                   return (
-                    <ListItem key={tag}>
-                      <ListItemIcon>{/* <TagIcon /> */}</ListItemIcon>
-                      <ListItemText>{tag}</ListItemText>
-                      <Button
-                        onClick={() => handleDelete(tag)}
-                        aria-label="delete"
-                      >
-                        <DeleteIcon />
-                      </Button>
-                    </ListItem>
+                    <MenuItem key={tag} value={tag}>
+                      {tag}
+                    </MenuItem>
                   );
                 })}
-              </List>
-            )}
-          </Grid>
-          <Grid item xs={3}>
-            <Button onClick={handleSubmit} variant="contained">
-              Crear Discusion
-            </Button>
+              </StyledTextField>
+              {error.errorTag.length > 0 && (
+                <StyledAlert severity="info">{error.errorTag}</StyledAlert>
+              )}
+            </Grid>
+            <Grid item xs={12} md={6}>
+              {post.tags.length > 0 && (
+                <List>
+                  {post.tags.map((tag) => {
+                    return (
+                      <ListItem key={tag}>
+                        <ListItemIcon>{/* <TagIcon /> */}</ListItemIcon>
+                        <ListItemText>{tag}</ListItemText>
+                        <Button
+                          onClick={() => handleDelete(tag)}
+                          aria-label="delete"
+                        >
+                          <DeleteIcon />
+                        </Button>
+                      </ListItem>
+                    );
+                  })}
+                </List>
+              )}
+            </Grid>
+            <Box
+              style={{
+                width: "20vw",
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                height: "8vh",
+              }}
+            >
+              <Button size="small" onClick={handleSubmit} variant="contained">
+                Crear
+              </Button>
+              <Button size="small" onClick={handleCancel} variant="contained">
+                Cancelar
+              </Button>
+            </Box>
             {error.errorSubmit.length > 0 && (
               <StyledAlert severity="error">{error.errorSubmit}</StyledAlert>
             )}
           </Grid>
-        </Grid>
-      </Paper>
-    </Container> 
+        </Paper>
+      </Container>
     </>
   );
 };

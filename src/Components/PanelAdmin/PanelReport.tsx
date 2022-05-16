@@ -166,7 +166,7 @@ export default function PanelReport(props:any) {
                         if(row.comment){
                           return(
                             <TableCell align={column.align} sx={{padding:"0px 0px 0px 10px" , margin:"0px" , width:"19%",}}>
-                            <Button sx={{textTransform:"none" , color:"info.main" }} onClick={()=>handlePostComment(row.comment.answer)}>Ir al comentario</Button>
+                            <Button sx={{textTransform:"none" , color:"comen.main" }} onClick={()=>handlePostComment(row.comment.answer)}>Ir al comentario</Button>
                           </TableCell>
                           )
                         }}
@@ -201,9 +201,9 @@ export default function PanelReport(props:any) {
                             )
                           }
                         }
-                        let aux = value.split(" ");
-                        let aux2 = aux.slice(0,28);
-                        let aux3 = aux2.join(" ")
+                        let aux = value?.split(" ");
+                        let aux2 = aux?.slice(0,28);
+                        let aux3 = aux2?.join(" ")
                         
                         return (
                           <TableCell align={column.align} sx={{maxWidth:"20vw"}}>
