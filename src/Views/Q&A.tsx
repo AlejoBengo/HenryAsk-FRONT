@@ -95,9 +95,7 @@ export default function Qa() {
           >
             <img src={Rocket} alt="" height="60em" width="60em" />
             <Typography
-              color={theme.palette.getContrastText(
-                theme.palette.background.default
-              )}
+              sx={{color: "title.main"}}              
               variant="h2"
               component="h1"
               gutterBottom
@@ -118,9 +116,7 @@ export default function Qa() {
             }}
           >
             <Typography
-              color={theme.palette.getContrastText(
-                theme.palette.background.default
-              )}
+              sx={{color: "title.main"}}
               variant="h4"
               component="h3"
               gutterBottom
@@ -140,9 +136,7 @@ export default function Qa() {
               id="panel1a-header"
             >
               <Typography
-                color={theme.palette.getContrastText(
-                  theme.palette.background.default
-                )}
+                sx={{color: "title.main"}}
                 variant="h5"
                 component="h4"
                 gutterBottom
@@ -163,9 +157,11 @@ export default function Qa() {
                   fontWeight: "bold",
                   padding: "1em",
                   borderRadius: "1em",
+                  border: "2px solid",
+                  borderColor: "border.main",
                 }}
               >
-                <Typography variant="body2" color="rgb(255, 255, 1)">
+                <Typography variant="body2" color="white">
                   1. Como usuario no logueado, puedo iniciar sesión, para poder
                   mantener un registro de mi actividad.
                   <br />
@@ -182,9 +178,7 @@ export default function Qa() {
               id="panel1a-header"
             >
               <Typography
-                color={theme.palette.getContrastText(
-                  theme.palette.background.default
-                )}
+                sx={{color: "title.main"}}
                 variant="h5"
                 component="h4"
                 gutterBottom
@@ -205,9 +199,11 @@ export default function Qa() {
                   fontWeight: "bold",
                   padding: "1em",
                   borderRadius: "1em",
+                  border: "2px solid",
+                  borderColor: "border.main",
                 }}
               >
-                <Typography variant="body2" color="rgb(255, 255, 1)">
+                <Typography variant="body2" color="white">
                   1. Como instructor, puedo subir material que sea prioritario y
                   distintivo para los alumnos con el fin de que sea lo primero
                   que se muestre.
@@ -232,9 +228,7 @@ export default function Qa() {
               id="panel1a-header"
             >
               <Typography
-                color={theme.palette.getContrastText(
-                  theme.palette.background.default
-                )}
+                sx={{color: "title.main"}}
                 variant="h5"
                 component="h4"
                 gutterBottom
@@ -255,9 +249,11 @@ export default function Qa() {
                   fontWeight: "bold",
                   padding: "1em",
                   borderRadius: "1em",
+                  border: "2px solid",
+                  borderColor: "border.main",
                 }}
               >
-                <Typography variant="body2" color="rgb(255, 255, 1)">
+                <Typography variant="body2" color="white">
                   1. Como alumno, puedo tener una sección donde solo pueda
                   encontrar contenido teórico, incluso se divida en dos
                   secciones, una contenido teórico subido por el profesor y otro
@@ -301,9 +297,7 @@ export default function Qa() {
               id="panel1a-header"
             >
               <Typography
-                color={theme.palette.getContrastText(
-                  theme.palette.background.default
-                )}
+                sx={{color: "title.main"}}
                 variant="h5"
                 component="h4"
                 gutterBottom
@@ -324,9 +318,11 @@ export default function Qa() {
                   fontWeight: "bold",
                   padding: "1em",
                   borderRadius: "1em",
+                  border: "2px solid",
+                  borderColor: "border.main",
                 }}
               >
-                <Typography variant="body2" color="rgb(255, 255, 1)">
+                <Typography variant="body2" color="white">
                   1. Como estudiante, puedo acceder a ejercicios, para mejorar
                   mediante la práctica. <br />
                   2. Como estudiante, puedo tener mi propia sección de favoritos
@@ -370,9 +366,7 @@ export default function Qa() {
             }}
           >
             <Typography
-              color={theme.palette.getContrastText(
-                theme.palette.background.default
-              )}
+              sx={{color: "title.main"}}
               variant="h4"
               component="h3"
               gutterBottom
@@ -393,9 +387,9 @@ export default function Qa() {
               justifyContent: "center",
               alignItems: "center",
               border: "2px solid",
-              borderColor: "primary.mein",
+              borderColor: "border.main",
               borderRadius: "20px",
-              padding: "10px",
+              padding: "10px",              
             }}
           >
             <Input type="text" placeholder="Nombre" name="user_name" />
@@ -405,7 +399,8 @@ export default function Qa() {
             <Input type="text" placeholder="Asunto" name="user_subject" />
 
             <TextareaAutosize
-              style={{ marginTop: "20px", width: 400, height: 300 }}
+              style={{ marginTop: "20px", width: 400, height: 300, border: "2px solid",
+              borderColor: "border.main",}}
               id=""
               placeholder="Tu consulta..."
               name="user_message"
@@ -416,6 +411,8 @@ export default function Qa() {
                 backgroundColor: "rgb(255, 255, 1)",
                 color: "black",
                 fontWeight: "bold",
+                border: "2px solid",
+                borderColor: "border.main",
               }}
               type="submit"
               value="Send Message"

@@ -9,7 +9,7 @@ import { BoxStyledEditProfile } from '../../Style/StyledComponents';
 
 export default function ModalEditProfile(props:any) {
 
-  let { handleClose , open , userInfo , setUserInfo , avatar , setAvatar} = props
+  let { handleClose , open , userInfo , setUserInfo , avatar, setAvatar } = props
   return (
     <div>
       <Modal
@@ -20,12 +20,11 @@ export default function ModalEditProfile(props:any) {
       >
       <Grid container spacing={2}>
         <Grid item xs={12}>
-        <BoxStyledEditProfile>
+        <BoxStyledEditProfile>          
           <ContainerAvatares userInfo={userInfo} setUserInfo={setUserInfo} avatar={avatar} setAvatar={setAvatar} handleClose={handleClose}/>
         </BoxStyledEditProfile>
         </Grid>
-      </Grid>
-       
+      </Grid>       
       </Modal>
     </div>
   );

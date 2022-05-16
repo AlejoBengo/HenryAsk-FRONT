@@ -30,7 +30,8 @@ export const userTemplate: User = {
   excersices: [],
   github: "",
   linkedin: "",
-  avatar:""
+  avatar:"",
+  coffee:"",
 };
 export const getUserById = async (id: string) => {
   try {

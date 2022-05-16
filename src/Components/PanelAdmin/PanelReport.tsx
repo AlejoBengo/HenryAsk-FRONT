@@ -201,9 +201,9 @@ export default function PanelReport(props:any) {
                             )
                           }
                         }
-                        let aux = value.split(" ");
-                        let aux2 = aux.slice(0,28);
-                        let aux3 = aux2.join(" ")
+                        let aux = value?.split(" ");
+                        let aux2 = aux?.slice(0,28);
+                        let aux3 = aux2?.join(" ")
                         
                         return (
                           <TableCell align={column.align} sx={{maxWidth:"20vw"}}>

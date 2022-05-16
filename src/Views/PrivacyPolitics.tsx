@@ -68,9 +68,7 @@ export default function Politics() {
           >
             <img src={Rocket} alt="" height="60em" width="60em" />
             <Typography
-              color={theme.palette.getContrastText(
-                theme.palette.background.default
-              )}
+              sx={{color: "title.main"}}
               variant="h2"
               component="h1"
               gutterBottom
@@ -92,9 +90,11 @@ export default function Politics() {
               fontWeight: "bold",
               padding: "1em",
               borderRadius: "1em",
+              border: "2px solid",
+              borderColor: "border.main",
             }}
           >
-            <Typography variant="body2" color="rgb(255, 255, 1)">
+            <Typography variant="body2" color="white">
               La privacidad y resguardo de la información personal de los
               usuarios del Sitio Web -según este término se define abajo- y
               alumnos de Henry Tecnología S.A.S. y Henry Technologies Inc. (en
@@ -148,9 +148,7 @@ export default function Politics() {
                 id="panel1a-header"
               >
                 <Typography
-                  color={theme.palette.getContrastText(
-                    theme.palette.background.default
-                  )}
+                  sx={{color: "title.main"}}
                   variant="h5"
                   component="h4"
                   gutterBottom
@@ -171,9 +169,11 @@ export default function Politics() {
                     fontWeight: "bold",
                     padding: "1em",
                     borderRadius: "1em",
+                    border: "2px solid",
+                    borderColor: "border.main",
                   }}
                 >
-                  <Typography variant="body2" color="rgb(255, 255, 1)">
+                  <Typography variant="body2" color="white">
                     1.1 Toda la información vertida en la aplicación y sus
                     formularios, se almacena y procesa en la base de datos de
                     Henry Tecnologia S.A.S. C.U.I.T. 30-71667218-9, con
@@ -222,9 +222,7 @@ export default function Politics() {
                 id="panel1a-header"
               >
                 <Typography
-                  color={theme.palette.getContrastText(
-                    theme.palette.background.default
-                  )}
+                  sx={{color: "title.main"}}
                   variant="h5"
                   component="h4"
                   gutterBottom
@@ -245,9 +243,11 @@ export default function Politics() {
                     fontWeight: "bold",
                     padding: "1em",
                     borderRadius: "1em",
+                    border: "2px solid",
+                    borderColor: "border.main",
                   }}
                 >
-                  <Typography variant="body2" color="rgb(255, 255, 1)">
+                  <Typography variant="body2" color="white">
                     2.1 Henry adopta en su sitio www.soyhenry.com las medidas de
                     seguridad standard de la industria, protegiendo la
                     información con tecnología SSL, para garantizar la seguridad
@@ -288,9 +288,7 @@ export default function Politics() {
                 id="panel1a-header"
               >
                 <Typography
-                  color={theme.palette.getContrastText(
-                    theme.palette.background.default
-                  )}
+                  sx={{color: "title.main"}}
                   variant="h5"
                   component="h4"
                   gutterBottom
@@ -311,9 +309,11 @@ export default function Politics() {
                     fontWeight: "bold",
                     padding: "1em",
                     borderRadius: "1em",
+                    border: "2px solid",
+                    borderColor: "border.main",
                   }}
                 >
-                  <Typography variant="body2" color="rgb(255, 255, 1)">
+                  <Typography variant="body2" color="white">
                     3.1 El usuario podrá solicitar el acceso a la información
                     que, a su nombre, conste en nuestra base de datos. Éste
                     derecho sólo puede ser ejercido de forma gratuita, en
@@ -354,9 +354,7 @@ export default function Politics() {
                 id="panel1a-header"
               >
                 <Typography
-                  color={theme.palette.getContrastText(
-                    theme.palette.background.default
-                  )}
+                  sx={{color: "title.main"}}
                   variant="h5"
                   component="h4"
                   gutterBottom
@@ -377,9 +375,11 @@ export default function Politics() {
                     fontWeight: "bold",
                     padding: "1em",
                     borderRadius: "1em",
+                    border: "2px solid",
+                    borderColor: "border.main",
                   }}
                 >
-                  <Typography variant="body2" color="rgb(255, 255, 1)">
+                  <Typography variant="body2" color="white">
                     4.1 El usuario garantiza que toda la información
                     suministrada ya sea a través de la plataforma o a los
                     asesores financieros de Henry es propia, veraz, exacta,
@@ -417,9 +417,7 @@ export default function Politics() {
                 id="panel1a-header"
               >
                 <Typography
-                  color={theme.palette.getContrastText(
-                    theme.palette.background.default
-                  )}
+                  sx={{color: "title.main"}}
                   variant="h5"
                   component="h4"
                   gutterBottom
@@ -440,9 +438,11 @@ export default function Politics() {
                     fontWeight: "bold",
                     padding: "1em",
                     borderRadius: "1em",
+                    border: "2px solid",
+                    borderColor: "border.main",
                   }}
                 >
-                  <Typography variant="body2" color="rgb(255, 255, 1)">
+                  <Typography variant="body2" color="white">
                     5.1 HENRY no lucra de ningún modo con la información
                     personal suministrada por los Usuarios, es decir que no la
                     alquila, vende ni ofrece de ningún modo a terceros.
@@ -575,9 +575,7 @@ export default function Politics() {
                 id="panel1a-header"
               >
                 <Typography
-                  color={theme.palette.getContrastText(
-                    theme.palette.background.default
-                  )}
+                  sx={{color: "title.main"}}
                   variant="h5"
                   component="h4"
                   gutterBottom
@@ -598,9 +596,11 @@ export default function Politics() {
                     fontWeight: "bold",
                     padding: "1em",
                     borderRadius: "1em",
+                    border: "2px solid",
+                    borderColor: "border.main",
                   }}
                 >
-                  <Typography variant="body2" color="rgb(255, 255, 1)">
+                  <Typography variant="body2" color="white">
                     6.1 Henry se reserva el derecho de modificar las presentes
                     Políticas de Privacidad, en cualquier momento ya sea para
                     ajustarlas al giro comercial de la sociedad, nuevos
