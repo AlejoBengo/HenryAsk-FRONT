@@ -8,18 +8,20 @@ import { List, ListItemButton, Collapse } from "@mui/material";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import { StyledSpan } from "../Theoric/StyledComponents";
 import { LinkDom } from "../Style/StyledComponents";
+import { ExerciseInterface } from "../../app/Interfaces/interfaceExercise";
+import { exerciseTemplate } from "../../app/Utils/ExerciseUtilities";
 /*--------------------------------------------------------*/
 
 const ExerciseList = () => {
   const [open, setOpen] = useState<boolean>(false);
-  let [allExercisesLocal, setAllExercisesLocal] = useState<any>([]);
+  let [allExercisesLocal, setAllExercisesLocal] = useState<Array<ExerciseInterface>>([exerciseTemplate]);
   const { exercises } = useAppSelector((state) => state.exercises);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(getAllExercises());
-    exercises?.length && setAllExercisesLocal((allExercisesLocal = exercises));
-  }, [exercises, dispatch]);
+    exercises?.length && setAllExercisesLocal(( allExercisesLocal ) => exercises);
+  }, [ dispatch ]);
 
   const handleOpen = (event: React.MouseEvent<HTMLDivElement>) => {
     setOpen(!open);
