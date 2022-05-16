@@ -140,17 +140,11 @@ export const EditProfile = () => {
 
   if (user._id != id) navigate(`/Profile/${id}`);
   return (
-    <Container sx={{ paddingBottom: "16px", paddingTop: "20px" }}>
-      <StackMigajas
-        style={{
-          marginLeft: "-6.7vw",
-          marginTop: "-1.8vh",
-          marginBottom: "1vh",
-        }}
-        spacing={2}
-      >
+    <>
+    <StackMigajas>
         <Breadcrumbs separator="›">{migajas}</Breadcrumbs>
       </StackMigajas>
+    <Container sx={{ paddingBottom: "16px", paddingTop: "20px" }}>      
       <Dialog
         openDialog={openDialog}
         setOpenDialog={setOpenDialog}
@@ -160,24 +154,14 @@ export const EditProfile = () => {
         modalState={modalState}
         setModalState={setModalState}
       />
-      <Paper sx={{ p: 3 , minWidth: "100%" , border: "2px solid", borderColor: "border.main",}}>
+      <Paper sx={{ p: 3 , minWidth: "100%"  }}>
 
-      <Box sx={{display: 'flex', flexDirection: 'row', justifyContent: "center", alignItems: "center",}}>                  
+      <Box sx={{display: 'flex', flexDirection: 'column', justifyContent: "center", alignItems: "center" }}>                  
           <Typography sx={{color: "title.main"}} variant="h4" component="h3" gutterBottom display='flex' justifyContent='center'>
             Edita tu información personal
-          </Typography>                    
-      </Box>
-        <Grid
-          container
-          spacing={2}
-          sx={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-around",
-          }}
-        >          
-          
-          <Card sx={{ minWidth: "100%" , padding:"1em" }}>
+          </Typography>
+
+          <Card sx={{ minWidth: "100%" , padding:"1em"}}>
             <CardMedia
               component="img"
               image={userInfo.banner || bannerDefault}
@@ -191,7 +175,7 @@ export const EditProfile = () => {
               }}
             />
             <StyledAvatar
-              sx={{ width:"30vh", height:"30vh" , left: "42%", border: "4px solid", borderColor: "border.main" }}
+              sx={{ left: "0em", width:"30vh", height:"30vh" , marginInline:"auto" , border: "4px solid", borderColor: "border.main" }}
               alt={user.user_name}
               src={
                 userInfo.profile_picture.length > 0
@@ -202,8 +186,32 @@ export const EditProfile = () => {
                   ? userInfo.avatar
                   : userInfo.profile_picture
               }
-            />
+            />            
             </Card>
+            <Button
+              sx={{border: "2px solid", 
+              borderColor: "border.main",
+              }}
+              variant="contained"
+              startIcon={<EditIcon />}
+              onClick={handleOpen}
+            >
+              Elegir Avatar
+            </Button>                   
+      </Box>
+
+        <Grid
+          container
+          spacing={2}
+          sx={{
+            display: "flex",            
+            flexDirection: "row",            
+            justifyContent: "space-around",            
+          }}
+        >          
+
+
+
           <Grid
             item
             xs={12}
@@ -214,15 +222,7 @@ export const EditProfile = () => {
               justifyContent: "center",
             }}
           >
-            <Button
-              sx={{border: "2px solid", 
-              borderColor: "border.main"}}
-              variant="contained"
-              startIcon={<EditIcon />}
-              onClick={handleOpen}
-            >
-              Elegir Avatar
-            </Button>
+            
             <ModalEditProfile
               open={open}
               setOpen={setOpen}
@@ -335,7 +335,7 @@ export const EditProfile = () => {
           </Grid>
           <Grid item xs={1}>
           <BuyMeACoffe handleCloseInfo={handleCloseInfo} openInfo={openInfo} />
-             <IconButton onClick={handleOpenInfo} aria-label="delete" size="large" color="info">
+             <IconButton onClick={handleOpenInfo} aria-label="delete" size="large" color="inherit">
               <HelpIcon fontSize="inherit" />
             </IconButton>
            </Grid>
@@ -395,5 +395,6 @@ export const EditProfile = () => {
         </Grid>
       </Paper>
     </Container>
+    </>
   );
 };
