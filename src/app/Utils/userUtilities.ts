@@ -21,7 +21,7 @@ export const userTemplate: User = {
   banner: "",
   biography: "",
   isBanned:false,
-  own_henry_coin: 0,
+  own_henry_coin: 5,
   give_henry_coin: 0,
   theoric: [],
   posts: [],
@@ -31,7 +31,9 @@ export const userTemplate: User = {
   github: "",
   linkedin: "",
   avatar:"",
-  coffee:"",
+  coffee: "",
+  userCoin: [],
+  createdAt: ""
 };
 export const getUserById = async (id: string) => {
   try {
