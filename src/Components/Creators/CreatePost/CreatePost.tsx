@@ -293,7 +293,7 @@ const PostForm = () => {
               }}
             >
               <Button size="small" onClick={handleSubmit} variant="contained">
-                Crear Discusion
+                Crear
               </Button>
               <Button size="small" onClick={handleCancel} variant="contained">
                 Cancelar
