@@ -25,7 +25,7 @@ import { Link } from "react-router-dom";
 export const HenryCoinsRanking = () => {
   const allUsers = useAppSelector((state) => state.allUser.allUsers);
   let filterUsers = [...allUsers].filter((el) => el.role === 2);
-  let sortedUsers = filterUsers.sort((a, b) => a.give_henry_coin > b.give_henry_coin ? -1 : 1);
+  let sortedUsers = filterUsers.sort((a, b) => a.give_henry_coin < b.give_henry_coin ? -1 : 1);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [page, setPage] = useState(0);
   const dispatch = useAppDispatch();

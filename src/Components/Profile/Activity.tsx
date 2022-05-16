@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { fetchProfile } from "../../app/Reducers/userProfileSlice";
+import { fetchGetAllPosts } from "../../app/Reducers/getPostsForum";
 import * as React from "react";
 import { useTheme } from "@mui/material/styles";
 import MobileStepper from "@mui/material/MobileStepper";
@@ -18,6 +19,7 @@ const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 export default function Activity() {
     const theme = useTheme();
     let userProfile = useAppSelector((state) => state.profile.profile);
+    // let post = useAppSelector((state: any) => state.getAllPosts.posts);
     let [activeStep, setActiveStep] = React.useState(0);
     const [activeStep1, setActiveStep1] = React.useState(0);
     const [activeStep2, setActiveStep2] = React.useState(0);
@@ -30,8 +32,10 @@ export default function Activity() {
 
     useEffect(() => {
         dispatch(fetchProfile(id));
+        // dispatch(fetchGetAllPosts(10));
         setActiveStep((activeStep = 0));
     }, [dispatch, id]);
+
 
     let content = (step: string) => {
         let aux = step.split(" ");
