@@ -9,6 +9,7 @@ import {
   TablePagination,
   TableRow,
   Typography,
+  Breadcrumbs,
   useTheme,
   Avatar,
 } from "@mui/material";
@@ -18,6 +19,9 @@ import { useAppSelector, useAppDispatch } from "../app/hooks";
 import { fetchAllUsers } from "../app/Utils/allUsers";
 import { LinkDom, TituloForo } from "../Components/Style/StyledComponents";
 import { UserShort } from "../Components/UserShort/UserShort";
+import { StackMigajas } from "../Components/Style/StyledComponents";
+import { Link } from "react-router-dom";
+
 export const HenryCoinsRanking = () => {
   const allUsers = useAppSelector((state) => state.allUser.allUsers);
   let filterUsers = [...allUsers].filter((el) => el.role === 2);
@@ -50,6 +54,33 @@ export const HenryCoinsRanking = () => {
     dispatch(fetchAllUsers());
   }, [dispatch]);
 
+  const migajas = [
+    <Link
+      to="/"
+      style={{
+        fontFamily: "Helvetica",
+        textDecoration: "none",
+        color: `${theme.palette.getContrastText(
+          theme.palette.background.default
+        )}`,
+      }}
+    >
+      HOME
+    </Link>,
+    <Link
+      to="/Ranking"
+      style={{
+        fontFamily: "Helvetica",
+        textDecoration: "none",
+        color: `${theme.palette.getContrastText(
+          theme.palette.background.default
+        )}`,
+      }}
+    >
+      HENRY COINS RANKING
+    </Link>,
+  ];
+
   return (
     <Container
       sx={{
@@ -59,6 +90,12 @@ export const HenryCoinsRanking = () => {
         alignItems: "center",
       }}
     >
+      <StackMigajas
+        style={{ marginLeft: "-27.7vw", marginTop: "-1.2vh" }}
+        spacing={2}
+      >
+        <Breadcrumbs separator="›">{migajas}</Breadcrumbs>
+      </StackMigajas>
       <Typography
         variant="h3"
         sx={{
@@ -83,6 +120,7 @@ export const HenryCoinsRanking = () => {
           </TableHead>
           <TableBody>
             {sortedUsers
+              .reverse()
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((user, index) => {
                 return (

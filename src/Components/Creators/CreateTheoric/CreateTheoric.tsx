@@ -143,13 +143,15 @@ export const CreateTheoric = () => {
     </Link>,
   ];
 
+  const handleCancel = (event: React.MouseEvent<HTMLButtonElement>) => {
+    navigate(`/`);
+  };
+
   return (
     <>
-        <StackMigajas
-          spacing={2}
-        >
-          <Breadcrumbs separator="›">{migajas}</Breadcrumbs>
-        </StackMigajas>
+      <StackMigajas spacing={2}>
+        <Breadcrumbs separator="›">{migajas}</Breadcrumbs>
+      </StackMigajas>
       <Container
         sx={{
           p: 1,
@@ -225,7 +227,11 @@ export const CreateTheoric = () => {
             {theoric.images.map((image: string, index: number) => {
               return (
                 <Grid item xs={12} key={index + image}>
-                  <Box display="flex" justifyContent="center" alignItems="center">
+                  <Box
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center"
+                  >
                     <img
                       src={image}
                       alt={image}
@@ -272,7 +278,11 @@ export const CreateTheoric = () => {
             {theoric.comments.map((comment: string, index: number) => {
               return (
                 <Grid item xs={12} key={index + comment}>
-                  <Box display="flex" justifyContent="center" alignItems="center">
+                  <Box
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center"
+                  >
                     <Typography variant="body2">{comment}</Typography>
                     <Button
                       color="error"
@@ -301,6 +311,14 @@ export const CreateTheoric = () => {
                   }}
                 >
                   Publicar
+                </Button>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={handleCancel}
+                  style={{ marginLeft: "2vw" }}
+                >
+                  Cancelar
                 </Button>
               </Box>
             </Grid>

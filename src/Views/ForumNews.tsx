@@ -43,8 +43,8 @@ export default function ForumNews() {
   //setTimeout(()=> console.log("USER",userLogin), 4000)
   //setTimeout(()=> console.log("ALUMNOS",postAlumnos), 4000)
   //setTimeout(()=> console.log("INSTRUCTOR",postInstructores), 4000)
-  setTimeout(()=> console.log("POST",posts), 4000)
-  setTimeout(()=> console.log("NEWS",postNews), 4000)
+/*   setTimeout(()=> console.log("POST",posts), 4000)
+  setTimeout(()=> console.log("NEWS",postNews), 4000) */
 
   const migajas = [
     <Link
@@ -91,12 +91,11 @@ export default function ForumNews() {
               Bienvenido/a a <TituloForo>HENRY ASK</TituloForo> Forum !
             </StyledTypography>
           </Grid>
-          <Grid item xs={12}>
+          <Grid item xs={12} sx={{display:"flex", justifyContent:"center"}}>
             <StyledTypography
               variant="h5"
               textAlign="center"
-              padding="3rem 0rem 3rem 0rem"
-            >
+              padding="3rem 0rem 3rem 0rem" sx={{width:"70%"}}>
               Espacio dedicado exclusivamente para que puedas dejar tus dudas respecto al bootcamp y que Alumnos 👨‍💻,Instructores 🚀 o Miembros del Staff las resuelvan!!! 
             </StyledTypography>
           </Grid>

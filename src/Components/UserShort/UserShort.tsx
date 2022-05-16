@@ -30,9 +30,24 @@ export const UserShort = ({ user }: Props) => {
             position: "absolute",
           },
         }}
-        src={user?.profile_picture.length>0? user.profile_picture : user.avatar.length>0? user.avatar : user.profile_picture}
+        src={
+          user?.profile_picture.length > 0
+            ? user.profile_picture
+            : user.avatar.length > 0
+            ? user.avatar
+            : user.profile_picture
+        }
       />
-      <LinkDom style={{fontSize:"20px" , fontWeight:"bold" , textDecoration:"underline"}} to={`/Profile/${user._id}`}>{user?.user_name} :</LinkDom>
+      <LinkDom
+        style={{
+          fontSize: "20px",
+          fontWeight: "bold",
+          textDecoration: "underline",
+        }}
+        to={`/Profile/${user._id}`}
+      >
+        {user?.user_name}
+      </LinkDom>
     </Typography>
   );
 };

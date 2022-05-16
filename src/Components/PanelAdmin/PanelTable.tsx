@@ -92,8 +92,8 @@ const handleOpenModalDelete = (info:any) => {
 }
 const borrarUsuario = (id:string) => {
   deleteUserPanel(id)
-  /* .then(()=>window.location.reload())
-  .catch((error)=> console.log(error)) */
+  .then(()=>window.location.reload())
+  .catch((error)=> console.log(error))
 }
 //==============//
   return (

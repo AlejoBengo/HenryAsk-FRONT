@@ -65,17 +65,19 @@ export default function Careers() {
                 <Container component="main" sx={{ mt: 8, mb: 2 }} maxWidth="sm">
                 <Box sx={{display: 'flex', flexDirection: 'row', justifyContent: "center", alignItems: "center",}}>
                     <img src={Rocket} alt="" height= "60em" width= "60em" />
-                    <Typography color={theme.palette.getContrastText(theme.palette.background.default)} variant="h2" component="h1" gutterBottom display='flex' justifyContent='center'>
+                    <Typography sx={{color: "title.main"}} variant="h2" component="h1" gutterBottom display='flex' justifyContent='center'>
                     CARRERAS
                     </Typography>
                     <img src={Rocket} alt="" height= "60em" width= "60em" />
                 </Box>
 
-                    <Typography color={theme.palette.getContrastText(theme.palette.background.default)} variant="h4" component="h3" gutterBottom display='flex' justifyContent='center'>
+                    <Typography sx={{color: "title.main"}} variant="h4" component="h3" gutterBottom display='flex' justifyContent='center'>
                         Invertimos en tu educación
                     </Typography>
                 </Container>
-                <Box sx={{ marginBottom: "1rem", height: "100%", width: "50%", backgroundColor: "black", color: "rgb(255, 255, 1)", fontWeight: "bold", padding: "1em", borderRadius: "1em"}}>
+                <Box sx={{ marginBottom: "1rem", height: "100%", width: "50%", backgroundColor: "black", 
+                      color: "rgb(255, 255, 1)", fontWeight: "bold", padding: "1em", borderRadius: "1em",
+                      border: "2px solid", borderColor: "border.main",}}>
                 <CardActionArea>
                         
                         <Grid 
@@ -101,8 +103,8 @@ export default function Careers() {
                             <Typography variant="h5" component="h4" gutterBottom display='flex' justifyContent='center' >
                             Full Stack Developer Full Time.
                             </Typography> 
-                            <Typography variant="body2" color="text.secondary" component="div"
-                            sx={{ textAlign: "center", marginTop: "1rem", marginBottom: "1rem", color: "rgb(255, 255, 1)" }}
+                            <Typography variant="body2" component="div"
+                            sx={{ textAlign: "center", marginTop: "1rem", marginBottom: "1rem", color: "white" }}
                             >
                             Un programa intensivo en línea que simula un entorno de trabajo real y te prepara para una carrera exitosa como desarrollador Full Stack.
                             </Typography>                                               
@@ -127,7 +129,10 @@ export default function Careers() {
                     </Box>
                     {/* ------------------------------- */}
 
-                    <Box sx={{marginBottom: "1rem",  height: "100%", width: "50%", backgroundColor: "black", color: "rgb(255, 255, 1)", fontWeight: "bold", padding: "1em", borderRadius: "1em"}}>
+                    <Box sx={{marginBottom: "1rem",  height: "100%", width: "50%",
+                     backgroundColor: "black", color: "rgb(255, 255, 1)", 
+                     fontWeight: "bold", padding: "1em", borderRadius: "1em", border: "2px solid",
+                     borderColor: "border.main",}}>
                 <CardActionArea>
                         
                         <Grid 
@@ -142,8 +147,8 @@ export default function Careers() {
                             <Typography variant="h5" component="h4" gutterBottom display='flex' justifyContent='center' >
                             Full Stack Part-Time.
                             </Typography> 
-                            <Typography variant="body2" color="text.secondary" component="div"
-                            sx={{ textAlign: "center", marginTop: "1rem", marginBottom: "1rem", color: "rgb(255, 255, 1)" }}
+                            <Typography variant="body2" component="div"
+                            sx={{ textAlign: "center", marginTop: "1rem", marginBottom: "1rem", color: "white" }}
                             >
                             En Henry invertimos en tu educación. Ahora puedes convertirte en Full Stack Web Developer mientras trabajas. Diseñamos una carrera part-time de 7 meses para que ingreses al mercado tech.
                             </Typography>                                               
@@ -178,7 +183,9 @@ export default function Careers() {
                         </CardActionArea>
                     </Box>
 
-                    <Box sx={{marginBottom: "1rem",  height: "100%", width: "50%", backgroundColor: "black", color: "rgb(255, 255, 1)", fontWeight: "bold", padding: "1em", borderRadius: "1em"}}>
+                    <Box sx={{marginBottom: "1rem",  height: "100%", width: "50%", backgroundColor: "black",
+                         color: "rgb(255, 255, 1)", fontWeight: "bold", padding: "1em", borderRadius: "1em",
+                         border: "2px solid", borderColor: "border.main",}}>
                 <CardActionArea>
                         
                         <Grid 
@@ -203,8 +210,8 @@ export default function Careers() {
                             <Typography variant="h5" component="h4" gutterBottom display='flex' justifyContent='center' >
                             Estudia Data Science.
                             </Typography> 
-                            <Typography variant="body2" color="text.secondary" component="div"
-                            sx={{ textAlign: "center", marginTop: "1rem", marginBottom: "1rem", color: "rgb(255, 255, 1)" }}
+                            <Typography variant="body2" component="div"
+                            sx={{ textAlign: "center", marginTop: "1rem", marginBottom: "1rem", color: "white" }}
                             >
                             Aprende todo lo que necesitas para trabajar en el mundo de los datos. En solo 5 meses y sin costo inicial.
                             </Typography>                                               
