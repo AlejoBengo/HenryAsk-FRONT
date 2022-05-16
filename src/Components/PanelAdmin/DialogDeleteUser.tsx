@@ -48,7 +48,7 @@ export default function DialogDeleteUser(props: any) {
             </Grid>
 
                 <Grid item xs={6} sx={{display:"flex", justifyContent:"center"}}>
-                    <Button color="warning" variant="outlined" onClick={() => handleCloseModalDelete()}>Cancel</Button>
+                    <Button color="warning" variant="outlined" onClick={() => handleCloseModalDelete()}>Cancelar</Button>
                 </Grid>
                 <Grid item xs={6} sx={{display:"flex", justifyContent:"center"}}>
                     <Button color="error" variant="outlined" onClick={() => borrarUsuario(infoDelete._id)}>Eliminar Usuario</Button>

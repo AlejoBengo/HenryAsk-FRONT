@@ -53,7 +53,7 @@ const TableExercise = (props:any) => {
       label: 'Descripción',
       minWidth: 250,
       align: 'center',
-      format: (value: string) => value.split(" ").length>28
+      format: (value: string) => value?.split(" ").length>28
         ?`${value.split(" ").slice(0,28).join(" ")}...`
         : value,
     },
@@ -62,7 +62,7 @@ const TableExercise = (props:any) => {
       label: 'Código',
       minWidth: 50,
       align: 'center',
-      format: (value)=> value.length
+      format: (value)=> value?.length
         ? <CheckIcon data-testid="CheckIcon" fontSize="large" color="success"></CheckIcon>
         : <CloseIcon data-testid="CloseIcon" fontSize="large" color="error"></CloseIcon> 
     },
@@ -71,7 +71,7 @@ const TableExercise = (props:any) => {
       label: 'Test',
       minWidth: 50,
       align: 'center',
-      format: (value)=> value.length
+      format: (value)=> value?.length
         ? <CheckIcon data-testid="CheckIcon" fontSize="large" color="success"></CheckIcon>
         : <CloseIcon data-testid="CloseIcon" fontSize="large" color="error"></CloseIcon> 
     },
@@ -80,7 +80,9 @@ const TableExercise = (props:any) => {
       label: 'Tags',
       minWidth: 100,
       align: 'center',
-      format: ( value ) => `# ${value.join(" ")}`
+      format: ( value ) => value?.length
+        ? `# ${value?.join(" ")}`
+        : <CloseIcon data-testid="CloseIcon" fontSize="large" color="error"></CloseIcon> 
     },
   ];
 

@@ -80,6 +80,10 @@ const Navbar = () => {
     setAnchorElCreate(null);
   };
 
+  const handleOnClickLogoHome = () => {
+    window.scrollTo(0, 0);
+  }
+
   return (
     <AppBar
       position="sticky"
@@ -100,7 +104,7 @@ const Navbar = () => {
             sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
           >
             <LateralMenu user={DBUser} />
-            <Link to="/">
+            <Link to="/" onClick={handleOnClickLogoHome}>
               <Img
                 src={logo}
                 alt="no responde img"
