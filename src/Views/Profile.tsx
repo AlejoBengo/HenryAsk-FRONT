@@ -1,6 +1,8 @@
 /*--------------------------------------------------------*/
 import Activity from "../Components/Profile/Activity";
+import HenryCoins from "../Components/Profile/HenryCoins";
 import bannerDefault from '../Components/Profile/bannerDefault/bannerDefault.jpg';
+
 /*-----------IMPORT UTILITIES-----------*/
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
@@ -29,6 +31,7 @@ import {
   Card,
   CardMedia,
   CardContent,
+  Grid
 } from "@mui/material";
 
 /*--------------------------------------------------------*/
@@ -236,8 +239,18 @@ export default function Profile() {
               )}
             </Box>
           </CardContent>
+          
+          <Card>
+            <HenryCoins />
+          </Card>
+          
         </Card>
       </Container>
+
+      {/* <Container>
+        <HenryCoins />
+      </Container> */}
+
       <Container>
           <Activity />
       </Container>

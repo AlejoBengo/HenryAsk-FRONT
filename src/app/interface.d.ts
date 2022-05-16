@@ -28,6 +28,8 @@ export interface User {
     | "https://res.cloudinary.com/henryask/image/upload/v1651459728/avatares/pigeon_yfv9ka.png"
     | "";
   createdAt?: string;
+  coffee: string;
+  userCoin: Array<string>;
 }
 export interface InitialState {
   data: User;

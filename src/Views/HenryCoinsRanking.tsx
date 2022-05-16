@@ -20,9 +20,8 @@ import { LinkDom, TituloForo } from "../Components/Style/StyledComponents";
 import { UserShort } from "../Components/UserShort/UserShort";
 export const HenryCoinsRanking = () => {
   const allUsers = useAppSelector((state) => state.allUser.allUsers);
-  const sortedUsers = [...allUsers].sort(
-    (a, b) => a.own_henry_coin - b.own_henry_coin
-  );
+  let filterUsers = [...allUsers].filter((el) => el.role === 2);
+  let sortedUsers = filterUsers.sort((a, b) => a.give_henry_coin > b.give_henry_coin ? -1 : 1);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [page, setPage] = useState(0);
   const dispatch = useAppDispatch();
@@ -128,7 +127,7 @@ export const HenryCoinsRanking = () => {
                       </LinkDom>
                     </TableCell>
                     <TableCell>{`${user.first_name} ${user.last_name}`}</TableCell>
-                    <TableCell>{user.own_henry_coin}</TableCell>
+                    <TableCell>{user.give_henry_coin}</TableCell>
                     <TableCell>{formatDate(user.createdAt || "")}</TableCell>
                   </TableRow>
                 );
@@ -140,7 +139,7 @@ export const HenryCoinsRanking = () => {
         rowsPerPageOptions={[10, 25, 100]}
         component={"div"}
         page={page}
-        count={allUsers.length}
+        count={sortedUsers.length}
         rowsPerPage={rowsPerPage}
         onPageChange={(event, newPage) => {
           setPage(newPage);

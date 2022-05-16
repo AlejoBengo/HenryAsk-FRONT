@@ -1,4 +1,4 @@
-import { Paper, Box, Typography, Grid, Avatar, Card } from "@mui/material";
+import { Paper, Typography, Grid, Avatar, Card } from "@mui/material";
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
@@ -75,7 +75,6 @@ export default function Activity() {
         for(let i = arr.length-1; i >= 0; i-- ) {
             ret.push(arr[i]);
         }
-        
         return ret;
     };
     

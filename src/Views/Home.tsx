@@ -54,9 +54,9 @@ export default function Home() {
     return (
       <Box>
         <CssBaseline />
-        <Box>
+        {userRole.role >= 2 ? (
           <Ranking />
-        </Box>
+        ) : null}
         <Cards />
         <PosteosAlumnos />
       </Box>
