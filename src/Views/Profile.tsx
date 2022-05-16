@@ -158,7 +158,7 @@ export default function Profile() {
             {user._id !== userProfile._id &&
             userProfile.role >= 2 &&
             user.role >= 2 && userProfile.coffee? (
-              <LinkDom to={userProfile.coffee}   style={{ height: "20%" , textDecoration:"none"}}>
+              <a href={userProfile.coffee} target="_blank" style={{ height: "20%" , textDecoration:"none"}}>
                 <Button
                   variant="contained"
                   color="primary"
@@ -168,7 +168,7 @@ export default function Profile() {
                 >
                   Regalame un cafecito
                 </Button>
-              </LinkDom>
+              </a>
             ) : null}
           </Box>
 

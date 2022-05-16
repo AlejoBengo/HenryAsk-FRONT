@@ -21,9 +21,9 @@ export default function ModalDeleteAccount(props:any) {
        
           <CheckIcon color="success" fontSize='large'/>
         </DialogContent>
-        <DialogActions sx={{display:"flex", justifyContent:"center"}}>
+        {/* <DialogActions sx={{display:"flex", justifyContent:"center"}}>
           <Button color="info" onClick={handleSuccessDelete}>Aceptar</Button>
-        </DialogActions>
+        </DialogActions> */}
       </Dialog>
     </div>
       )

@@ -62,7 +62,7 @@ export const EditProfile = () => {
   const handleInputChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    setUserInfo({
+    setUserInfo(userInfo={
       ...userInfo,
       [event.target.name]: event.target.value,
     });
@@ -328,7 +328,7 @@ export const EditProfile = () => {
           <Grid item xs={11} sm={11}>
             <StyledTextField
               variant="filled"
-              label="Link Buy me a Coffee"
+              label="Coffee"
               name="coffee"
               value={userInfo.coffee}
               onChange={(event) => handleInputChange(event)}/>

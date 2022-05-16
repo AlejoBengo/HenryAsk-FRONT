@@ -40,6 +40,7 @@ const Navbar = () => {
   const DBUser = useAppSelector((state) => state.user.data);
   const [pivote, setPivote] = useState(false); // para TA y ADM moverse en libertad por forum learning y forum prep
   const [openBanned, setOpenBanned] = React.useState(false);
+  const { logout } = useAuth0();
   useEffect(() => {
     if (DBUser.role === 3 || DBUser.role === 5) {
       setPivote(true);
@@ -107,7 +108,7 @@ let [inputDelete , setInputDelete] = React.useState<any>("");
     setInputDelete(event.target.value)
   }
   const handleDeleteUser = () => {
-    deleteUserPanel(DBUser._id).then(()=> setInputDelete("Eliminado147"))
+    deleteUserPanel(DBUser._id).then(()=> setInputDelete("Eliminado147")).then(()=> logout({ returnTo: window.location.origin }))
   }
   const handleSuccessDelete = () => {
     window.location.reload();
