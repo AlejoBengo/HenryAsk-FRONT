@@ -21,7 +21,7 @@ const ExerciseList = () => {
   useEffect(() => {
     dispatch(getAllExercises());
     exercises?.length && setAllExercisesLocal(( allExercisesLocal ) => exercises);
-  }, [ dispatch ]);
+  },[]);
 
   const handleOpen = (event: React.MouseEvent<HTMLDivElement>) => {
     setOpen(!open);
