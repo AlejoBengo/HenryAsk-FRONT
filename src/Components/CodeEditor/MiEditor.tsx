@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import CodeMirror from "@uiw/react-codemirror";
 import { javascript } from "@codemirror/lang-javascript";
 import { oneDark } from "@codemirror/theme-one-dark";
+import s from "./scrollBar.module.css";
 import {
   EditorCode,
   EditorTest,
@@ -37,7 +38,7 @@ export default function MiEditor({ coding, testing }: Data) {
 
   return (
     <EditorsContainer>
-      <EditorCode>
+      <EditorCode className={s.editor}>
         <Title>SOLUCIÓN</Title>
         <CodeMirror
           value={code}

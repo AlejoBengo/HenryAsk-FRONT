@@ -12,12 +12,3 @@
   --color-error-light: #a10702;
   --color-success-light: #00cc66;
 }
-
-::-webkit-scrollbar {
-  width: 1vw;
-  background-color: #fff;
-}
-
-::-webkit-scrollbar-thumb {
-  background-color: rgb(39, 37, 37);
-}
