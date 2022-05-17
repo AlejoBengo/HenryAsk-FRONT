@@ -24,6 +24,7 @@ import henryCoin from '../Profile/bannerDefault/henryCoin.jpeg';
 import { useNavigate } from "react-router-dom";
 import { TituloForo } from '../Style/StyledComponents';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import { LinkDom } from '../Style/StyledComponents';
 
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
@@ -72,7 +73,6 @@ export default function Ranking(){
         dispatch(fetchAllUsers);
     }, []);
 
-console.log(sortedUsers)
 
     const handleNext = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -136,7 +136,9 @@ console.log(sortedUsers)
                                             justifyContent='center'
                                             style={{ textDecoration: 'underline', fontSize: '2rem' }}
                                             sx={theme.palette.mode === 'dark' ? { color:'yellow'} : { color:'black'}}>
-                                                {`${el.first_name.concat(` ${el.last_name}`)} | ${el.user_name}`}
+                                                <LinkDom to={`/Profile/${el._id}`}>
+                                                    {`${el.first_name.concat(` ${el.last_name}`)} | ${el.user_name}`}
+                                                </LinkDom>
                                             </Typography>
                                             <Grid sx={{display:'flex', justifyContent:'flex-start'}}>
                                                 <Box
@@ -191,16 +193,18 @@ console.log(sortedUsers)
                                 </Button>}
                             />
                         </CardActionArea>
-
                     </Card>
                 </Grid>
-                        <Button
-                        onClick={() => navigate(`/Ranking`)}
-                        variant="contained" 
-                        sx={{marginTop: '1rem'}}
-                        color={theme.palette.mode === 'dark' ? 'primary' : 'secondary'}>
-                            Ver ranking completo🏆
-                        </Button>
+            </Grid>
+
+            <Grid sx={{display:'flex', justifyContent:'center', padding:'.6rem'}}>
+                <Button
+                onClick={() => navigate(`/Ranking`)}
+                variant="contained" 
+                sx={{marginTop: '1rem'}}
+                color={theme.palette.mode === 'dark' ? 'primary' : 'secondary'}>
+                    Ver ranking completo🏆
+                </Button>
             </Grid>
         </Paper>
     );
