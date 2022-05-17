@@ -42,8 +42,7 @@ import Search from "./Views/Search";
 import HenryCoinsRanking from "./Views/HenryCoinsRanking";
 import { toggleMode, setMode } from "./app/Reducers/modeReducer";
 import ForumNews from "./Views/ForumNews";
-
-
+import Verify from "./Views/Verify";
 const App = () => {
   const [cookies, setCookie, removeCookie] = useCookies();
   const { isAuthenticated, user } = useAuth0();
@@ -57,6 +56,7 @@ const App = () => {
     if (isAuthenticated) {
       dispatch(fetchUserByEmail(user?.email));
     }
+    console.log(user);
   }, [user]);
 
   useEffect(() => {
@@ -65,7 +65,8 @@ const App = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    if (isAuthenticated && DBUser.user_name === "") {
+    if (isAuthenticated && !user?.email_verified) navigate("/verify");
+    else if (isAuthenticated && DBUser.user_name === "") {
       navigate(`/Profile/${DBUser?._id}/Edit`);
     }
   }, [DBUser]);
@@ -84,17 +85,16 @@ const App = () => {
       <Header />
       <Navbar />
       <Box
-        
         sx={{
           minHeight: "100vh",
           p: 0,
           paddingTop: "1rem",
           paddingBottom: "3rem",
-          backgroundColor:"background.main",
+          backgroundColor: "background.main",
         }}
       >
         <Routes>
-          <Route path="/" element={<Home />} />          
+          <Route path="/" element={<Home />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/qya" element={<Qa />} />
           <Route path="/contact" element={<Contact />} />
@@ -115,6 +115,7 @@ const App = () => {
           <Route path="/Search/" element={<Search />} />
           <Route path="/Ranking/" element={<HenryCoinsRanking />} />
           <Route path="/Forum/News" element={<ForumNews />} />
+          <Route path="/verify" element={<Verify />} />
         </Routes>
       </Box>
       <Footer />
