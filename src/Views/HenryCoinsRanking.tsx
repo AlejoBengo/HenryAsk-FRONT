@@ -47,7 +47,7 @@ export const HenryCoinsRanking = () => {
     ];
     let aux = date.slice(0, 10).split("-");
 
-    return `${aux[2]} de ${months[Number(aux[1])]} del ${aux[0]}`;
+    return `${aux[2]} de ${months[Number(aux[1])-1]} del ${aux[0]}`;
   };
 
   useEffect(() => {
