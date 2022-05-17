@@ -18,6 +18,10 @@ interface Data {
   setter2: any;
 }
 
+const que = "function () {}";
+const hola = `${que}`;
+console.log(hola);
+
 export default function MiEditor({ coding, testing, setter, setter2 }: Data) {
   const [code, setCode] = useState<string>("");
   const [test, setTest] = useState<string>("");
