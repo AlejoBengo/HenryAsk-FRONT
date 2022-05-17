@@ -13,11 +13,13 @@ import { theoricTemplate } from "../app/Utils/theoricUtilites";
 /*-----------IMPORT MUI & CSS-----------*/
 import {
   Button,
-  Modal,
   TextField,
   Box,
   Grid,
   useTheme,
+  Modal,
+  CircularProgress,
+  LinearProgress,
   Breadcrumbs,
 } from "@mui/material";
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
@@ -47,6 +49,7 @@ export default function TheoricView() {
   const [open, setOpen] = useState<boolean>(false);
   const [save, setSave] = useState<boolean>(false);
   const [openDelete, setOpenDelete] = useState<boolean>(false);
+  const [charged, setCharged] = useState(false);
   const { isAuthenticated } = useAuth0();
   const [editable, setEditable] = useState(theoricTemplate);
 
@@ -150,7 +153,35 @@ export default function TheoricView() {
   ];
 
   if (!isAuthenticated) {
-    return <RedirectToLogin open={true} />;
+    setTimeout(() => {
+      setCharged(true);
+    }, 4000);
+    if (!charged) {
+      return (
+        <Modal open={true}>
+          <CircularProgress
+            style={{
+              // width: "90vw",
+              marginLeft: "50vw",
+              background: "transparent",
+              marginTop: "50vh",
+              // height: "1vh",
+            }}
+          />
+          {/* <LinearProgress
+            color="secondary"
+            style={{
+              width: "90vw",
+              marginLeft: "5vw",
+              marginTop: "49vh",
+              height: "1vh",
+            }}
+          /> */}
+        </Modal>
+      );
+    } else {
+      return <RedirectToLogin open={true} />;
+    }
   }
 
   return (
