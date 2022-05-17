@@ -40,13 +40,11 @@ const {handleClose, openDialog, title1 , subtitle1 , buttonText} = props
                 {subtitle1}
             </Grid>
             <Grid item xs={12} sx={{display:"flex" , justifyContent:"center"}}>
-                <Button onClick={handleClose} color="inherit" size="small" sx={{width:"40%"}}>
+                <Button onClick={handleClose} color="inherit" size="small" sx={{width:"40%", color:"dialogButt.main"}}>
                     {buttonText}
                 </Button>
             </Grid>
-        </Grid>
-
-           
+        </Grid>           
         </Alert>
       </Dialog>
     </div>

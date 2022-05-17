@@ -40,7 +40,7 @@ const {handleClose, open} = props
                 El usuario al que esta intentando buscar<strong> no existe o puede que lo haya escrito mal</strong>
             </Grid>
             <Grid item xs={12} sx={{display:"flex" , justifyContent:"center"}}>
-                <Button onClick={handleClose} color="inherit" size="small" sx={{width:"40%"}}>
+                <Button onClick={handleClose} color="inherit" size="small" sx={{width:"40%" , color:"dialogButt.main"}}>
                     Aceptar
                 </Button>
             </Grid>

@@ -219,7 +219,7 @@ export default function TheoricView() {
               theoric.comments.map((com: string) => {
                 return <StyledTypography3> {com} </StyledTypography3>;
               })}
-            <LocalOfferIcon
+            <LocalOfferIcon            
               style={{
                 color: `${theme.palette.getContrastText(
                   theme.palette.background.default
