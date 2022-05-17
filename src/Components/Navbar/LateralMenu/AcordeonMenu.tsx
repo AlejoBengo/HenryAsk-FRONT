@@ -3,17 +3,7 @@ import DialogFailed from "../../Dialog/DialogWarning";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
-import Typography from "@mui/material/Typography";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { LateralItemStyled } from "../../Style/StyledComponents";
-import {
-  Button,
-  TextField,
-  IconButton,
-  Box,
-  Autocomplete,
-} from "@mui/material";
-import InputAdornment from "@mui/material/InputAdornment";
+import { Button, TextField, Box, Autocomplete } from "@mui/material";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import SearchIcon from "@mui/icons-material/Search";
 import { useAppSelector, useAppDispatch } from "../../../app/hooks";

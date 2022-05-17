@@ -30,7 +30,6 @@ import {
 import { Img } from "../Content/ContentStyled";
 import css from "./NavBar.module.css";
 import logo from "./logo.png";
-import { LinkDom } from "../Style/StyledComponents";
 import { SearchBar } from "../SearchBar/SearchBar";
 
 const pages = ["Material complementario", "Foro"];
