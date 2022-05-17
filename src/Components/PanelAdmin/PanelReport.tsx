@@ -2,6 +2,15 @@ import React from 'react';
 import ReadMoreModal from './ReadMoreModal';
 import { Link, useNavigate } from 'react-router-dom';
 import { fetchAnswerById } from '../../app/Utils/answerUtilities';
+import {TituloForo} from '../Style/StyledComponents'
+import { editIsBanned , fetchIdUserBan} from '../../app/Utils/editUser';
+import { editReportStatus } from '../../app/Utils/editReportStatus';
+import { deletePost } from '../../app/Utils/postUtilities';
+import Dialog from '../Dialog/Dialog';
+import { deleteAnswer } from '../../app/Utils/answerUtilities';
+import { deleteComment } from '../../app/Utils/commentUtilities';
+
+
 /*-----------IMPORT MUI & CSS-----------*/
 import {Table, TableBody, TableCell, TableContainer, TableHead, Paper, TableRow , TablePagination , Button} from '@mui/material';
 import Typography from '@mui/material/Typography';
@@ -41,7 +50,7 @@ export default function PanelReport(props:any) {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [rowsPerPage, setRowsPerPage] = React.useState(25);
   const [open, setOpen] = React.useState(false);
   let [infoModal , setInfoModal] = React.useState({});
 
@@ -69,9 +78,78 @@ export default function PanelReport(props:any) {
     setPage(0);
   };
 
+  // handle BANEO 
+  const handleCloseResuelto = (info:any) => {
+    if(info.post){
+      fetchIdUserBan(info.post.owner)
+       .then(response=> {
+        let aux = {...response , isBanned:true}
+        alert(`${aux.user_name} ha sido baneado correctamente`)
+        editIsBanned(aux)
+        .then(respo => editReportStatus({status:"FULFILLED", id:info._id }))
+        .then(()=> window.location.reload())
+      })
+    }
+    if(info.answer){
+      fetchIdUserBan(info.answer.owner)
+       .then(response=>{
+        let aux = {...response, isBanned:true}
+        alert(`${aux.user_name} ha sido baneado correctamente`)
+        editIsBanned(aux)
+        .then(respo => editReportStatus({status:"FULFILLED", id:info._id }))
+        .then(()=> window.location.reload())
+      })
+    }
+    if(info.comment){
+      fetchIdUserBan(info.comment.owner)
+       .then(response =>{
+        let aux = {...response, isBanned:true}
+        alert(`${aux.user_name} ha sido baneado correctamente`)
+        editIsBanned(aux)
+        .then(respo => editReportStatus({status:"FULFILLED", id:info._id }))
+        .then(()=> window.location.reload())
+      })
+    }
+    setOpen(false);
+  };
+
+  // ===============//
+  // report instantaneo y borrar post 
+  const [openDialog, setOpenDialog] = React.useState(false);
+  let [modalState, setModalState] = React.useState("Enviando...");
+  let [dialogBaneado , setDialogBaneado] = React.useState("")
+  const handleBoomReport = (str : string , info : any) => {
+    if(str === 'post'){
+      deletePost(info.val?.post._id)
+      .then(()=>fetchIdUserBan(info.val?.post.owner))
+      .then((response)=> {let aux={...response, isBanned:true};editIsBanned(aux)})
+      .then(()=> editReportStatus({status:'FULFILLED' , id:info.val?._id}))
+      .then(()=>{setDialogBaneado(dialogBaneado="Se ha baneado y eliminado el post correctamente!"); setModalState(modalState=dialogBaneado); setOpenDialog(true)})
+      .catch((err)=> console.log(err))
+    }
+    if(str === 'answer'){
+      deleteAnswer(info.val?.answer._id)
+      .then(()=>fetchIdUserBan(info.val?.answer.owner))
+      .then((response)=>{let aux={...response, isBanned:true}; editIsBanned(aux)})
+      .then(()=>editReportStatus({status:'FULFILLED', id:info.val?._id}))
+      .then(()=>{setDialogBaneado(dialogBaneado='Se ha baneado y eliminado la respuesta correctamente'); setModalState(modalState=dialogBaneado); setOpenDialog(true)})
+      .catch((err)=> console.log(err))
+    }
+    if(str==='comment'){
+      deleteComment(info.val?.comment._id)
+      .then(()=> fetchIdUserBan(info.val?.comment.owner))
+      .then((response)=> {let aux= {...response,isBanned:true}; editIsBanned(aux)})
+      .then(()=>editReportStatus({status:'FULFILLED', id:info.val?._id}))
+      .then(()=>{setDialogBaneado(dialogBaneado='Se ha baneado y eliminado el comentario correctamente'); setModalState(modalState=dialogBaneado); setOpenDialog(true)})
+      .catch((err)=> console.log(err))
+    }
+  }
+
+  // ==================//
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-      <ReadMoreModal open={open} setOpen={setOpen} infoModal={infoModal} handlePostComment={handlePostComment}/>
+      <Dialog textSuccess={dialogBaneado} openDialog={openDialog} modalState={modalState} error="No se pudo completar el procedimiento" setOpenDialog={setOpenDialog}/>
+      <ReadMoreModal open={open} setOpen={setOpen} infoModal={infoModal} handlePostComment={handlePostComment} handleCloseResuelto={handleCloseResuelto} handleBoomReport={handleBoomReport}/>
       <TableContainer sx={{ maxHeight: 1540 , minHeight:1540}}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
@@ -122,7 +200,7 @@ export default function PanelReport(props:any) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row:any) => {
+            {rows?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).reverse().map((row:any) => {
                 return (
                   <TableRow hover role="checkbox" tabIndex={-1} key={row.name}>
                     {columns.map((column) => {
@@ -165,11 +243,17 @@ export default function PanelReport(props:any) {
                         }
                         if(row.comment){
                           return(
-                            <TableCell align={column.align} sx={{padding:"0px 0px 0px 10px" , margin:"0px" , width:"19%",}}>
+                            <TableCell align={column.align} sx={{padding:"0px 0px 0px 10px" , margin:"0px" , width:"19%"}}>
                             <Button sx={{textTransform:"none" , color:"comen.main" }} onClick={()=>handlePostComment(row.comment.answer)}>Ir al comentario</Button>
                           </TableCell>
                           )
-                        }}
+                        }
+                        return (
+                          <TableCell align={column.align} sx={{padding:"0px 0px 0px 10px" , margin:"0px" , width:"19%",}}>
+                            <TituloForo sx={{borderBottom:"4px solid yellow"}}>Post Eliminado</TituloForo>
+                          </TableCell>
+                        )
+                      }
 
 
                         if(column.id === 'status'){
