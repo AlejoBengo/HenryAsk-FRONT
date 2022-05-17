@@ -1,21 +1,20 @@
-import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { useAppSelector } from "../hooks";
-import { User, Posts, Answer, Comment , Report} from "../interface";
+import { Report } from "../interface";
 import axios from "axios";
 
-
 interface InitialState {
-  reports:Array<Report>;
+  reports: Array<Report>;
 }
 
 const initialState: InitialState = {
-    reports:[],
+  reports: [],
 };
 
 export const fetchGetAllReport = createAsyncThunk(
-  'report/GetAllReport',
+  "report/GetAllReport",
   async () => {
-    const response = (await axios('/report')).data;
+    const response = (await axios("/report")).data;
     return response;
   }
 );
@@ -30,7 +29,5 @@ export const getReport = createSlice({
     });
   },
 });
-
-//export const { getPendingReports } = getReport.actions;
 
 export default getReport.reducer;

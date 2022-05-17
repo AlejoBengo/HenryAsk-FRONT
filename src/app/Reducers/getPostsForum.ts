@@ -1,27 +1,26 @@
-import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
-import { useAppSelector } from "../hooks";
-import { User, Posts } from "../interface";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { Posts } from "../interface";
 import axios from "axios";
 
 interface InitialState {
-  posts:Array<Posts>,
+  posts: Array<Posts>;
 }
 
 const initialState: InitialState = {
-    posts:[],
+  posts: [],
 };
 
 export const fetchGetAllPosts = createAsyncThunk(
-  'post/GetAllPosts',
-  async (type:0|1|2|10) => { // new
-    if(type===10){
-    const response =(await axios.get(`/post`)).data;
-    return response;
-    }else{
-      const response =(await axios.get(`/post?type=${type}`)).data;
-    return response;
+  "post/GetAllPosts",
+  async (type: 0 | 1 | 2 | 10) => {
+    // new
+    if (type === 10) {
+      const response = (await axios.get(`/post`)).data;
+      return response;
+    } else {
+      const response = (await axios.get(`/post?type=${type}`)).data;
+      return response;
     }
-    
   }
 );
 
@@ -30,7 +29,7 @@ export const getPosts = createSlice({
   initialState,
   reducers: {
     getAllPosts: (state) => {
-        state.posts = initialState.posts
+      state.posts = initialState.posts;
     },
   },
   extraReducers: (builder) => {

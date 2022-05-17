@@ -1,9 +1,7 @@
 /*--------------------------------------------------------*/
 /*-----------IMPORT UTILITIES-----------*/
 import React, { useEffect, useState } from "react";
-import { useAppSelector, useAppDispatch } from "../../app/hooks";
 import { fetchAllTheorics } from "../../app/Reducers/theoricSlice";
-import { fetchAllTheoricsReducer } from "../../app/Reducers/theoricSlice";
 /*-----------IMPORT MUI & CSS-----------*/
 import { List, ListItemButton, Collapse, Typography } from "@mui/material";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
@@ -14,11 +12,8 @@ import { LinkDom } from "../Style/StyledComponents";
 export default function TheoricList() {
   const [open, setOpen] = useState<boolean>(false);
   let [allTheoricsLocal, setAllTheoricsLocal] = useState<any>([]);
-  const { allTheorics } = useAppSelector((state) => state.theorics);
-  const dipatch = useAppDispatch();
 
   useEffect(() => {
-    // dipatch( fetchAllTheoricsReducer() )
     fetchAllTheorics().then((res) => {
       setAllTheoricsLocal(res);
     });
