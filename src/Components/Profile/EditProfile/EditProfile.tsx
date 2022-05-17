@@ -149,7 +149,6 @@ export const EditProfile = () => {
       <StackMigajas>
         <Breadcrumbs separator="›">{migajas}</Breadcrumbs>
       </StackMigajas>
-<<<<<<< HEAD
     <Container sx={{ paddingBottom: "16px", paddingTop: "20px" }}>      
       <Dialog        
         openDialog={openDialog}
@@ -166,37 +165,6 @@ export const EditProfile = () => {
           <Typography sx={{color: "title.main"}} variant="h4" component="h3" gutterBottom display='flex' justifyContent='center'>
             Edita tu información personal
           </Typography>
-=======
-      <Container sx={{ paddingBottom: "16px", paddingTop: "20px" }}>
-        <Dialog
-          openDialog={openDialog}
-          setOpenDialog={setOpenDialog}
-          textSuccess="Cambios guardados correctamente"
-          error="Error al hacer los cambios"
-          buttonText="Volver a mi perfil"
-          modalState={modalState}
-          setModalState={setModalState}
-        />
-        <Paper sx={{ p: 3, minWidth: "100%" }}>
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <Typography
-              sx={{ color: "title.main" }}
-              variant="h4"
-              component="h3"
-              gutterBottom
-              display="flex"
-              justifyContent="center"
-            >
-              Edita tu información personal
-            </Typography>
->>>>>>> 4d7506d91f4c9a308d2fc7b74adcc038630cb4a0
 
             <Card sx={{ minWidth: "100%", padding: "1em" }}>
               <CardMedia
