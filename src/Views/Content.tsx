@@ -1,7 +1,7 @@
 /*--------------------------------------------------------*/
 /*-----------IMPORT UTILITIES-----------*/
 import { useAuth0 } from "@auth0/auth0-react";
-import React from "react";
+import React, { useState } from "react";
 /*-----------IMPORT COMPONENTS-----------*/
 import MainContent from "../Components/Content/MainContent/MainContent";
 import RedirectToLogin from "../Components/RedirectToLogin/RedirectToLogin";

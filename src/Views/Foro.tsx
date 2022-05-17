@@ -1,6 +1,6 @@
 /*--------------------------------------------------------*/
 /*-----------IMPORT UTILITIES-----------*/
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Link, useNavigate } from "react-router-dom";
 /*-----------IMPORT COMPONENTS-----------*/
@@ -11,7 +11,15 @@ import {
   TituloForo,
   StackMigajas,
 } from "../Components/Style/StyledComponents";
-import { Container, Grid, Alert, Breadcrumbs, useTheme } from "@mui/material";
+import {
+  Container,
+  Grid,
+  Alert,
+  Breadcrumbs,
+  useTheme,
+  Modal,
+  LinearProgress,
+} from "@mui/material";
 import { fetchGetAllPosts } from "../app/Reducers/getPostsForum";
 import { useAppSelector, useAppDispatch } from "../app/hooks";
 import { Posts } from "../app/interface";
@@ -21,16 +29,17 @@ import { StyledTypography } from "../Components/Content/MainContent/TableExercis
 let AlumnOrInstructor = ["Alumno", "Instructor"];
 export default function Foro() {
   const theme = useTheme();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const userLogin = useAppSelector((state) => state.user.data);
   const posts = useAppSelector((state) => state.getAllPosts.posts);
   const { isAuthenticated } = useAuth0();
   const dispatch = useAppDispatch();
+  const [charged, setCharged] = useState(false);
 
   // USER LOOGIN ---> USUARIO LOGEAEDO ---> SE MUESTRA SEGUN SU ROL
   useEffect(() => {
-    if(userLogin.role === 0){
-      navigate('/Forum/News')
+    if (userLogin.role === 0) {
+      navigate("/Forum/News");
     }
     if (userLogin.role === 1) {
       // USUARIO DEL PREP
@@ -111,7 +120,26 @@ export default function Foro() {
     </Link>,
   ];
   if (!isAuthenticated) {
-    return <RedirectToLogin open={true} />;
+    setTimeout(() => {
+      setCharged(true);
+    }, 4000);
+    if (!charged) {
+      return (
+        <Modal open={true}>
+          <LinearProgress
+            color="secondary"
+            style={{
+              width: "90vw",
+              marginLeft: "5vw",
+              marginTop: "49vh",
+              height: "1vh",
+            }}
+          />
+        </Modal>
+      );
+    } else {
+      return <RedirectToLogin open={true} />;
+    }
   }
   if (userLogin.role === 1) {
     return (
