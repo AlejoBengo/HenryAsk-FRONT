@@ -32,7 +32,8 @@ export default function Dialog(props: any) {
   const handleClose = () => {
     if (modalState !== "Enviando...") {
       setOpenDialog(false);
-      navigate(route || 0);
+      route?
+      navigate(route || 0): window.location.reload();
     }
   };
 

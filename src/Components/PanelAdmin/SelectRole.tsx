@@ -12,7 +12,6 @@ export default function SelectRole(props:any) {
     let [userInfo , setUserInfo] = React.useState(usuario)
     const handleChangeRole = (event: any) => {
       setRole(role = event.target.value);
-      console.log(userInfo)
       setUserInfo(userInfo = {...userInfo, role:event.target.value})
       dispatch(remoteUpdateUser(userInfo)).then(()=> handleClickOpen() , null)
       window.location.reload();

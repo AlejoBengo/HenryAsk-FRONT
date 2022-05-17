@@ -72,7 +72,6 @@ export default function PanelTable(props:any) {
   }
   
   const handleBan = (info:any)=>{
-    console.log(info)
     let aux = {...info , isBanned:true};
     editIsBanned(aux)
     .then(()=> window.location.reload())
@@ -115,7 +114,8 @@ const borrarUsuario = (id:string) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            { userByUserName.user_name? 
+            
+          {userByUserName.user_name? 
             
             [userByUserName].map((row) => {
               return (
@@ -125,10 +125,28 @@ const borrarUsuario = (id:string) => {
                     let usuario = row
                     if(column.id === "role"){
                         return (
-                        <TableCell key={column.id} align={column.align}>
-                              <SelectRole valor={value} usuario={usuario} handleClickOpen={handleClickOpen}/>
+                    <TableCell key={column.id} align={column.align} sx={{display:"flex", alignItems:"center", minHeight:"95px"}}>
+                          <SelectRole valor={value} usuario={usuario} handleClickOpen={handleClickOpen}/>
+                          <IconButton onClick={()=>handleOpenModalDelete(row)} aria-label="delete" color="error">
+                            <CloseIcon />
+                          </IconButton> 
+                    </TableCell>
+                        )
+                    }
+                    if(column.id==="isBanned"){
+                      if(row.isBanned){
+                        return(
+                        <TableCell key={column.id} align={column.align} sx={{minHeight:"95px"}}>
+                            <Button onClick={()=> handleDesban(row)} color="success">Pulsa para Desbanear</Button>
+                      </TableCell>
+                        )
+                      }else{
+                        return(
+                          <TableCell key={column.id} align={column.align} sx={{minHeight:"95px"}}>
+                          <Button onClick={()=> handleBan(row)} color="error">Pulsa para Banear</Button>
                         </TableCell>
                         )
+                      }
                     }
                     return (
                       <TableCell key={column.id} align={column.align}>
@@ -140,46 +158,48 @@ const borrarUsuario = (id:string) => {
               );
             })
             
-            :users.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-                return (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={row.first_name}>
-                    {columns.map((column) => {
-                      const value = row[column.id];
-                      let usuario = row
-                      if(column.id === "role"){
-                          return (
-                          <TableCell key={column.id} align={column.align} sx={{display:"flex", alignItems:"center"}}>
-                                <SelectRole valor={value} usuario={usuario} handleClickOpen={handleClickOpen}/>
-                                <IconButton onClick={()=>handleOpenModalDelete(row)} aria-label="delete" color="error">
-                                  <CloseIcon />
-                                </IconButton> 
-                          </TableCell>
-                          )
-                      }
-                      if(column.id==="isBanned"){
-                        if(row.isBanned){
-                          return(
-                          <TableCell key={column.id} align={column.align}>
-                              <Button onClick={()=> handleDesban(row)} color="success">Pulsa para Desbanear</Button>
+            : null}
+            {!userByUserName.user_name &&users.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+              return (
+                <TableRow hover role="checkbox" tabIndex={-1} key={row.user_name}>
+                  {columns.map((column) => {
+                    const value = row[column.id];
+                    let usuario = row
+                    if(column.id === "role"){
+                        return (
+                        <TableCell key={column.id} align={column.align} sx={{display:"flex", alignItems:"center", minHeight:"95px"}}>
+                              <SelectRole valor={value} usuario={usuario} handleClickOpen={handleClickOpen}/>
+                              <IconButton onClick={()=>handleOpenModalDelete(row)} aria-label="delete" color="error">
+                                <CloseIcon />
+                              </IconButton> 
                         </TableCell>
-                          )
-                        }else{
-                          return(
-                            <TableCell key={column.id} align={column.align}>
-                            <Button onClick={()=> handleBan(row)} color="error">Pulsa para Banear</Button>
-                          </TableCell>
-                          )
-                        }
-                      }
-                      return (
-                        <TableCell key={column.id} align={column.align}>
-                          {value}
+                        )
+                    }
+                    if(column.id==="isBanned"){
+                      if(row.isBanned){
+                        return(
+                        <TableCell key={column.id} align={column.align} sx={{minHeight:"95px"}}>
+                            <Button onClick={()=> handleDesban(row)} color="success">Pulsa para Desbanear</Button>
+                      </TableCell>
+                        )
+                      }else{
+                        return(
+                          <TableCell key={column.id} align={column.align} sx={{minHeight:"95px"}}>
+                          <Button onClick={()=> handleBan(row)} color="error">Pulsa para Banear</Button>
                         </TableCell>
-                      );
-                    })}
-                  </TableRow>
-                );
-              })}
+                        )
+                      }
+                    }
+                    return (
+                      <TableCell key={column.id} align={column.align} sx={{minHeight:"95px"}}>
+                        {value}
+                      </TableCell>
+                    );
+                  })}
+                </TableRow>
+              );
+            })}
+            
           </TableBody>
         </Table>
       </TableContainer>

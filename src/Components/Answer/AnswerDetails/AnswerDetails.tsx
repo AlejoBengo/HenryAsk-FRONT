@@ -261,7 +261,7 @@ export const AnswerDetails = ({
             )}
             {(user._id === answerData.owner._id || user.role > 3) && (
               <MenuItem onClick={handleOpenDelete}>
-                Eliminar respuesta *Rol admin*
+                Eliminar respuesta
               </MenuItem>
             )}
             {user._id !== answerData.owner._id && (
