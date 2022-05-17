@@ -23,6 +23,7 @@ import {
   Container,
   Avatar,
   Button,
+  Skeleton,
   Tooltip,
   MenuItem,
 } from "@mui/material";
@@ -40,11 +41,15 @@ const Navbar = () => {
   const DBUser = useAppSelector((state) => state.user.data);
   const [pivote, setPivote] = useState(false); // para TA y ADM moverse en libertad por forum learning y forum prep
   const [openBanned, setOpenBanned] = React.useState(false);
+  const [charged, setCharged] = useState<boolean>(false);
   const { logout } = useAuth0();
   useEffect(() => {
     if (DBUser.role === 3 || DBUser.role === 5) {
       setPivote(true);
     }
+    setTimeout(() => {
+      setCharged(true);
+    }, 4000);
   }, []);
 
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
@@ -85,9 +90,9 @@ const Navbar = () => {
 
   const handleOnClickLogoHome = () => {
     window.scrollTo(0, 0);
-  }
+  };
 
-// handle de si estas baneado en publicar discusion 
+  // handle de si estas baneado en publicar discusion
 
   const handleClickOpenBanned = () => {
     setOpenBanned(true);
@@ -97,27 +102,31 @@ const Navbar = () => {
     setOpenBanned(false);
     setAnchorElCreate(null);
   };
-// ================//
+  // ================//
 
-// handle eliminar cuenta  + estado local
-const [deleteAccount , setDeleteAccount] = React.useState(false);
-let [inputDelete , setInputDelete] = React.useState<any>("");
+  // handle eliminar cuenta  + estado local
+  const [deleteAccount, setDeleteAccount] = React.useState(false);
+  let [inputDelete, setInputDelete] = React.useState<any>("");
   const handleOpenDeleteAccount = () => {
     setDeleteAccount(true);
-  }
+  };
   const handleCloseDeleteAccount = () => {
     setDeleteAccount(false);
-  }
-  const handleChangeDelete = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setInputDelete(event.target.value)
-  }
+  };
+  const handleChangeDelete = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setInputDelete(event.target.value);
+  };
   const handleDeleteUser = () => {
-    deleteUserPanel(DBUser._id).then(()=> setInputDelete("Eliminado147")).then(()=> logout({ returnTo: window.location.origin }))
-  }
+    deleteUserPanel(DBUser._id)
+      .then(() => setInputDelete("Eliminado147"))
+      .then(() => logout({ returnTo: window.location.origin }));
+  };
   const handleSuccessDelete = () => {
     window.location.reload();
-  }
-// ===========//
+  };
+  // ===========//
   return (
     <AppBar
       position="sticky"
@@ -225,8 +234,17 @@ let [inputDelete , setInputDelete] = React.useState<any>("");
               anchorEl={anchorElCreate}
               onClose={handleCloseCreateMenu}
             >
-              <IsBannedModal handleCloseBanned={handleCloseBanned} openBanned={openBanned}/>
-              <MenuItem onClick={() => DBUser.isBanned? handleClickOpenBanned() : navigate("/Ask")}> Discusión</MenuItem>
+              <IsBannedModal
+                handleCloseBanned={handleCloseBanned}
+                openBanned={openBanned}
+              />
+              <MenuItem
+                onClick={() =>
+                  DBUser.isBanned ? handleClickOpenBanned() : navigate("/Ask")
+                }
+              >
+                Discusión
+              </MenuItem>
               {DBUser.role >= 5 ? (
                 <MenuItem onClick={() => navigate("/Theoric/Create")}>
                   Contenido Teórico
@@ -276,7 +294,14 @@ let [inputDelete , setInputDelete] = React.useState<any>("");
                   />
                 </IconButton>
               </Tooltip>
-              <ModalDeleteAccount handleCloseDeleteAccount={handleCloseDeleteAccount} deleteAccount={deleteAccount} handleChangeDelete={handleChangeDelete} inputDelete={inputDelete} handleDeleteUser={handleDeleteUser} handleSuccessDelete={handleSuccessDelete}/>
+              <ModalDeleteAccount
+                handleCloseDeleteAccount={handleCloseDeleteAccount}
+                deleteAccount={deleteAccount}
+                handleChangeDelete={handleChangeDelete}
+                inputDelete={inputDelete}
+                handleDeleteUser={handleDeleteUser}
+                handleSuccessDelete={handleSuccessDelete}
+              />
               <Menu
                 sx={{ mt: "45px" }}
                 id="menu-appbar"
@@ -305,7 +330,7 @@ let [inputDelete , setInputDelete] = React.useState<any>("");
                       >
                         {setting}
                       </Button>
-                    ) : setting==="Eliminar Cuenta"?(
+                    ) : setting === "Eliminar Cuenta" ? (
                       <Button
                         color="inherit"
                         sx={{ width: "100%", height: "100%" }}
@@ -323,7 +348,13 @@ let [inputDelete , setInputDelete] = React.useState<any>("");
               </Menu>
             </Box>
           ) : (
-            <LoginButton />
+            <div>
+              {!charged ? (
+                <Skeleton variant="circular" width={50} height={50} />
+              ) : (
+                <LoginButton />
+              )}
+            </div>
           )}
         </Toolbar>
       </Container>
