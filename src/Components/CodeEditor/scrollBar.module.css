@@ -1,0 +1,8 @@
+.editor ::-webkit-scrollbar {
+  width: 1vw;
+  background-color: #fff;
+}
+
+.editor ::-webkit-scrollbar-thumb {
+  background-color: rgb(39, 37, 37);
+}

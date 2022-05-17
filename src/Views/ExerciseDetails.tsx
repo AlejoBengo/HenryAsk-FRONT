@@ -29,7 +29,9 @@ import {
 import {
   BoxExcerciceContainer,
   StyledTypography,
+  SuccessTypography,
   CreatorNameText,
+  FailedTypography,
   StyledPaper,
   CreatedAt,
 } from "../Components/Excercise/StyledComponents";
@@ -52,6 +54,8 @@ const ExerciseDetails = () => {
   const [openDelete, setOpenDelete] = useState<boolean>(false);
   const [editable, setEditable] = useState<ExerciseInterface>(exerciseTemplate);
   const dispatch = useAppDispatch();
+  const [status, setStatus] = useState<boolean>(false);
+  const [statusF, setStatusF] = useState<boolean>(false);
 
   useEffect(() => {
     if (id && typeof id === "string") {
@@ -109,6 +113,14 @@ const ExerciseDetails = () => {
       deleteExercise(id);
       navigate("/Content");
     }
+  };
+
+  const handleCloseSuccess = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setStatus(false);
+  };
+
+  const handleCloseFail = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setStatusF(false);
   };
 
   const migajas = [
@@ -223,6 +235,26 @@ const ExerciseDetails = () => {
           </Button>
         </StyledBoxModal>
       </Modal>
+      <Modal open={status}>
+        <StyledBoxModal2>
+          <SuccessTypography>LO LOGRASTE!</SuccessTypography>
+          <Button
+            onClick={handleCloseSuccess}
+            variant="contained"
+            color="success"
+          >
+            Aceptar
+          </Button>
+        </StyledBoxModal2>
+      </Modal>
+      <Modal open={statusF}>
+        <StyledBoxModal2>
+          <FailedTypography>INTÉNTALO DE NUEVO!</FailedTypography>
+          <Button onClick={handleCloseFail} variant="contained" color="error">
+            Aceptar
+          </Button>
+        </StyledBoxModal2>
+      </Modal>
 
       <Box
         style={{
@@ -264,7 +296,12 @@ const ExerciseDetails = () => {
           </StyledPaper>
         </BoxExcerciceContainer>
 
-        <MiEditor coding={exercise.code} testing={exercise.test} />
+        <MiEditor
+          coding={exercise.code}
+          testing={exercise.test}
+          setter={setStatus}
+          setter2={setStatusF}
+        />
       </Box>
     </StyledGrid>
   );

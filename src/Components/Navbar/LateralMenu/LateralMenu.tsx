@@ -26,7 +26,7 @@ import ForumIcon from "@mui/icons-material/Forum";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import { LateralItemStyled, LinkDom } from "../../Style/StyledComponents";
-import BookmarkAddIcon from '@mui/icons-material/BookmarkAdd';
+import BookmarkAddIcon from "@mui/icons-material/BookmarkAdd";
 /*--------------------------------------------------------*/
 
 export default function LateralMenu(props: any) {
@@ -50,7 +50,6 @@ export default function LateralMenu(props: any) {
     setOpenBanned(false);
   };
 
-
   const toggleDrawer =
     (anchor: "left", open: boolean) =>
     (event: React.KeyboardEvent | React.MouseEvent) => {
@@ -64,13 +63,12 @@ export default function LateralMenu(props: any) {
 
       setState({ ...state, [anchor]: open });
     };
-    const toggleDrawer1 =
+  const toggleDrawer1 =
     (anchor: "left", open: boolean) =>
     (event: React.KeyboardEvent | React.MouseEvent) => {
-
-      if(userLog.isBanned){
-        handleClickOpenBanned()
-      } else{
+      if (userLog.isBanned) {
+        handleClickOpenBanned();
+      } else {
         if (
           event.type === "keydown" &&
           ((event as React.KeyboardEvent).key === "Tab" ||
@@ -82,16 +80,13 @@ export default function LateralMenu(props: any) {
       }
     };
 
-
   const list = (anchor: "left") => (
-    
     <Box
       sx={{ width: 325 }}
       role="presentation"
       /* onClick={toggleDrawer(anchor, false)} */
       /* onKeyDown={toggleDrawer(anchor, false)} */
     >
-      
       <Box
         width="100%"
         display="flex"
@@ -129,7 +124,7 @@ export default function LateralMenu(props: any) {
           </LinkDom>
         </Box>
       </Box>
-      
+
       <List>
         <AcordeonMenu state={state} setState={setState} />
         <LinkDom onClick={toggleDrawer(anchor, false)} to="/Forum">
@@ -146,22 +141,23 @@ export default function LateralMenu(props: any) {
             />
           </LinkDom>
         </LinkDom>
-        <LinkDom onClick={toggleDrawer1(anchor, false)} to={userLog.isBanned?"#" : "/Ask"}>
+        <LinkDom
+          onClick={toggleDrawer1(anchor, false)}
+          to={userLog.isBanned ? "#" : "/Ask"}
+        >
           <LateralItemStyled
             text="Crear nueva Discusión"
             icon={<NoteAddIcon />}
           />
         </LinkDom>
-        {
-          userLog.role >= 3 ? (
-            <LinkDom onClick={toggleDrawer(anchor, false)} to="/Forum/News">
+        {userLog.role >= 3 ? (
+          <LinkDom onClick={toggleDrawer(anchor, false)} to="/Forum/News">
             <LateralItemStyled
               text="Foro Futuros Henry's"
-              icon={<BookmarkAddIcon/>}
+              icon={<BookmarkAddIcon />}
             />
           </LinkDom>
-          ):null
-        }
+        ) : null}
         {userLog.role === 5 ? (
           <LinkDom onClick={toggleDrawer(anchor, false)} to="/PanelAdm">
             <LateralItemStyled
@@ -173,10 +169,12 @@ export default function LateralMenu(props: any) {
       </List>
       <Divider />
 
-      <Stack sx={{ width: "100%" }}>
-        <TheoricList />
-        <ExerciseList />
-      </Stack>
+      {userLog.role === 0 ? null : (
+        <Stack sx={{ width: "100%" }}>
+          <TheoricList />
+          <ExerciseList />
+        </Stack>
+      )}
     </Box>
   );
 
@@ -197,7 +195,10 @@ export default function LateralMenu(props: any) {
         >
           {list("left")}
         </Drawer>
-        <IsBannedModal handleCloseBanned={handleCloseBanned} openBanned={openBanned}/>
+        <IsBannedModal
+          handleCloseBanned={handleCloseBanned}
+          openBanned={openBanned}
+        />
       </React.Fragment>
     </div>
   );

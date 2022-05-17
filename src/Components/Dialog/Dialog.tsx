@@ -1,12 +1,6 @@
 import React, { useState } from "react";
 /*-----------IMPORT MUI & CSS-----------*/
-import {
-  CircularProgress,
-  Fade,
-  Modal,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { CircularProgress, Fade, Modal, Typography } from "@mui/material";
 import { Button, Box } from "@mui/material";
 import CheckIcon from "@mui/icons-material/Check";
 import ErrorIcon from "@mui/icons-material/Error";
@@ -48,6 +42,7 @@ export default function Dialog(props: any) {
       <Fade in={openDialog}>
         <Box
           sx={{
+            color:"comen.main",
             position: "absolute" as "absolute",
             top: "50%",
             left: "50%",
@@ -68,11 +63,11 @@ export default function Dialog(props: any) {
           </Typography>
           {modalState === "Enviando" && <CircularProgress />}
           {modalState === textSuccess && (
-            <CheckIcon fontSize="large" color="info" />
+            <CheckIcon fontSize="large" color="success" />
           )}
           {modalState === error && <ErrorIcon fontSize="large" color="error" />}
           {modalState !== "Enviando..." && (
-            <Button onClick={() => handleClose()}>Aceptar</Button>
+            <Button sx={{color:"dialogButt.main"}} onClick={() => handleClose()}>Aceptar</Button>
           )}
         </Box>
       </Fade>
