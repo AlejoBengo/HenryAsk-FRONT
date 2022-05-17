@@ -382,7 +382,7 @@ export const PostDetails = () => {
             >
               Cerrar
             </Button>
-            <StyledTypography>Are you sure?</StyledTypography>
+            <StyledTypography>Estas Seguro?</StyledTypography>
             <Button
               variant="contained"
               color="error"

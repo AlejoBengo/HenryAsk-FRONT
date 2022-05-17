@@ -452,7 +452,7 @@ export const AnswerDetails = ({
             >
               Cerrar
             </BotonCerrar>
-            <AreYouSure>ARE YOU SURE?</AreYouSure>
+            <AreYouSure>Estas Seguro?</AreYouSure>
             <BotonBorrar2
               onClick={handleDelete}
               color="error"
