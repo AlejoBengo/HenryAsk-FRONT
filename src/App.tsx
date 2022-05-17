@@ -11,7 +11,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { useAppSelector, useAppDispatch } from "./app/hooks";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { createOptions } from "./Assets/theme/options";
-import { Box } from "@mui/material";
+import { Box, Skeleton } from "@mui/material";
 import { useCookies } from "react-cookie";
 /*-----------IMPORT REDUCER-----------*/
 import { fetchUserByEmail } from "./app/Reducers/userSlice";
@@ -51,8 +51,12 @@ const App = () => {
   const DBUser = useAppSelector((state) => state.user.data);
   const mode = useAppSelector((state) => state.mode.mode);
   const [theme, setTheme] = useState(createTheme(createOptions(mode)));
+  const [charged, setCharged] = useState<boolean>(false);
 
   useEffect(() => {
+    setTimeout(() => {
+      setCharged(true);
+    }, 4000);
     if (isAuthenticated) {
       dispatch(fetchUserByEmail(user?.email));
     }
@@ -82,7 +86,7 @@ const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Header />
+      {charged ? <Header /> : <Skeleton animation="wave" height={50} />}
       <Navbar />
       <Box
         sx={{
