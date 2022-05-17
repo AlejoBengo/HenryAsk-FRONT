@@ -31,6 +31,6 @@ export const getReport = createSlice({
   },
 });
 
-//export const {  } = xxxxx.actions;
+//export const { getPendingReports } = getReport.actions;
 
 export default getReport.reducer;
