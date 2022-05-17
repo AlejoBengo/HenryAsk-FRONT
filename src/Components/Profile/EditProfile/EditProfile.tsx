@@ -407,7 +407,8 @@ export const EditProfile = () => {
                 disabled={
                   userInfo.first_name === "" ||
                   userInfo.last_name === "" ||
-                  userInfo.user_name === ""
+                  userInfo.user_name === "" ||
+                  allUserNames.includes(userInfo.user_name)
                 }
               >
                 Guardar
