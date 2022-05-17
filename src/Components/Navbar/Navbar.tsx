@@ -245,12 +245,12 @@ const Navbar = () => {
               >
                 Discusión
               </MenuItem>
-              {DBUser.role >= 5 ? (
+              {DBUser.role >= 4 ? (
                 <MenuItem onClick={() => navigate("/Theoric/Create")}>
                   Contenido Teórico
                 </MenuItem>
               ) : null}
-              {DBUser.role >= 5 ? (
+              {DBUser.role >= 4 ? (
                 <MenuItem onClick={() => navigate("/Exercise/Create")}>
                   Ejercicio
                 </MenuItem>
