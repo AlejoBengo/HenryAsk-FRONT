@@ -1,4 +1,3 @@
-import React from "react";
 import { Switch } from "@mui/material";
 import { useAppSelector, useAppDispatch } from "../../app/hooks";
 import { toggleMode } from "../../app/Reducers/modeReducer";

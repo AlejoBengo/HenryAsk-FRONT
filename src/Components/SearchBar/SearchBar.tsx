@@ -1,10 +1,8 @@
-import React, { useState, useRef } from "react";
-import { Box, TextField, Button, useTheme } from "@mui/material";
-//import { Search as SearchIcon } from "@mui/icons-material";
-import IconButton from '@mui/material/IconButton';
-import SearchIcon from '@mui/icons-material/Search';
+import { useState } from "react";
+import { Box, TextField, Button } from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
 import { useAppDispatch } from "../../app/hooks";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { getSearchResults } from "../../app/Reducers/searchSlice";
 
 export const SearchBar = () => {
@@ -60,13 +58,14 @@ export const SearchBar = () => {
         inputProps={{
           sx: { color: "primary.light" },
         }}
-      />      
+      />
       <Button
-        startIcon={<SearchIcon sx={{ width:"30px", height:"30px"}} />}
+        startIcon={<SearchIcon sx={{ width: "30px", height: "30px" }} />}
         variant="contained"
         onClick={() => handleSearch()}
-        sx={{ ml: 1 , height:"50px", borderRadius:"100px"}}
-      >Buscar...
+        sx={{ ml: 1, height: "50px", borderRadius: "100px" }}
+      >
+        Buscar...
       </Button>
     </Box>
   );
