@@ -18,6 +18,26 @@ export const StyledTypography = styled(Typography)(
   `
 );
 
+export const SuccessTypography = styled(Typography)(
+  ({ theme }) => `
+    font-family: helvetica;
+    color:  ${theme.palette.success.main};
+    font-size: 5vh;
+    font-weight: bold;
+    text-transform: uppercase;
+  `
+);
+
+export const FailedTypography = styled(Typography)(
+  ({ theme }) => `
+    font-family: helvetica;
+    color:  ${theme.palette.error.main};
+    font-size: 5vh;
+    font-weight: bold;
+    text-transform: uppercase;
+  `
+);
+
 export const CreatorNameText = styled(Typography)(
   ({ theme }) => `
   font-family: helvetica;

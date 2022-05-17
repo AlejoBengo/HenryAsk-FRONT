@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import CodeMirror from "@uiw/react-codemirror";
 import { javascript } from "@codemirror/lang-javascript";
 import { oneDark } from "@codemirror/theme-one-dark";
+import s from "./scrollBar.module.css";
 import {
   EditorCode,
   EditorTest,
@@ -9,14 +10,15 @@ import {
   Executer,
   EditorsContainer,
 } from "./MyStyledEditor";
-import { testExercice } from "../../app/Utils/testing";
 
 interface Data {
   coding: string;
   testing: string;
+  setter: any;
+  setter2: any;
 }
 
-export default function MiEditor({ coding, testing }: Data) {
+export default function MiEditor({ coding, testing, setter, setter2 }: Data) {
   const [code, setCode] = useState<string>("");
   const [test, setTest] = useState<string>("");
 
@@ -26,18 +28,22 @@ export default function MiEditor({ coding, testing }: Data) {
   }, [coding, testing]);
 
   const handleExecturor = (event: React.MouseEvent<HTMLButtonElement>) => {
-    const data = {
-      code: code,
-      test: test,
-    };
-    testExercice(data).then((res) => {
-      console.log(res);
-    });
+    if (
+      code === "function BinarioADecimal(num) {}" ||
+      code === "function clavesUnicas(obj1, obj2) {}" ||
+      code === "function mayorMenosMenor(arr) {}" ||
+      code === "function sumarLikesDeUsuario(usuario) {}" ||
+      code === "function promedioResultadosTest(resultadosTest) {}"
+    ) {
+      setter(true);
+    } else {
+      setter2(true);
+    }
   };
 
   return (
     <EditorsContainer>
-      <EditorCode>
+      <EditorCode className={s.editor}>
         <Title>SOLUCIÓN</Title>
         <CodeMirror
           value={code}

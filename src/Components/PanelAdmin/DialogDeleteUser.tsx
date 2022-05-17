@@ -44,7 +44,7 @@ export default function DialogDeleteUser(props: any) {
         >
             <Grid container>
             <Grid item xs={12} sx={{margin:"0px 0px 20px 0px"}}>
-                <Typography align="center">Esta seguro/a que desea eliminar este usuario?</Typography>
+                <Typography sx={{color: "comen.main"}} align="center">Esta seguro/a que desea eliminar este usuario?</Typography>
             </Grid>
 
                 <Grid item xs={6} sx={{display:"flex", justifyContent:"center"}}>

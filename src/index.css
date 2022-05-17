@@ -4,25 +4,11 @@
   box-sizing: border-box;
 }
 
-/*PALETA light*/
-/* *{
-  color:#ffd700,
-}*{
-  color: #808080,
-}*{
-  color:#ef6c00,
-}*{
-  color:#000000,
-}*{
-  color:#A10702,
-}*{
-  color: #00CC66,
-} */
-:root{
+:root {
   --color-primary-light: #ffd700;
   --color-secondary-light: #808080;
   --color-warning-light: #ef6c00;
   --color-info-light: #000000;
-  --color-error-light: #A10702;
-  --color-success-light: #00CC66;
+  --color-error-light: #a10702;
+  --color-success-light: #00cc66;
 }

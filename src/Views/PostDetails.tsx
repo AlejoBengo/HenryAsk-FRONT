@@ -57,6 +57,7 @@ import {
   DialogActions,
   DialogContent,
   DialogContentText,
+  LinearProgress,
   DialogTitle,
 } from "@mui/material";
 import CheckIcon from "@mui/icons-material/Check";
@@ -115,6 +116,7 @@ export const PostDetails = () => {
   });
   const [newTags, setNewTags] = useState<any>([]);
   const [openDialog, setOpenDialog] = React.useState(false);
+  const [charged, setCharged] = useState(false);
   const { isAuthenticated } = useAuth0();
   const [openModalReport, setOpenModalReport] = React.useState(false);
   const [goEdit, setGoEdit] = useState<boolean>(false);
@@ -317,9 +319,30 @@ export const PostDetails = () => {
   ];
 
   if (error) return <div>Error</div>;
+
   if (!isAuthenticated) {
-    return <RedirectToLogin open={true} />;
+    setTimeout(() => {
+      setCharged(true);
+    }, 4000);
+    if (!charged) {
+      return (
+        <Modal open={true}>
+          <LinearProgress
+            color="secondary"
+            style={{
+              width: "90vw",
+              marginLeft: "5vw",
+              marginTop: "49vh",
+              height: "1vh",
+            }}
+          />
+        </Modal>
+      );
+    } else {
+      return <RedirectToLogin open={true} />;
+    }
   }
+
   return (
     <Box>
       <StackMigajas spacing={2}>
@@ -359,7 +382,7 @@ export const PostDetails = () => {
             >
               Cerrar
             </Button>
-            <StyledTypography>Are you sure?</StyledTypography>
+            <StyledTypography>Estas Seguro?</StyledTypography>
             <Button
               variant="contained"
               color="error"
