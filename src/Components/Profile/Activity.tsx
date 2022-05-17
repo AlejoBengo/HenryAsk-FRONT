@@ -19,7 +19,7 @@ const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 export default function Activity() {
     const theme = useTheme();
     let userProfile = useAppSelector((state) => state.profile.profile);
-    // let post = useAppSelector((state: any) => state.getAllPosts.posts);
+    let post = useAppSelector((state: any) => state.getAllPosts.posts);
     let [activeStep, setActiveStep] = React.useState(0);
     const [activeStep1, setActiveStep1] = React.useState(0);
     const [activeStep2, setActiveStep2] = React.useState(0);
@@ -32,10 +32,9 @@ export default function Activity() {
 
     useEffect(() => {
         dispatch(fetchProfile(id));
-        // dispatch(fetchGetAllPosts(10));
+        dispatch(fetchGetAllPosts(10));
         setActiveStep((activeStep = 0));
     }, [dispatch, id]);
-
 
     let content = (step: string) => {
         let aux = step.split(" ");
@@ -92,8 +91,6 @@ export default function Activity() {
     ? reverseArr(userProfile.comments).slice(0, 6).length
     : 1;
 
-    console.log(userProfile)
-
     return (
         <Paper>
             <Grid>
@@ -125,7 +122,7 @@ export default function Activity() {
                         onChangeIndex={handleStepChange}>
                             {reverseArr(userProfile.posts).slice(0, 6).map((step: any) => (
                                 <Grid>
-                                    <Grid sx={{ height: 230, display: "grid", padding: "1rem" }}>
+                                    <Grid sx={{ height: 263, display: "grid", padding: "1rem" }}>
                                         <Typography
                                         variant="h5"
                                         component="div"
@@ -213,7 +210,7 @@ export default function Activity() {
                         onChangeIndex={handleStepChange1}>
                             {reverseArr(userProfile.answers).slice(0, 6).map((step: any) => (
                                 <Grid>
-                                    <Grid sx={{ height: 230, display: "grid", padding: "1rem" }}>
+                                    <Grid sx={{ height: 263, display: "grid", padding: "1rem" }}>
                                         <Grid
                                         sx={{
                                         display: "flex",
@@ -296,18 +293,18 @@ export default function Activity() {
                     display="flex"
                     justifyContent="center"
                     padding="2rem" >
-                    <TituloForo>Comentarios</TituloForo>
-                </Typography>
+                        <TituloForo>Comentarios</TituloForo>
+                    </Typography>
 
                 <Card sx={theme.palette.mode === "dark"
                 ? { backgroundImage: "none" }
-                : { background: "yellow" }}>
+                : { background: "yellow"}}>
                     <AutoPlaySwipeableViews
                     index={activeStep2}
                     onChangeIndex={handleStepChange2}>
                         {reverseArr(userProfile.comments).slice(0, 6).map((step: any) => (
                             <Grid>
-                                <Grid sx={{ height: 230, display: "grid", padding: "1rem" }}>
+                                <Grid sx={{ height: 300, display: "grid", padding: "1rem" }}>
                                     <Grid
                                     sx={{
                                     display: "flex",
@@ -337,15 +334,6 @@ export default function Activity() {
                                 justifyContent="center" 
                                 paddingBottom="0.5rem">
                                     {`Realizado:${step.createdAt.slice(0, 10)}`}
-                                </Grid>
-                                <Grid display="flex" justifyContent="center">
-                                    <Button
-                                    onClick={() => navigate(`/Post/${step.answer}`)}
-                                    variant="contained"
-                                    color={theme.palette.mode === "dark" ? "primary" : "secondary" }
-                                    sx={{ height: "10%" }}>
-                                        Ir
-                                    </Button>
                                 </Grid>
                             </Grid>
                         ))}

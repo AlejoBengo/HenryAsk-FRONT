@@ -1,6 +1,6 @@
-import { 
-    CardActionArea, 
+import {
     Typography, 
+    useTheme,
     Button,
     Link,
     Grid, 
@@ -8,22 +8,21 @@ import {
     Box } from '@mui/material';
 
 export default function CardRedirect(){
+    const theme = useTheme();
+
     return (
         <Box sx={{width: '100%', padding: '1rem'}} >
             <Grid container >
                 <Grid item xs={12} sm={12}>
-                    {/* <Box></Box> */}
-                    <Card sx={{ 
-                        width: '100%', 
-                        height: '100%',
-                        padding: '3rem',
-                        backgroundColor: 'yellow' }}>
+                    <Card sx={theme.palette.mode === "dark"
+                    ? { backgroundImage: "black", width: '100%', height: '100%', padding: '3rem' }
+                    : { background: "yellow", width: '100%', height: '100%', padding: '3rem'  }}>
                             <Typography
                                 variant="h2"
                                 display='flex'
                                 justifyContent='center'
                                 padding='3rem'
-                                color='secondary'
+                                color={theme.palette.mode === "dark" ? "primary" : "secondary"}
                                 >
                                 👩🏽‍🚀¡Sumate a la comunidad!👨🏽‍🚀
                             </Typography>
@@ -35,7 +34,7 @@ export default function CardRedirect(){
                                 rel="noopener" 
                                 target="_blank">
                                     <Button
-                                    color= "secondary"
+                                    color={theme.palette.mode === "dark" ? "primary" : "secondary"}
                                     variant='contained'
                                     >
                                         Aplica

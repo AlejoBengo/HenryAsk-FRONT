@@ -21,6 +21,7 @@ import { StyledAvatar } from "../../Views/Profile";
 import { useNavigate } from "react-router-dom";
 import { TituloForo } from "../Style/StyledComponents";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import { LinkDom } from "../Style/StyledComponents";
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
@@ -149,7 +150,9 @@ export default function PosteosAlumnos() {
                           sx={theme.palette.mode === "dark" 
                           ? { color: "yellow" } 
                           : { color: "black" }}>
-                          {el.question}
+                            <LinkDom to={`/Post/${el._id}`}>
+                              {el.question}
+                            </LinkDom>
                         </Typography>
                         <Typography
                           display="flex"
