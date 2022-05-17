@@ -153,9 +153,7 @@ export const ButtonsContainer = styled(Box)`
 export const StyledBoxModal2 = styled(Box)(
   ({ theme }) => `
   background-color: ${
-    theme.palette.mode === "light"
-      ? theme.palette.secondary.main
-      : theme.palette.info.main
+    theme.palette.mode === "light" ? "whitesmoke" : theme.palette.info.main
   };
   margin-top: 20vh;
   margin-left: 25vw;

@@ -13,10 +13,10 @@ const togglePalette = (mode: string): object => {
   if (mode === "light") {
     return {
       comen: {
-        main: "black", 
+        main: "black",
       },
       title: {
-        main: "black", 
+        main: "black",
       },
       primary: {
         main: "#ffd700", //yellow
@@ -46,10 +46,10 @@ const togglePalette = (mode: string): object => {
   } else {
     return {
       comen: {
-        main: "white", 
+        main: "white",
       },
       title: {
-        main: "yellow", 
+        main: "yellow",
       },
       primary: {
         main: "#ffd700",
