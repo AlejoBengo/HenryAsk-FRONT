@@ -1,7 +1,7 @@
 /*--------------------------------------------------------*/
 import Activity from "../Components/Profile/Activity";
 import HenryCoins from "../Components/Profile/HenryCoins";
-import bannerDefault from '../Components/Profile/bannerDefault/bannerDefault.jpg';
+import bannerDefault from "../Components/Profile/bannerDefault/bannerDefault.jpg";
 
 /*-----------IMPORT UTILITIES-----------*/
 import React, { useEffect } from "react";
@@ -32,7 +32,7 @@ import {
   Card,
   CardMedia,
   CardContent,
-  Grid
+  Grid,
 } from "@mui/material";
 
 /*--------------------------------------------------------*/
@@ -89,8 +89,6 @@ export default function Profile() {
   const userProfile = useAppSelector((state) => state.profile.profile); //state.profile?
   const user = useAppSelector((state) => state.user.data);
 
-
-
   const migajas = [
     <LinkR
       to="/"
@@ -120,6 +118,9 @@ export default function Profile() {
 
   useEffect(() => {
     dispatch(fetchProfile(id));
+    return () => {
+      dispatch(clearProfile());
+    };
   }, [dispatch, id]);
   //If not includes "id" in dependencies's array when u're in a profile's detail of some user
   // and go to your profile's detail, this component dont render the change.
@@ -160,8 +161,13 @@ export default function Profile() {
             />
             {user._id !== userProfile._id &&
             userProfile.role >= 2 &&
-            user.role >= 2 && userProfile.coffee? (
-              <a href={userProfile.coffee} target="_blank" style={{ height: "20%" , textDecoration:"none"}}>
+            user.role >= 2 &&
+            userProfile.coffee ? (
+              <a
+                href={userProfile.coffee}
+                target="_blank"
+                style={{ height: "20%", textDecoration: "none" }}
+              >
                 <Button
                   variant="contained"
                   color="primary"
@@ -239,11 +245,10 @@ export default function Profile() {
               )}
             </Box>
           </CardContent>
-          
+
           <Card>
             <HenryCoins />
           </Card>
-          
         </Card>
       </Container>
 
