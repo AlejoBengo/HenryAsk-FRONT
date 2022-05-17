@@ -127,6 +127,9 @@ const borrarUsuario = (id:string) => {
                         return (
                         <TableCell key={column.id} align={column.align}>
                               <SelectRole valor={value} usuario={usuario} handleClickOpen={handleClickOpen}/>
+                              <IconButton onClick={()=>handleOpenModalDelete(row)} aria-label="delete" color="error">
+                                <CloseIcon />
+                              </IconButton> 
                         </TableCell>
                         )
                     }

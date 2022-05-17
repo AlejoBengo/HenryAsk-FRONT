@@ -41,7 +41,7 @@ const validator = (tags: Array<string>) => {
   };
   if (tags.length > 3) {
     errors.errorTag =
-      "No se pueden elgir más de 3 etiquetas. Por favor, elimine una.";
+      "Se pueden elgir hasta 3 etiquetas.";
   }
   return errors;
 };
@@ -93,8 +93,13 @@ const PostForm = () => {
     "CSS",
     "HTML",
     "SQL",
-    "Modulo",
     "Otros",
+    "M1",
+    "M2",
+    "M3",
+    "M4",
+    "PI",
+    "PG",
   ];
 
   const handleInputChange = (
@@ -145,7 +150,7 @@ const PostForm = () => {
   };
 
   const handleCancel = (event: React.MouseEvent<HTMLButtonElement>) => {
-    navigate(`/`);
+    navigate(`/Forum`);
   };
 
   const migajas = [
@@ -208,7 +213,7 @@ const PostForm = () => {
           }}
         >
           <Typography variant="h3" marginBottom={1}>
-            ¡Crea una discusión!
+            ¡Crea una Discusión!
           </Typography>
           <Grid
             container
