@@ -27,7 +27,7 @@ import {
   Button,
   Container,
   IconButton,
-   CardMedia,
+  CardMedia,
   Card,
 } from "@mui/material";
 
@@ -145,7 +145,7 @@ export const EditProfile = () => {
         <Breadcrumbs separator="›">{migajas}</Breadcrumbs>
       </StackMigajas>
     <Container sx={{ paddingBottom: "16px", paddingTop: "20px" }}>      
-      <Dialog
+      <Dialog        
         openDialog={openDialog}
         setOpenDialog={setOpenDialog}
         textSuccess="Cambios guardados correctamente"

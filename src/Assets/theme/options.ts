@@ -12,11 +12,14 @@ export const createOptions = (mode: PaletteMode) => {
 const togglePalette = (mode: string): object => {
   if (mode === "light") {
     return {
+      dialogButt: {
+        main: "#2c387e",
+      },
       comen: {
-        main: "black", 
+        main: "black",
       },
       title: {
-        main: "black", 
+        main: "black",
       },
       primary: {
         main: "#ffd700", //yellow
@@ -45,6 +48,9 @@ const togglePalette = (mode: string): object => {
     };
   } else {
     return {
+      dialogButt: {
+        main: "yellow",
+      },
       comen: {
         main: "white", 
       },
