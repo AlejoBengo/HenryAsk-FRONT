@@ -11,7 +11,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { useAppSelector, useAppDispatch } from "./app/hooks";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { createOptions } from "./Assets/theme/options";
-import { Box } from "@mui/material";
+import { Box, Skeleton } from "@mui/material";
 import { useCookies } from "react-cookie";
 /*-----------IMPORT REDUCER-----------*/
 import { fetchUserByEmail } from "./app/Reducers/userSlice";
@@ -42,8 +42,7 @@ import Search from "./Views/Search";
 import HenryCoinsRanking from "./Views/HenryCoinsRanking";
 import { toggleMode, setMode } from "./app/Reducers/modeReducer";
 import ForumNews from "./Views/ForumNews";
-
-
+import Verify from "./Views/Verify";
 const App = () => {
   const [cookies, setCookie, removeCookie] = useCookies();
   const { isAuthenticated, user } = useAuth0();
@@ -52,11 +51,16 @@ const App = () => {
   const DBUser = useAppSelector((state) => state.user.data);
   const mode = useAppSelector((state) => state.mode.mode);
   const [theme, setTheme] = useState(createTheme(createOptions(mode)));
+  const [charged, setCharged] = useState<boolean>(false);
 
   useEffect(() => {
+    setTimeout(() => {
+      setCharged(true);
+    }, 4000);
     if (isAuthenticated) {
       dispatch(fetchUserByEmail(user?.email));
     }
+    console.log(user);
   }, [user]);
 
   useEffect(() => {
@@ -65,7 +69,8 @@ const App = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    if (isAuthenticated && DBUser.user_name === "") {
+    if (isAuthenticated && !user?.email_verified) navigate("/verify");
+    else if (isAuthenticated && DBUser.user_name === "") {
       navigate(`/Profile/${DBUser?._id}/Edit`);
     }
   }, [DBUser]);
@@ -81,20 +86,19 @@ const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Header />
+      {charged ? <Header /> : <Skeleton animation="wave" height={50} />}
       <Navbar />
       <Box
-        
         sx={{
           minHeight: "100vh",
           p: 0,
           paddingTop: "1rem",
           paddingBottom: "3rem",
-          backgroundColor:"background.main",
+          backgroundColor: "background.main",
         }}
       >
         <Routes>
-          <Route path="/" element={<Home />} />          
+          <Route path="/" element={<Home />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/qya" element={<Qa />} />
           <Route path="/contact" element={<Contact />} />
@@ -115,6 +119,7 @@ const App = () => {
           <Route path="/Search/" element={<Search />} />
           <Route path="/Ranking/" element={<HenryCoinsRanking />} />
           <Route path="/Forum/News" element={<ForumNews />} />
+          <Route path="/verify" element={<Verify />} />
         </Routes>
       </Box>
       <Footer />

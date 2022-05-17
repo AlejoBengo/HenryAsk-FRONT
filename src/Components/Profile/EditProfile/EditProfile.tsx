@@ -27,20 +27,23 @@ import {
   Button,
   Container,
   IconButton,
-   CardMedia,
+  CardMedia,
   Card,
 } from "@mui/material";
 
- 
 import { StyledAvatar } from "../../../Views/Profile";
 import { callbackify } from "util";
 import BuyMeACoffe from "./BuyMeACoffe";
-import HelpIcon from '@mui/icons-material/Help';
+import HelpIcon from "@mui/icons-material/Help";
 /*--------------------------------------------------------*/
 
 export const EditProfile = () => {
   const theme = useTheme();
   const user = useAppSelector((state) => state.user.data);
+  const allUsers = useAppSelector((state) => state.allUser.allUsers);
+  const allUserNames = [...allUsers]
+    .filter((arrayUser) => arrayUser._id !== user._id)
+    .map((user) => user.user_name);
   let [userInfo, setUserInfo] = useState({ ...userTemplate, ...user });
   const { id } = useParams();
   const dispatch = useAppDispatch();
@@ -62,10 +65,12 @@ export const EditProfile = () => {
   const handleInputChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    setUserInfo(userInfo={
-      ...userInfo,
-      [event.target.name]: event.target.value,
-    });
+    setUserInfo(
+      (userInfo = {
+        ...userInfo,
+        [event.target.name]: event.target.value,
+      })
+    );
   };
 
   const handleSave = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -82,22 +87,22 @@ export const EditProfile = () => {
       .catch((err) => {
         console.log(err);
         setModalState("Error al hacer los cambios"); // en caso de entrar al catch mando mensaje de error que COINCIDE  con la prop de error en linea 75 , de esta forma tenemos renderizaods
-        //manejos de errores tambien en el front        
-      });      
+        //manejos de errores tambien en el front
+      });
   };
   const handleCancel = (event: React.MouseEvent<HTMLButtonElement>) => {
     navigate(`/Profile/${id}`);
   };
 
   //Modal leer mas buy me coffe
-  let [openInfo , setOpenInfo] = React.useState(false);
+  let [openInfo, setOpenInfo] = React.useState(false);
   const handleCloseInfo = () => {
     setOpenInfo(false);
-  }
+  };
   const handleOpenInfo = () => {
     setOpenInfo(true);
-  }
-  // ====== / 
+  };
+  // ====== /
 
   const migajas = [
     <Link
@@ -141,11 +146,11 @@ export const EditProfile = () => {
   if (user._id != id) navigate(`/Profile/${id}`);
   return (
     <>
-    <StackMigajas>
+      <StackMigajas>
         <Breadcrumbs separator="›">{migajas}</Breadcrumbs>
       </StackMigajas>
     <Container sx={{ paddingBottom: "16px", paddingTop: "20px" }}>      
-      <Dialog
+      <Dialog        
         openDialog={openDialog}
         setOpenDialog={setOpenDialog}
         textSuccess="Cambios guardados correctamente"
@@ -161,240 +166,258 @@ export const EditProfile = () => {
             Edita tu información personal
           </Typography>
 
-          <Card sx={{ minWidth: "100%" , padding:"1em"}}>
-            <CardMedia
-              component="img"
-              image={userInfo.banner || bannerDefault}
-              alt={userInfo.user_name + " banner"}
-              sx={{
-                width: "100%",
-                height: "30vh",
-                border: "2px solid", 
-                borderColor: "border.main",
-                borderRadius: "20px"
-              }}
-            />
-            <StyledAvatar
-              sx={{ left: "0em", width:"30vh", height:"30vh" , marginInline:"auto" , border: "4px solid", borderColor: "border.main" }}
-              alt={user.user_name}
-              src={
-                userInfo.profile_picture.length > 0
-                  ? userInfo.profile_picture
-                  : avatar
-                  ? avatar
-                  : userInfo.avatar
-                  ? userInfo.avatar
-                  : userInfo.profile_picture
-              }
-            />            
+            <Card sx={{ minWidth: "100%", padding: "1em" }}>
+              <CardMedia
+                component="img"
+                image={userInfo.banner || bannerDefault}
+                alt={userInfo.user_name + " banner"}
+                sx={{
+                  width: "100%",
+                  height: "30vh",
+                  border: "2px solid",
+                  borderColor: "border.main",
+                  borderRadius: "20px",
+                }}
+              />
+              <StyledAvatar
+                sx={{
+                  left: "0em",
+                  width: "30vh",
+                  height: "30vh",
+                  marginInline: "auto",
+                  border: "4px solid",
+                  borderColor: "border.main",
+                }}
+                alt={user.user_name}
+                src={
+                  userInfo.profile_picture.length > 0
+                    ? userInfo.profile_picture
+                    : avatar
+                    ? avatar
+                    : userInfo.avatar
+                    ? userInfo.avatar
+                    : userInfo.profile_picture
+                }
+              />
             </Card>
             <Button
-              sx={{border: "2px solid", 
-              borderColor: "border.main",
-              }}
+              sx={{ border: "2px solid", borderColor: "border.main" }}
               variant="contained"
               startIcon={<EditIcon />}
               onClick={handleOpen}
             >
               Elegir Avatar
-            </Button>                   
-      </Box>
-
-        <Grid
-          container
-          spacing={2}
-          sx={{
-            display: "flex",            
-            flexDirection: "row",            
-            justifyContent: "space-around",            
-          }}
-        >          
-
-
+            </Button>
+          </Box>
 
           <Grid
-            item
-            xs={12}
-            sm={12}
+            container
+            spacing={2}
             sx={{
               display: "flex",
-              margin: "0rem 0rem 2em 0em",
-              justifyContent: "center",
+              flexDirection: "row",
+              justifyContent: "space-around",
             }}
           >
-            
-            <ModalEditProfile
-              open={open}
-              setOpen={setOpen}
-              handleOpen={handleOpen}
-              handleClose={handleClose}
-              userInfo={userInfo}
-              setUserInfo={setUserInfo}
-              avatar={avatar}
-              setAvatar={setAvatar}              
-            />
-          </Grid>
+            <Grid
+              item
+              xs={12}
+              sm={12}
+              sx={{
+                display: "flex",
+                margin: "0rem 0rem 2em 0em",
+                justifyContent: "center",
+              }}
+            >
+              <ModalEditProfile
+                open={open}
+                setOpen={setOpen}
+                handleOpen={handleOpen}
+                handleClose={handleClose}
+                userInfo={userInfo}
+                setUserInfo={setUserInfo}
+                avatar={avatar}
+                setAvatar={setAvatar}
+              />
+            </Grid>
 
-          <Grid item xs={11} sm={4}>
-            <StyledTextField
-              variant="filled"
-              label="Nombre"
-              name="first_name"
-              value={userInfo.first_name}
-              onChange={(event) => handleInputChange(event)}
-              error={userInfo.first_name === ""}
-              helperText={userInfo.first_name === "" ? "Campo obligatorio" : ""}
-            ></StyledTextField>
-          </Grid>
-          <Grid item xs={11} sm={4}>
-            <StyledTextField
-              variant="filled"
-              label="Apellido"
-              name="last_name"
-              value={userInfo.last_name}
-              onChange={(event) => handleInputChange(event)}
-              error={userInfo.last_name === ""}
-              helperText={userInfo.last_name === "" ? "Campo obligatorio" : ""}
-            ></StyledTextField>
-          </Grid>
-          <Grid item xs={11} sm={4}>
-            <StyledTextField
-              variant="filled"
-              label="Nombre de Usuario"
-              name="user_name"
-              value={userInfo.user_name}
-              onChange={(event) => handleInputChange(event)}
-              error={userInfo.user_name === ""}
-              helperText={userInfo.user_name === "" ? "Campo obligatorio" : ""}
-            ></StyledTextField>
-          </Grid>
-          <Grid item xs={11} sm={6}>
-            <StyledTextField
-              variant="filled"
-              label="País"
-              name="country"
-              value={userInfo.country}
-              onChange={(event) => handleInputChange(event)}
-            ></StyledTextField>
-          </Grid>
-          <Grid item xs={11} sm={6}>
-            <StyledTextField
-              variant="filled"
-              label="Ciudad"
-              name="city"
-              value={userInfo.city}
-              onChange={(event) => handleInputChange(event)}
-            ></StyledTextField>
-          </Grid>
-          <Grid item xs={11} sm={6}>
-            <StyledTextField
-              variant="filled"
-              label="Foto de Perfil"
-              name="profile_picture"
-              value={userInfo.profile_picture}
-              onChange={(event) => handleInputChange(event)}
-            ></StyledTextField>
-          </Grid>
-          <Grid item xs={11} sm={6}>
-            <StyledTextField
-              variant="filled"
-              label="Foto de Portada"
-              name="banner"
-              value={userInfo.banner}
-              onChange={(event) => handleInputChange(event)}
-            ></StyledTextField>
-          </Grid>
-          <Grid item xs={11} sm={6}>
-            <StyledTextField
-              variant="filled"
-              label="LinkedIn"
-              name="linkedin"
-              value={userInfo.linkedin}
-              onChange={(event) => handleInputChange(event)}
-            ></StyledTextField>
-          </Grid>
-          <Grid item xs={11} sm={6}>
-            <StyledTextField
-              variant="filled"
-              label="GitHub"
-              name="github"
-              value={userInfo.github}
-              onChange={(event) => handleInputChange(event)}
-            ></StyledTextField>
-          </Grid>
-          {
-            user.role >= 2 ? 
-            <>
-          <Grid item xs={11} sm={11}>
-            <StyledTextField
-              variant="filled"
-              label="Coffee"
-              name="coffee"
-              value={userInfo.coffee}
-              onChange={(event) => handleInputChange(event)}/>
-          </Grid>
-          <Grid item xs={1}>
-          <BuyMeACoffe handleCloseInfo={handleCloseInfo} openInfo={openInfo} />
-             <IconButton onClick={handleOpenInfo} aria-label="delete" size="large" color="inherit">
-              <HelpIcon fontSize="inherit" />
-            </IconButton>
-           </Grid>
-           </> : null
-          }
-          
-          <Grid item xs={11} sm={12}>
-            <StyledTextField
-              variant="filled"
-              multiline
-              label="Biografía"
-              name="biography"
-              value={userInfo.biography}
-              onChange={(event) => handleInputChange(event)}
-              minRows={3}
-              maxRows={5}
-            ></StyledTextField>
-          </Grid>
-          <Grid
-            item
-            xs={12}
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-            }}
-          >            
-            <Button
-              sx={{border: "2px solid", 
-              borderColor: "border.main"}}
-              color="primary"
-              variant="contained"
-              onClick={handleSave}
-              disabled={
-                userInfo.first_name === "" ||
-                userInfo.last_name === "" ||
-                userInfo.user_name === ""
-              }
+            <Grid item xs={11} sm={4}>
+              <StyledTextField
+                variant="filled"
+                label="Nombre"
+                name="first_name"
+                value={userInfo.first_name}
+                onChange={(event) => handleInputChange(event)}
+                error={userInfo.first_name === ""}
+                helperText={
+                  userInfo.first_name === "" ? "Campo obligatorio" : ""
+                }
+              ></StyledTextField>
+            </Grid>
+            <Grid item xs={11} sm={4}>
+              <StyledTextField
+                variant="filled"
+                label="Apellido"
+                name="last_name"
+                value={userInfo.last_name}
+                onChange={(event) => handleInputChange(event)}
+                error={userInfo.last_name === ""}
+                helperText={
+                  userInfo.last_name === "" ? "Campo obligatorio" : ""
+                }
+              ></StyledTextField>
+            </Grid>
+            <Grid item xs={11} sm={4}>
+              <StyledTextField
+                variant="filled"
+                label="Nombre de Usuario"
+                name="user_name"
+                value={userInfo.user_name}
+                onChange={(event) => handleInputChange(event)}
+                error={userInfo.user_name === ""}
+                helperText={
+                  userInfo.user_name === ""
+                    ? "Campo obligatorio"
+                    : allUserNames.includes(userInfo.user_name)
+                    ? "El nombre de ususario ya está tomado"
+                    : ""
+                }
+              ></StyledTextField>
+            </Grid>
+            <Grid item xs={11} sm={6}>
+              <StyledTextField
+                variant="filled"
+                label="País"
+                name="country"
+                value={userInfo.country}
+                onChange={(event) => handleInputChange(event)}
+              ></StyledTextField>
+            </Grid>
+            <Grid item xs={11} sm={6}>
+              <StyledTextField
+                variant="filled"
+                label="Ciudad"
+                name="city"
+                value={userInfo.city}
+                onChange={(event) => handleInputChange(event)}
+              ></StyledTextField>
+            </Grid>
+            <Grid item xs={11} sm={6}>
+              <StyledTextField
+                variant="filled"
+                label="Foto de Perfil"
+                name="profile_picture"
+                value={userInfo.profile_picture}
+                onChange={(event) => handleInputChange(event)}
+              ></StyledTextField>
+            </Grid>
+            <Grid item xs={11} sm={6}>
+              <StyledTextField
+                variant="filled"
+                label="Foto de Portada"
+                name="banner"
+                value={userInfo.banner}
+                onChange={(event) => handleInputChange(event)}
+              ></StyledTextField>
+            </Grid>
+            <Grid item xs={11} sm={6}>
+              <StyledTextField
+                variant="filled"
+                label="LinkedIn"
+                name="linkedin"
+                value={userInfo.linkedin}
+                onChange={(event) => handleInputChange(event)}
+              ></StyledTextField>
+            </Grid>
+            <Grid item xs={11} sm={6}>
+              <StyledTextField
+                variant="filled"
+                label="GitHub"
+                name="github"
+                value={userInfo.github}
+                onChange={(event) => handleInputChange(event)}
+              ></StyledTextField>
+            </Grid>
+            {user.role >= 2 ? (
+              <>
+                <Grid item xs={11} sm={11}>
+                  <StyledTextField
+                    variant="filled"
+                    label="Coffee"
+                    name="coffee"
+                    value={userInfo.coffee}
+                    onChange={(event) => handleInputChange(event)}
+                  />
+                </Grid>
+                <Grid item xs={1}>
+                  <BuyMeACoffe
+                    handleCloseInfo={handleCloseInfo}
+                    openInfo={openInfo}
+                  />
+                  <IconButton
+                    onClick={handleOpenInfo}
+                    aria-label="delete"
+                    size="large"
+                    color="inherit"
+                  >
+                    <HelpIcon fontSize="inherit" />
+                  </IconButton>
+                </Grid>
+              </>
+            ) : null}
+
+            <Grid item xs={11} sm={12}>
+              <StyledTextField
+                variant="filled"
+                multiline
+                label="Biografía"
+                name="biography"
+                value={userInfo.biography}
+                onChange={(event) => handleInputChange(event)}
+                minRows={3}
+                maxRows={5}
+              ></StyledTextField>
+            </Grid>
+            <Grid
+              item
+              xs={12}
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+              }}
             >
-              Guardar
-            </Button>
-            <Button
-              sx={{border: "2px solid", 
-              borderColor: "border.main"}}
-              color="primary"
-              variant="contained"
-              onClick={handleCancel}
-              style={{ marginLeft: "1.5vw" }}
-              disabled={
-                userInfo.first_name === "" ||
-                userInfo.last_name === "" ||
-                userInfo.user_name === ""
-              }
-            >
-              Cancelar
-            </Button>
+              <Button
+                sx={{ border: "2px solid", borderColor: "border.main" }}
+                color="primary"
+                variant="contained"
+                onClick={handleSave}
+                disabled={
+                  userInfo.first_name === "" ||
+                  userInfo.last_name === "" ||
+                  userInfo.user_name === "" ||
+                  allUserNames.includes(userInfo.user_name)
+                }
+              >
+                Guardar
+              </Button>
+              <Button
+                sx={{ border: "2px solid", borderColor: "border.main" }}
+                color="primary"
+                variant="contained"
+                onClick={handleCancel}
+                style={{ marginLeft: "1.5vw" }}
+                disabled={
+                  userInfo.first_name === "" ||
+                  userInfo.last_name === "" ||
+                  userInfo.user_name === ""
+                }
+              >
+                Cancelar
+              </Button>
+            </Grid>
           </Grid>
-        </Grid>
-      </Paper>
-    </Container>
+        </Paper>
+      </Container>
     </>
   );
 };

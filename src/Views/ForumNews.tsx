@@ -1,6 +1,6 @@
 /*--------------------------------------------------------*/
 /*-----------IMPORT UTILITIES-----------*/
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Link } from "react-router-dom";
 /*-----------IMPORT COMPONENTS-----------*/
@@ -16,6 +16,7 @@ import { fetchGetAllPosts } from "../app/Reducers/getPostsForum";
 import { useAppSelector, useAppDispatch } from "../app/hooks";
 import { Posts } from "../app/interface";
 import RedirectToLogin from "../Components/RedirectToLogin/RedirectToLogin";
+import { Modal, LinearProgress } from "@mui/material";
 import { StyledTypography } from "../Components/Content/MainContent/TableExercise/TableExercise";
 
 let AlumnOrInstructor = ["Usuario", "Instructor"];
@@ -23,16 +24,17 @@ export default function ForumNews() {
   const theme = useTheme();
   const userLogin = useAppSelector((state) => state.user.data);
   const posts = useAppSelector((state) => state.getAllPosts.posts);
+  const [charged, setCharged] = useState(false);
   const { isAuthenticated } = useAuth0();
   const dispatch = useAppDispatch();
 
   // Traigo los post de los usuarios Rol 0
   useEffect(() => {
-      dispatch(fetchGetAllPosts(0));
+    dispatch(fetchGetAllPosts(0));
   }, [userLogin]);
-// ======================// 
+  // ======================//
 
-  let postNews:Array<Posts> = []; 
+  let postNews: Array<Posts> = [];
 
   posts?.map((e) => {
     if (e.owner) {
@@ -43,7 +45,7 @@ export default function ForumNews() {
   //setTimeout(()=> console.log("USER",userLogin), 4000)
   //setTimeout(()=> console.log("ALUMNOS",postAlumnos), 4000)
   //setTimeout(()=> console.log("INSTRUCTOR",postInstructores), 4000)
-/*   setTimeout(()=> console.log("POST",posts), 4000)
+  /*   setTimeout(()=> console.log("POST",posts), 4000)
   setTimeout(()=> console.log("NEWS",postNews), 4000) */
 
   const migajas = [
@@ -72,34 +74,58 @@ export default function ForumNews() {
       FORO
     </Link>,
   ];
+
   if (!isAuthenticated) {
-    return <RedirectToLogin open={true} />;
+    setTimeout(() => {
+      setCharged(true);
+    }, 4000);
+    if (!charged) {
+      return (
+        <Modal open={true}>
+          <LinearProgress
+            color="secondary"
+            style={{
+              width: "90vw",
+              marginLeft: "5vw",
+              marginTop: "49vh",
+              height: "1vh",
+            }}
+          />
+        </Modal>
+      );
+    } else {
+      return <RedirectToLogin open={true} />;
+    }
   }
 
-    return (
-      <Div>
-        <StackMigajas spacing={2}>
-          <Breadcrumbs separator="›">{migajas}</Breadcrumbs>
-        </StackMigajas>
-        <Grid container spacing={2}>
-          <Grid item xs={12}>
-            <StyledTypography
-              variant="h3"
-              textAlign="center"
-              padding="3rem 0rem 3rem 0rem"
-            >
-              Bienvenido/a a <TituloForo>HENRY ASK</TituloForo> Forum !
-            </StyledTypography>
-          </Grid>
-          <Grid item xs={12} sx={{display:"flex", justifyContent:"center"}}>
-            <StyledTypography
-              variant="h5"
-              textAlign="center"
-              padding="3rem 0rem 3rem 0rem" sx={{width:"70%"}}>
-              Espacio dedicado exclusivamente para que puedas dejar tus dudas respecto al bootcamp y que Alumnos 👨‍💻,Instructores 🚀 o Miembros del Staff las resuelvan!!! 
-            </StyledTypography>
-          </Grid>
-         {/*  <Grid item xs={12}>
+  return (
+    <Div>
+      <StackMigajas spacing={2}>
+        <Breadcrumbs separator="›">{migajas}</Breadcrumbs>
+      </StackMigajas>
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <StyledTypography
+            variant="h3"
+            textAlign="center"
+            padding="3rem 0rem 3rem 0rem"
+          >
+            Bienvenido/a a <TituloForo>HENRY ASK</TituloForo> Forum !
+          </StyledTypography>
+        </Grid>
+        <Grid item xs={12} sx={{ display: "flex", justifyContent: "center" }}>
+          <StyledTypography
+            variant="h5"
+            textAlign="center"
+            padding="3rem 0rem 3rem 0rem"
+            sx={{ width: "70%" }}
+          >
+            Espacio dedicado exclusivamente para que puedas dejar tus dudas
+            respecto al bootcamp y que Alumnos 👨‍💻,Instructores 🚀 o Miembros del
+            Staff las resuelvan!!!
+          </StyledTypography>
+        </Grid>
+        {/*  <Grid item xs={12}>
             <StyledTypography
               variant="h3"
               textAlign="center"
@@ -108,31 +134,31 @@ export default function ForumNews() {
               Posteos entre <TituloForo>Alumnos</TituloForo>
             </StyledTypography>
           </Grid> */}
-        </Grid>
-        
-        <Container maxWidth={false} sx={{ width: "80vw" }}>
-        <Grid container spacing={5}>
-        <Grid item xs={6}>
-                <Alert variant="filled" severity="success">
-                  Esta discusion fue resuelta!
-                </Alert>
-        </Grid>
-              {/* <Grid item xs={7}></Grid> */}
+      </Grid>
 
-        <Grid item xs={6}>
-                <Alert variant="filled" severity="warning">
-                  El propietario de esa discusion aun busca una respuesta!
-                </Alert>
+      <Container maxWidth={false} sx={{ width: "80vw" }}>
+        <Grid container spacing={5}>
+          <Grid item xs={6}>
+            <Alert variant="filled" severity="success">
+              Esta discusion fue resuelta!
+            </Alert>
+          </Grid>
+          {/* <Grid item xs={7}></Grid> */}
+
+          <Grid item xs={6}>
+            <Alert variant="filled" severity="warning">
+              El propietario de esa discusion aun busca una respuesta!
+            </Alert>
+          </Grid>
         </Grid>
-        </Grid>
-        
-          <TableInstructor
-            post={postNews.reverse()}
-            key="News"
-            height={1040}
-            user={AlumnOrInstructor[0]}
-          />
-        </Container>
-      </Div>
-    );
+
+        <TableInstructor
+          post={postNews.reverse()}
+          key="News"
+          height={1040}
+          user={AlumnOrInstructor[0]}
+        />
+      </Container>
+    </Div>
+  );
 }
