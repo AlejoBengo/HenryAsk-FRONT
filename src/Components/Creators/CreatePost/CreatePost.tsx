@@ -301,7 +301,7 @@ const PostForm = () => {
             >
               <Button 
               size="small" 
-              onClick={handleCancel} 
+              onClick={handleSubmit} 
               variant="contained"
               sx={{width:"7rem"}}
               >
