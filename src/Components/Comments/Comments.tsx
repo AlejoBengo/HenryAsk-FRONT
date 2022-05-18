@@ -54,9 +54,8 @@ export const Comments = ({ id, toggleOpen, open }: Props) => {
     answer: true,
     comments: true,
   });
-  const [openEdit, setOpenEdit] = useState<boolean>(false);
   const [openDelete, setOpenDelete] = useState<boolean>(false);
-  const [commentId, setCommentId] = useState<any>({});
+  const [commentId, setCommentId] = useState<any>("");
 
   useEffect(() => {
     fetchAnswerById(id)
@@ -290,7 +289,7 @@ export const Comments = ({ id, toggleOpen, open }: Props) => {
 
                   <Box>
                     <IconButton
-                      onClick={(e) => handleMenuComment(e, comment)}
+                      onClick={(e) => handleMenuComment(e, comment._id)}
                       aria-label="delete"
                       size="large"
                     >

@@ -444,15 +444,23 @@ export const AnswerDetails = ({
         </Modal>
 
         <Modal open={openDelete}>
-          <BoxModal2>
+          <BoxModal2 sx={{border: "1px solid", borderColor: "primary.main", borderRadius:"20px", padding:"1em", backgroundColor:"backModal.main"}}>
+          <AreYouSure sx={{ color:"comen.main" }}>Estas Seguro?</AreYouSure>
+          <Box
+              style={{                
+                display: "flex",
+                justifyContent: "space-around",
+                alignItems: "center",
+                gap:"4em"                
+              }}
+            >
             <BotonCerrar
-              style={{ marginTop: "-6vh" }}
+              sx={{marginLeft: "0"}}
               variant="contained"
               onClick={handleOpenDelete}
             >
               Cerrar
-            </BotonCerrar>
-            <AreYouSure>Estas Seguro?</AreYouSure>
+            </BotonCerrar>            
             <BotonBorrar2
               onClick={handleDelete}
               color="error"
@@ -460,8 +468,11 @@ export const AnswerDetails = ({
             >
               <DeleteIcon fontSize="small" />
             </BotonBorrar2>
+            </Box>
           </BoxModal2>
         </Modal>
+
+
       </StyledDiv>
       <Box
         sx={{ width: "100%", py: 1 }}

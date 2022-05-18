@@ -94,6 +94,10 @@ export default function Profile() {
   const dispatch = useAppDispatch();
   const userProfile = useAppSelector((state) => state.profile.profile); //state.profile?
   const user = useAppSelector((state) => state.user.data);
+  console.log(`userProfile: ${userProfile}`)
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
@@ -183,7 +187,7 @@ const borrarUsuario = (id:string) => {
             <StyledAvatar
               alt={userProfile.first_name} //if the image can't be loaded then will show the first alt's letter (user's firstname)
               src={
-                userProfile.profile_picture.length > 0
+                userProfile.profile_picture?.length > 0
                   ? userProfile.profile_picture
                   : userProfile.avatar
                   ? userProfile.avatar

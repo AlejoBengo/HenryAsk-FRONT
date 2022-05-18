@@ -43,6 +43,7 @@ import HenryCoinsRanking from "./Views/HenryCoinsRanking";
 import { toggleMode, setMode } from "./app/Reducers/modeReducer";
 import ForumNews from "./Views/ForumNews";
 import Verify from "./Views/Verify";
+
 const App = () => {
   const [cookies, setCookie, removeCookie] = useCookies();
   const { isAuthenticated, user } = useAuth0();

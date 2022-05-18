@@ -1,8 +1,7 @@
 /*--------------------------------------------------------*/
 /*-----------IMPORT UTILITIES-----------*/
 import React, { useEffect, useState } from "react";
-import { useAppSelector, useAppDispatch } from "../../app/hooks";
-import { getAllExercises } from "../../app/Reducers/exercisesSlice";
+import { fetchAllExcercices } from "../../app/Reducers/exercisesSlice";
 /*-----------IMPORT MUI & CSS-----------*/
 import { List, ListItemButton, Collapse } from "@mui/material";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
@@ -14,14 +13,15 @@ import { exerciseTemplate } from "../../app/Utils/ExerciseUtilities";
 
 const ExerciseList = () => {
   const [open, setOpen] = useState<boolean>(false);
-  let [allExercisesLocal, setAllExercisesLocal] = useState<Array<ExerciseInterface>>([exerciseTemplate]);
-  const { exercises } = useAppSelector((state) => state.exercises);
-  const dispatch = useAppDispatch();
+  let [allExercisesLocal, setAllExercisesLocal] = useState<
+    Array<ExerciseInterface>
+  >([exerciseTemplate]);
 
   useEffect(() => {
-    dispatch(getAllExercises());
-    exercises?.length && setAllExercisesLocal(( allExercisesLocal ) => exercises);
-  }, [ dispatch ]);
+    fetchAllExcercices().then((res) => {
+      setAllExercisesLocal(res);
+    });
+  }, []);
 
   const handleOpen = (event: React.MouseEvent<HTMLDivElement>) => {
     setOpen(!open);

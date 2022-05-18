@@ -4,12 +4,11 @@ import { Provider } from "react-redux";
 import { store } from "./app/store";
 import { BrowserRouter as Router } from "react-router-dom";
 import { Auth0Provider } from "@auth0/auth0-react";
-import { useAuth0 } from "@auth0/auth0-react";
 import App from "./App";
 import "./index.css";
 import axios from "axios";
 import { CookiesProvider } from "react-cookie";
-import ScrollToTop from "./Components/Scroll Restoration/ScrollRestoration";
+import ScrollToTop from "./Components/ScrollRestoration/ScrollRestoration";
 axios.defaults.baseURL = process.env.REACT_APP_BACKEND;
 
 const container = document.getElementById("root")!;
@@ -24,7 +23,7 @@ root.render(
         redirectUri={window.location.origin}
       >
         <Router>
-        <ScrollToTop/>
+          <ScrollToTop />
           <CookiesProvider>
             <App />
           </CookiesProvider>

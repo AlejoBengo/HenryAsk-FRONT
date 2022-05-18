@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { fetchAllUsers } from "../Utils/allUsers";
 import { User } from "../interface";
 interface InitialState {
@@ -9,23 +9,19 @@ interface InitialState {
 
 const initialState: InitialState = {
   allUsers: [],
-  auxUser:false,
+  auxUser: false,
   loading: "",
 };
-
 
 export const AllUserSlice = createSlice({
   name: "allUser",
   initialState,
-  reducers: {
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchAllUsers.fulfilled, (state, action) => {
       state.allUsers = action.payload;
     });
   },
 });
-
-//export const { existUserName } = AllUserSlice.actions;
 
 export default AllUserSlice.reducer;
