@@ -74,7 +74,7 @@ const Navbar = () => {
 
   const handleCloseNavMenu = (
     event: React.MouseEvent<HTMLLIElement | HTMLButtonElement>
-  ) => {  
+  ) => {
     let target = event.target;
     // if (target.name === "Perfil") {
     // setAnchorElNav(null);
@@ -157,7 +157,7 @@ const Navbar = () => {
             </Link>
           </Box>
           <DarkModeButton />
-          <SearchBar />
+          {isAuthenticated ? <SearchBar /> : null}
           <Box
             sx={{
               flexGrow: 1,
@@ -224,7 +224,7 @@ const Navbar = () => {
               marginRight: "4em",
             }}
           >
-            {DBUser.role >= 0 ? (
+            {isAuthenticated ? (
               <Button
                 onClick={handleOpenCreateMenu}
                 sx={{ my: 2, color: "white", display: "block" }}

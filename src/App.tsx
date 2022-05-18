@@ -71,7 +71,7 @@ const App = () => {
 
   useEffect(() => {
     if (isAuthenticated && !user?.email_verified) navigate("/verify");
-    else if (isAuthenticated && DBUser.user_name === "") {
+    else if (isAuthenticated && DBUser.first_name === "") {
       navigate(`/Profile/${DBUser?._id}/Edit`);
     }
   }, [DBUser]);
