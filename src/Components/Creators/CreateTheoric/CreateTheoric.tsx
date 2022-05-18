@@ -11,7 +11,6 @@ import {
   useTheme,
   DialogTitle,
   DialogContent,
-  DialogContentText,
 } from "@mui/material";
 import {
   theoricTemplate,
@@ -22,8 +21,8 @@ import {
   StyledTextField,
   StackMigajas,
 } from "../../Style/StyledComponents";
-import { Theoric } from "../../../app/interface";
 import { useNavigate, Link } from "react-router-dom";
+
 export const CreateTheoric = () => {
   const theme = useTheme();
   const user = useAppSelector((state) => state.user.data);
@@ -161,8 +160,12 @@ export const CreateTheoric = () => {
         <StyledPaper elevation={2}>
           <Grid container spacing={3}>
             <Grid item xs={12}>
-              <Typography variant="h5" align="left">
-                Crear nuevo contenido Teórico
+              <Typography 
+                variant="h3" 
+                marginBottom={1} 
+                align="center"
+              >
+                ¡Crea un contenido Teórico!
               </Typography>
             </Grid>
             <Grid item xs={6}>
