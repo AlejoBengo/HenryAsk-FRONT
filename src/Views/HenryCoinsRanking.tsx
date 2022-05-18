@@ -13,7 +13,6 @@ import {
   useTheme,
   Avatar,
   Grid,
-  Button,
   IconButton
 } from "@mui/material";
 
@@ -45,7 +44,7 @@ export const HenryCoinsRanking = () => {
   const handleOpenInfo = () => {
     setOpenInfo(true);
   };
-
+  //
 
   const formatDate = (date: string) => {
     const months = [
@@ -125,15 +124,17 @@ export const HenryCoinsRanking = () => {
           Ranking de <TituloForo>Henry Coins</TituloForo>
         </Typography>
 
+        <Grid sx={{display:'flex', justifyContent:'flex-end', height:'3rem', width:'100%'}}>
           <HCinfo
           handleCloseInfo={handleCloseInfo}
           openInfo={openInfo}/>
             <IconButton
             onClick={handleOpenInfo}
             size="large"
-            color="inherit">
+            color={theme.palette.mode === 'dark' ? 'primary' : 'secondary'}>
                 <HelpIcon fontSize="inherit" />
             </IconButton>
+        </Grid>
 
       <TableContainer component={Paper} sx={{ mt: 2 }}>
         <Table>
