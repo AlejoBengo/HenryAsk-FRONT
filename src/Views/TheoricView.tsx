@@ -18,7 +18,6 @@ import {
   Grid,
   useTheme,
   Modal,
-  CircularProgress,
   LinearProgress,
   Breadcrumbs,
 } from "@mui/material";
@@ -159,16 +158,7 @@ export default function TheoricView() {
     if (!charged) {
       return (
         <Modal open={true}>
-          <CircularProgress
-            style={{
-              // width: "90vw",
-              marginLeft: "50vw",
-              background: "transparent",
-              marginTop: "50vh",
-              // height: "1vh",
-            }}
-          />
-          {/* <LinearProgress
+          <LinearProgress
             color="secondary"
             style={{
               width: "90vw",
@@ -176,7 +166,7 @@ export default function TheoricView() {
               marginTop: "49vh",
               height: "1vh",
             }}
-          /> */}
+          />
         </Modal>
       );
     } else {
@@ -219,7 +209,7 @@ export default function TheoricView() {
               theoric.comments.map((com: string) => {
                 return <StyledTypography3> {com} </StyledTypography3>;
               })}
-            <LocalOfferIcon            
+            <LocalOfferIcon
               style={{
                 color: `${theme.palette.getContrastText(
                   theme.palette.background.default
@@ -232,7 +222,7 @@ export default function TheoricView() {
 
       {theoric.images.length > 0 &&
         theoric.images.map((img: string) => {
-          return <img src={img} alt="" />;
+          return <img src={img} key={img} alt="" />;
         })}
 
       <Modal open={openDelete}>
@@ -250,7 +240,6 @@ export default function TheoricView() {
           </Button>
         </StyledBoxModal2>
       </Modal>
-
       <Modal open={open}>
         <StyledBoxModal>
           <Button
