@@ -9,6 +9,7 @@ import { fetchGetAllReport } from "../app/Reducers/getAllReport";
 import PanelTable from "../Components/PanelAdmin/PanelTable";
 import PanelReport from "../Components/PanelAdmin/PanelReport";
 import AcordeonRole from "../Components/PanelAdmin/AcordeonRole";
+import SelectFilter from "../Components/PanelAdmin/SelectFilter";
 /*-----------IMPORT MUI & CSS-----------*/
 import { Box } from "@mui/system";
 import {
@@ -39,7 +40,10 @@ export default function PanelAdm(props: any) {
     dispatch(fetchGetAllReport())
   },[])
 
-
+  let [filter, setFilter] = React.useState([]);
+  const handleClearFilter = ()=>{
+    setFilter(filter=[]);
+  } 
   // {
   // OWNER : {user_name, avatar , picture_profile , role }
   // DESCRIPTION : string mensaje report
@@ -58,41 +62,7 @@ export default function PanelAdm(props: any) {
   //five = 'Este usuario se hace pasar por mí.',
   //six = 'Contiene información personal.'
 /* 
-  const rows = [{
-    owner: {user_name:'user_name', avatar:'' , profile_picture:'https://st2.depositphotos.com/1009634/7235/v/950/depositphotos_72350117-stock-illustration-no-user-profile-picture-hand.jpg' , role:5},
-    description: 'Esta persona hizo un comentario desubicado , estoy totalemente en contra de lo que puso, quiero que lo sancionen porfavor. es un tipo muy racista , no tolero sus comentarios ni su persona',
-    status:'PENDING',
-    reason:'Información erronea.',
-    post: { _id: '_id' ,owner: {first_name:'first_name', last_name:'last_name' , email:'email' , role:5 , country:'country', city:'city', user_name:'user_name', profile_picture:'https://st2.depositphotos.com/1009634/7235/v/950/depositphotos_72350117-stock-illustration-no-user-profile-picture-hand.jpg', avatar:'', isBanned:false}},
-    answer:{},
-    comment:{},
-  },
-  {
-    owner: {user_name:'user_name1', avatar:'' , profile_picture:'https://st2.depositphotos.com/1009634/7235/v/950/depositphotos_72350117-stock-illustration-no-user-profile-picture-hand.jpg' , role:4},
-    description: 'Esta persona hizo un comentario desubicado , estoy totalemente en contra de lo que puso, quiero que lo sancionen porfavor. es un tipo muy racista , no tolero sus comentarios ni su persona',
-    status:'FULFILLED',
-    reason:'Es spam.',
-    post: {},
-    answer:{_id:'_id', post:{_id:'_id',owner:{props:'...'}} ,content:'Hola esta es mi answer reportada',owner:{first_name:'first_name1', last_name:'last_name1' , email:'email1' , role:5 , country:'country1', city:'city1', user_name:'user_name1', profile_picture:'https://st2.depositphotos.com/1009634/7235/v/950/depositphotos_72350117-stock-illustration-no-user-profile-picture-hand.jpg', avatar:'', isBanned:false}},
-    comment:{},
-  },
-  {
-    owner: {user_name:'user_name2', avatar:'' , profile_picture:'https://st2.depositphotos.com/1009634/7235/v/950/depositphotos_72350117-stock-illustration-no-user-profile-picture-hand.jpg' , role:3},
-    description: 'Esta persona hizo un comentario desubicado , estoy totalemente en contra de lo que puso, quiero que lo sancionen porfavor. es un tipo muy racista , no tolero sus comentarios ni su persona',
-    status:'REJECTED',
-    reason:'Lenguaje o símbolos que incitan al odio.',
-    post: {},
-    answer:{},
-    comment:{content:'este es el comentario reportado', owner:{props:'...'}, answer:{post:{_id:'_id'}}},
-  },
-]
- */
-
-  // EN EL FRONT 
-  // 1 COLUMNA- USUARIO QUE REPORTO 
-  // 2 -  COMMENT | POST | ANSWER  
-  // 3 - DESCRIPCION ---> MODAL QUE SE ABRE Y MUESTRA RAZON Y DESCRIPCION
-  // 4 - STATUS: PENDING , REJECTED , FULFILLED
+ 
 
   /* useEffect(() => {
     dispatch(fetchUserByEmail(user?.email))
@@ -100,9 +70,9 @@ export default function PanelAdm(props: any) {
   }, [user]); */
 
   function handleChange(
-    e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
-  ) {
+    e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) {
     setValor((valor = e.target.value));
+    /* dispatch(fetchUserByUserName(valor)); */
   }
 
   function handleClick(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
@@ -113,7 +83,7 @@ export default function PanelAdm(props: any) {
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) {
     dispatch(clearUserName());
-    setValor((valor = ""));
+    setValor((valor =""));
   }
 
   const migajas = [
@@ -239,9 +209,9 @@ export default function PanelAdm(props: any) {
             <Grid
               item
               xs={12}
-              sm={12}
-              md={12}
-              lg={6}
+              sm={6}
+              md={6}
+              lg={3}
               sx={{ display: "flex", alignItems: "center" }}
             >
               <Typography
@@ -251,6 +221,27 @@ export default function PanelAdm(props: any) {
               >
                 Post reportados:
               </Typography>
+            </Grid>
+            <Grid
+              item
+              xs={12}
+              sm={6}
+              md={6}
+              lg={3}
+              sx={{ display: "flex", alignItems: "center" }}
+            >
+              <Typography
+                variant="h5"
+                component="div"
+                sx={{ color: "secondary.main" }}
+              >
+                Estado:
+              </Typography>
+              <SelectFilter filter={filter} setFilter={setFilter} reports={reports} />
+              <IconButton onClick={handleClearFilter} aria-label="delete" size="large" color="error">
+                <ClearIcon fontSize="inherit" />
+              </IconButton>
+
             </Grid>
             <Grid
               item
@@ -272,7 +263,7 @@ export default function PanelAdm(props: any) {
               </Typography>
             </Grid>
             <Grid item xs={12} sm={12} md={12} lg={6}>
-              <PanelReport rows={reports}/>
+              <PanelReport rows={filter.length>0? filter : reports}/>
             </Grid>
             <Grid
               item

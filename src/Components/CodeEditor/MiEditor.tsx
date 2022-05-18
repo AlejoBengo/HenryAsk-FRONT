@@ -3,6 +3,7 @@ import CodeMirror from "@uiw/react-codemirror";
 import { javascript } from "@codemirror/lang-javascript";
 import { oneDark } from "@codemirror/theme-one-dark";
 import s from "./scrollBar.module.css";
+import { testExercice } from "../../app/Utils/testing";
 import {
   EditorCode,
   EditorTest,
@@ -28,17 +29,16 @@ export default function MiEditor({ coding, testing, setter, setter2 }: Data) {
   }, [coding, testing]);
 
   const handleExecturor = (event: React.MouseEvent<HTMLButtonElement>) => {
-    if (
-      code === "function BinarioADecimal(num) {}" ||
-      code === "function clavesUnicas(obj1, obj2) {}" ||
-      code === "function mayorMenosMenor(arr) {}" ||
-      code === "function sumarLikesDeUsuario(usuario) {}" ||
-      code === "function promedioResultadosTest(resultadosTest) {}"
-    ) {
-      setter(true);
-    } else {
-      setter2(true);
-    }
+    const data = {
+      code: code,
+    };
+    testExercice(data).then((res) => {
+      if (res === "LOGRADO") {
+        setter(true);
+      } else {
+        setter2(true);
+      }
+    });
   };
 
   return (

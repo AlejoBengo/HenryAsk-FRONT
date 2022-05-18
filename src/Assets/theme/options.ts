@@ -12,6 +12,9 @@ export const createOptions = (mode: PaletteMode) => {
 const togglePalette = (mode: string): object => {
   if (mode === "light") {
     return {
+      backModal: {
+        main: "#f3e5f5",
+      },
       dialogButt: {
         main: "#2c387e",
       },
@@ -48,6 +51,9 @@ const togglePalette = (mode: string): object => {
     };
   } else {
     return {
+      backModal: {
+        main: "#121212",
+      },
       dialogButt: {
         main: "yellow",
       },

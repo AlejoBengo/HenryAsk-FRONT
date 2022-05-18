@@ -1,5 +1,4 @@
-import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
-import { useAppSelector } from "../hooks";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { User } from "../interface";
 import axios from "axios";
 import { userTemplate } from "../Utils/userUtilities";

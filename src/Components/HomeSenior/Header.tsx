@@ -1,5 +1,5 @@
 import AppBar from "@mui/material/AppBar";
-import { Box, Skeleton } from "@mui/material";
+import { Box } from "@mui/material";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
@@ -74,5 +74,22 @@ export default function DenseAppBar() {
         </AutoPlaySwipeableViews>
       </AppBar>
     </Box>
-  ) : null;
+  ) : (
+    <Box sx={{ height: "2rem" }}>
+      <AppBar position="static">
+        <Toolbar
+          variant="dense"
+          sx={{
+            backgroundColor: "yellow",
+            color: "black",
+            display: "flex",
+            justifyContent: "center",
+            minHeight: "2rem",
+          }}
+        >
+          <Typography>{`Bienvenidxs al foro de Henry🖤`}</Typography>
+        </Toolbar>
+      </AppBar>
+    </Box>
+  );
 }

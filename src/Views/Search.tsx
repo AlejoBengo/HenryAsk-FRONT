@@ -8,11 +8,11 @@ import {
   Typography,
   Avatar,
 } from "@mui/material";
-import { useAppSelector } from "../app/hooks";
-import React, { useState } from "react";
+import { useAppSelector, useAppDispatch } from "../app/hooks";
+import React, { useEffect, useState } from "react";
 import { LinkDom } from "../Components/Style/StyledComponents";
 import { Tag as TagIcon } from "@mui/icons-material";
-import { UserShort } from "../Components/UserShort/UserShort";
+import { clearResults } from "../app/Reducers/searchSlice";
 
 interface tabPannelProps {
   children: React.ReactNode;
@@ -39,17 +39,24 @@ export const Search = () => {
   const { users, theorics, posts, exercises } = useAppSelector(
     (state) => state.search
   );
-  const categories = ["users", "posts", "exercises", "theorics"];
-
+  const dispatch = useAppDispatch();
   const changeTabIndex = (event: React.SyntheticEvent, newIndex: number) => {
     setTabIndex(newIndex);
   };
+
   function allyProps(index: number) {
     return {
       id: `simple-tab-${index}`,
       "aria-controls": `simple-tabpanel-${index}`,
     };
   }
+
+  useEffect(() => {
+    return () => {
+      dispatch(clearResults());
+    };
+  }, []);
+
   return (
     <Container sx={{ pt: 1 }}>
       <Paper elevation={2} sx={{ p: 1 }}>
