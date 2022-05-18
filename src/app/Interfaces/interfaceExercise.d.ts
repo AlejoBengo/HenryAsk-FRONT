@@ -17,32 +17,11 @@ export interface OwnerInterface{
   avatar: string
 }
 
-export enum TagsEnum{
-  JavaScript = "JavaScript",
-  PostgreSQL = "PostgreSQL",
-  Sequelize = "Sequelize",
-  Nodejs = "Nodejs",
-  Express = "Express",
-  React = "React",
-  Redux = "Redux",
-  CSS = "CSS",
-  HTML = "HTML",
-  SQL = "SQL",
-  Modulo = "Modulo",
-  Otros = "Otros",
-  M1 = "M1",
-  M2 = "M2",
-  M3 = "M3",
-  M4 = "M4",
-  PI = "PI",
-  PG = "PG",
-}
-
 export interface ExerciseInterface{
   _id: string
   owner: Owner
   title: string
-  tags: Array<TagsEnum>
+  tags: Array<string>
   description: string
   code: string
   test: string

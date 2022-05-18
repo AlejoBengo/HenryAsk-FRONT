@@ -84,7 +84,16 @@ export const editExercise = async (changesExercise: ExerciseInterface) => {
   } catch (error: ErrorType) {
     console.log(`Error en exercisesSlice:${error}`);
   }
-};
+}
+export const postExercise = async (exercise: ExerciseInterface) => {
+  try {
+    const response = (await axios.post(`/exercise`,exercise)).data;
+    return response;
+  } catch (error: ErrorType) {
+    console.log(`Error en exercisesSlice:${error}`);
+    
+  }
+}
 
 const exercisesReducer = createSlice({
   name: "exercises",
