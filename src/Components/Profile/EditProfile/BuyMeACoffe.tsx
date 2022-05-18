@@ -22,8 +22,9 @@ export default function BuyMeACoffe(props: any) {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
+        <Box sx={style} border= "2px solid" borderColor="border.main" borderRadius="20px">
           <Typography
+            sx={{ color:"comen.main", backgroundColor:"backModal.main" }}
             id="modal-modal-title"
             variant="h6"
             component="h2"
@@ -47,7 +48,7 @@ export default function BuyMeACoffe(props: any) {
               marginTop: "20px",
             }}
           >
-            <Button onClick={handleCloseInfo} variant="outlined" color="info">
+            <Button sx={{ color:"comen.main", border: "2px solid", borderColor: "border.main" }} onClick={handleCloseInfo} variant="outlined" color="info">
               Genial!
             </Button>
           </Box>
