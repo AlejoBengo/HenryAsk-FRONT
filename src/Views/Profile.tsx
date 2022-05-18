@@ -264,22 +264,10 @@ export default function Profile() {
           </Box>
 
           <CardContent>
-            {/* <Typography variant="h5">
-              {`${userProfile.first_name} ${userProfile.last_name} | ${userProfile.user_name}`}       // SUPLANTADO POR CODIGO DE ARRIBA
-              {id === user._id && (
-                <Button
-                  variant="contained"
-                  onClick={() => navigate(`/Profile/${id}/Edit`)}
-                  sx={{
-                    marginLeft: "1em",
-                    fontSize: "1rem",
-                  }}
-                  startIcon={<EditIcon />}
-                >
-                  Editar Información
-                </Button>
-              )}
-            </Typography> */}
+            <Typography variant="h5">
+              {`${userProfile.first_name} ${userProfile.last_name} | ${userProfile.user_name}`}
+              
+            </Typography>
             <Typography variant="caption" gutterBottom>
               {`${userProfile.country}${
                 userProfile.city && ` | ${userProfile.city} `
