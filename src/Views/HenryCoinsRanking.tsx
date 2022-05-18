@@ -12,8 +12,12 @@ import {
   Breadcrumbs,
   useTheme,
   Avatar,
+  Grid,
+  Button,
+  IconButton
 } from "@mui/material";
 
+import HelpIcon from "@mui/icons-material/Help";
 import React, { ChangeEvent, useEffect, useState } from "react";
 import { useAppSelector, useAppDispatch } from "../app/hooks";
 import { fetchAllUsers } from "../app/Utils/allUsers";
@@ -21,6 +25,7 @@ import { LinkDom, TituloForo } from "../Components/Style/StyledComponents";
 import { UserShort } from "../Components/UserShort/UserShort";
 import { StackMigajas } from "../Components/Style/StyledComponents";
 import { Link } from "react-router-dom";
+import HCinfo from "../Components/HomeSenior/HCinfo/HCinfo";
 
 export const HenryCoinsRanking = () => {
   const allUsers = useAppSelector((state) => state.allUser.allUsers);
@@ -30,6 +35,17 @@ export const HenryCoinsRanking = () => {
   const [page, setPage] = useState(0);
   const dispatch = useAppDispatch();
   const theme = useTheme();
+
+  //Modal info de HC
+  let [openInfo, setOpenInfo] = React.useState(false);
+  const handleCloseInfo = () => {
+    setOpenInfo(false);
+  };
+  const handleOpenInfo = () => {
+    setOpenInfo(true);
+  };
+
+
   const formatDate = (date: string) => {
     const months = [
       "enero",
@@ -96,16 +112,27 @@ export const HenryCoinsRanking = () => {
       >
         <Breadcrumbs separator="›">{migajas}</Breadcrumbs>
       </StackMigajas>
-      <Typography
-        variant="h3"
-        sx={{
-          color: theme.palette.getContrastText(
-            theme.palette.background.default
-          ),
-        }}
-      >
-        Ranking de <TituloForo>Henry Coins</TituloForo>
-      </Typography>
+      {/* <Grid> */}
+        <Typography
+          variant="h3"
+          sx={{
+            color: theme.palette.getContrastText(
+              theme.palette.background.default
+            ),
+          }}
+        >
+          Ranking de <TituloForo>Henry Coins</TituloForo>
+        </Typography>
+
+          <HCinfo
+          handleCloseInfo={handleCloseInfo}
+          openInfo={openInfo}/>
+            <IconButton
+            onClick={handleOpenInfo}
+            size="large"
+            color="inherit">
+                <HelpIcon fontSize="inherit" />
+            </IconButton>
 
       <TableContainer component={Paper} sx={{ mt: 2 }}>
         <Table>
