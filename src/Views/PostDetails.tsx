@@ -28,7 +28,7 @@ import RedirectToLogin from "../Components/RedirectToLogin/RedirectToLogin";
 import {
   Container,
   Divider,
-  Typography,  
+  Typography,
   Box,
   Menu,
   Button,
@@ -98,7 +98,6 @@ const tags: Array<string> = [
 export const PostDetails = () => {
   //Icon Menu
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  
 
   const theme = useTheme();
   const { id } = useParams();
@@ -336,7 +335,7 @@ export const PostDetails = () => {
   if (!isAuthenticated) {
     setTimeout(() => {
       setCharged(true);
-    }, 4000);
+    }, 7000);
     if (!charged) {
       return (
         <Modal open={true}>
@@ -388,9 +387,18 @@ export const PostDetails = () => {
         </StyledDivButtons> */}
 
         <Modal open={openDelete}>
-          <StyledBoxModal2 sx={{border: "1px solid", borderColor: "primary.main", borderRadius:"20px", padding:"1em", backgroundColor:"backModal.main"}}>
-            
-            <StyledTypography sx={{ color:"comen.main" }}>Estas Seguro?</StyledTypography>
+          <StyledBoxModal2
+            sx={{
+              border: "1px solid",
+              borderColor: "primary.main",
+              borderRadius: "20px",
+              padding: "1em",
+              backgroundColor: "backModal.main",
+            }}
+          >
+            <StyledTypography sx={{ color: "comen.main" }}>
+              Estas Seguro?
+            </StyledTypography>
             <Box
               style={{
                 width: "100%",
@@ -400,26 +408,30 @@ export const PostDetails = () => {
                 height: "8vh",
               }}
             >
-            <Button
-              variant="contained"
-              color="error"
-              onClick={handleDeletePost}
-            >
-              Borrar
-            </Button>
-            <Button
-              style={{}}
-              variant="contained"
-              onClick={handleOpenDelete}
-            >
-              Cerrar
-            </Button>
+              <Button
+                variant="contained"
+                color="error"
+                onClick={handleDeletePost}
+              >
+                Borrar
+              </Button>
+              <Button style={{}} variant="contained" onClick={handleOpenDelete}>
+                Cerrar
+              </Button>
             </Box>
           </StyledBoxModal2>
         </Modal>
 
         <Modal open={openEdit}>
-          <StyledBoxModal sx={{border: "1px solid", borderColor: "primary.main", borderRadius:"20px", padding:"1em", backgroundColor:"backModal.main"}}>            
+          <StyledBoxModal
+            sx={{
+              border: "1px solid",
+              borderColor: "primary.main",
+              borderRadius: "20px",
+              padding: "1em",
+              backgroundColor: "backModal.main",
+            }}
+          >
             <TextField
               multiline
               style={{ marginLeft: "1vh", width: "50vw" }}
@@ -437,19 +449,19 @@ export const PostDetails = () => {
               />
             </StyledDiv>
             <StyledTextField
-                sx={{ width:"150px" }}
-                select
-                label="Etiquetas"
-                onChange={(event) => handleEditTags(event)}
-              >
-                {tags.map((tag) => {
-                  return (
-                    <MenuItem key={tag} value={tag}>
-                      {tag}
-                    </MenuItem>
-                  );
-                })}
-              </StyledTextField>
+              sx={{ width: "150px" }}
+              select
+              label="Etiquetas"
+              onChange={(event) => handleEditTags(event)}
+            >
+              {tags.map((tag) => {
+                return (
+                  <MenuItem key={tag} value={tag}>
+                    {tag}
+                  </MenuItem>
+                );
+              })}
+            </StyledTextField>
             <StyledBoxChoosed>
               {newTags.length > 0 &&
                 newTags.map((tag: string) => {
@@ -492,18 +504,12 @@ export const PostDetails = () => {
                 height: "8vh",
               }}
             >
-            <Button              
-              variant="contained"
-              onClick={handleOpenEdit}
-            >
-              Cerrar
-            </Button>
-            <Button              
-              variant="contained"
-              onClick={willEdit}
-            >
-              Guardar
-            </Button>
+              <Button variant="contained" onClick={handleOpenEdit}>
+                Cerrar
+              </Button>
+              <Button variant="contained" onClick={willEdit}>
+                Guardar
+              </Button>
             </Box>
           </StyledBoxModal>
         </Modal>
@@ -533,52 +539,57 @@ export const PostDetails = () => {
             </Typography>
             {/* ------------------------------------------------------ */}
             <Box>
-            <IconButton onClick={handleMenu} aria-label="delete" size="large">
-              <MoreVertIcon fontSize="inherit" />
-            </IconButton>
+              <IconButton onClick={handleMenu} aria-label="delete" size="large">
+                <MoreVertIcon fontSize="inherit" />
+              </IconButton>
             </Box>
             <Menu
-            sx={{ marginLeft: "0" }}
-            id="menu-appbar"
-            anchorEl={anchorEl}
-            anchorOrigin={{
-              vertical: "top",
-              horizontal: "right",
-            }}
-            keepMounted
-            transformOrigin={{
-              vertical: "top",
-              horizontal: "right",
-            }}
-            open={Boolean(anchorEl)}
-            onClose={handleCloseMenu}
-          >
-            <StyledDivButtons 
-            sx={{ display:"flex", flexDirection: "column", gap:"10px", marginLeft: "0"}}
+              sx={{ marginLeft: "0" }}
+              id="menu-appbar"
+              anchorEl={anchorEl}
+              anchorOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
+              open={Boolean(anchorEl)}
+              onClose={handleCloseMenu}
             >
-            {usuario._id === post.owner._id && (            
-            <Button variant="contained" onClick={handleOpenEdit}>
-              Editar
-            </Button>
-          )}
-          {(usuario.role > 3 || usuario._id === post.owner._id) && (
-            <Button
-              variant="contained"
-              color="error"
-              onClick={handleOpenDelete}
-            >
-              Borrar
-            </Button>
-          )} 
-            <Button
-              variant="contained"
-              color="error"
-              onClick={(ev) => handleOpenModalReport("post")}
-            >
-              Reportar
-            </Button> 
-            </StyledDivButtons>
-          </Menu>
+              <StyledDivButtons
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "10px",
+                  marginLeft: "0",
+                }}
+              >
+                {usuario._id === post.owner._id && (
+                  <Button variant="contained" onClick={handleOpenEdit}>
+                    Editar
+                  </Button>
+                )}
+                {(usuario.role > 3 || usuario._id === post.owner._id) && (
+                  <Button
+                    variant="contained"
+                    color="error"
+                    onClick={handleOpenDelete}
+                  >
+                    Borrar
+                  </Button>
+                )}
+                <Button
+                  variant="contained"
+                  color="error"
+                  onClick={(ev) => handleOpenModalReport("post")}
+                >
+                  Reportar
+                </Button>
+              </StyledDivButtons>
+            </Menu>
             {/* <Box>
               <IconButton
                 onClick={(ev) => handleOpenModalReport("post")}
