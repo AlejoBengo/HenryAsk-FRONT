@@ -204,7 +204,7 @@ export const PostDetails = () => {
     if (!open) setSelectedAnswer("");
     setOpen(!open);
   };
-  const handleOpenEdit = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleOpenEdit = (event: any) => {
     setOpenEdit(!openEdit);
     setEditable({
       ...editable,
@@ -235,7 +235,7 @@ export const PostDetails = () => {
     await editPost(editable);
     window.location.reload();
   };
-  const handleOpenDelete = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleOpenDelete = (event: any) => {
     setOpenDelete(!openDelete);
   };
   const handleDeletePost = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -543,63 +543,39 @@ export const PostDetails = () => {
                 <MoreVertIcon fontSize="inherit" />
               </IconButton>
             </Box>
+
             <Menu
-              sx={{ marginLeft: "0" }}
-              id="menu-appbar"
-              anchorEl={anchorEl}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorEl)}
-              onClose={handleCloseMenu}
-            >
-              <StyledDivButtons
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "10px",
-                  marginLeft: "0",
-                }}
-              >
-                {usuario._id === post.owner._id && (
-                  <Button variant="contained" onClick={handleOpenEdit}>
-                    Editar
-                  </Button>
-                )}
-                {(usuario.role > 3 || usuario._id === post.owner._id) && (
-                  <Button
-                    variant="contained"
-                    color="error"
-                    onClick={handleOpenDelete}
-                  >
-                    Borrar
-                  </Button>
-                )}
-                <Button
-                  variant="contained"
-                  color="error"
-                  onClick={(ev) => handleOpenModalReport("post")}
-                >
-                  Reportar
-                </Button>
-              </StyledDivButtons>
-            </Menu>
-            {/* <Box>
-              <IconButton
-                onClick={(ev) => handleOpenModalReport("post")}
-                aria-label="delete"
-                size="large"
-                color="error"
-              >
-                <ReportIcon fontSize="large" />
-              </IconButton>
-            </Box> */}
+            sx={{ marginLeft: "0" }}
+            id="menu-appbar"
+            anchorEl={anchorEl}
+            anchorOrigin={{
+              vertical: "top",
+              horizontal: "right",
+            }}
+            keepMounted
+            transformOrigin={{
+              vertical: "top",
+              horizontal: "right",
+            }}
+            open={Boolean(anchorEl)}
+            onClose={handleCloseMenu}
+          >
+          {usuario._id === post.owner._id && (            
+          <MenuItem onClick={handleOpenEdit}>
+            Editar Post
+          </MenuItem>
+          )}
+
+          {(usuario.role > 3 || usuario._id === post.owner._id) && (
+          <MenuItem onClick={handleOpenDelete}>
+            Borrar Post
+          </MenuItem>
+          )} 
+
+          <MenuItem onClick={(ev) => handleOpenModalReport("post")}>
+            Reportar Post
+          </MenuItem>          
+          </Menu>            
           </Box>
           {/* MODAL DIALOG REPORT AQUI */}
           <div>

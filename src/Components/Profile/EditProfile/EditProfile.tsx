@@ -338,7 +338,7 @@ export const EditProfile = () => {
                 onChange={(event) => handleInputChange(event)}
               ></StyledTextField>
             </Grid>
-            {user.role >= 2 ? (
+            {user.role >= 2 && user.role<=3 ? (
               <>
                 <Grid item xs={11} sm={11}>
                   <StyledTextField

@@ -13,6 +13,9 @@ import { StackMigajas } from "../Components/Style/StyledComponents";
 import { styled } from "@mui/material/styles";
 import { Container, useTheme } from "@mui/material";
 import BuyMeACoffe from "../Components/Profile/EditProfile/BuyMeACoffe";
+import { deleteUserPanel } from "../app/Utils/editUser";
+import DialogDeletePerfil from "../Components/Profile/EditProfile/DialogDeletePerfil";
+import { useAuth0 } from "@auth0/auth0-react";
 /*-----------IMPORT REDUCER-----------*/
 import { fetchProfile, clearProfile } from "../app/Reducers/userProfileSlice";
 /*-----------IMPORT MUI & CSS-----------*/
@@ -20,7 +23,9 @@ import CoffeeIcon from "@mui/icons-material/Coffee";
 import { LinkDom } from "../Components/Style/StyledComponents";
 import EditIcon from "@mui/icons-material/Edit";
 import GitHubIcon from "@mui/icons-material/GitHub";
+import { IconButton , MenuItem , Menu} from "@mui/material";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 
 import {
   Box,
@@ -84,6 +89,7 @@ export default function Profile() {
     "Administrator",
   ];
   const navigate = useNavigate();
+  const { logout } = useAuth0();
   const { id }: any = useParams();
   const dispatch = useAppDispatch();
   const userProfile = useAppSelector((state) => state.profile.profile); //state.profile?
@@ -92,6 +98,8 @@ export default function Profile() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
   const migajas = [
     <LinkR
@@ -128,8 +136,31 @@ export default function Profile() {
   }, [dispatch, id]);
   //If not includes "id" in dependencies's array when u're in a profile's detail of some user
   // and go to your profile's detail, this component dont render the change.
+  const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleCloseMenu = () => {
+    setAnchorEl(null);
+  };
+
+let [infoDelete , setInfoDelete] = React.useState({})
+const [openDialogDelete, setOpenDialogDelete] = React.useState(false);
+const handleCloseModalDelete = () => {
+  setOpenDialogDelete(false);
+  setInfoDelete({});
+};
+const handleOpenModalDelete = (info:any) => {
+  setOpenDialogDelete(true);
+  setInfoDelete(info);
+}
+const borrarUsuario = (id:string) => {
+  deleteUserPanel(id)
+  .then(()=> logout({ returnTo: window.location.origin }))
+  .catch((error)=> console.log(error))
+}
   return (
     <>
+      <DialogDeletePerfil handleCloseModalDelete={handleCloseModalDelete} openDialogDelete={openDialogDelete} infoDelete={infoDelete} borrarUsuario={borrarUsuario}/>
       <StackMigajas spacing={2}>
         <Breadcrumbs separator="›">{migajas}</Breadcrumbs>
       </StackMigajas>
@@ -165,7 +196,7 @@ export default function Profile() {
             />
             {user._id !== userProfile._id &&
             userProfile.role >= 2 &&
-            user.role >= 2 &&
+            user.role >= 2 && user.role<=3 &&
             userProfile.coffee ? (
               <a
                 href={userProfile.coffee}
@@ -183,11 +214,43 @@ export default function Profile() {
                 </Button>
               </a>
             ) : null}
+            {
+              user._id === id ? (
+                <>
+              <Box>
+                <IconButton onClick={handleMenu} aria-label="delete" size="large">
+                  <MoreVertIcon fontSize="inherit" />
+                </IconButton>
+              </Box>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                open={Boolean(anchorEl)}
+                onClose={handleCloseMenu}
+              >
+                  <MenuItem onClick={() => navigate(`/Profile/${id}/Edit`)}>
+                    Editar Perfil
+                  </MenuItem>
+                  <MenuItem onClick={()=>handleOpenModalDelete(user._id)}>
+                    Eliminar cuenta
+                  </MenuItem>
+              </Menu>
+              </>) :null
+            }
           </Box>
 
           <CardContent>
-            <Typography variant="h5">
-              {`${userProfile.first_name} ${userProfile.last_name} | ${userProfile.user_name}`}
+            {/* <Typography variant="h5">
+              {`${userProfile.first_name} ${userProfile.last_name} | ${userProfile.user_name}`}       // SUPLANTADO POR CODIGO DE ARRIBA
               {id === user._id && (
                 <Button
                   variant="contained"
@@ -201,7 +264,7 @@ export default function Profile() {
                   Editar Información
                 </Button>
               )}
-            </Typography>
+            </Typography> */}
             <Typography variant="caption" gutterBottom>
               {`${userProfile.country}${
                 userProfile.city && ` | ${userProfile.city} `

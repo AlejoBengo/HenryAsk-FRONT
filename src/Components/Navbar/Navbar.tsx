@@ -145,7 +145,9 @@ const Navbar = () => {
             height="8vh"
             sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
           >
-            <LateralMenu user={DBUser} />
+            {DBUser.user_name? (
+                <LateralMenu user={DBUser} />
+            ):null}
             <Link to="/" onClick={handleOnClickLogoHome}>
               <Img
                 src={logo}
