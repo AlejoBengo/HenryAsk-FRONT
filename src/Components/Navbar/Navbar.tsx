@@ -74,7 +74,7 @@ const Navbar = () => {
 
   const handleCloseNavMenu = (
     event: React.MouseEvent<HTMLLIElement | HTMLButtonElement>
-  ) => {  
+  ) => {
     let target = event.target;
     // if (target.name === "Perfil") {
     // setAnchorElNav(null);
@@ -145,9 +145,7 @@ const Navbar = () => {
             height="8vh"
             sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
           >
-            {DBUser.user_name? (
-                <LateralMenu user={DBUser} />
-            ):null}
+            {DBUser.user_name ? <LateralMenu user={DBUser} /> : null}
             <Link to="/" onClick={handleOnClickLogoHome}>
               <Img
                 src={logo}
@@ -157,7 +155,7 @@ const Navbar = () => {
             </Link>
           </Box>
           <DarkModeButton />
-          <SearchBar />
+          {isAuthenticated ? <SearchBar /> : null}
           <Box
             sx={{
               flexGrow: 1,
@@ -222,7 +220,7 @@ const Navbar = () => {
               marginRight: "4em",
             }}
           >
-            {DBUser.role >= 0 ? (
+            {isAuthenticated ? (
               <Button
                 onClick={handleOpenCreateMenu}
                 sx={{ my: 2, color: "white", display: "block" }}
