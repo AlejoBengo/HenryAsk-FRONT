@@ -371,18 +371,22 @@ export const PostDetails = () => {
             >
               Borrar
             </Button>
-          )}
+          )}          
         </StyledDivButtons>
+
         <Modal open={openDelete}>
-          <StyledBoxModal2>
-            <Button
-              style={{ marginLeft: "43.2vw", marginTop: "-2.4vh" }}
-              variant="contained"
-              onClick={handleOpenDelete}
+          <StyledBoxModal2 sx={{border: "1px solid", borderColor: "primary.main", borderRadius:"20px", padding:"1em", backgroundColor:"backModal.main"}}>
+            
+            <StyledTypography sx={{ color:"comen.main" }}>Estas Seguro?</StyledTypography>
+            <Box
+              style={{
+                width: "100%",
+                display: "flex",
+                justifyContent: "space-around",
+                alignItems: "center",
+                height: "8vh",
+              }}
             >
-              Cerrar
-            </Button>
-            <StyledTypography>Estas Seguro?</StyledTypography>
             <Button
               variant="contained"
               color="error"
@@ -390,18 +394,19 @@ export const PostDetails = () => {
             >
               Borrar
             </Button>
+            <Button
+              style={{}}
+              variant="contained"
+              onClick={handleOpenDelete}
+            >
+              Cerrar
+            </Button>
+            </Box>
           </StyledBoxModal2>
         </Modal>
 
         <Modal open={openEdit}>
-          <StyledBoxModal>
-            <Button
-              style={{ marginLeft: "68.1vw" }}
-              variant="contained"
-              onClick={handleOpenEdit}
-            >
-              Cerrar
-            </Button>
+          <StyledBoxModal sx={{border: "1px solid", borderColor: "primary.main", borderRadius:"20px", padding:"1em", backgroundColor:"backModal.main"}}>            
             <TextField
               multiline
               style={{ marginLeft: "1vh", width: "50vw" }}
@@ -418,15 +423,20 @@ export const PostDetails = () => {
                 value={editable.description}
               />
             </StyledDiv>
-            <StyledSelect onChange={(event) => handleEditTags(event)}>
-              {tags.map((tag) => {
-                return (
-                  <MenuItem value={tag} key={tag}>
-                    {tag}
-                  </MenuItem>
-                );
-              })}
-            </StyledSelect>
+            <StyledTextField
+                sx={{ width:"150px" }}
+                select
+                label="Etiquetas"
+                onChange={(event) => handleEditTags(event)}
+              >
+                {tags.map((tag) => {
+                  return (
+                    <MenuItem key={tag} value={tag}>
+                      {tag}
+                    </MenuItem>
+                  );
+                })}
+              </StyledTextField>
             <StyledBoxChoosed>
               {newTags.length > 0 &&
                 newTags.map((tag: string) => {
@@ -460,13 +470,28 @@ export const PostDetails = () => {
                   );
                 })}
             </StyledBoxChoosed>
-            <Button
-              style={{ marginLeft: "67.3vw" }}
+            <Box
+              style={{
+                width: "100%",
+                display: "flex",
+                justifyContent: "space-around",
+                alignItems: "center",
+                height: "8vh",
+              }}
+            >
+            <Button              
+              variant="contained"
+              onClick={handleOpenEdit}
+            >
+              Cerrar
+            </Button>
+            <Button              
               variant="contained"
               onClick={willEdit}
             >
               Guardar
             </Button>
+            </Box>
           </StyledBoxModal>
         </Modal>
 
