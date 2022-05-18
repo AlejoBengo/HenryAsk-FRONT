@@ -22,6 +22,19 @@ import { StackMigajas, StyledTextField } from "../../Style/StyledComponents";
 import { StyledAlert } from "../CreatePost/StyledComponents";
 import { exerciseTemplate } from "../../../app/Utils/ExerciseUtilities";
 import { Error } from "../../../app/interface";
+/* //------------CodeEditor---------------------//
+import CodeMirror from "@uiw/react-codemirror";
+import { javascript } from "@codemirror/lang-javascript";
+import { oneDark } from "@codemirror/theme-one-dark";
+import s from "../../CodeEditor/MyStyledEditor/scrollBar.module.css";
+import {
+  EditorCode,
+  EditorTest,
+  Title,
+  Executer,
+  EditorsContainer,
+} from "../../CodeEditor/MyStyledEditor"; */
+
 
 const CreateExercise = () => {
   const theme = useTheme();
@@ -174,11 +187,23 @@ const CreateExercise = () => {
       <StackMigajas spacing={2}>
         <Breadcrumbs separator="›">{migajas}</Breadcrumbs>
       </StackMigajas>
-      <Container sx={{ p: 1, mt: 2 }}>
-        <StyledPaper elevation={2} sx={{ height: "fit-content" }}>
-          <Grid container spacing={3}>
+      <Container 
+        sx={{ p: 1, mt: 2 }}
+      >
+        <StyledPaper 
+            elevation={2}   
+            sx={{ height: "fit-content" }}
+          >
+          <Grid 
+            container 
+            spacing={3}
+          >
             <Grid item xs={12}>
-              <Typography variant="h3" align="center" marginBottom={1}>
+              <Typography 
+                variant="h3" 
+                align="center" 
+                marginBottom={1}
+              >
                 ¡Crea un Ejercicio!
               </Typography>
             </Grid>
@@ -266,17 +291,29 @@ const CreateExercise = () => {
             </Grid>
             <Box
               style={{
-                width: "20vw",
                 display: "flex",
                 justifyContent: "space-between",
                 alignItems: "center",
-                height: "8vh",
+                height: "7vh",
+                marginTop: "1vh",
+                marginInline: "auto",
+                columnGap: "3rem"
               }}
             >
-              <Button size="small" onClick={handleSubmit} variant="contained">
+              <Button 
+                size="small" 
+                onClick={handleSubmit} 
+                variant="contained"
+                sx={{width:"7rem"}}
+              >
                 Crear
               </Button>
-              <Button size="small" onClick={handleCancel} variant="contained">
+              <Button 
+                size="small" 
+                onClick={handleCancel} 
+                variant="contained"
+                sx={{width:"7rem"}}
+              >
                 Cancelar
               </Button>
             </Box>

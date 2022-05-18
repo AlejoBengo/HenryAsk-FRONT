@@ -205,14 +205,14 @@ const PostForm = () => {
         <Paper
           elevation={2}
           sx={{
-            p: "2rem",
+            p: "1rem",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
             flexDirection: "column",
           }}
         >
-          <Typography variant="h3" marginBottom={1}>
+          <Typography variant="h3" marginBottom={3}>
             ¡Crea una Discusión!
           </Typography>
           <Grid
@@ -290,17 +290,29 @@ const PostForm = () => {
             </Grid>
             <Box
               style={{
-                width: "20vw",
                 display: "flex",
                 justifyContent: "space-between",
                 alignItems: "center",
-                height: "8vh",
+                height: "7vh",
+                marginTop: "1vh",
+                marginInline: "auto",
+                columnGap: "3rem"
               }}
             >
-              <Button size="small" onClick={handleSubmit} variant="contained">
+              <Button 
+              size="small" 
+              onClick={handleCancel} 
+              variant="contained"
+              sx={{width:"7rem"}}
+              >
                 Crear
               </Button>
-              <Button size="small" onClick={handleCancel} variant="contained">
+              <Button 
+              size="small" 
+              onClick={handleCancel} 
+              variant="contained"
+              sx={{width:"7rem"}}
+              >
                 Cancelar
               </Button>
             </Box>
