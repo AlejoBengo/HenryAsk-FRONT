@@ -28,14 +28,16 @@ import RedirectToLogin from "../Components/RedirectToLogin/RedirectToLogin";
 import {
   Container,
   Divider,
-  Typography,
-  MenuItem,
+  Typography,  
   Box,
+  Menu,
   Button,
   TextField,
   Modal,
   IconButton,
 } from "@mui/material";
+import { MenuItem } from "@mui/material";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { StyledTypography } from "../Components/Theoric/StyledComponents";
 import {
@@ -94,6 +96,10 @@ const tags: Array<string> = [
 ];
 
 export const PostDetails = () => {
+  //Icon Menu
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  
+
   const theme = useTheme();
   const { id } = useParams();
   const navigate = useNavigate();
@@ -129,6 +135,13 @@ export const PostDetails = () => {
     answer: {},
     comment: {},
   });
+  //Icon Menu
+  const handleCloseMenu = () => {
+    setAnchorEl(null);
+  };
+  const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
   //handleChange report option
   const handleChangeOption = (event: SelectChangeEvent) => {
     setInfoReport((infoReport = { ...infoReport, reason: event.target.value }));
@@ -357,7 +370,7 @@ export const PostDetails = () => {
           buttonText="Volver al foro"
         />
 
-        <StyledDivButtons>
+        {/* <StyledDivButtons>
           {usuario._id === post.owner._id && (
             <Button variant="contained" onClick={handleOpenEdit}>
               Editar
@@ -371,18 +384,22 @@ export const PostDetails = () => {
             >
               Borrar
             </Button>
-          )}
-        </StyledDivButtons>
+          )}          
+        </StyledDivButtons> */}
+
         <Modal open={openDelete}>
-          <StyledBoxModal2>
-            <Button
-              style={{ marginLeft: "43.2vw", marginTop: "-2.4vh" }}
-              variant="contained"
-              onClick={handleOpenDelete}
+          <StyledBoxModal2 sx={{border: "1px solid", borderColor: "primary.main", borderRadius:"20px", padding:"1em", backgroundColor:"backModal.main"}}>
+            
+            <StyledTypography sx={{ color:"comen.main" }}>Estas Seguro?</StyledTypography>
+            <Box
+              style={{
+                width: "100%",
+                display: "flex",
+                justifyContent: "space-around",
+                alignItems: "center",
+                height: "8vh",
+              }}
             >
-              Cerrar
-            </Button>
-            <StyledTypography>Estas Seguro?</StyledTypography>
             <Button
               variant="contained"
               color="error"
@@ -390,18 +407,19 @@ export const PostDetails = () => {
             >
               Borrar
             </Button>
+            <Button
+              style={{}}
+              variant="contained"
+              onClick={handleOpenDelete}
+            >
+              Cerrar
+            </Button>
+            </Box>
           </StyledBoxModal2>
         </Modal>
 
         <Modal open={openEdit}>
-          <StyledBoxModal>
-            <Button
-              style={{ marginLeft: "68.1vw" }}
-              variant="contained"
-              onClick={handleOpenEdit}
-            >
-              Cerrar
-            </Button>
+          <StyledBoxModal sx={{border: "1px solid", borderColor: "primary.main", borderRadius:"20px", padding:"1em", backgroundColor:"backModal.main"}}>            
             <TextField
               multiline
               style={{ marginLeft: "1vh", width: "50vw" }}
@@ -418,15 +436,20 @@ export const PostDetails = () => {
                 value={editable.description}
               />
             </StyledDiv>
-            <StyledSelect onChange={(event) => handleEditTags(event)}>
-              {tags.map((tag) => {
-                return (
-                  <MenuItem value={tag} key={tag}>
-                    {tag}
-                  </MenuItem>
-                );
-              })}
-            </StyledSelect>
+            <StyledTextField
+                sx={{ width:"150px" }}
+                select
+                label="Etiquetas"
+                onChange={(event) => handleEditTags(event)}
+              >
+                {tags.map((tag) => {
+                  return (
+                    <MenuItem key={tag} value={tag}>
+                      {tag}
+                    </MenuItem>
+                  );
+                })}
+              </StyledTextField>
             <StyledBoxChoosed>
               {newTags.length > 0 &&
                 newTags.map((tag: string) => {
@@ -460,13 +483,28 @@ export const PostDetails = () => {
                   );
                 })}
             </StyledBoxChoosed>
-            <Button
-              style={{ marginLeft: "67.3vw" }}
+            <Box
+              style={{
+                width: "100%",
+                display: "flex",
+                justifyContent: "space-around",
+                alignItems: "center",
+                height: "8vh",
+              }}
+            >
+            <Button              
+              variant="contained"
+              onClick={handleOpenEdit}
+            >
+              Cerrar
+            </Button>
+            <Button              
               variant="contained"
               onClick={willEdit}
             >
               Guardar
             </Button>
+            </Box>
           </StyledBoxModal>
         </Modal>
 
@@ -493,7 +531,55 @@ export const PostDetails = () => {
             >
               {post.question}
             </Typography>
+            {/* ------------------------------------------------------ */}
             <Box>
+            <IconButton onClick={handleMenu} aria-label="delete" size="large">
+              <MoreVertIcon fontSize="inherit" />
+            </IconButton>
+            </Box>
+            <Menu
+            sx={{ marginLeft: "0" }}
+            id="menu-appbar"
+            anchorEl={anchorEl}
+            anchorOrigin={{
+              vertical: "top",
+              horizontal: "right",
+            }}
+            keepMounted
+            transformOrigin={{
+              vertical: "top",
+              horizontal: "right",
+            }}
+            open={Boolean(anchorEl)}
+            onClose={handleCloseMenu}
+          >
+            <StyledDivButtons 
+            sx={{ display:"flex", flexDirection: "column", gap:"10px", marginLeft: "0"}}
+            >
+            {usuario._id === post.owner._id && (            
+            <Button variant="contained" onClick={handleOpenEdit}>
+              Editar
+            </Button>
+          )}
+          {(usuario.role > 3 || usuario._id === post.owner._id) && (
+            <Button
+              variant="contained"
+              color="error"
+              onClick={handleOpenDelete}
+            >
+              Borrar
+            </Button>
+          )} 
+            <Button
+              variant="contained"
+              color="error"
+              onClick={(ev) => handleOpenModalReport("post")}
+            >
+              Reportar
+            </Button> 
+            </StyledDivButtons>
+          </Menu>
+            {/* <Box>
               <IconButton
                 onClick={(ev) => handleOpenModalReport("post")}
                 aria-label="delete"
@@ -502,7 +588,7 @@ export const PostDetails = () => {
               >
                 <ReportIcon fontSize="large" />
               </IconButton>
-            </Box>
+            </Box> */}
           </Box>
           {/* MODAL DIALOG REPORT AQUI */}
           <div>

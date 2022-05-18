@@ -41,7 +41,7 @@ const validator = (tags: Array<string>) => {
   };
   if (tags.length > 3) {
     errors.errorTag =
-      "No se pueden elgir más de 3 etiquetas. Por favor, elimine una.";
+      "Se pueden elgir hasta 3 etiquetas.";
   }
   return errors;
 };
@@ -93,8 +93,13 @@ const PostForm = () => {
     "CSS",
     "HTML",
     "SQL",
-    "Modulo",
     "Otros",
+    "M1",
+    "M2",
+    "M3",
+    "M4",
+    "PI",
+    "PG",
   ];
 
   const handleInputChange = (
@@ -145,7 +150,7 @@ const PostForm = () => {
   };
 
   const handleCancel = (event: React.MouseEvent<HTMLButtonElement>) => {
-    navigate(`/`);
+    navigate(`/Forum`);
   };
 
   const migajas = [
@@ -200,15 +205,15 @@ const PostForm = () => {
         <Paper
           elevation={2}
           sx={{
-            p: "2rem",
+            p: "1rem",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
             flexDirection: "column",
           }}
         >
-          <Typography variant="h3" marginBottom={1}>
-            ¡Crea una discusión!
+          <Typography variant="h3" marginBottom={3}>
+            ¡Crea una Discusión!
           </Typography>
           <Grid
             container
@@ -285,17 +290,29 @@ const PostForm = () => {
             </Grid>
             <Box
               style={{
-                width: "20vw",
                 display: "flex",
                 justifyContent: "space-between",
                 alignItems: "center",
-                height: "8vh",
+                height: "7vh",
+                marginTop: "1vh",
+                marginInline: "auto",
+                columnGap: "3rem"
               }}
             >
-              <Button size="small" onClick={handleSubmit} variant="contained">
+              <Button 
+              size="small" 
+              onClick={handleCancel} 
+              variant="contained"
+              sx={{width:"7rem"}}
+              >
                 Crear
               </Button>
-              <Button size="small" onClick={handleCancel} variant="contained">
+              <Button 
+              size="small" 
+              onClick={handleCancel} 
+              variant="contained"
+              sx={{width:"7rem"}}
+              >
                 Cancelar
               </Button>
             </Box>

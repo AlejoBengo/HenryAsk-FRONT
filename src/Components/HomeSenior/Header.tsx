@@ -1,5 +1,5 @@
 import AppBar from "@mui/material/AppBar";
-import { Box, Skeleton } from "@mui/material";
+import { Box } from "@mui/material";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
@@ -28,64 +28,68 @@ export default function DenseAppBar() {
     dispatch(fetchAllUsers);
   }, [userRole]);
 
-    const handleStepChange = (step: number) => {
-        setActiveStep(step);
-    };
-    
-    return(
-        userRole.role >= 1 ? 
-            (<Box sx={{ height: '2rem' }}>
-                <AppBar position="static">
-                <AutoPlaySwipeableViews
-                    axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-                    index={activeStep}
-                    onChangeIndex={handleStepChange}
-                    enableMouseEvents
-                >
-                    <Toolbar 
-                    variant="dense"
-                    sx={{ 
-                        backgroundColor:'yellow', 
-                        color:'black',
-                        display:'flex', 
-                        justifyContent:'center', 
-                        minHeight: '2rem'}}>
-                            <Typography>
-                                {`Ya somos +${users ? users.allUsers.length : null} usuarios en la comunidad🖤`}
-                            </Typography>
-                    </Toolbar>
-                    <Toolbar 
-                    variant="dense"
-                    sx={{ 
-                        backgroundColor:'yellow', 
-                        color:'black',
-                        display:'flex', 
-                        justifyContent:'center', 
-                        minHeight: '2rem'}}>
-                            <Typography>
-                                {`Se han creado +${post ? post.posts.length : 0} posts🚀`}
-                            </Typography>
-                    </Toolbar>
-                </AutoPlaySwipeableViews>
-                </AppBar>
-            </Box>)
-        : (
-            <Box sx={{ height: '2rem' }}>
-                <AppBar position="static">
-                    <Toolbar 
-                    variant="dense"
-                    sx={{ 
-                    backgroundColor:'yellow', 
-                    color:'black',
-                    display:'flex', 
-                    justifyContent:'center', 
-                    minHeight: '2rem'}}>
-                        <Typography>
-                            {`Bienvenidxs al foro de Henry🖤`}
-                        </Typography>
-                    </Toolbar>
-                </AppBar>
-            </Box>
-        )
-    );
-};
+  const handleStepChange = (step: number) => {
+    setActiveStep(step);
+  };
+
+  return userRole.role >= 1 ? (
+    <Box sx={{ height: "2rem" }}>
+      <AppBar position="static">
+        <AutoPlaySwipeableViews
+          axis={theme.direction === "rtl" ? "x-reverse" : "x"}
+          index={activeStep}
+          onChangeIndex={handleStepChange}
+          enableMouseEvents
+        >
+          <Toolbar
+            variant="dense"
+            sx={{
+              backgroundColor: "yellow",
+              color: "black",
+              display: "flex",
+              justifyContent: "center",
+              minHeight: "2rem",
+            }}
+          >
+            <Typography>
+              {`Ya somos +${
+                users ? users.allUsers.length : null
+              } usuarios en la comunidad🖤`}
+            </Typography>
+          </Toolbar>
+          <Toolbar
+            variant="dense"
+            sx={{
+              backgroundColor: "yellow",
+              color: "black",
+              display: "flex",
+              justifyContent: "center",
+              minHeight: "2rem",
+            }}
+          >
+            <Typography>
+              {`Se han creado +${post ? post.posts.length : 0} posts🚀`}
+            </Typography>
+          </Toolbar>
+        </AutoPlaySwipeableViews>
+      </AppBar>
+    </Box>
+  ) : (
+    <Box sx={{ height: "2rem" }}>
+      <AppBar position="static">
+        <Toolbar
+          variant="dense"
+          sx={{
+            backgroundColor: "yellow",
+            color: "black",
+            display: "flex",
+            justifyContent: "center",
+            minHeight: "2rem",
+          }}
+        >
+          <Typography>{`Bienvenidxs al foro de Henry🖤`}</Typography>
+        </Toolbar>
+      </AppBar>
+    </Box>
+  );
+}

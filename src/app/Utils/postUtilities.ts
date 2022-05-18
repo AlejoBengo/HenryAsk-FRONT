@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Posts, Owner } from "../interface";
+import { Posts } from "../interface";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { ownerTemplate } from "./userUtilities";
 
@@ -32,7 +32,6 @@ export const postNewPost = createAsyncThunk(
     return info.data;
   }
 );
-
 
 export const editAnswerChildInPost = async (id: string | undefined) => {
   try {
@@ -68,5 +67,3 @@ export const closePost = async (id: string | undefined) => {
     return error;
   }
 };
-
-

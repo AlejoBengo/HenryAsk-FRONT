@@ -30,7 +30,6 @@ import {
 import { Img } from "../Content/ContentStyled";
 import css from "./NavBar.module.css";
 import logo from "./logo.png";
-import { LinkDom } from "../Style/StyledComponents";
 import { SearchBar } from "../SearchBar/SearchBar";
 
 const pages = ["Material complementario", "Foro"];
@@ -75,7 +74,7 @@ const Navbar = () => {
 
   const handleCloseNavMenu = (
     event: React.MouseEvent<HTMLLIElement | HTMLButtonElement>
-  ) => {
+  ) => {  
     let target = event.target;
     // if (target.name === "Perfil") {
     // setAnchorElNav(null);

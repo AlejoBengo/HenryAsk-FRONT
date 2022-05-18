@@ -197,7 +197,7 @@ const ExerciseDetails = () => {
       <Modal open={open}>
         <StyledBoxModal>
           <Button
-            style={{ marginLeft: "74vw", marginTop: "-0.2vh" }}
+            style={{ marginLeft: "73.1vw", marginTop: "-0.2vh" }}
             variant="contained"
             onClick={handleOpen}
           >
@@ -227,7 +227,7 @@ const ExerciseDetails = () => {
             multiline
           />
           <Button
-            style={{ marginLeft: "74.85vw", marginBottom: "-0.2vh" }}
+            style={{ marginLeft: "72.3vw", marginBottom: "-0.2vh" }}
             variant="contained"
             onClick={handleSaver}
           >

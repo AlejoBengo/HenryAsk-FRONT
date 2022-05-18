@@ -22,7 +22,6 @@ import React, { ChangeEvent, useEffect, useState } from "react";
 import { useAppSelector, useAppDispatch } from "../app/hooks";
 import { fetchAllUsers } from "../app/Utils/allUsers";
 import { LinkDom, TituloForo } from "../Components/Style/StyledComponents";
-import { UserShort } from "../Components/UserShort/UserShort";
 import { StackMigajas } from "../Components/Style/StyledComponents";
 import { Link } from "react-router-dom";
 import HCinfo from "../Components/HomeSenior/HCinfo/HCinfo";
@@ -30,7 +29,9 @@ import HCinfo from "../Components/HomeSenior/HCinfo/HCinfo";
 export const HenryCoinsRanking = () => {
   const allUsers = useAppSelector((state) => state.allUser.allUsers);
   let filterUsers = [...allUsers].filter((el) => el.role === 2);
-  let sortedUsers = filterUsers.sort((a, b) => a.give_henry_coin < b.give_henry_coin ? -1 : 1);
+  let sortedUsers = filterUsers.sort((a, b) =>
+    a.give_henry_coin < b.give_henry_coin ? -1 : 1
+  );
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [page, setPage] = useState(0);
   const dispatch = useAppDispatch();
@@ -63,7 +64,7 @@ export const HenryCoinsRanking = () => {
     ];
     let aux = date.slice(0, 10).split("-");
 
-    return `${aux[2]} de ${months[Number(aux[1])-1]} del ${aux[0]}`;
+    return `${aux[2]} de ${months[Number(aux[1]) - 1]} del ${aux[0]}`;
   };
 
   useEffect(() => {

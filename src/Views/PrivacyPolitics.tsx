@@ -1,12 +1,5 @@
 import * as React from "react";
-import {
-  Container,
-  Box,
-  Typography,
-  Link,
-  Grid,
-  Breadcrumbs,
-} from "@mui/material";
+import { Container, Box, Typography, Breadcrumbs } from "@mui/material";
 import { useTheme } from "@mui/material";
 import Rocket from "../Components/AboutUs/Img/rocket.png";
 import { Link as LinkR } from "react-router-dom";
@@ -68,7 +61,7 @@ export default function Politics() {
           >
             <img src={Rocket} alt="" height="60em" width="60em" />
             <Typography
-              sx={{color: "title.main"}}
+              sx={{ color: "title.main" }}
               variant="h2"
               component="h1"
               gutterBottom
@@ -148,7 +141,7 @@ export default function Politics() {
                 id="panel1a-header"
               >
                 <Typography
-                  sx={{color: "title.main"}}
+                  sx={{ color: "title.main" }}
                   variant="h5"
                   component="h4"
                   gutterBottom
@@ -222,7 +215,7 @@ export default function Politics() {
                 id="panel1a-header"
               >
                 <Typography
-                  sx={{color: "title.main"}}
+                  sx={{ color: "title.main" }}
                   variant="h5"
                   component="h4"
                   gutterBottom
@@ -288,7 +281,7 @@ export default function Politics() {
                 id="panel1a-header"
               >
                 <Typography
-                  sx={{color: "title.main"}}
+                  sx={{ color: "title.main" }}
                   variant="h5"
                   component="h4"
                   gutterBottom
@@ -354,7 +347,7 @@ export default function Politics() {
                 id="panel1a-header"
               >
                 <Typography
-                  sx={{color: "title.main"}}
+                  sx={{ color: "title.main" }}
                   variant="h5"
                   component="h4"
                   gutterBottom
@@ -417,7 +410,7 @@ export default function Politics() {
                 id="panel1a-header"
               >
                 <Typography
-                  sx={{color: "title.main"}}
+                  sx={{ color: "title.main" }}
                   variant="h5"
                   component="h4"
                   gutterBottom
@@ -575,7 +568,7 @@ export default function Politics() {
                 id="panel1a-header"
               >
                 <Typography
-                  sx={{color: "title.main"}}
+                  sx={{ color: "title.main" }}
                   variant="h5"
                   component="h4"
                   gutterBottom

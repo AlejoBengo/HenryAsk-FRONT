@@ -74,7 +74,7 @@ export const StyledPaper = styled(Paper)(
   width: 97vw;
   padding: 1vw;
   overflow-y: auto;
-  height: 78vh;
+  // height: 78vh;
 
   &::-webkit-scrollbar {
     width: 15px;
@@ -99,9 +99,7 @@ export const StyledBoxModal = styled(Box)(
   width: 80vw;
   height: 80vh;
   background-color: ${
-    theme.palette.mode === "light"
-      ? theme.palette.secondary.main
-      : theme.palette.info.main
+    theme.palette.mode === "light" ? "whitesmoke" : theme.palette.info.main
   };
   display: flex;
   flex-direction: column;
@@ -175,7 +173,6 @@ export const InfoContainer = styled(Box)`
 
 export const InfoSubContainer = styled(Box)`
   width: 98vw;
-  height: 90vh;
   display: flex;
   padding: 1vh;
   flex-direction: column;

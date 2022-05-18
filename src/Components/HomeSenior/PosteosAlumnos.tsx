@@ -37,7 +37,7 @@ export default function PosteosAlumnos() {
 
   useEffect(() => {
     dispatch(fetchGetAllPosts(10));
-  }, [userRole]);
+  }, [userRole, dispatch]);
 
 
   post?.map((el: object | any) => {
@@ -84,11 +84,11 @@ export default function PosteosAlumnos() {
       ret.push(arr[i]);
     }
     return ret;
-  };
+  }
 
-  maxSteps = reverseArr(postAlumnos).length 
-  ? reverseArr(postAlumnos).slice(0, 15).length 
-  : 1;
+  maxSteps = reverseArr(postAlumnos).length
+    ? reverseArr(postAlumnos).slice(0, 15).length
+    : 1;
 
   if(reverseArr(postAlumnos).length > 0) {
     return (
