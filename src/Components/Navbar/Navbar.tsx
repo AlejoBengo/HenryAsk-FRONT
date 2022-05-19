@@ -33,7 +33,7 @@ import logo from "./logo.png";
 import { SearchBar } from "../SearchBar/SearchBar";
 
 const pages = ["Material complementario", "Foro"];
-const settings = ["Perfil", "Eliminar Cuenta", "Cerrar Sesion"];
+const settings = ["Perfil", "Cerrar Sesion"];
 
 const Navbar = () => {
   const navigate = useNavigate();
