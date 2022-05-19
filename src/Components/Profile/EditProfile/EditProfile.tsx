@@ -274,7 +274,7 @@ export const EditProfile = () => {
                 name="user_name"
                 value={userInfo.user_name}
                 onChange={(event) => handleInputChange(event)}
-                error={userInfo.user_name === ""}
+                error={userInfo.user_name === "" || allUserNames.includes(userInfo.user_name)}
                 helperText={
                   userInfo.user_name === ""
                     ? "Campo obligatorio"
