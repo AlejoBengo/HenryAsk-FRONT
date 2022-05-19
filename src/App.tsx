@@ -58,10 +58,10 @@ const App = () => {
     setTimeout(() => {
       setCharged(true);
     }, 4000);
-    if (isAuthenticated) {
+    if (isAuthenticated && !user?.email_verified) navigate("/verify");
+    else if (isAuthenticated) {
       dispatch(fetchUserByEmail(user?.email));
     }
-    if (isAuthenticated && !user?.email_verified) navigate("/verify");
     console.log(user);
   }, [user]);
 
@@ -71,7 +71,6 @@ const App = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    
     if (isAuthenticated && DBUser.first_name === "") {
       navigate(`/Profile/${DBUser?._id}/Edit`);
     }
