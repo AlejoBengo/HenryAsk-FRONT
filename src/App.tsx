@@ -61,6 +61,7 @@ const App = () => {
     if (isAuthenticated) {
       dispatch(fetchUserByEmail(user?.email));
     }
+    if (isAuthenticated && !user?.email_verified) navigate("/verify");
     console.log(user);
   }, [user]);
 
@@ -70,8 +71,8 @@ const App = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    if (isAuthenticated && !user?.email_verified) navigate("/verify");
-    else if (isAuthenticated && DBUser.first_name === "") {
+    
+    if (isAuthenticated && DBUser.first_name === "") {
       navigate(`/Profile/${DBUser?._id}/Edit`);
     }
   }, [DBUser]);
