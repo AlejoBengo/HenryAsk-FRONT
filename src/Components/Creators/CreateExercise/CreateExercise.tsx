@@ -16,25 +16,19 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
-import { getAllExercises, postExercise } from "../../../app/Reducers/exercisesSlice";
+import {
+  getAllExercises,
+  postExercise,
+} from "../../../app/Reducers/exercisesSlice";
 import { StyledPaper } from "../../Excercise/StyledComponents";
 import { StackMigajas, StyledTextField } from "../../Style/StyledComponents";
 import { StyledAlert } from "../CreatePost/StyledComponents";
 import { exerciseTemplate } from "../../../app/Utils/ExerciseUtilities";
 import { Error } from "../../../app/interface";
-/* //------------CodeEditor---------------------//
+//------------CodeEditor---------------------//
 import CodeMirror from "@uiw/react-codemirror";
 import { javascript } from "@codemirror/lang-javascript";
 import { oneDark } from "@codemirror/theme-one-dark";
-import s from "../../CodeEditor/MyStyledEditor/scrollBar.module.css";
-import {
-  EditorCode,
-  EditorTest,
-  Title,
-  Executer,
-  EditorsContainer,
-} from "../../CodeEditor/MyStyledEditor"; */
-
 
 const CreateExercise = () => {
   const theme = useTheme();
@@ -130,8 +124,9 @@ const CreateExercise = () => {
     </Link>,
   ];
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-    ): void => {
+  const handleInputChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ): void => {
     setExercise({ ...exercise, [event.target.name]: event.target.value });
   };
 
@@ -160,7 +155,7 @@ const CreateExercise = () => {
       exercise.tags.length > 0
     ) {
       postExercise(exercise)
-        .then((response) => navigate(`/exercise/${response.payload._id}`))
+        .then((response) => (console.log ("response", response), navigate(`/exercise/${response._id}`)))
         .catch((err) => console.log(err));
       setExercise(exerciseTemplate);
     } else {
@@ -168,9 +163,7 @@ const CreateExercise = () => {
     }
   };
 
-  const handleCancel = () => {
-
-  };
+  const handleCancel = () => {};
 
   const handleDelete = (event: string) => {
     setExercise({
@@ -180,30 +173,26 @@ const CreateExercise = () => {
     if (exercise.tags.length < 4) {
       setError({ ...error, errorTag: "" });
     }
-  }
+  };
+
+  const handleInputChangeCode = (value: string): void => {
+    setExercise({ ...exercise, code: value });
+  };
+
+  const handleInputChangeTest = (value: string): void => {
+    setExercise({ ...exercise, test: value });
+  };
 
   return (
     <>
       <StackMigajas spacing={2}>
         <Breadcrumbs separator="›">{migajas}</Breadcrumbs>
       </StackMigajas>
-      <Container 
-        sx={{ p: 1, mt: 2 }}
-      >
-        <StyledPaper 
-            elevation={2}   
-            sx={{ height: "fit-content" }}
-          >
-          <Grid 
-            container 
-            spacing={3}
-          >
+      <Container sx={{ p: 1, mt: 2 }}>
+        <StyledPaper elevation={2} sx={{ height: "fit-content" }}>
+          <Grid container spacing={3}>
             <Grid item xs={12}>
-              <Typography 
-                variant="h3" 
-                align="center" 
-                marginBottom={1}
-              >
+              <Typography variant="h3" align="center" marginBottom={1}>
                 ¡Crea un Ejercicio!
               </Typography>
             </Grid>
@@ -230,24 +219,29 @@ const CreateExercise = () => {
                 onChange={handleInputChange}
               ></StyledTextField>
             </Grid>
-            <Grid item xs={6}>
-              <StyledTextField
-                required
-                autoSave="false"
-                label="Código"
-                name="code"
+            <Grid item xs={6} fontSize="16px">
+              <CodeMirror
                 value={exercise.code}
-                onChange={handleInputChange}
-              ></StyledTextField>
+                theme={oneDark}
+                height="38vh"
+                placeholder="Tu código..."
+                extensions={[javascript({ jsx: true })]}
+                onChange={(value, viewUpdate) => {
+                  handleInputChangeCode(value);
+                }}
+              />
             </Grid>
-            <Grid item xs={6}>
-              <StyledTextField
-                required
-                label="Test"
-                name="test"
+            <Grid item xs={6} fontSize="16px">
+              <CodeMirror
                 value={exercise.test}
-                onChange={handleInputChange}
-              ></StyledTextField>
+                theme={oneDark}
+                height="38vh"
+                placeholder="Tu test..."
+                extensions={[javascript({ jsx: true })]}
+                onChange={(value, viewUpdate) => {
+                  handleInputChangeTest(value);
+                }}
+              />
             </Grid>
             <Grid item xs={12} md={6}>
               <StyledTextField
@@ -273,9 +267,7 @@ const CreateExercise = () => {
                   {exercise.tags.map((tag) => {
                     return (
                       <ListItem key={tag}>
-                        <ListItemIcon>
-            {/* <TagIcon /> */}
-            </ListItemIcon>
+                        <ListItemIcon>{/* <TagIcon /> */}</ListItemIcon>
                         <ListItemText>{tag}</ListItemText>
                         <Button
                           onClick={() => handleDelete(tag)}
@@ -289,37 +281,43 @@ const CreateExercise = () => {
                 </List>
               )}
             </Grid>
-            <Box
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                height: "7vh",
-                marginTop: "1vh",
-                marginInline: "auto",
-                columnGap: "3rem"
-              }}
-            >
-              <Button 
-                size="small" 
-                onClick={handleSubmit} 
-                variant="contained"
-                sx={{width:"7rem"}}
+            <Box sx={{marginInline:"auto"}}>
+              <Box>
+                {error.errorSubmit.length > 0 && (
+                  <StyledAlert severity="error">
+                    {error.errorSubmit}
+                  </StyledAlert>
+                )}
+              </Box>
+              <Box
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  height: "7vh",
+                  marginTop: "1vh",
+                  marginInline: "auto",
+                  columnGap: "3rem",
+                }}
               >
-                Crear
-              </Button>
-              <Button 
-                size="small" 
-                onClick={handleCancel} 
-                variant="contained"
-                sx={{width:"7rem"}}
-              >
-                Cancelar
-              </Button>
+                <Button
+                  size="small"
+                  onClick={handleSubmit}
+                  variant="contained"
+                  sx={{ width: "7rem" }}
+                >
+                  Crear
+                </Button>
+                <Button
+                  size="small"
+                  onClick={handleCancel}
+                  variant="contained"
+                  sx={{ width: "7rem" }}
+                >
+                  Cancelar
+                </Button>
+              </Box>
             </Box>
-            {error.errorSubmit.length > 0 && (
-              <StyledAlert severity="error">{error.errorSubmit}</StyledAlert>
-            )}
           </Grid>
         </StyledPaper>
       </Container>

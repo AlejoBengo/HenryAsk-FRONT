@@ -247,24 +247,10 @@ const borrarUsuario = (id:string) => {
               </>) :null
             }
           </Box>
-
           <CardContent>
-            {/* <Typography variant="h5">
+            <Typography variant="h5">
               {`${userProfile.first_name} ${userProfile.last_name} | ${userProfile.user_name}`}       // SUPLANTADO POR CODIGO DE ARRIBA
-              {id === user._id && (
-                <Button
-                  variant="contained"
-                  onClick={() => navigate(`/Profile/${id}/Edit`)}
-                  sx={{
-                    marginLeft: "1em",
-                    fontSize: "1rem",
-                  }}
-                  startIcon={<EditIcon />}
-                >
-                  Editar Información
-                </Button>
-              )}
-            </Typography> */}
+            </Typography>
             <Typography variant="caption" gutterBottom>
               {`${userProfile.country}${
                 userProfile.city && ` | ${userProfile.city} `
@@ -318,11 +304,6 @@ const borrarUsuario = (id:string) => {
           </Card>
         </Card>
       </Container>
-
-      {/* <Container>
-        <HenryCoins />
-      </Container> */}
-
       <Container>
         <Activity />
       </Container>
