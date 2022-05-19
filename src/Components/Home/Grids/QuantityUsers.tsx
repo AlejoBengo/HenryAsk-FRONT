@@ -15,7 +15,7 @@ export default function QuantityUsers(){
         dispatch(fetchAllUsers);
     }, [userRole]);
 
-    return(
+    return userRole.role <= 0 ? (
         <Paper sx={{ padding: '1rem', margin: '2rem' }}>
             <Typography
               variant="h2"
@@ -27,5 +27,6 @@ export default function QuantityUsers(){
               {`+${users ? users.allUsers.length : null} usuarios se han sumado`}
             </Typography>
         </Paper>
-    );
+    )
+    : null ;
 };
