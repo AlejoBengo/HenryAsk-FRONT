@@ -13,17 +13,18 @@ export default function QuantityUsers() {
     dispatch(fetchAllUsers);
   }, [userRole]);
 
-  return (
-    <Paper sx={{ padding: "1rem", margin: "2rem" }}>
-      <Typography
-        variant="h2"
-        component="h1"
-        gutterBottom
-        display="flex"
-        justifyContent="center"
-      >
-        {`+${users ? users.allUsers.length : null} usuarios se han sumado`}
-      </Typography>
-    </Paper>
-  );
-}
+    return userRole.role <= 0 ? (
+        <Paper sx={{ padding: '1rem', margin: '2rem' }}>
+            <Typography
+              variant="h2"
+              component="h1"
+              gutterBottom
+              display="flex"
+              justifyContent="center"
+            >
+              {`+${users ? users.allUsers.length : null} usuarios se han sumado`}
+            </Typography>
+        </Paper>
+    )
+    : null ;
+};
