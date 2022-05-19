@@ -46,13 +46,13 @@ export const CreateTheoric = () => {
   };
   const handleAdd = (name: string, value: string) => {
     if (name === "images") {
-      let array = theoric.images;
+      let array = [...theoric.images];
       array.push(value);
       setTheoric({ ...theoric, images: array });
       setNewImage("");
     }
     if (name === "comments") {
-      let array = theoric.comments;
+      let array = [...theoric.comments];
       array.push(value);
       setTheoric({ ...theoric, comments: array });
       setNewComment("");
@@ -160,11 +160,7 @@ export const CreateTheoric = () => {
         <StyledPaper elevation={2}>
           <Grid container spacing={3}>
             <Grid item xs={12}>
-              <Typography 
-                variant="h3" 
-                marginBottom={1} 
-                align="center"
-              >
+              <Typography variant="h3" marginBottom={1} align="center">
                 ¡Crea un contenido Teórico!
               </Typography>
             </Grid>
