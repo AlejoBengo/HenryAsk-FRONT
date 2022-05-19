@@ -10,21 +10,20 @@ export default function QuantityUsers() {
   const userRole = useAppSelector((state) => state.user.data);
 
   useEffect(() => {
-    dispatch(fetchAllUsers);
+    dispatch(fetchAllUsers());
   }, []);
 
-    return userRole.role <= 0 ? (
-        <Paper sx={{ padding: '1rem', margin: '2rem' }}>
-            <Typography
-              variant="h2"
-              component="h1"
-              gutterBottom
-              display="flex"
-              justifyContent="center"
-            >
-              {`+${users ? users.allUsers.length : null} usuarios se han sumado`}
-            </Typography>
-        </Paper>
-    )
-    : null ;
-};
+  return userRole.role <= 0 ? (
+    <Paper sx={{ padding: "1rem", margin: "2rem" }}>
+      <Typography
+        variant="h2"
+        component="h1"
+        gutterBottom
+        display="flex"
+        justifyContent="center"
+      >
+        {`+${users ? users.allUsers.length : null} usuarios se han sumado`}
+      </Typography>
+    </Paper>
+  ) : null;
+}
