@@ -145,9 +145,7 @@ const Navbar = () => {
             height="8vh"
             sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
           >
-            {DBUser.first_name? (
-                <LateralMenu user={DBUser} />
-            ):null}
+            {DBUser.first_name ? <LateralMenu user={DBUser} /> : null}
             <Link to="/" onClick={handleOnClickLogoHome}>
               <Img
                 src={logo}
@@ -173,9 +171,7 @@ const Navbar = () => {
               height="8vh"
               sx={{ mr: 2, display: { xs: "flex", md: "none" } }}
             >
-              {DBUser.first_name? (
-                <LateralMenu user={DBUser} />
-            ):null}
+              {DBUser.first_name ? <LateralMenu user={DBUser} /> : null}
               <Link to="/">
                 <Img
                   src={logo}
@@ -329,16 +325,6 @@ const Navbar = () => {
                         sx={{ width: "100%", height: "100%" }}
                         onClick={() => {
                           navigate(`/Profile/${DBUser?._id}`);
-                        }}
-                      >
-                        {setting}
-                      </Button>
-                    ) : setting === "Eliminar Cuenta" ? (
-                      <Button
-                        color="inherit"
-                        sx={{ width: "100%", height: "100%" }}
-                        onClick={() => {
-                          handleOpenDeleteAccount();
                         }}
                       >
                         {setting}
