@@ -145,7 +145,9 @@ const Navbar = () => {
             height="8vh"
             sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
           >
-            {DBUser.user_name ? <LateralMenu user={DBUser} /> : null}
+            {DBUser.first_name? (
+                <LateralMenu user={DBUser} />
+            ):null}
             <Link to="/" onClick={handleOnClickLogoHome}>
               <Img
                 src={logo}
@@ -171,7 +173,9 @@ const Navbar = () => {
               height="8vh"
               sx={{ mr: 2, display: { xs: "flex", md: "none" } }}
             >
-              <LateralMenu user={DBUser} />
+              {DBUser.first_name? (
+                <LateralMenu user={DBUser} />
+            ):null}
               <Link to="/">
                 <Img
                   src={logo}

@@ -26,6 +26,7 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 import { IconButton , MenuItem , Menu} from "@mui/material";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
+import ModalDeleteAccount from "../Components/Navbar/ModalDeleteAccount";
 
 import {
   Box,
@@ -143,24 +144,38 @@ export default function Profile() {
     setAnchorEl(null);
   };
 
-let [infoDelete , setInfoDelete] = React.useState({})
-const [openDialogDelete, setOpenDialogDelete] = React.useState(false);
-const handleCloseModalDelete = () => {
-  setOpenDialogDelete(false);
-  setInfoDelete({});
-};
-const handleOpenModalDelete = (info:any) => {
-  setOpenDialogDelete(true);
-  setInfoDelete(info);
-}
-const borrarUsuario = (id:string) => {
-  deleteUserPanel(id)
-  .then(()=> logout({ returnTo: window.location.origin }))
-  .catch((error)=> console.log(error))
-}
+  const [deleteAccount, setDeleteAccount] = React.useState(false);
+  let [inputDelete, setInputDelete] = React.useState<any>("");
+  const handleOpenDeleteAccount = () => {
+    setDeleteAccount(true);
+  };
+  const handleCloseDeleteAccount = () => {
+    setDeleteAccount(false);
+  };
+  const handleChangeDelete = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setInputDelete(event.target.value);
+  };
+  const handleDeleteUser = () => {
+    deleteUserPanel(userProfile._id)
+      .then(() => setInputDelete("Eliminado147"))
+      .then(() => logout({ returnTo: window.location.origin }));
+  };
+  const handleSuccessDelete = () => {
+    logout({ returnTo: window.location.origin })
+  };
   return (
     <>
-      <DialogDeletePerfil handleCloseModalDelete={handleCloseModalDelete} openDialogDelete={openDialogDelete} infoDelete={infoDelete} borrarUsuario={borrarUsuario}/>
+    <ModalDeleteAccount
+                handleCloseDeleteAccount={handleCloseDeleteAccount}
+                deleteAccount={deleteAccount}
+                handleChangeDelete={handleChangeDelete}
+                inputDelete={inputDelete}
+                handleDeleteUser={handleDeleteUser}
+                handleSuccessDelete={handleSuccessDelete}
+              />
+      {/* <DialogDeletePerfil handleCloseModalDelete={handleCloseModalDelete} openDialogDelete={openDialogDelete} infoDelete={infoDelete} borrarUsuario={borrarUsuario}/> */}
       <StackMigajas spacing={2}>
         <Breadcrumbs separator="›">{migajas}</Breadcrumbs>
       </StackMigajas>
@@ -240,7 +255,7 @@ const borrarUsuario = (id:string) => {
                   <MenuItem onClick={() => navigate(`/Profile/${id}/Edit`)}>
                     Editar Perfil
                   </MenuItem>
-                  <MenuItem onClick={()=>handleOpenModalDelete(user._id)}>
+                  <MenuItem onClick={()=>handleOpenDeleteAccount()}>
                     Eliminar cuenta
                   </MenuItem>
               </Menu>
@@ -249,7 +264,8 @@ const borrarUsuario = (id:string) => {
           </Box>
           <CardContent>
             <Typography variant="h5">
-              {`${userProfile.first_name} ${userProfile.last_name} | ${userProfile.user_name}`}       // SUPLANTADO POR CODIGO DE ARRIBA
+              {`${userProfile.first_name} ${userProfile.last_name} | ${userProfile.user_name}`}
+              
             </Typography>
             <Typography variant="caption" gutterBottom>
               {`${userProfile.country}${
