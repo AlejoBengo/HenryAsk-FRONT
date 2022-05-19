@@ -11,7 +11,7 @@ export default function QuantityUsers() {
 
   useEffect(() => {
     dispatch(fetchAllUsers);
-  }, [userRole]);
+  }, []);
 
     return userRole.role <= 0 ? (
         <Paper sx={{ padding: '1rem', margin: '2rem' }}>
